@@ -5,8 +5,8 @@
 CREATE TABLE o_ward (
     id VARCHAR(32) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    type INTEGER NOT NULL,
-    status INTEGER NOT NULL,
+    type INTEGER NOT NULL DEFAULT 0,
+    status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 COMMENT ON TABLE o_ward IS '病房表';
@@ -20,8 +20,8 @@ CREATE TABLE o_bed (
     id VARCHAR(32) NOT NULL,
     ward_id VARCHAR(32) NOT NULL,
     bed_no VARCHAR(32) NOT NULL,
-    type INTEGER NOT NULL,
-    status INTEGER NOT NULL,
+    type INTEGER NOT NULL DEFAULT 0,
+    status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 COMMENT ON TABLE o_bed IS '病床表';
@@ -31,13 +31,16 @@ COMMENT ON COLUMN o_bed.bed_no IS '床位号';
 COMMENT ON COLUMN o_bed.type IS '床位类型';
 COMMENT ON COLUMN o_bed.status IS '床位状态';
 
+CREATE OR REPLACE VIEW v_bed_info AS
+SELECT o.*,w.name AS ward_name FROM o_bed o,o_ward w WHERE o.ward_id = w.id;
+
 -- 病床摄像头绑定关系表
 CREATE TABLE o_bed_camera (
     id VARCHAR(32) NOT NULL,
     bed_id VARCHAR(32) NOT NULL,
     camera_id VARCHAR(32) NOT NULL,
     bind_time TIMESTAMP NOT NULL,
-    status INTEGER NOT NULL,
+    status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 COMMENT ON TABLE o_bed_camera IS '病床摄像头绑定关系表';
@@ -54,8 +57,8 @@ CREATE TABLE o_patient (
     bed_id VARCHAR(32) NOT NULL,
     name VARCHAR(255) NOT NULL,
     hospital_no VARCHAR(32) NOT NULL,
-    status INTEGER NOT NULL,
-    remark VARCHAR(1024),
+    status INTEGER NOT NULL DEFAULT 0,
+    remark VARCHAR(1024) DEFAULT '',
     PRIMARY KEY (id)
 );
 COMMENT ON TABLE o_patient IS '病患表';
@@ -67,14 +70,17 @@ COMMENT ON COLUMN o_patient.hospital_no IS '住院号';
 COMMENT ON COLUMN o_patient.status IS '状态';
 COMMENT ON COLUMN o_patient.remark IS '备注';
 
+CREATE OR REPLACE VIEW v_patient_info AS
+SELECT p.*,b.bed_no,w.name as ward_name FROM o_patient p,o_bed b,o_ward w WHERE p.bed_id = b.id AND b.ward_id = w.id;
+
 -- 探视排班表
 CREATE TABLE o_visit_schedule (
     id VARCHAR(32) NOT NULL,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
     total_visitors INTEGER NOT NULL,
-    remaining_visitors INTEGER NOT NULL,
-    status INTEGER NOT NULL,
+    remaining_visitors INTEGER NOT NULL DEFAULT 0,
+    status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 COMMENT ON TABLE o_visit_schedule IS '探视排班表';
@@ -90,7 +96,7 @@ CREATE TABLE o_schedule_camera (
     id VARCHAR(32) NOT NULL,
     schedule_id VARCHAR(32) NOT NULL,
     camera_id VARCHAR(32) NOT NULL,
-    status INTEGER NOT NULL,
+    status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 COMMENT ON TABLE o_schedule_camera IS '探视排班摄像头表';
@@ -110,8 +116,8 @@ CREATE TABLE o_visit_record (
     visitor_phone VARCHAR(32) NOT NULL,
     visitor_id_card VARCHAR(32) NOT NULL,
     relationship VARCHAR(32) NOT NULL,
-    status INTEGER NOT NULL,
-    remark VARCHAR(1024),
+    status INTEGER NOT NULL DEFAULT 0,
+    remark VARCHAR(1024) DEFAULT '',
     PRIMARY KEY (id)
 );
 COMMENT ON TABLE o_visit_record IS '探视登记表';
@@ -127,19 +133,22 @@ COMMENT ON COLUMN o_visit_record.relationship IS '探视人关系';
 COMMENT ON COLUMN o_visit_record.status IS '状态';
 COMMENT ON COLUMN o_visit_record.remark IS '备注';
 
+CREATE OR REPLACE VIEW v_visit_record_info AS
+SELECT r.*,p.name AS patient_name,p.name AS patient_ward_name,b.bed_no AS patient_bed_no FROM o_visit_record r,o_patient p,o_bed b,o_ward w WHERE r.patient_id = p.id AND p.bed_id = b.id AND b.ward_id = w.id;
+
 -- 摄像头表
 CREATE TABLE o_camera (
     id VARCHAR(32) NOT NULL,
     device_name VARCHAR(255) NOT NULL,
     device_no VARCHAR(32) NOT NULL,
-    location_type INTEGER NOT NULL,
+    location_type INTEGER NOT NULL DEFAULT 0,
     ward_id VARCHAR(32),
     bed_id VARCHAR(32),
-    device_type INTEGER NOT NULL,
+    device_type INTEGER NOT NULL DEFAULT 0  ,
     manufacturer VARCHAR(255) NOT NULL,
     main_stream_url VARCHAR(1024) NOT NULL,
     sub_stream_url VARCHAR(1024) NOT NULL,
-    status INTEGER NOT NULL,
+    status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 COMMENT ON TABLE o_camera IS '摄像头表';
@@ -155,13 +164,16 @@ COMMENT ON COLUMN o_camera.main_stream_url IS '主码流URL';
 COMMENT ON COLUMN o_camera.sub_stream_url IS '辅码流URL';
 COMMENT ON COLUMN o_camera.status IS '状态';
 
+CREATE OR REPLACE VIEW v_camera_info AS
+SELECT c.*,b.bed_no,w.name as ward_name FROM o_camera c,o_bed b,o_ward w WHERE c.bed_id = b.id AND b.ward_id = w.id;
+
 -- 移动摄像头绑定关系表
 CREATE TABLE o_mobile_camera_binding (
     id VARCHAR(32) NOT NULL,
     camera_id VARCHAR(32) NOT NULL,
     panoramic_camera_id VARCHAR(32) NOT NULL,
     bind_time TIMESTAMP NOT NULL,
-    status INTEGER NOT NULL,
+    status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 COMMENT ON TABLE o_mobile_camera_binding IS '移动摄像头绑定关系表';
@@ -187,6 +199,9 @@ COMMENT ON COLUMN o_head_display.device_no IS '设备编号';
 COMMENT ON COLUMN o_head_display.model IS '型号';
 COMMENT ON COLUMN o_head_display.ward_id IS '病房';
 
+CREATE OR REPLACE VIEW v_head_display_info AS
+SELECT h.*,w.name AS ward_name FROM o_head_display h,o_ward w WHERE h.ward_id = w.id;
+
 -- 直播记录表
 CREATE TABLE o_live_record (
     id VARCHAR(32) NOT NULL,
@@ -197,7 +212,7 @@ CREATE TABLE o_live_record (
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP,
     file_size BIGINT,
-    status INTEGER NOT NULL,
+    status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 COMMENT ON TABLE o_live_record IS '直播记录表';
@@ -211,26 +226,44 @@ COMMENT ON COLUMN o_live_record.end_time IS '直播结束时间';
 COMMENT ON COLUMN o_live_record.file_size IS '文件大小';
 COMMENT ON COLUMN o_live_record.status IS '状态(0:未开始,1:直播中,2:已结束)';
 
+CREATE OR REPLACE VIEW v_live_record_info AS
+SELECT l.*,p.name AS patient_name,p.name AS patient_ward_name,b.bed_no AS patient_bed_no FROM o_live_record l,o_patient p,o_bed b,o_ward w WHERE l.patient_id = p.id AND p.bed_id = b.id AND b.ward_id = w.id;
+
 -- 系统配置表
 CREATE TABLE o_system_config (
     id VARCHAR(32) NOT NULL,
     config_name VARCHAR(255) NOT NULL,
     config_value VARCHAR(1024) NOT NULL,
-    config_desc VARCHAR(1024),
-    status INTEGER NOT NULL,
+    config_type VARCHAR(32) NOT NULL DEFAULT 'string',
+    config_unit VARCHAR(32) DEFAULT '',
+    config_desc VARCHAR(1024) DEFAULT '',
+    status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 COMMENT ON TABLE o_system_config IS '系统配置表';
 COMMENT ON COLUMN o_system_config.id IS '配置ID';
 COMMENT ON COLUMN o_system_config.config_name IS '配置名称';
 COMMENT ON COLUMN o_system_config.config_value IS '配置值';
+COMMENT ON COLUMN o_system_config.config_type IS '配置类型';
+COMMENT ON COLUMN o_system_config.config_unit IS '配置单位';
 COMMENT ON COLUMN o_system_config.config_desc IS '配置描述';
 COMMENT ON COLUMN o_system_config.status IS '状态';
+
+
+CREATE OR REPLACE VIEW v_family_member_info AS
+SELECT * FROM o_user WHERE type = 3;
 
 -- +goose StatementEnd
 
 -- +goose Down
 -- +goose StatementBegin
+DROP VIEW IF EXISTS v_family_member_info CASCADE;
+DROP VIEW IF EXISTS v_bed_info CASCADE;
+DROP VIEW IF EXISTS v_patient_info CASCADE;
+DROP VIEW IF EXISTS v_visit_record CASCADE;
+DROP VIEW IF EXISTS v_camera_info CASCADE;
+DROP VIEW IF EXISTS v_live_record_info CASCADE;
+DROP VIEW IF EXISTS v_head_display_info CASCADE;
 DROP TABLE IF EXISTS o_system_config CASCADE;
 DROP TABLE IF EXISTS o_live_record CASCADE;
 DROP TABLE IF EXISTS o_head_display CASCADE;

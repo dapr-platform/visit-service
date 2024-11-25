@@ -1,0 +1,11 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "visit-service API",
+        "title": "visit-service API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "basePath": "/swagger/visit-service",
+    "paths": {}
+}

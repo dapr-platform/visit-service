@@ -1,0 +1,8 @@
+basePath: /swagger/visit-service
+info:
+  contact: {}
+  description: visit-service API
+  title: visit-service API
+  version: "1.0"
+paths: {}
+swagger: "2.0"

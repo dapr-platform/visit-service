@@ -8,9 +8,9 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-func InitManualHandler(mux *chi.Mux) {
-	mux.HandleFunc("/manual/init-visit-schedule", DebugInitVisitScheduleHandler)
-	mux.HandleFunc("/manual/delete-visit-schedule", DeleteVisitScheduleHandler)
+func InitManualHandler(r chi.Router) {
+	r.Post(common.BASE_CONTEXT+"/manual/init-visit-schedule", DebugInitVisitScheduleHandler)
+	r.Post(common.BASE_CONTEXT+"/manual/delete-visit-schedule", DeleteVisitScheduleHandler)
 }
 
 // @Summary 手动初始化排班

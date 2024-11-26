@@ -31,7 +31,7 @@ func init() {
 // ManuAddVisitSchedule 手动添加排班
 func ManuAddVisitSchedule(startTime time.Time, endTime time.Time, totalVisitors int) error {
 	// 检查时间段是否已存在
-	exists, err := checkTimeSlotExists(startTime, endTime)
+	exists, err := checkTimeSlotExists(startTime)
 	if err != nil {
 		return fmt.Errorf("failed to check time slot: %v", err)
 	}

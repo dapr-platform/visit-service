@@ -32,11 +32,12 @@ Table: v_visit_record_info
 [11] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [12] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [13] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[14] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "tsoEigbGmiHqdBLNroTWEWivH",    "patient_id": "cWDpuBpHHaCRwGqUbRUtCWcoj",    "relative_id": "lceuTlYpkMcaZcAQmDVoJbeau",    "visit_start_time": 92,    "visit_end_time": 57,    "visitor_name": "ZVypcPoUNvZoLVROxxnBUEXQd",    "visitor_phone": "YoDbrmAtxyxnIYJZRaXbJhAUG",    "visitor_id_card": "GZNRmLSgRoYmAQWsXMOIkRjSD",    "relationship": "eKusWmnTKDdsBMENhvOatYJfr",    "status": 63,    "remark": "otABLmkHMLqeUmRZwgPtcJJiE",    "patient_name": "PIouRLMDgNoGVBHtBbkycppAk",    "patient_ward_name": "KDainNmAmUivoDfGHCeQtHCbX",    "patient_bed_no": "ZvchrZWNfDyLnVDjCRVWlCiuL"}
+{    "id": "UgFZldLEXZnUUMUrSuMFtcOVQ",    "patient_id": "xPkDooGfTNiYmLqrkXHBmOZQU",    "relative_id": "MIPETFOTyJFfFXnkLkhVcQVGt",    "visit_start_time": 8,    "visit_end_time": 37,    "visitor_name": "NilEISIHeFSQmaGFwRNxoeiRr",    "visitor_phone": "tGZxaGkIjplJaKdtNpaTneLHn",    "visitor_id_card": "PxCpJSLGexglqNbplhciLhyxn",    "relationship": "OCEjcFrOfrlqsrcBrfylIOIow",    "status": 14,    "remark": "bDfCGJrClxFHHqxhPnINroQOM",    "patient_name": "VgMXdyQMVkuuWNlEPZGdbnRkK",    "patient_ward_name": "GqYMJACrbgrbvTXSSksIGaCGi",    "patient_bed_no": "WwMPrlTKQGnZrKmcDNpTmgOTy",    "stream_id": "tQhomQZPijYZuncxHJuTNCcTv"}
 
 
 Comments
@@ -77,6 +78,8 @@ var (
 	Visit_record_info_FIELD_NAME_patient_ward_name = "patient_ward_name"
 
 	Visit_record_info_FIELD_NAME_patient_bed_no = "patient_bed_no"
+
+	Visit_record_info_FIELD_NAME_stream_id = "stream_id"
 )
 
 // Visit_record_info struct is a row record of the v_visit_record_info table in the  database
@@ -108,6 +111,8 @@ type Visit_record_info struct {
 	PatientWardName string `json:"patient_ward_name"` // [12] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 
 	PatientBedNo string `json:"patient_bed_no"` // [13] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	StreamID string `json:"stream_id"` // [14] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
 }
 
@@ -409,6 +414,27 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			ProtobufFieldName:  "patient_bed_no",
 			ProtobufType:       "string",
 			ProtobufPos:        14,
+		},
+
+		&ColumnInfo{
+			Index:              14,
+			Name:               "stream_id",
+			Comment:            `stream_id`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "StreamID",
+			GoFieldType:        "string",
+			JSONFieldName:      "stream_id",
+			ProtobufFieldName:  "stream_id",
+			ProtobufType:       "string",
+			ProtobufPos:        15,
 		},
 	},
 }

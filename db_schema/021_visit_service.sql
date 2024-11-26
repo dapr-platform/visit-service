@@ -153,7 +153,10 @@ COMMENT ON COLUMN o_visit_record.status IS '状态';
 COMMENT ON COLUMN o_visit_record.remark IS '备注';
 
 CREATE OR REPLACE VIEW v_visit_record_info AS
-SELECT r.*,p.name AS patient_name,p.name AS patient_ward_name,b.bed_no AS patient_bed_no FROM o_visit_record r,o_patient p,o_bed b,o_ward w WHERE r.patient_id = p.id AND p.bed_id = b.id AND b.ward_id = w.id;
+SELECT r.*,p.name AS patient_name,p.name AS patient_ward_name,b.bed_no AS patient_bed_no,
+(SELECT l.stream_id FROM o_live_record l WHERE l.schedule_id = r.id LIMIT 1) as stream_id
+FROM o_visit_record r,o_patient p,o_bed b,o_ward w 
+WHERE r.patient_id = p.id AND p.bed_id = b.id AND b.ward_id = w.id;
 
 COMMENT ON VIEW v_visit_record_info IS '探视记录信息视图';
 COMMENT ON COLUMN v_visit_record_info.id IS '探视记录ID';
@@ -170,6 +173,7 @@ COMMENT ON COLUMN v_visit_record_info.remark IS '备注';
 COMMENT ON COLUMN v_visit_record_info.patient_name IS '病患姓名';
 COMMENT ON COLUMN v_visit_record_info.patient_ward_name IS '病房名称';
 COMMENT ON COLUMN v_visit_record_info.patient_bed_no IS '床位号';
+COMMENT ON COLUMN v_visit_record_info.stream_id IS '直播流ID';
 
 -- 摄像头表
 CREATE TABLE o_camera (

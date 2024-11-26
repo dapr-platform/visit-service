@@ -28,7 +28,7 @@ Table: v_bed_info
 
 JSON Sample
 -------------------------------------
-{    "id": "dRtFKpGjWrOARJKjuwGUMDnUF",    "ward_id": "AZVJcrxsqhOOTKXvdNIHDLNrb",    "bed_no": "oZkGQicSCimGTbmkksvLlXFqq",    "type": 97,    "status": 57,    "ward_name": "xdyaQLCMBRJjlRwPOKEpjKxND"}
+{    "id": "IdvshYSldCWmENxlpRIFfXqdQ",    "ward_id": "IdQwMhxbenQsNwMpxfMcDDLpo",    "bed_no": "FgcvXGLfDCdKEWmMdCpKPkTmJ",    "type": 87,    "status": 52,    "ward_name": "tureGEhAURcmRnSAUOseWpQiF"}
 
 
 Comments

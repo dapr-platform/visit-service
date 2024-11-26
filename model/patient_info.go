@@ -31,7 +31,7 @@ Table: v_patient_info
 
 JSON Sample
 -------------------------------------
-{    "id": "BUtvTrgoFJDqXghllHNhxAcwm",    "ward_id": "jTxoPNfRpfinyjVmyJHfSOnCC",    "bed_id": "VyXhmpnDcLggjRpPfjdgPlQSf",    "name": "cTFvOQLmsBbseuAIIAgjsPblm",    "hospital_no": "lYtrMXIkKkrQxbfcBTXSVFuRA",    "status": 16,    "remark": "TCdMqZdCxuhfUVtguTDLkveSX",    "bed_no": "ijeECUvboQRrXaGvPENjxoeyk",    "ward_name": "ORNmtKQTKswjyASggEpxosSFX"}
+{    "id": "YXvDWOylOeMfXjqJsdIYxNOuJ",    "ward_id": "CrSBFbEyvGDLmJQZufPQgJZel",    "bed_id": "HFiUnaHTlwPXSQqxKqhmkTKLH",    "name": "GHfSWUpwKHbEYZFqJrdMDZbyL",    "hospital_no": "rcpCDTODFCmHuEliqRbiWMapd",    "status": 5,    "remark": "IZefsysMgDibSAcpWUgQXCiCJ",    "bed_no": "sloypQwlpMBjIuxmfOpXOYsBC",    "ward_name": "NBXhGFpsRLaoZBEuPIHsrDsem"}
 
 
 Comments

@@ -35,7 +35,7 @@ Table: v_camera_info
 
 JSON Sample
 -------------------------------------
-{    "id": "PPYEprDtMCatQLOwDsmXOTkgo",    "device_name": "mhrtYGnmbrGNlhIVcRWbntafL",    "device_no": "oSAciwqHwKOjnypTpykvVDgvE",    "location_type": 61,    "ward_id": "VvJtVxFFyGQGQQWtENcEcuEMQ",    "bed_id": "ScLVQGQASwFtLyAfmCYTnOHdW",    "device_type": 5,    "manufacturer": "crHpYTtLEbkuGcFbsUNDlhBFC",    "main_stream_url": "SKAOucMAnNkVXfnLSyCWLlqGS",    "sub_stream_url": "damxGwqoIArJqEafhLLuMrPul",    "status": 4,    "bed_no": "xyeWlYiJYLIxCgwdJQwBSYuXd",    "ward_name": "OeSxPwCwRmaMqwWdffbFtfHkI"}
+{    "id": "HgyjokCgYPwoEPKjJQJrlAqZD",    "device_name": "EwMePyjuZaJYwMVgXgVkyWqqh",    "device_no": "stCkwoXSuieWOobDpfAHaEucN",    "location_type": 57,    "ward_id": "iMIBsuWIweIeZHOKELejNJYVY",    "bed_id": "XGdHYVYwTNwyNuqQsCyDxZaIh",    "device_type": 62,    "manufacturer": "vWhMqcXEWwBrEsQrOXqpGdLvT",    "main_stream_url": "uCtoAwVRATLrkHFKjJgwgDgcj",    "sub_stream_url": "glwknsaDyEcMqaIGWMdBckuiB",    "status": 71,    "bed_no": "WseXSNBlccYSjIKuUmghbIMvG",    "ward_name": "KNkhfYBuQNuDTYEDulgZRRDVG"}
 
 
 Comments

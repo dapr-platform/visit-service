@@ -34,6 +34,7 @@ func InitVisit_record_infoRoute(r chi.Router) {
 // @Param patient_name query string false "patient_name"
 // @Param patient_ward_name query string false "patient_ward_name"
 // @Param patient_bed_no query string false "patient_bed_no"
+// @Param stream_id query string false "stream_id"
 // @Produce  json
 // @Success 200 {object} common.Response{data=common.Page{items=[]model.Visit_record_info}} "objects array"
 // @Failure 500 {object} common.Response ""
@@ -69,6 +70,7 @@ func Visit_record_infoPageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param patient_name query string false "patient_name"
 // @Param patient_ward_name query string false "patient_ward_name"
 // @Param patient_bed_no query string false "patient_bed_no"
+// @Param stream_id query string false "stream_id"
 // @Produce  json
 // @Success 200 {object} common.Response{data=[]model.Visit_record_info} "objects array"
 // @Failure 500 {object} common.Response ""

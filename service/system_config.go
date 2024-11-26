@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"net/http"
+	"time"
 	"visit-service/model"
 
 	"github.com/dapr-platform/common"
@@ -105,9 +106,15 @@ func init() {
 }
 
 func initDefaultSystemConfig() {
-	configs, err := common.DbQuery[model.System_config](context.Background(), common.GetDaprClient(), model.System_configTableInfo.Name, "")
-	if err != nil {
-		panic(err)
+	var configs []model.System_config
+	var err error
+	for {
+		configs, err = common.DbQuery[model.System_config](context.Background(), common.GetDaprClient(), model.System_configTableInfo.Name, "")
+		if err != nil {
+			time.Sleep(time.Second * 1)
+			continue
+		}
+		break
 	}
 
 	// 创建一个map来加速查找

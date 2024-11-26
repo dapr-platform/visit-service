@@ -35,7 +35,7 @@ Table: v_camera_info
 
 JSON Sample
 -------------------------------------
-{    "id": "LAlyPohXbeNAXUUbNoOnXKOSm",    "device_name": "bccFFChRfNkQGisCeBShQVTqU",    "device_no": "BpleDJIHsLRUGRVUFyBauTWZI",    "location_type": 31,    "ward_id": "vVdQhfHWtlaDAJdIfEnQbmsfd",    "bed_id": "qZgvJvIQcQYHIyJJEtwUnBuTg",    "device_type": 35,    "manufacturer": "UNsahMCNiWybRdaDnJCefOIOG",    "main_stream_url": "HbUNSdkIegNxSAXTKcAZigYsQ",    "sub_stream_url": "pHensydjXnqilcJXolsVTcJcx",    "status": 74,    "bed_no": "YsHxVlHfTrGPHWwQpjxEVEdmR",    "ward_name": "SZEuasPBXEPyLKgekMQnbJEoJ"}
+{    "id": "PPYEprDtMCatQLOwDsmXOTkgo",    "device_name": "mhrtYGnmbrGNlhIVcRWbntafL",    "device_no": "oSAciwqHwKOjnypTpykvVDgvE",    "location_type": 61,    "ward_id": "VvJtVxFFyGQGQQWtENcEcuEMQ",    "bed_id": "ScLVQGQASwFtLyAfmCYTnOHdW",    "device_type": 5,    "manufacturer": "crHpYTtLEbkuGcFbsUNDlhBFC",    "main_stream_url": "SKAOucMAnNkVXfnLSyCWLlqGS",    "sub_stream_url": "damxGwqoIArJqEafhLLuMrPul",    "status": 4,    "bed_no": "xyeWlYiJYLIxCgwdJQwBSYuXd",    "ward_name": "OeSxPwCwRmaMqwWdffbFtfHkI"}
 
 
 Comments
@@ -78,19 +78,31 @@ var (
 
 // Camera_info struct is a row record of the v_camera_info table in the  database
 type Camera_info struct {
-	ID            string `json:"id"`              //摄像头ID
-	DeviceName    string `json:"device_name"`     //设备名称
-	DeviceNo      string `json:"device_no"`       //设备编号
-	LocationType  int32  `json:"location_type"`   //位置类型
-	WardID        string `json:"ward_id"`         //所属病房ID
-	BedID         string `json:"bed_id"`          //所属床位ID
-	DeviceType    int32  `json:"device_type"`     //设备类型
-	Manufacturer  string `json:"manufacturer"`    //设备厂商
-	MainStreamURL string `json:"main_stream_url"` //主码流URL
-	SubStreamURL  string `json:"sub_stream_url"`  //辅码流URL
-	Status        int32  `json:"status"`          //状态
-	BedNo         string `json:"bed_no"`          //床位号
-	WardName      string `json:"ward_name"`       //病房名称
+	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	DeviceName string `json:"device_name"` // [ 1] device_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	DeviceNo string `json:"device_no"` // [ 2] device_no                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	LocationType int32 `json:"location_type"` // [ 3] location_type                                  INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+
+	WardID string `json:"ward_id"` // [ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	BedID string `json:"bed_id"` // [ 5] bed_id                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	DeviceType int32 `json:"device_type"` // [ 6] device_type                                    INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+
+	Manufacturer string `json:"manufacturer"` // [ 7] manufacturer                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	MainStreamURL string `json:"main_stream_url"` // [ 8] main_stream_url                                VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+
+	SubStreamURL string `json:"sub_stream_url"` // [ 9] sub_stream_url                                 VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+
+	Status int32 `json:"status"` // [10] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+
+	BedNo string `json:"bed_no"` // [11] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	WardName string `json:"ward_name"` // [12] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 
 }
 

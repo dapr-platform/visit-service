@@ -28,7 +28,7 @@ Table: v_bed_info
 
 JSON Sample
 -------------------------------------
-{    "id": "icRqKSvYVjQuaMpepcbQPxKIu",    "ward_id": "uKslcGpdtDkXsRGyhYjwRZJtF",    "bed_no": "ykPAECNaoHqwENHmwVUFxBcsh",    "type": 81,    "status": 16,    "ward_name": "rfWwckctksXOEVbcMJSxoNklH"}
+{    "id": "dRtFKpGjWrOARJKjuwGUMDnUF",    "ward_id": "AZVJcrxsqhOOTKXvdNIHDLNrb",    "bed_no": "oZkGQicSCimGTbmkksvLlXFqq",    "type": 97,    "status": 57,    "ward_name": "xdyaQLCMBRJjlRwPOKEpjKxND"}
 
 
 Comments
@@ -57,12 +57,17 @@ var (
 
 // Bed_info struct is a row record of the v_bed_info table in the  database
 type Bed_info struct {
-	ID       string `json:"id"`        //病床ID
-	WardID   string `json:"ward_id"`   //病房ID
-	BedNo    string `json:"bed_no"`    //床位号
-	Type     int32  `json:"type"`      //床位类型
-	Status   int32  `json:"status"`    //床位状态
-	WardName string `json:"ward_name"` //病房名称
+	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	WardID string `json:"ward_id"` // [ 1] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	BedNo string `json:"bed_no"` // [ 2] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	Type int32 `json:"type"` // [ 3] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+
+	Status int32 `json:"status"` // [ 4] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+
+	WardName string `json:"ward_name"` // [ 5] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 
 }
 

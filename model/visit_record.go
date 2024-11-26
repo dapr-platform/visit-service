@@ -33,7 +33,7 @@ Table: o_visit_record
 
 JSON Sample
 -------------------------------------
-{    "id": "LhrZEcvuSePOnpLrshxuejUVW",    "patient_id": "xVEMwMMWYCUKbGAMavWoeNnJW",    "relative_id": "HIMmxloUJIITYtJqwmPKFTtCS",    "visit_start_time": 16,    "visit_end_time": 21,    "visitor_name": "rTWVcwGrrbHIehMyjCMMoCINH",    "visitor_phone": "lHOGwBukPYnuvsJjIBagNEETT",    "visitor_id_card": "aWuwvkjgZFEcMLXWqRkonMmhV",    "relationship": "fVhVCaiKSoMrNiwllwmAGKpPX",    "status": 10,    "remark": "vlKeUObxLbmaGMlstMMYRyLrk"}
+{    "id": "UXkaerrIQhWoDNqLYWFxsHSyy",    "patient_id": "ZjjvrZBhOSkpWFrxPHhJgpNCM",    "relative_id": "aJYWruriNXgPkqIPdajjSfXIr",    "visit_start_time": 57,    "visit_end_time": 65,    "visitor_name": "ryoZTUaJoNOTSXuqORScIqDbj",    "visitor_phone": "CdqTWOVmoooDXyCKTwQrZvjad",    "visitor_id_card": "KMNwJmVdAEQBgkHCxmtvbhfNa",    "relationship": "yFoSuRbfWKwOHdjfNjlVvKbWM",    "status": 5,    "remark": "XeXLGgwfLMxtpIiJgyVwsfsdC"}
 
 
 
@@ -65,17 +65,27 @@ var (
 
 // Visit_record struct is a row record of the o_visit_record table in the  database
 type Visit_record struct {
-	ID             string           `json:"id"`               //探视登记ID
-	PatientID      string           `json:"patient_id"`       //病患ID
-	RelativeID     string           `json:"relative_id"`      //家属ID
-	VisitStartTime common.LocalTime `json:"visit_start_time"` //探视开始时间
-	VisitEndTime   common.LocalTime `json:"visit_end_time"`   //探视结束时间
-	VisitorName    string           `json:"visitor_name"`     //探视人
-	VisitorPhone   string           `json:"visitor_phone"`    //探视人电话
-	VisitorIDCard  string           `json:"visitor_id_card"`  //探视人身份证号
-	Relationship   string           `json:"relationship"`     //探视人关系
-	Status         int32            `json:"status"`           //状态
-	Remark         string           `json:"remark"`           //备注
+	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	PatientID string `json:"patient_id"` // [ 1] patient_id                                     VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	RelativeID string `json:"relative_id"` // [ 2] relative_id                                    VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	VisitStartTime common.LocalTime `json:"visit_start_time"` // [ 3] visit_start_time                               TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+
+	VisitEndTime common.LocalTime `json:"visit_end_time"` // [ 4] visit_end_time                                 TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+
+	VisitorName string `json:"visitor_name"` // [ 5] visitor_name                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	VisitorPhone string `json:"visitor_phone"` // [ 6] visitor_phone                                  VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	VisitorIDCard string `json:"visitor_id_card"` // [ 7] visitor_id_card                                VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	Relationship string `json:"relationship"` // [ 8] relationship                                   VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	Status int32 `json:"status"` // [ 9] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+
+	Remark string `json:"remark"` // [10] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
 
 }
 

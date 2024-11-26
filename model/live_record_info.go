@@ -26,15 +26,16 @@ Table: v_live_record_info
 [ 5] start_time                                     TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
 [ 6] end_time                                       TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
 [ 7] file_size                                      INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
-[ 8] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[ 9] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[10] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[11] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 8] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 9] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[10] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[11] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[12] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "ZwdklMFjXKdXsmpyLwINXSvlr",    "schedule_id": "IOlUIXDqEOCWvIaRLAACZIQsF",    "patient_id": "ljJJyyTkJpADgAIouDHtqVwGn",    "relative_id": "TKBsYVUPNwBZVroDOrRTuDZtk",    "device_id": "eukpvVmCfDWJKQOolTVRukFSF",    "start_time": 62,    "end_time": 66,    "file_size": 27,    "status": 86,    "patient_name": "JRxnBVqUNyypeKKjsROmyHtJR",    "patient_ward_name": "pCZemmCDhudeWWbXVSAPkmFGT",    "patient_bed_no": "kmhvDBCnUUUKtILPEHxbiKbkl"}
+{    "id": "DmtwRfHwVOlURpkIbmoAotUfr",    "schedule_id": "LtMvXtaiYEctbNkhDDcwGQHZD",    "patient_id": "pIreStmGjukFbPVoKpuxNxdBr",    "relative_id": "uYyvwMeLQEdGsJOIRwmIFaJrf",    "device_id": "OxXOZhQhRPLrLprIGKdHahWnl",    "start_time": 7,    "end_time": 56,    "file_size": 81,    "stream_id": "RJRTxmmslJXWpWgcLYyQBVDIO",    "status": 91,    "patient_name": "ITwlBeWolRmxTrRaRxKdWvlDJ",    "patient_ward_name": "NTDGZvRvmdnJvXwZxVtxQHdRT",    "patient_bed_no": "XKbYqmHyMEDEXXPBFZExfUDoC"}
 
 
 Comments
@@ -64,6 +65,8 @@ var (
 
 	Live_record_info_FIELD_NAME_file_size = "file_size"
 
+	Live_record_info_FIELD_NAME_stream_id = "stream_id"
+
 	Live_record_info_FIELD_NAME_status = "status"
 
 	Live_record_info_FIELD_NAME_patient_name = "patient_name"
@@ -75,18 +78,31 @@ var (
 
 // Live_record_info struct is a row record of the v_live_record_info table in the  database
 type Live_record_info struct {
-	ID              string           `json:"id"`                //直播记录ID
-	ScheduleID      string           `json:"schedule_id"`       //探视排班ID
-	PatientID       string           `json:"patient_id"`        //病患ID
-	RelativeID      string           `json:"relative_id"`       //家属ID
-	DeviceID        string           `json:"device_id"`         //设备ID
-	StartTime       common.LocalTime `json:"start_time"`        //直播开始时间
-	EndTime         common.LocalTime `json:"end_time"`          //直播结束时间
-	FileSize        int32            `json:"file_size"`         //文件大小
-	Status          int32            `json:"status"`            //状态(0:未开始,1:直播中,2:已结束)
-	PatientName     string           `json:"patient_name"`      //病患姓名
-	PatientWardName string           `json:"patient_ward_name"` //病房名称
-	PatientBedNo    string           `json:"patient_bed_no"`    //床位号
+	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	ScheduleID string `json:"schedule_id"` // [ 1] schedule_id                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	PatientID string `json:"patient_id"` // [ 2] patient_id                                     VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	RelativeID string `json:"relative_id"` // [ 3] relative_id                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	DeviceID string `json:"device_id"` // [ 4] device_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	StartTime common.LocalTime `json:"start_time"` // [ 5] start_time                                     TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+
+	EndTime common.LocalTime `json:"end_time"` // [ 6] end_time                                       TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+
+	FileSize int32 `json:"file_size"` // [ 7] file_size                                      INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
+
+	StreamID string `json:"stream_id"` // [ 8] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	Status int32 `json:"status"` // [ 9] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+
+	PatientName string `json:"patient_name"` // [10] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	PatientWardName string `json:"patient_ward_name"` // [11] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	PatientBedNo string `json:"patient_bed_no"` // [12] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
 }
 
@@ -266,6 +282,27 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 
 		&ColumnInfo{
 			Index:              8,
+			Name:               "stream_id",
+			Comment:            `流ID`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "StreamID",
+			GoFieldType:        "string",
+			JSONFieldName:      "stream_id",
+			ProtobufFieldName:  "stream_id",
+			ProtobufType:       "string",
+			ProtobufPos:        9,
+		},
+
+		&ColumnInfo{
+			Index:              9,
 			Name:               "status",
 			Comment:            `状态(0:未开始,1:直播中,2:已结束)`,
 			Notes:              ``,
@@ -282,11 +319,11 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
-			ProtobufPos:        9,
+			ProtobufPos:        10,
 		},
 
 		&ColumnInfo{
-			Index:              9,
+			Index:              10,
 			Name:               "patient_name",
 			Comment:            `病患姓名`,
 			Notes:              ``,
@@ -303,11 +340,11 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 			JSONFieldName:      "patient_name",
 			ProtobufFieldName:  "patient_name",
 			ProtobufType:       "string",
-			ProtobufPos:        10,
+			ProtobufPos:        11,
 		},
 
 		&ColumnInfo{
-			Index:              10,
+			Index:              11,
 			Name:               "patient_ward_name",
 			Comment:            `病房名称`,
 			Notes:              ``,
@@ -324,11 +361,11 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 			JSONFieldName:      "patient_ward_name",
 			ProtobufFieldName:  "patient_ward_name",
 			ProtobufType:       "string",
-			ProtobufPos:        11,
+			ProtobufPos:        12,
 		},
 
 		&ColumnInfo{
-			Index:              11,
+			Index:              12,
 			Name:               "patient_bed_no",
 			Comment:            `床位号`,
 			Notes:              ``,
@@ -345,7 +382,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 			JSONFieldName:      "patient_bed_no",
 			ProtobufFieldName:  "patient_bed_no",
 			ProtobufType:       "string",
-			ProtobufPos:        12,
+			ProtobufPos:        13,
 		},
 	},
 }

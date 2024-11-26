@@ -28,7 +28,7 @@ Table: o_visit_schedule
 
 JSON Sample
 -------------------------------------
-{    "id": "YYSkuKGkOPZqTROWIIXNSVrWq",    "start_time": 91,    "end_time": 55,    "total_visitors": 50,    "remaining_visitors": 9,    "status": 28}
+{    "id": "VHDYUCYZnZcUqdWNoJnGkCnBT",    "start_time": 36,    "end_time": 82,    "total_visitors": 13,    "remaining_visitors": 87,    "status": 77}
 
 
 
@@ -50,12 +50,17 @@ var (
 
 // Visit_schedule struct is a row record of the o_visit_schedule table in the  database
 type Visit_schedule struct {
-	ID                string           `json:"id"`                 //排班ID
-	StartTime         common.LocalTime `json:"start_time"`         //开始时间
-	EndTime           common.LocalTime `json:"end_time"`           //结束时间
-	TotalVisitors     int32            `json:"total_visitors"`     //探视总人数
-	RemainingVisitors int32            `json:"remaining_visitors"` //探视剩余人数
-	Status            int32            `json:"status"`             //状态
+	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	StartTime common.LocalTime `json:"start_time"` // [ 1] start_time                                     TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+
+	EndTime common.LocalTime `json:"end_time"` // [ 2] end_time                                       TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+
+	TotalVisitors int32 `json:"total_visitors"` // [ 3] total_visitors                                 INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+
+	RemainingVisitors int32 `json:"remaining_visitors"` // [ 4] remaining_visitors                             INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+
+	Status int32 `json:"status"` // [ 5] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 }
 

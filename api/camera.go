@@ -18,7 +18,7 @@ func InitCameraRoute(r chi.Router) {
 
 // @Summary page query
 // @Description page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%
-// @Tags Camera
+// @Tags 摄像头
 // @Param _page query int true "current page"
 // @Param _page_size query int true "page size"
 // @Param _order query string false "order"
@@ -51,7 +51,7 @@ func CameraPageListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary query objects
 // @Description query objects
-// @Tags Camera
+// @Tags 摄像头
 // @Param _select query string false "_select"
 // @Param _order query string false "order"
 // @Param id query string false "id"
@@ -75,7 +75,7 @@ func CameraListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary save
 // @Description save
-// @Tags Camera
+// @Tags 摄像头
 // @Accept       json
 // @Param item body model.Camera true "object"
 // @Produce  json

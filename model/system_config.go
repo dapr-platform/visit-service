@@ -29,7 +29,7 @@ Table: o_system_config
 
 JSON Sample
 -------------------------------------
-{    "id": "ldXjcQGInpJyVDhfyoTtRVmvi",    "config_name": "fNyywROXtgUuQrvNcfeYGUvNB",    "config_value": "ZObbiZQGQHMFOPoKbAqEJtLLK",    "config_type": "jZYQqHCSSBtpjkLgrXTavAkVG",    "config_unit": "miLkdNCukyuSOENHxGtDZsLuT",    "config_desc": "ObMaCAhPOaRGYwHSrqHjRlFOW",    "status": 66}
+{    "id": "gBnqGafawYIkIsRxvtKSPPoHf",    "config_name": "CtcMyNKrnWrFLNCDKQCnkapAH",    "config_value": "MlDlPYdOGFrNrguypiakRHIrf",    "config_type": "bQKKRqOiCideRPeofiWMyTbER",    "config_unit": "kcnjOmpblZfyGjBNwbhGviNeQ",    "config_desc": "cxkqCKuxlCPFfMZwpFhIdTFxq",    "status": 72}
 
 
 
@@ -53,13 +53,19 @@ var (
 
 // System_config struct is a row record of the o_system_config table in the  database
 type System_config struct {
-	ID          string `json:"id"`           //配置ID
-	ConfigName  string `json:"config_name"`  //配置名称
-	ConfigValue string `json:"config_value"` //配置值
-	ConfigType  string `json:"config_type"`  //配置类型
-	ConfigUnit  string `json:"config_unit"`  //配置单位
-	ConfigDesc  string `json:"config_desc"`  //配置描述
-	Status      int32  `json:"status"`       //状态
+	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	ConfigName string `json:"config_name"` // [ 1] config_name                                    VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	ConfigValue string `json:"config_value"` // [ 2] config_value                                   VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+
+	ConfigType string `json:"config_type"` // [ 3] config_type                                    VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: [string]
+
+	ConfigUnit string `json:"config_unit"` // [ 4] config_unit                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	ConfigDesc string `json:"config_desc"` // [ 5] config_desc                                    VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+
+	Status int32 `json:"status"` // [ 6] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 }
 

@@ -26,7 +26,7 @@ Table: o_schedule_camera
 
 JSON Sample
 -------------------------------------
-{    "id": "MWrUXaffAllOgNgMJSvnhVDyW",    "schedule_id": "wGyNTVsUtnXDBvxwORADhEcdO",    "camera_id": "JYwWpckEpEQJPPWPWqmFggJNV",    "status": 49}
+{    "id": "NMqVkdbqfRnrgYmmELuSFgLvZ",    "schedule_id": "NnSvTSPqmXstYuFIIfjunYOGa",    "camera_id": "WIIEqwXOIkJRFVDviWBAfLRef",    "status": 43}
 
 
 
@@ -44,10 +44,13 @@ var (
 
 // Schedule_camera struct is a row record of the o_schedule_camera table in the  database
 type Schedule_camera struct {
-	ID         string `json:"id"`          //排班摄像头ID
-	ScheduleID string `json:"schedule_id"` //探视排班ID
-	CameraID   string `json:"camera_id"`   //摄像头ID
-	Status     int32  `json:"status"`      //状态
+	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	ScheduleID string `json:"schedule_id"` // [ 1] schedule_id                                    VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	CameraID string `json:"camera_id"` // [ 2] camera_id                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	Status int32 `json:"status"` // [ 3] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 }
 

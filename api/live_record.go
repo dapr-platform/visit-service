@@ -18,7 +18,7 @@ func InitLive_recordRoute(r chi.Router) {
 
 // @Summary page query
 // @Description page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%
-// @Tags Live_record
+// @Tags 直播记录
 // @Param _page query int true "current page"
 // @Param _page_size query int true "page size"
 // @Param _order query string false "order"
@@ -50,7 +50,7 @@ func Live_recordPageListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary query objects
 // @Description query objects
-// @Tags Live_record
+// @Tags 直播记录
 // @Param _select query string false "_select"
 // @Param _order query string false "order"
 // @Param id query string false "id"
@@ -73,7 +73,7 @@ func Live_recordListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary save
 // @Description save
-// @Tags Live_record
+// @Tags 直播记录
 // @Accept       json
 // @Param item body model.Live_record true "object"
 // @Produce  json

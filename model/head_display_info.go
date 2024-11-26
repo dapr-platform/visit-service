@@ -28,7 +28,7 @@ Table: v_head_display_info
 
 JSON Sample
 -------------------------------------
-{    "id": "WMHiswDkVllNyOIAOYCgZAwGv",    "device_name": "JLRGJssIESxHqgEYKqXXHTLkM",    "device_no": "ZjAMSUJiVpMmyEfLksvhHKGRY",    "model": "RSHQSsbxYNTfZkycawfxufocX",    "ward_id": "eDtjeSlBxEsPfdFcdFZOCexNf",    "ward_name": "XGydamvPaZwLeoiypUGYxloTl"}
+{    "id": "ahERryjJLACaHBbjwbDQYxMsE",    "device_name": "JgNChMZEskKCgKUhupukftdGU",    "device_no": "pWTfClgiltPTLWIfgHrMJxJIY",    "model": "YudYfIDRJpJyAMbiGdiGNONQj",    "ward_id": "GNmrdERXehyrWRoNrPQHCZyHf",    "ward_name": "vZelNlUBrmyrhjhRErDyosSHq"}
 
 
 Comments
@@ -57,12 +57,17 @@ var (
 
 // Head_display_info struct is a row record of the v_head_display_info table in the  database
 type Head_display_info struct {
-	ID         string `json:"id"`          //头显ID
-	DeviceName string `json:"device_name"` //设备名称
-	DeviceNo   string `json:"device_no"`   //设备编号
-	Model      string `json:"model"`       //型号
-	WardID     string `json:"ward_id"`     //病房ID
-	WardName   string `json:"ward_name"`   //病房名称
+	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	DeviceName string `json:"device_name"` // [ 1] device_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	DeviceNo string `json:"device_no"` // [ 2] device_no                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	Model string `json:"model"` // [ 3] model                                          VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	WardID string `json:"ward_id"` // [ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	WardName string `json:"ward_name"` // [ 5] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 
 }
 

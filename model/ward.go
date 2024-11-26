@@ -26,7 +26,7 @@ Table: o_ward
 
 JSON Sample
 -------------------------------------
-{    "id": "sQOkUCCsPbAQqyYWPaqwvDKKl",    "name": "BRlsExppngXfxHpBbUogZjZrT",    "type": 26,    "status": 53}
+{    "id": "DQWjIcZWrVwninkdgHxCyGOqC",    "name": "evYjQpWKgucjJKBofWWctvXyh",    "type": 45,    "status": 87}
 
 
 
@@ -44,10 +44,13 @@ var (
 
 // Ward struct is a row record of the o_ward table in the  database
 type Ward struct {
-	ID     string `json:"id"`     //病房ID
-	Name   string `json:"name"`   //病房名称
-	Type   int32  `json:"type"`   //病房类型
-	Status int32  `json:"status"` //病房状态
+	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	Name string `json:"name"` // [ 1] name                                           VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	Type int32 `json:"type"` // [ 2] type                                           INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+
+	Status int32 `json:"status"` // [ 3] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 }
 

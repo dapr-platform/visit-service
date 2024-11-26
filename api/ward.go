@@ -18,7 +18,7 @@ func InitWardRoute(r chi.Router) {
 
 // @Summary page query
 // @Description page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%
-// @Tags Ward
+// @Tags 病房
 // @Param _page query int true "current page"
 // @Param _page_size query int true "page size"
 // @Param _order query string false "order"
@@ -44,7 +44,7 @@ func WardPageListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary query objects
 // @Description query objects
-// @Tags Ward
+// @Tags 病房
 // @Param _select query string false "_select"
 // @Param _order query string false "order"
 // @Param id query string false "id"
@@ -61,7 +61,7 @@ func WardListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary save
 // @Description save
-// @Tags Ward
+// @Tags 病房
 // @Accept       json
 // @Param item body model.Ward true "object"
 // @Produce  json

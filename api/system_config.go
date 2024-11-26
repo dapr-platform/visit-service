@@ -18,7 +18,7 @@ func InitSystem_configRoute(r chi.Router) {
 
 // @Summary page query
 // @Description page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%
-// @Tags System_config
+// @Tags 系统配置
 // @Param _page query int true "current page"
 // @Param _page_size query int true "page size"
 // @Param _order query string false "order"
@@ -47,7 +47,7 @@ func System_configPageListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary query objects
 // @Description query objects
-// @Tags System_config
+// @Tags 系统配置
 // @Param _select query string false "_select"
 // @Param _order query string false "order"
 // @Param id query string false "id"
@@ -67,7 +67,7 @@ func System_configListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary save
 // @Description save
-// @Tags System_config
+// @Tags 系统配置
 // @Accept       json
 // @Param item body model.System_config true "object"
 // @Produce  json

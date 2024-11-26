@@ -18,7 +18,7 @@ func InitVisit_recordRoute(r chi.Router) {
 
 // @Summary page query
 // @Description page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%
-// @Tags Visit_record
+// @Tags 探视登记
 // @Param _page query int true "current page"
 // @Param _page_size query int true "page size"
 // @Param _order query string false "order"
@@ -51,7 +51,7 @@ func Visit_recordPageListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary query objects
 // @Description query objects
-// @Tags Visit_record
+// @Tags 探视登记
 // @Param _select query string false "_select"
 // @Param _order query string false "order"
 // @Param id query string false "id"
@@ -75,7 +75,7 @@ func Visit_recordListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary save
 // @Description save
-// @Tags Visit_record
+// @Tags 探视登记
 // @Accept       json
 // @Param item body model.Visit_record true "object"
 // @Produce  json

@@ -33,7 +33,7 @@ Table: o_camera
 
 JSON Sample
 -------------------------------------
-{    "id": "RkAEXsTgQyHPJyraFplQiaLSs",    "device_name": "WjEXxFlShIhqnNTrRxciliUwk",    "device_no": "BvwAFSrvATWcCpIbbSuVtprRP",    "location_type": 80,    "ward_id": "baEWvZfuCDtfTrZfQCYjjyvrh",    "bed_id": "ZKfvSLQINJVnBdXwKivisXJMn",    "device_type": 12,    "manufacturer": "PkCWTQlGBBiDHjmcwYfntxKbi",    "main_stream_url": "mkXSnVtkhEJjAcATGLwccnYKM",    "sub_stream_url": "cnuirHGnKldJryTiBGQIBIGdI",    "status": 99}
+{    "id": "mbUlgdoROPLiGPOxHtYVTrfVs",    "device_name": "dhliyyMZVxvxvVwOHfuYPIMNi",    "device_no": "EHyOIlCHuGSPDSYNZtqmPUxEw",    "location_type": 94,    "ward_id": "iDWPcIVRhCbbcrnlayHSkEMFy",    "bed_id": "fsRALmLTwxLwQDRkuoVtMZOsB",    "device_type": 12,    "manufacturer": "xspRoRLJKgVirScEprwlIVEXh",    "main_stream_url": "PTlsiUyAPaohRVgJftcNqTgUG",    "sub_stream_url": "gBbkPBmtfCJBnGlFkJTxpcykP",    "status": 10}
 
 
 
@@ -65,17 +65,27 @@ var (
 
 // Camera struct is a row record of the o_camera table in the  database
 type Camera struct {
-	ID            string `json:"id"`              //摄像头ID
-	DeviceName    string `json:"device_name"`     //设备名称
-	DeviceNo      string `json:"device_no"`       //设备编号
-	LocationType  int32  `json:"location_type"`   //位置类型
-	WardID        string `json:"ward_id"`         //所属病房
-	BedID         string `json:"bed_id"`          //所属床位
-	DeviceType    int32  `json:"device_type"`     //设备类型
-	Manufacturer  string `json:"manufacturer"`    //设备厂商
-	MainStreamURL string `json:"main_stream_url"` //主码流URL
-	SubStreamURL  string `json:"sub_stream_url"`  //辅码流URL
-	Status        int32  `json:"status"`          //状态
+	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	DeviceName string `json:"device_name"` // [ 1] device_name                                    VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	DeviceNo string `json:"device_no"` // [ 2] device_no                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	LocationType int32 `json:"location_type"` // [ 3] location_type                                  INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+
+	WardID string `json:"ward_id"` // [ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	BedID string `json:"bed_id"` // [ 5] bed_id                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	DeviceType int32 `json:"device_type"` // [ 6] device_type                                    INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+
+	Manufacturer string `json:"manufacturer"` // [ 7] manufacturer                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	MainStreamURL string `json:"main_stream_url"` // [ 8] main_stream_url                                VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+
+	SubStreamURL string `json:"sub_stream_url"` // [ 9] sub_stream_url                                 VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+
+	Status int32 `json:"status"` // [10] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 }
 

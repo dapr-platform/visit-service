@@ -16,7 +16,7 @@ func InitLive_record_infoRoute(r chi.Router) {
 
 // @Summary page query
 // @Description page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%
-// @Tags Live_record_info
+// @Tags 直播记录信息视图
 // @Param _page query int true "current page"
 // @Param _page_size query int true "page size"
 // @Param _order query string false "order"
@@ -28,6 +28,7 @@ func InitLive_record_infoRoute(r chi.Router) {
 // @Param start_time query string false "start_time"
 // @Param end_time query string false "end_time"
 // @Param file_size query string false "file_size"
+// @Param stream_id query string false "stream_id"
 // @Param status query string false "status"
 // @Param patient_name query string false "patient_name"
 // @Param patient_ward_name query string false "patient_ward_name"
@@ -50,7 +51,7 @@ func Live_record_infoPageListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary query objects
 // @Description query objects
-// @Tags Live_record_info
+// @Tags 直播记录信息视图
 // @Param _select query string false "_select"
 // @Param _order query string false "order"
 // @Param id query string false "id"
@@ -61,6 +62,7 @@ func Live_record_infoPageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param start_time query string false "start_time"
 // @Param end_time query string false "end_time"
 // @Param file_size query string false "file_size"
+// @Param stream_id query string false "stream_id"
 // @Param status query string false "status"
 // @Param patient_name query string false "patient_name"
 // @Param patient_ward_name query string false "patient_ward_name"

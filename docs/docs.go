@@ -22,7 +22,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Bed_info"
+                    "病床信息视图"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -113,7 +113,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Bed_info"
+                    "病床信息视图"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -224,7 +224,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Camera"
+                    "摄像头"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -346,7 +346,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Camera"
+                    "摄像头"
                 ],
                 "summary": "save",
                 "parameters": [
@@ -395,7 +395,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Camera_info"
+                    "摄像头信息视图"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -528,7 +528,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Camera_info"
+                    "摄像头信息视图"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -739,7 +739,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Camera"
+                    "摄像头"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -915,7 +915,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Family_member_info"
+                    "家属信息视图"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -1078,7 +1078,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Family_member_info"
+                    "家属信息视图"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -1261,7 +1261,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Head_display_info"
+                    "头显信息视图"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -1352,7 +1352,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Head_display_info"
+                    "头显信息视图"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -1463,7 +1463,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Live_record"
+                    "直播记录"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -1579,7 +1579,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Live_record"
+                    "直播记录"
                 ],
                 "summary": "save",
                 "parameters": [
@@ -1628,7 +1628,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Live_record_info"
+                    "直播记录信息视图"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -1694,6 +1694,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "stream_id",
+                        "name": "stream_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "status",
                         "name": "status",
                         "in": "query"
@@ -1755,7 +1761,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Live_record_info"
+                    "直播记录信息视图"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -1825,6 +1831,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "file_size",
                         "name": "file_size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "stream_id",
+                        "name": "stream_id",
                         "in": "query"
                     },
                     {
@@ -1902,7 +1914,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Live_record"
+                    "直播记录"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -2072,7 +2084,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Patient_info"
+                    "病患信息视图"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -2181,7 +2193,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Patient_info"
+                    "病患信息视图"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -2310,7 +2322,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Schedule_camera"
+                    "探视排班摄像头"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -2390,7 +2402,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Schedule_camera"
+                    "探视排班摄像头"
                 ],
                 "summary": "save",
                 "parameters": [
@@ -2439,7 +2451,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Schedule_camera"
+                    "探视排班摄像头"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -2538,7 +2550,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "System_config"
+                    "系统配置"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -2636,7 +2648,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "System_config"
+                    "系统配置"
                 ],
                 "summary": "save",
                 "parameters": [
@@ -2685,7 +2697,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "System_config"
+                    "系统配置"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -2802,7 +2814,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Visit_record"
+                    "探视登记"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -2924,7 +2936,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Visit_record"
+                    "探视登记"
                 ],
                 "summary": "save",
                 "parameters": [
@@ -2973,7 +2985,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Visit_record_info"
+                    "探视记录信息视图"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -3112,7 +3124,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Visit_record_info"
+                    "探视记录信息视图"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -3271,7 +3283,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Visit_record"
+                    "探视登记"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -3412,7 +3424,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Visit_schedule"
+                    "探视排班"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -3504,7 +3516,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Visit_schedule"
+                    "探视排班"
                 ],
                 "summary": "save",
                 "parameters": [
@@ -3553,7 +3565,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Visit_schedule"
+                    "探视排班"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -3664,7 +3676,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Ward"
+                    "病房"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -3744,7 +3756,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Ward"
+                    "病房"
                 ],
                 "summary": "save",
                 "parameters": [
@@ -3793,7 +3805,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Ward"
+                    "病房"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -4033,27 +4045,27 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "bed_no": {
-                    "description": "床位号",
+                    "description": "[ 2] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "id": {
-                    "description": "病床ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "床位状态",
+                    "description": "[ 4] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "type": {
-                    "description": "床位类型",
+                    "description": "[ 3] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "ward_id": {
-                    "description": "病房ID",
+                    "description": "[ 1] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "ward_name": {
-                    "description": "病房名称",
+                    "description": "[ 5] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 }
             }
@@ -4062,47 +4074,47 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "bed_id": {
-                    "description": "所属床位",
+                    "description": "[ 5] bed_id                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "device_name": {
-                    "description": "设备名称",
+                    "description": "[ 1] device_name                                    VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "device_no": {
-                    "description": "设备编号",
+                    "description": "[ 2] device_no                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "device_type": {
-                    "description": "设备类型",
+                    "description": "[ 6] device_type                                    INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 },
                 "id": {
-                    "description": "摄像头ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "location_type": {
-                    "description": "位置类型",
+                    "description": "[ 3] location_type                                  INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 },
                 "main_stream_url": {
-                    "description": "主码流URL",
+                    "description": "[ 8] main_stream_url                                VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "manufacturer": {
-                    "description": "设备厂商",
+                    "description": "[ 7] manufacturer                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态",
+                    "description": "[10] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 },
                 "sub_stream_url": {
-                    "description": "辅码流URL",
+                    "description": "[ 9] sub_stream_url                                 VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "ward_id": {
-                    "description": "所属病房",
+                    "description": "[ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 }
             }
@@ -4111,55 +4123,55 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "bed_id": {
-                    "description": "所属床位ID",
+                    "description": "[ 5] bed_id                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "bed_no": {
-                    "description": "床位号",
+                    "description": "[11] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "device_name": {
-                    "description": "设备名称",
+                    "description": "[ 1] device_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "device_no": {
-                    "description": "设备编号",
+                    "description": "[ 2] device_no                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "device_type": {
-                    "description": "设备类型",
+                    "description": "[ 6] device_type                                    INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "id": {
-                    "description": "摄像头ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "location_type": {
-                    "description": "位置类型",
+                    "description": "[ 3] location_type                                  INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "main_stream_url": {
-                    "description": "主码流URL",
+                    "description": "[ 8] main_stream_url                                VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "manufacturer": {
-                    "description": "设备厂商",
+                    "description": "[ 7] manufacturer                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态",
+                    "description": "[10] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "sub_stream_url": {
-                    "description": "辅码流URL",
+                    "description": "[ 9] sub_stream_url                                 VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "ward_id": {
-                    "description": "所属病房ID",
+                    "description": "[ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "ward_name": {
-                    "description": "病房名称",
+                    "description": "[12] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 }
             }
@@ -4168,75 +4180,75 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "address": {
-                    "description": "address",
+                    "description": "[ 7] address                                        VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "avatar_url": {
-                    "description": "avatar_url",
+                    "description": "[13] avatar_url                                     VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "create_at": {
-                    "description": "create_at",
+                    "description": "[14] create_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "email": {
-                    "description": "email",
+                    "description": "[ 3] email                                          VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "gender": {
-                    "description": "gender",
+                    "description": "[ 6] gender                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "id": {
-                    "description": "id",
+                    "description": "[ 0] id                                             VARCHAR(25)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 25      default: []",
                     "type": "string"
                 },
                 "id_card": {
-                    "description": "id_card",
+                    "description": "[11] id_card                                        VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "identity": {
-                    "description": "identity",
+                    "description": "[ 4] identity                                       VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "mobile": {
-                    "description": "mobile",
+                    "description": "[ 2] mobile                                         VARCHAR(15)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 15      default: []",
                     "type": "string"
                 },
                 "name": {
-                    "description": "name",
+                    "description": "[ 5] name                                           VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "org_id": {
-                    "description": "org_id",
+                    "description": "[10] org_id                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "password": {
-                    "description": "password",
+                    "description": "[ 8] password                                       VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "remark": {
-                    "description": "remark",
+                    "description": "[16] remark                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "status",
+                    "description": "[17] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "tenant_id": {
-                    "description": "tenant_id",
+                    "description": "[ 1] tenant_id                                      VARCHAR(25)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 25      default: []",
                     "type": "string"
                 },
                 "type": {
-                    "description": "type",
+                    "description": "[ 9] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "update_at": {
-                    "description": "update_at",
+                    "description": "[15] update_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "work_number": {
-                    "description": "work_number",
+                    "description": "[12] work_number                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 }
             }
@@ -4245,27 +4257,27 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "device_name": {
-                    "description": "设备名称",
+                    "description": "[ 1] device_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "device_no": {
-                    "description": "设备编号",
+                    "description": "[ 2] device_no                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "id": {
-                    "description": "头显ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "model": {
-                    "description": "型号",
+                    "description": "[ 3] model                                          VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "ward_id": {
-                    "description": "病房ID",
+                    "description": "[ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "ward_name": {
-                    "description": "病房名称",
+                    "description": "[ 5] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 }
             }
@@ -4274,43 +4286,43 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "device_id": {
-                    "description": "设备ID",
+                    "description": "[ 4] device_id                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "end_time": {
-                    "description": "直播结束时间",
+                    "description": "[ 6] end_time                                       TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "file_size": {
-                    "description": "文件大小",
+                    "description": "[ 7] file_size                                      INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []",
                     "type": "integer"
                 },
                 "id": {
-                    "description": "直播记录ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "patient_id": {
-                    "description": "病患ID",
+                    "description": "[ 2] patient_id                                     VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "relative_id": {
-                    "description": "家属ID",
+                    "description": "[ 3] relative_id                                    VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "schedule_id": {
-                    "description": "探视排班ID",
+                    "description": "[ 1] schedule_id                                    VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "start_time": {
-                    "description": "直播开始时间",
+                    "description": "[ 5] start_time                                     TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态(0:未开始,1:直播中,2:已结束)",
+                    "description": "[ 9] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 },
                 "stream_id": {
-                    "description": "流ID",
+                    "description": "[ 8] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 }
             }
@@ -4319,52 +4331,56 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "device_id": {
-                    "description": "设备ID",
+                    "description": "[ 4] device_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "end_time": {
-                    "description": "直播结束时间",
+                    "description": "[ 6] end_time                                       TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "file_size": {
-                    "description": "文件大小",
+                    "description": "[ 7] file_size                                      INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []",
                     "type": "integer"
                 },
                 "id": {
-                    "description": "直播记录ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "patient_bed_no": {
-                    "description": "床位号",
+                    "description": "[12] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "patient_id": {
-                    "description": "病患ID",
+                    "description": "[ 2] patient_id                                     VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "patient_name": {
-                    "description": "病患姓名",
+                    "description": "[10] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "patient_ward_name": {
-                    "description": "病房名称",
+                    "description": "[11] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "relative_id": {
-                    "description": "家属ID",
+                    "description": "[ 3] relative_id                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "schedule_id": {
-                    "description": "探视排班ID",
+                    "description": "[ 1] schedule_id                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "start_time": {
-                    "description": "直播开始时间",
+                    "description": "[ 5] start_time                                     TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态(0:未开始,1:直播中,2:已结束)",
+                    "description": "[ 9] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
+                },
+                "stream_id": {
+                    "description": "[ 8] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
+                    "type": "string"
                 }
             }
         },
@@ -4372,39 +4388,39 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "bed_id": {
-                    "description": "床位ID",
+                    "description": "[ 2] bed_id                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "bed_no": {
-                    "description": "床位号",
+                    "description": "[ 7] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "hospital_no": {
-                    "description": "住院号",
+                    "description": "[ 4] hospital_no                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "id": {
-                    "description": "病患ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "name": {
-                    "description": "病患姓名",
+                    "description": "[ 3] name                                           VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "remark": {
-                    "description": "备注",
+                    "description": "[ 6] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态",
+                    "description": "[ 5] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "ward_id": {
-                    "description": "病房ID",
+                    "description": "[ 1] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "ward_name": {
-                    "description": "病房名称",
+                    "description": "[ 8] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 }
             }
@@ -4413,19 +4429,19 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "camera_id": {
-                    "description": "摄像头ID",
+                    "description": "[ 2] camera_id                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "id": {
-                    "description": "排班摄像头ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "schedule_id": {
-                    "description": "探视排班ID",
+                    "description": "[ 1] schedule_id                                    VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态",
+                    "description": "[ 3] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 }
             }
@@ -4434,31 +4450,31 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "config_desc": {
-                    "description": "配置描述",
+                    "description": "[ 5] config_desc                                    VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "config_name": {
-                    "description": "配置名称",
+                    "description": "[ 1] config_name                                    VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "config_type": {
-                    "description": "配置类型",
+                    "description": "[ 3] config_type                                    VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: [string]",
                     "type": "string"
                 },
                 "config_unit": {
-                    "description": "配置单位",
+                    "description": "[ 4] config_unit                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "config_value": {
-                    "description": "配置值",
+                    "description": "[ 2] config_value                                   VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "id": {
-                    "description": "配置ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态",
+                    "description": "[ 6] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 }
             }
@@ -4467,47 +4483,47 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "id": {
-                    "description": "探视登记ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "patient_id": {
-                    "description": "病患ID",
+                    "description": "[ 1] patient_id                                     VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "relationship": {
-                    "description": "探视人关系",
+                    "description": "[ 8] relationship                                   VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "relative_id": {
-                    "description": "家属ID",
+                    "description": "[ 2] relative_id                                    VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "remark": {
-                    "description": "备注",
+                    "description": "[10] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态",
+                    "description": "[ 9] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 },
                 "visit_end_time": {
-                    "description": "探视结束时间",
+                    "description": "[ 4] visit_end_time                                 TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "visit_start_time": {
-                    "description": "探视开始时间",
+                    "description": "[ 3] visit_start_time                               TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "visitor_id_card": {
-                    "description": "探视人身份证号",
+                    "description": "[ 7] visitor_id_card                                VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "visitor_name": {
-                    "description": "探视人",
+                    "description": "[ 5] visitor_name                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "visitor_phone": {
-                    "description": "探视人电话",
+                    "description": "[ 6] visitor_phone                                  VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 }
             }
@@ -4516,59 +4532,59 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "id": {
-                    "description": "探视记录ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "patient_bed_no": {
-                    "description": "床位号",
+                    "description": "[13] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "patient_id": {
-                    "description": "病患ID",
+                    "description": "[ 1] patient_id                                     VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "patient_name": {
-                    "description": "病患姓名",
+                    "description": "[11] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "patient_ward_name": {
-                    "description": "病房名称",
+                    "description": "[12] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "relationship": {
-                    "description": "探视人关系",
+                    "description": "[ 8] relationship                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "relative_id": {
-                    "description": "家属ID",
+                    "description": "[ 2] relative_id                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "remark": {
-                    "description": "备注",
+                    "description": "[10] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态",
+                    "description": "[ 9] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "visit_end_time": {
-                    "description": "探视结束时间",
+                    "description": "[ 4] visit_end_time                                 TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "visit_start_time": {
-                    "description": "探视开始时间",
+                    "description": "[ 3] visit_start_time                               TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "visitor_id_card": {
-                    "description": "探视人身份证号",
+                    "description": "[ 7] visitor_id_card                                VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "visitor_name": {
-                    "description": "探视人姓名",
+                    "description": "[ 5] visitor_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "visitor_phone": {
-                    "description": "探视人电话",
+                    "description": "[ 6] visitor_phone                                  VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 }
             }
@@ -4577,27 +4593,27 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "end_time": {
-                    "description": "结束时间",
+                    "description": "[ 2] end_time                                       TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "id": {
-                    "description": "排班ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "remaining_visitors": {
-                    "description": "探视剩余人数",
+                    "description": "[ 4] remaining_visitors                             INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 },
                 "start_time": {
-                    "description": "开始时间",
+                    "description": "[ 1] start_time                                     TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态",
+                    "description": "[ 5] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 },
                 "total_visitors": {
-                    "description": "探视总人数",
+                    "description": "[ 3] total_visitors                                 INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 }
             }
@@ -4606,19 +4622,19 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "id": {
-                    "description": "病房ID",
+                    "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "name": {
-                    "description": "病房名称",
+                    "description": "[ 1] name                                           VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "病房状态",
+                    "description": "[ 3] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 },
                 "type": {
-                    "description": "病房类型",
+                    "description": "[ 2] type                                           INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 }
             }

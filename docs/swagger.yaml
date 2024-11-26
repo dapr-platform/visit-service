@@ -1017,6 +1017,29 @@ paths:
       summary: page query
       tags:
       - Camera
+  /debug/init-visit-schedule:
+    post:
+      consumes:
+      - application/json
+      description: 手动初始化排班
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success response
+          schema:
+            $ref: '#/definitions/common.Response'
+        "400":
+          description: Invalid request parameters
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: 手动初始化排班
+      tags:
+      - Manual
   /family-member-info:
     get:
       description: query objects
@@ -1727,6 +1750,29 @@ paths:
       summary: page query
       tags:
       - Live_record
+  /manual/delete-visit-schedule:
+    post:
+      consumes:
+      - application/json
+      description: 手动删除排班
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success response
+          schema:
+            $ref: '#/definitions/common.Response'
+        "400":
+          description: Invalid request parameters
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: 手动删除排班
+      tags:
+      - Manual
   /patient-info:
     get:
       description: query objects

@@ -866,41 +866,6 @@
                 }
             }
         },
-        "/debug/init-visit-schedule": {
-            "post": {
-                "description": "手动初始化排班",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Manual"
-                ],
-                "summary": "手动初始化排班",
-                "responses": {
-                    "200": {
-                        "description": "Success response",
-                        "schema": {
-                            "$ref": "#/definitions/common.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid request parameters",
-                        "schema": {
-                            "$ref": "#/definitions/common.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "schema": {
-                            "$ref": "#/definitions/common.Response"
-                        }
-                    }
-                }
-            }
-        },
         "/family-member-info": {
             "get": {
                 "description": "query objects",
@@ -2048,6 +2013,50 @@
                     "Manual"
                 ],
                 "summary": "手动删除排班",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "删除开始时间，2006-01-02",
+                        "name": "start_day",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request parameters",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/manual/init-visit-schedule": {
+            "post": {
+                "description": "手动初始化排班",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Manual"
+                ],
+                "summary": "手动初始化排班",
                 "responses": {
                     "200": {
                         "description": "Success response",

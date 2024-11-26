@@ -63,8 +63,8 @@ func ManuAddVisitSchedule(startTime time.Time, endTime time.Time, totalVisitors 
 	return nil
 }
 
-// DebugInitVisitSchedule 用于调试的初始化函数
-func DebugInitVisitSchedule() error {
+// ManualInitVisitSchedule 用于调试的初始化函数
+func ManualInitVisitSchedule() error {
 	return initVisitScheduleDaily()
 }
 
@@ -83,7 +83,7 @@ func DeleteVisitSchedule(startDay time.Time) error {
 func checkTimeSlotExists(startTime time.Time) (bool, error) {
 	// 查询与给定时间段有重叠的排班
 	qstr := model.Visit_schedule_FIELD_NAME_id + "=" + startTime.Format("20060102150405")
-	
+
 	schedules, err := common.DbQuery[model.Visit_schedule](
 		context.Background(),
 		common.GetDaprClient(),

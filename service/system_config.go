@@ -137,6 +137,12 @@ func UpsertSystem_config(r *http.Request, in any) (out any, err error) {
 	if !ok {
 		return nil, errors.New("invalid input")
 	}
-	defaultSystemConfigListMap[v.ConfigName].ConfigValue = v.ConfigValue
+	
+	defaultConfig, exists := defaultSystemConfigListMap[v.ConfigName]
+	if !exists {
+		return nil, errors.New("config name not found")
+	}
+	
+	defaultConfig.ConfigValue = v.ConfigValue
 	return v, nil
 }

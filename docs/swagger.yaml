@@ -1,8 +1,2359 @@
 basePath: /swagger/visit-service
+definitions:
+  common.Page:
+    properties:
+      items: {}
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
+    type: object
+  common.Response:
+    properties:
+      data: {}
+      msg:
+        type: string
+      status:
+        type: integer
+    type: object
+  model.Bed_info:
+    properties:
+      bed_no:
+        description: bed_no
+        type: string
+      id:
+        description: id
+        type: string
+      status:
+        description: status
+        type: integer
+      type:
+        description: type
+        type: integer
+      ward_id:
+        description: ward_id
+        type: string
+      ward_name:
+        description: ward_name
+        type: string
+    type: object
+  model.Camera_info:
+    properties:
+      bed_id:
+        description: bed_id
+        type: string
+      bed_no:
+        description: bed_no
+        type: string
+      device_name:
+        description: device_name
+        type: string
+      device_no:
+        description: device_no
+        type: string
+      device_type:
+        description: device_type
+        type: integer
+      id:
+        description: id
+        type: string
+      location_type:
+        description: location_type
+        type: integer
+      main_stream_url:
+        description: main_stream_url
+        type: string
+      manufacturer:
+        description: manufacturer
+        type: string
+      status:
+        description: status
+        type: integer
+      sub_stream_url:
+        description: sub_stream_url
+        type: string
+      ward_id:
+        description: ward_id
+        type: string
+      ward_name:
+        description: ward_name
+        type: string
+    type: object
+  model.Family_member_info:
+    properties:
+      address:
+        description: address
+        type: string
+      avatar_url:
+        description: avatar_url
+        type: string
+      create_at:
+        description: create_at
+        type: string
+      email:
+        description: email
+        type: string
+      gender:
+        description: gender
+        type: integer
+      id:
+        description: id
+        type: string
+      id_card:
+        description: id_card
+        type: string
+      identity:
+        description: identity
+        type: string
+      mobile:
+        description: mobile
+        type: string
+      name:
+        description: name
+        type: string
+      org_id:
+        description: org_id
+        type: string
+      password:
+        description: password
+        type: string
+      remark:
+        description: remark
+        type: string
+      status:
+        description: status
+        type: integer
+      tenant_id:
+        description: tenant_id
+        type: string
+      type:
+        description: type
+        type: integer
+      update_at:
+        description: update_at
+        type: string
+      work_number:
+        description: work_number
+        type: string
+    type: object
+  model.Head_display_info:
+    properties:
+      device_name:
+        description: device_name
+        type: string
+      device_no:
+        description: device_no
+        type: string
+      id:
+        description: id
+        type: string
+      model:
+        description: model
+        type: string
+      ward_id:
+        description: ward_id
+        type: string
+      ward_name:
+        description: ward_name
+        type: string
+    type: object
+  model.Live_record_info:
+    properties:
+      device_id:
+        description: device_id
+        type: string
+      end_time:
+        description: end_time
+        type: string
+      file_size:
+        description: file_size
+        type: integer
+      id:
+        description: id
+        type: string
+      patient_bed_no:
+        description: patient_bed_no
+        type: string
+      patient_id:
+        description: patient_id
+        type: string
+      patient_name:
+        description: patient_name
+        type: string
+      patient_ward_name:
+        description: patient_ward_name
+        type: string
+      relative_id:
+        description: relative_id
+        type: string
+      schedule_id:
+        description: schedule_id
+        type: string
+      start_time:
+        description: start_time
+        type: string
+      status:
+        description: status
+        type: integer
+    type: object
+  model.Patient_info:
+    properties:
+      bed_id:
+        description: bed_id
+        type: string
+      bed_no:
+        description: bed_no
+        type: string
+      hospital_no:
+        description: hospital_no
+        type: string
+      id:
+        description: id
+        type: string
+      name:
+        description: name
+        type: string
+      remark:
+        description: remark
+        type: string
+      status:
+        description: status
+        type: integer
+      ward_id:
+        description: ward_id
+        type: string
+      ward_name:
+        description: ward_name
+        type: string
+    type: object
+  model.Schedule_camera:
+    properties:
+      camera_id:
+        description: 摄像头ID
+        type: string
+      id:
+        description: 排班摄像头ID
+        type: string
+      schedule_id:
+        description: 探视排班ID
+        type: string
+      status:
+        description: 状态
+        type: integer
+    type: object
+  model.System_config:
+    properties:
+      config_desc:
+        description: 配置描述
+        type: string
+      config_name:
+        description: 配置名称
+        type: string
+      config_type:
+        description: 配置类型
+        type: string
+      config_unit:
+        description: 配置单位
+        type: string
+      config_value:
+        description: 配置值
+        type: string
+      id:
+        description: 配置ID
+        type: string
+      status:
+        description: 状态
+        type: integer
+    type: object
+  model.Visit_record:
+    properties:
+      id:
+        description: 探视登记ID
+        type: string
+      patient_id:
+        description: 病患ID
+        type: string
+      relationship:
+        description: 探视人关系
+        type: string
+      relative_id:
+        description: 家属ID
+        type: string
+      remark:
+        description: 备注
+        type: string
+      status:
+        description: 状态
+        type: integer
+      visit_end_time:
+        description: 探视结束时间
+        type: string
+      visit_start_time:
+        description: 探视开始时间
+        type: string
+      visitor_id_card:
+        description: 探视人身份证号
+        type: string
+      visitor_name:
+        description: 探视人
+        type: string
+      visitor_phone:
+        description: 探视人电话
+        type: string
+    type: object
+  model.Visit_record_info:
+    properties:
+      id:
+        description: id
+        type: string
+      patient_bed_no:
+        description: patient_bed_no
+        type: string
+      patient_id:
+        description: patient_id
+        type: string
+      patient_name:
+        description: patient_name
+        type: string
+      patient_ward_name:
+        description: patient_ward_name
+        type: string
+      relationship:
+        description: relationship
+        type: string
+      relative_id:
+        description: relative_id
+        type: string
+      remark:
+        description: remark
+        type: string
+      status:
+        description: status
+        type: integer
+      visit_end_time:
+        description: visit_end_time
+        type: string
+      visit_start_time:
+        description: visit_start_time
+        type: string
+      visitor_id_card:
+        description: visitor_id_card
+        type: string
+      visitor_name:
+        description: visitor_name
+        type: string
+      visitor_phone:
+        description: visitor_phone
+        type: string
+    type: object
+  model.Visit_schedule:
+    properties:
+      end_time:
+        description: 结束时间
+        type: string
+      id:
+        description: 排班ID
+        type: string
+      remaining_visitors:
+        description: 探视剩余人数
+        type: integer
+      start_time:
+        description: 开始时间
+        type: string
+      status:
+        description: 状态
+        type: integer
+      total_visitors:
+        description: 探视总人数
+        type: integer
+    type: object
+  model.Ward:
+    properties:
+      id:
+        description: 病房ID
+        type: string
+      name:
+        description: 病房名称
+        type: string
+      status:
+        description: 病房状态
+        type: integer
+      type:
+        description: 病房类型
+        type: integer
+    type: object
 info:
   contact: {}
   description: visit-service API
   title: visit-service API
   version: "1.0"
-paths: {}
+paths:
+  /bed-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: bed_no
+        in: query
+        name: bed_no
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: ward_name
+        in: query
+        name: ward_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Bed_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Bed_info
+  /bed-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: bed_no
+        in: query
+        name: bed_no
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: ward_name
+        in: query
+        name: ward_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Bed_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Bed_info
+  /camera-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: device_name
+        in: query
+        name: device_name
+        type: string
+      - description: device_no
+        in: query
+        name: device_no
+        type: string
+      - description: location_type
+        in: query
+        name: location_type
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: bed_id
+        in: query
+        name: bed_id
+        type: string
+      - description: device_type
+        in: query
+        name: device_type
+        type: string
+      - description: manufacturer
+        in: query
+        name: manufacturer
+        type: string
+      - description: main_stream_url
+        in: query
+        name: main_stream_url
+        type: string
+      - description: sub_stream_url
+        in: query
+        name: sub_stream_url
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: bed_no
+        in: query
+        name: bed_no
+        type: string
+      - description: ward_name
+        in: query
+        name: ward_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Camera_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Camera_info
+  /camera-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: device_name
+        in: query
+        name: device_name
+        type: string
+      - description: device_no
+        in: query
+        name: device_no
+        type: string
+      - description: location_type
+        in: query
+        name: location_type
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: bed_id
+        in: query
+        name: bed_id
+        type: string
+      - description: device_type
+        in: query
+        name: device_type
+        type: string
+      - description: manufacturer
+        in: query
+        name: manufacturer
+        type: string
+      - description: main_stream_url
+        in: query
+        name: main_stream_url
+        type: string
+      - description: sub_stream_url
+        in: query
+        name: sub_stream_url
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: bed_no
+        in: query
+        name: bed_no
+        type: string
+      - description: ward_name
+        in: query
+        name: ward_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Camera_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Camera_info
+  /family-member-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: tenant_id
+        in: query
+        name: tenant_id
+        type: string
+      - description: mobile
+        in: query
+        name: mobile
+        type: string
+      - description: email
+        in: query
+        name: email
+        type: string
+      - description: identity
+        in: query
+        name: identity
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: gender
+        in: query
+        name: gender
+        type: string
+      - description: address
+        in: query
+        name: address
+        type: string
+      - description: password
+        in: query
+        name: password
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: org_id
+        in: query
+        name: org_id
+        type: string
+      - description: id_card
+        in: query
+        name: id_card
+        type: string
+      - description: work_number
+        in: query
+        name: work_number
+        type: string
+      - description: avatar_url
+        in: query
+        name: avatar_url
+        type: string
+      - description: create_at
+        in: query
+        name: create_at
+        type: string
+      - description: update_at
+        in: query
+        name: update_at
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Family_member_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Family_member_info
+  /family-member-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: tenant_id
+        in: query
+        name: tenant_id
+        type: string
+      - description: mobile
+        in: query
+        name: mobile
+        type: string
+      - description: email
+        in: query
+        name: email
+        type: string
+      - description: identity
+        in: query
+        name: identity
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: gender
+        in: query
+        name: gender
+        type: string
+      - description: address
+        in: query
+        name: address
+        type: string
+      - description: password
+        in: query
+        name: password
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: org_id
+        in: query
+        name: org_id
+        type: string
+      - description: id_card
+        in: query
+        name: id_card
+        type: string
+      - description: work_number
+        in: query
+        name: work_number
+        type: string
+      - description: avatar_url
+        in: query
+        name: avatar_url
+        type: string
+      - description: create_at
+        in: query
+        name: create_at
+        type: string
+      - description: update_at
+        in: query
+        name: update_at
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Family_member_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Family_member_info
+  /head-display-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: device_name
+        in: query
+        name: device_name
+        type: string
+      - description: device_no
+        in: query
+        name: device_no
+        type: string
+      - description: model
+        in: query
+        name: model
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: ward_name
+        in: query
+        name: ward_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Head_display_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Head_display_info
+  /head-display-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: device_name
+        in: query
+        name: device_name
+        type: string
+      - description: device_no
+        in: query
+        name: device_no
+        type: string
+      - description: model
+        in: query
+        name: model
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: ward_name
+        in: query
+        name: ward_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Head_display_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Head_display_info
+  /live-record-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: device_id
+        in: query
+        name: device_id
+        type: string
+      - description: start_time
+        in: query
+        name: start_time
+        type: string
+      - description: end_time
+        in: query
+        name: end_time
+        type: string
+      - description: file_size
+        in: query
+        name: file_size
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: patient_name
+        in: query
+        name: patient_name
+        type: string
+      - description: patient_ward_name
+        in: query
+        name: patient_ward_name
+        type: string
+      - description: patient_bed_no
+        in: query
+        name: patient_bed_no
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Live_record_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Live_record_info
+  /live-record-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: device_id
+        in: query
+        name: device_id
+        type: string
+      - description: start_time
+        in: query
+        name: start_time
+        type: string
+      - description: end_time
+        in: query
+        name: end_time
+        type: string
+      - description: file_size
+        in: query
+        name: file_size
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: patient_name
+        in: query
+        name: patient_name
+        type: string
+      - description: patient_ward_name
+        in: query
+        name: patient_ward_name
+        type: string
+      - description: patient_bed_no
+        in: query
+        name: patient_bed_no
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Live_record_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Live_record_info
+  /patient-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: bed_id
+        in: query
+        name: bed_id
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: hospital_no
+        in: query
+        name: hospital_no
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      - description: bed_no
+        in: query
+        name: bed_no
+        type: string
+      - description: ward_name
+        in: query
+        name: ward_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Patient_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Patient_info
+  /patient-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: bed_id
+        in: query
+        name: bed_id
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: hospital_no
+        in: query
+        name: hospital_no
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      - description: bed_no
+        in: query
+        name: bed_no
+        type: string
+      - description: ward_name
+        in: query
+        name: ward_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Patient_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Patient_info
+  /schedule-camera:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
+        type: string
+      - description: camera_id
+        in: query
+        name: camera_id
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Schedule_camera'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Schedule_camera
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Schedule_camera'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Schedule_camera'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - Schedule_camera
+  /schedule-camera/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
+        type: string
+      - description: camera_id
+        in: query
+        name: camera_id
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Schedule_camera'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Schedule_camera
+  /system-config:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: config_name
+        in: query
+        name: config_name
+        type: string
+      - description: config_value
+        in: query
+        name: config_value
+        type: string
+      - description: config_type
+        in: query
+        name: config_type
+        type: string
+      - description: config_unit
+        in: query
+        name: config_unit
+        type: string
+      - description: config_desc
+        in: query
+        name: config_desc
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.System_config'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - System_config
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.System_config'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.System_config'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - System_config
+  /system-config/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: config_name
+        in: query
+        name: config_name
+        type: string
+      - description: config_value
+        in: query
+        name: config_value
+        type: string
+      - description: config_type
+        in: query
+        name: config_type
+        type: string
+      - description: config_unit
+        in: query
+        name: config_unit
+        type: string
+      - description: config_desc
+        in: query
+        name: config_desc
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.System_config'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - System_config
+  /visit-record:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: visit_start_time
+        in: query
+        name: visit_start_time
+        type: string
+      - description: visit_end_time
+        in: query
+        name: visit_end_time
+        type: string
+      - description: visitor_name
+        in: query
+        name: visitor_name
+        type: string
+      - description: visitor_phone
+        in: query
+        name: visitor_phone
+        type: string
+      - description: visitor_id_card
+        in: query
+        name: visitor_id_card
+        type: string
+      - description: relationship
+        in: query
+        name: relationship
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Visit_record'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Visit_record
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Visit_record'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Visit_record'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - Visit_record
+  /visit-record-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: visit_start_time
+        in: query
+        name: visit_start_time
+        type: string
+      - description: visit_end_time
+        in: query
+        name: visit_end_time
+        type: string
+      - description: visitor_name
+        in: query
+        name: visitor_name
+        type: string
+      - description: visitor_phone
+        in: query
+        name: visitor_phone
+        type: string
+      - description: visitor_id_card
+        in: query
+        name: visitor_id_card
+        type: string
+      - description: relationship
+        in: query
+        name: relationship
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      - description: patient_name
+        in: query
+        name: patient_name
+        type: string
+      - description: patient_ward_name
+        in: query
+        name: patient_ward_name
+        type: string
+      - description: patient_bed_no
+        in: query
+        name: patient_bed_no
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Visit_record_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Visit_record_info
+  /visit-record-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: visit_start_time
+        in: query
+        name: visit_start_time
+        type: string
+      - description: visit_end_time
+        in: query
+        name: visit_end_time
+        type: string
+      - description: visitor_name
+        in: query
+        name: visitor_name
+        type: string
+      - description: visitor_phone
+        in: query
+        name: visitor_phone
+        type: string
+      - description: visitor_id_card
+        in: query
+        name: visitor_id_card
+        type: string
+      - description: relationship
+        in: query
+        name: relationship
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      - description: patient_name
+        in: query
+        name: patient_name
+        type: string
+      - description: patient_ward_name
+        in: query
+        name: patient_ward_name
+        type: string
+      - description: patient_bed_no
+        in: query
+        name: patient_bed_no
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Visit_record_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Visit_record_info
+  /visit-record/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: visit_start_time
+        in: query
+        name: visit_start_time
+        type: string
+      - description: visit_end_time
+        in: query
+        name: visit_end_time
+        type: string
+      - description: visitor_name
+        in: query
+        name: visitor_name
+        type: string
+      - description: visitor_phone
+        in: query
+        name: visitor_phone
+        type: string
+      - description: visitor_id_card
+        in: query
+        name: visitor_id_card
+        type: string
+      - description: relationship
+        in: query
+        name: relationship
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Visit_record'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Visit_record
+  /visit-schedule:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: start_time
+        in: query
+        name: start_time
+        type: string
+      - description: end_time
+        in: query
+        name: end_time
+        type: string
+      - description: total_visitors
+        in: query
+        name: total_visitors
+        type: string
+      - description: remaining_visitors
+        in: query
+        name: remaining_visitors
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Visit_schedule'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Visit_schedule
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Visit_schedule'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Visit_schedule'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - Visit_schedule
+  /visit-schedule/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: start_time
+        in: query
+        name: start_time
+        type: string
+      - description: end_time
+        in: query
+        name: end_time
+        type: string
+      - description: total_visitors
+        in: query
+        name: total_visitors
+        type: string
+      - description: remaining_visitors
+        in: query
+        name: remaining_visitors
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Visit_schedule'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Visit_schedule
+  /ward:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Ward'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Ward
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Ward'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Ward'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - Ward
+  /ward/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Ward'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Ward
 swagger: "2.0"

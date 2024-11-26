@@ -1,15 +1,18 @@
 package main
 
 import (
+	"net/http"
+	"os"
+	"strconv"
+	"visit-service/api"
+	_ "visit-service/docs"
+	_ "visit-service/service"
+
 	"github.com/dapr-platform/common"
 	daprd "github.com/dapr/go-sdk/service/http"
 	"github.com/go-chi/chi/v5"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	httpSwagger "github.com/swaggo/http-swagger"
-	"net/http"
-	"os"
-	"strconv"
-	_ "visit-service/docs"
 )
 
 var (
@@ -30,6 +33,7 @@ func init() {
 // @BasePath /swagger/visit-service
 func main() {
 	mux := chi.NewRouter()
+	api.InitRoute(mux)
 	mux.Handle("/metrics", promhttp.Handler())
 	mux.Handle("/swagger*", httpSwagger.WrapHandler)
 	s := daprd.NewServiceWithMux(":"+strconv.Itoa(PORT), mux)

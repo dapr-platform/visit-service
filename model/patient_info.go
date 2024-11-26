@@ -31,7 +31,7 @@ Table: v_patient_info
 
 JSON Sample
 -------------------------------------
-{    "id": "PxsreBmeqgmdMjjlHCYpjelpU",    "ward_id": "YNZGZCDrUIpjcBXdBXvpxGdHZ",    "bed_id": "rKNKpRdLbTiKoUTvOYNMewJIE",    "name": "DmLectSHTwCBMOjQVAZytxgcX",    "hospital_no": "KUBlbfmTgsDqUruSdcbhCjDCJ",    "status": 99,    "remark": "iGFfimiwDJYKgfxlCDprVDmrJ",    "bed_no": "AJheOnVppVsSwGBWithgtZWvf",    "ward_name": "dvHNnEdxcrIekomsWDwiUwxnR"}
+{    "id": "iqdIwXbVfyrWQEfdrqVEFESNp",    "ward_id": "sQSgnfortuNENKEQKMqVLWsby",    "bed_id": "xVCPQfUrJIxWGjdGyvxMiweMT",    "name": "ekRXZheBRKIfTvfGPHiGdQRuj",    "hospital_no": "CBPvvryNGnwjYYCAFkqiZCXSP",    "status": 94,    "remark": "JTltGZbLXBwLQseWeiixJOwYI",    "bed_no": "PVHBRgOtWgSKDWlDjgUwKEorE",    "ward_name": "DequLBFvChEmJKHxnmDeKMHGo"}
 
 
 Comments
@@ -66,15 +66,15 @@ var (
 
 // Patient_info struct is a row record of the v_patient_info table in the  database
 type Patient_info struct {
-	ID         string `json:"id"`          //id
-	WardID     string `json:"ward_id"`     //ward_id
-	BedID      string `json:"bed_id"`      //bed_id
-	Name       string `json:"name"`        //name
-	HospitalNo string `json:"hospital_no"` //hospital_no
-	Status     int32  `json:"status"`      //status
-	Remark     string `json:"remark"`      //remark
-	BedNo      string `json:"bed_no"`      //bed_no
-	WardName   string `json:"ward_name"`   //ward_name
+	ID         string `json:"id"`          //病患ID
+	WardID     string `json:"ward_id"`     //病房ID
+	BedID      string `json:"bed_id"`      //床位ID
+	Name       string `json:"name"`        //病患姓名
+	HospitalNo string `json:"hospital_no"` //住院号
+	Status     int32  `json:"status"`      //状态
+	Remark     string `json:"remark"`      //备注
+	BedNo      string `json:"bed_no"`      //床位号
+	WardName   string `json:"ward_name"`   //病房名称
 
 }
 
@@ -85,7 +85,7 @@ var Patient_infoTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:   0,
 			Name:    "id",
-			Comment: `id`,
+			Comment: `病患ID`,
 			Notes: `Warning table: v_patient_info does not have a primary key defined, setting col position 1 id as primary key
 Warning table: v_patient_info primary key column id is nullable column, setting it as NOT NULL
 `,
@@ -108,7 +108,7 @@ Warning table: v_patient_info primary key column id is nullable column, setting 
 		&ColumnInfo{
 			Index:              1,
 			Name:               "ward_id",
-			Comment:            `ward_id`,
+			Comment:            `病房ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -129,7 +129,7 @@ Warning table: v_patient_info primary key column id is nullable column, setting 
 		&ColumnInfo{
 			Index:              2,
 			Name:               "bed_id",
-			Comment:            `bed_id`,
+			Comment:            `床位ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -150,7 +150,7 @@ Warning table: v_patient_info primary key column id is nullable column, setting 
 		&ColumnInfo{
 			Index:              3,
 			Name:               "name",
-			Comment:            `name`,
+			Comment:            `病患姓名`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -171,7 +171,7 @@ Warning table: v_patient_info primary key column id is nullable column, setting 
 		&ColumnInfo{
 			Index:              4,
 			Name:               "hospital_no",
-			Comment:            `hospital_no`,
+			Comment:            `住院号`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -192,7 +192,7 @@ Warning table: v_patient_info primary key column id is nullable column, setting 
 		&ColumnInfo{
 			Index:              5,
 			Name:               "status",
-			Comment:            `status`,
+			Comment:            `状态`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT4",
@@ -213,7 +213,7 @@ Warning table: v_patient_info primary key column id is nullable column, setting 
 		&ColumnInfo{
 			Index:              6,
 			Name:               "remark",
-			Comment:            `remark`,
+			Comment:            `备注`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -234,7 +234,7 @@ Warning table: v_patient_info primary key column id is nullable column, setting 
 		&ColumnInfo{
 			Index:              7,
 			Name:               "bed_no",
-			Comment:            `bed_no`,
+			Comment:            `床位号`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -255,7 +255,7 @@ Warning table: v_patient_info primary key column id is nullable column, setting 
 		&ColumnInfo{
 			Index:              8,
 			Name:               "ward_name",
-			Comment:            `ward_name`,
+			Comment:            `病房名称`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",

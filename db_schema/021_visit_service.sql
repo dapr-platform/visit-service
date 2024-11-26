@@ -34,6 +34,14 @@ COMMENT ON COLUMN o_bed.status IS '床位状态';
 CREATE OR REPLACE VIEW v_bed_info AS
 SELECT o.*,w.name AS ward_name FROM o_bed o,o_ward w WHERE o.ward_id = w.id;
 
+COMMENT ON VIEW v_bed_info IS '病床信息视图';
+COMMENT ON COLUMN v_bed_info.id IS '病床ID';
+COMMENT ON COLUMN v_bed_info.ward_id IS '病房ID';
+COMMENT ON COLUMN v_bed_info.bed_no IS '床位号';
+COMMENT ON COLUMN v_bed_info.type IS '床位类型';
+COMMENT ON COLUMN v_bed_info.status IS '床位状态';
+COMMENT ON COLUMN v_bed_info.ward_name IS '病房名称';
+
 -- 病床摄像头绑定关系表
 CREATE TABLE o_bed_camera (
     id VARCHAR(32) NOT NULL,
@@ -72,6 +80,17 @@ COMMENT ON COLUMN o_patient.remark IS '备注';
 
 CREATE OR REPLACE VIEW v_patient_info AS
 SELECT p.*,b.bed_no,w.name as ward_name FROM o_patient p,o_bed b,o_ward w WHERE p.bed_id = b.id AND b.ward_id = w.id;
+
+COMMENT ON VIEW v_patient_info IS '病患信息视图';
+COMMENT ON COLUMN v_patient_info.id IS '病患ID';
+COMMENT ON COLUMN v_patient_info.ward_id IS '病房ID';
+COMMENT ON COLUMN v_patient_info.bed_id IS '床位ID';
+COMMENT ON COLUMN v_patient_info.name IS '病患姓名';
+COMMENT ON COLUMN v_patient_info.hospital_no IS '住院号';
+COMMENT ON COLUMN v_patient_info.status IS '状态';
+COMMENT ON COLUMN v_patient_info.remark IS '备注';
+COMMENT ON COLUMN v_patient_info.bed_no IS '床位号';
+COMMENT ON COLUMN v_patient_info.ward_name IS '病房名称';
 
 -- 探视排班表
 CREATE TABLE o_visit_schedule (
@@ -136,6 +155,22 @@ COMMENT ON COLUMN o_visit_record.remark IS '备注';
 CREATE OR REPLACE VIEW v_visit_record_info AS
 SELECT r.*,p.name AS patient_name,p.name AS patient_ward_name,b.bed_no AS patient_bed_no FROM o_visit_record r,o_patient p,o_bed b,o_ward w WHERE r.patient_id = p.id AND p.bed_id = b.id AND b.ward_id = w.id;
 
+COMMENT ON VIEW v_visit_record_info IS '探视记录信息视图';
+COMMENT ON COLUMN v_visit_record_info.id IS '探视记录ID';
+COMMENT ON COLUMN v_visit_record_info.patient_id IS '病患ID';
+COMMENT ON COLUMN v_visit_record_info.relative_id IS '家属ID';
+COMMENT ON COLUMN v_visit_record_info.visit_start_time IS '探视开始时间';
+COMMENT ON COLUMN v_visit_record_info.visit_end_time IS '探视结束时间';
+COMMENT ON COLUMN v_visit_record_info.visitor_name IS '探视人姓名';
+COMMENT ON COLUMN v_visit_record_info.visitor_phone IS '探视人电话';
+COMMENT ON COLUMN v_visit_record_info.visitor_id_card IS '探视人身份证号';
+COMMENT ON COLUMN v_visit_record_info.relationship IS '探视人关系';
+COMMENT ON COLUMN v_visit_record_info.status IS '状态';
+COMMENT ON COLUMN v_visit_record_info.remark IS '备注';
+COMMENT ON COLUMN v_visit_record_info.patient_name IS '病患姓名';
+COMMENT ON COLUMN v_visit_record_info.patient_ward_name IS '病房名称';
+COMMENT ON COLUMN v_visit_record_info.patient_bed_no IS '床位号';
+
 -- 摄像头表
 CREATE TABLE o_camera (
     id VARCHAR(32) NOT NULL,
@@ -166,6 +201,21 @@ COMMENT ON COLUMN o_camera.status IS '状态';
 
 CREATE OR REPLACE VIEW v_camera_info AS
 SELECT c.*,b.bed_no,w.name as ward_name FROM o_camera c,o_bed b,o_ward w WHERE c.bed_id = b.id AND b.ward_id = w.id;
+
+COMMENT ON VIEW v_camera_info IS '摄像头信息视图';
+COMMENT ON COLUMN v_camera_info.id IS '摄像头ID';
+COMMENT ON COLUMN v_camera_info.device_name IS '设备名称';
+COMMENT ON COLUMN v_camera_info.device_no IS '设备编号';
+COMMENT ON COLUMN v_camera_info.location_type IS '位置类型';
+COMMENT ON COLUMN v_camera_info.ward_id IS '所属病房ID';
+COMMENT ON COLUMN v_camera_info.bed_id IS '所属床位ID';
+COMMENT ON COLUMN v_camera_info.device_type IS '设备类型';
+COMMENT ON COLUMN v_camera_info.manufacturer IS '设备厂商';
+COMMENT ON COLUMN v_camera_info.main_stream_url IS '主码流URL';
+COMMENT ON COLUMN v_camera_info.sub_stream_url IS '辅码流URL';
+COMMENT ON COLUMN v_camera_info.status IS '状态';
+COMMENT ON COLUMN v_camera_info.bed_no IS '床位号';
+COMMENT ON COLUMN v_camera_info.ward_name IS '病房名称';
 
 -- 移动摄像头绑定关系表
 CREATE TABLE o_mobile_camera_binding (
@@ -202,6 +252,14 @@ COMMENT ON COLUMN o_head_display.ward_id IS '病房';
 CREATE OR REPLACE VIEW v_head_display_info AS
 SELECT h.*,w.name AS ward_name FROM o_head_display h,o_ward w WHERE h.ward_id = w.id;
 
+COMMENT ON VIEW v_head_display_info IS '头显信息视图';
+COMMENT ON COLUMN v_head_display_info.id IS '头显ID';
+COMMENT ON COLUMN v_head_display_info.device_name IS '设备名称';
+COMMENT ON COLUMN v_head_display_info.device_no IS '设备编号';
+COMMENT ON COLUMN v_head_display_info.model IS '型号';
+COMMENT ON COLUMN v_head_display_info.ward_id IS '病房ID';
+COMMENT ON COLUMN v_head_display_info.ward_name IS '病房名称';
+
 -- 直播记录表
 CREATE TABLE o_live_record (
     id VARCHAR(32) NOT NULL,
@@ -212,6 +270,7 @@ CREATE TABLE o_live_record (
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP,
     file_size BIGINT,
+    stream_id VARCHAR(32),
     status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
@@ -224,10 +283,26 @@ COMMENT ON COLUMN o_live_record.device_id IS '设备ID';
 COMMENT ON COLUMN o_live_record.start_time IS '直播开始时间';
 COMMENT ON COLUMN o_live_record.end_time IS '直播结束时间';
 COMMENT ON COLUMN o_live_record.file_size IS '文件大小';
+COMMENT ON COLUMN o_live_record.stream_id IS '流ID';
 COMMENT ON COLUMN o_live_record.status IS '状态(0:未开始,1:直播中,2:已结束)';
 
 CREATE OR REPLACE VIEW v_live_record_info AS
 SELECT l.*,p.name AS patient_name,p.name AS patient_ward_name,b.bed_no AS patient_bed_no FROM o_live_record l,o_patient p,o_bed b,o_ward w WHERE l.patient_id = p.id AND p.bed_id = b.id AND b.ward_id = w.id;
+
+COMMENT ON VIEW v_live_record_info IS '直播记录信息视图';
+COMMENT ON COLUMN v_live_record_info.id IS '直播记录ID';
+COMMENT ON COLUMN v_live_record_info.schedule_id IS '探视排班ID';
+COMMENT ON COLUMN v_live_record_info.patient_id IS '病患ID';
+COMMENT ON COLUMN v_live_record_info.relative_id IS '家属ID';
+COMMENT ON COLUMN v_live_record_info.device_id IS '设备ID';
+COMMENT ON COLUMN v_live_record_info.start_time IS '直播开始时间';
+COMMENT ON COLUMN v_live_record_info.end_time IS '直播结束时间';
+COMMENT ON COLUMN v_live_record_info.file_size IS '文件大小';
+COMMENT ON COLUMN v_live_record_info.stream_id IS '流ID';
+COMMENT ON COLUMN v_live_record_info.status IS '状态(0:未开始,1:直播中,2:已结束)';
+COMMENT ON COLUMN v_live_record_info.patient_name IS '病患姓名';
+COMMENT ON COLUMN v_live_record_info.patient_ward_name IS '病房名称';
+COMMENT ON COLUMN v_live_record_info.patient_bed_no IS '床位号';
 
 -- 系统配置表
 CREATE TABLE o_system_config (
@@ -249,9 +324,10 @@ COMMENT ON COLUMN o_system_config.config_unit IS '配置单位';
 COMMENT ON COLUMN o_system_config.config_desc IS '配置描述';
 COMMENT ON COLUMN o_system_config.status IS '状态';
 
-
 CREATE OR REPLACE VIEW v_family_member_info AS
 SELECT * FROM o_user WHERE type = 3;
+
+COMMENT ON VIEW v_family_member_info IS '家属信息视图';
 
 -- +goose StatementEnd
 

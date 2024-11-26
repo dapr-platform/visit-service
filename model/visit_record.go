@@ -33,7 +33,7 @@ Table: o_visit_record
 
 JSON Sample
 -------------------------------------
-{    "id": "tQSZJDTujDGpUoZSDIqealfts",    "patient_id": "XlbDaiSJbVARYoJEoZYRFpKoX",    "relative_id": "WxMQTtpMBYAtiGgabpZMKkRfg",    "visit_start_time": 61,    "visit_end_time": 40,    "visitor_name": "PjfsvifZaReCxetgcKefaHXrj",    "visitor_phone": "sAeVjcPyFZDOyEwOPSnlvpxch",    "visitor_id_card": "JwrnUoGsRZJmjTwLVoUukfdrr",    "relationship": "bIvqZTLQHKYVKFNMEteOYlpQN",    "status": 30,    "remark": "pLYUVcAHcQQIHjeWufEdQybSn"}
+{    "id": "LhrZEcvuSePOnpLrshxuejUVW",    "patient_id": "xVEMwMMWYCUKbGAMavWoeNnJW",    "relative_id": "HIMmxloUJIITYtJqwmPKFTtCS",    "visit_start_time": 16,    "visit_end_time": 21,    "visitor_name": "rTWVcwGrrbHIehMyjCMMoCINH",    "visitor_phone": "lHOGwBukPYnuvsJjIBagNEETT",    "visitor_id_card": "aWuwvkjgZFEcMLXWqRkonMmhV",    "relationship": "fVhVCaiKSoMrNiwllwmAGKpPX",    "status": 10,    "remark": "vlKeUObxLbmaGMlstMMYRyLrk"}
 
 
 

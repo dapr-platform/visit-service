@@ -15,5 +15,6 @@ func InitRoute(r chi.Router) {
 	InitVisit_record_infoRoute(r)
 	InitVisit_scheduleRoute(r)
 	InitWardRoute(r)
-
+	InitCustomCamRoute(r)
+	InitZlmCbHandler(r)
 }

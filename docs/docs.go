@@ -217,6 +217,177 @@ const docTemplate = `{
                 }
             }
         },
+        "/camera": {
+            "get": {
+                "description": "query objects",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Camera"
+                ],
+                "summary": "query objects",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "device_name",
+                        "name": "device_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "device_no",
+                        "name": "device_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "location_type",
+                        "name": "location_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "ward_id",
+                        "name": "ward_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "bed_id",
+                        "name": "bed_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "device_type",
+                        "name": "device_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "manufacturer",
+                        "name": "manufacturer",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "main_stream_url",
+                        "name": "main_stream_url",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "sub_stream_url",
+                        "name": "sub_stream_url",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.Camera"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "save",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Camera"
+                ],
+                "summary": "save",
+                "parameters": [
+                    {
+                        "description": "object",
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Camera"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Camera"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/camera-info": {
             "get": {
                 "description": "query objects",
@@ -483,6 +654,205 @@ const docTemplate = `{
                                                             "type": "array",
                                                             "items": {
                                                                 "$ref": "#/definitions/model.Camera_info"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/camera/livestream/start": {
+            "post": {
+                "description": "Start a camera livestream for a specific room",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Camera"
+                ],
+                "summary": "Start camera livestream",
+                "parameters": [
+                    {
+                        "description": "Camera livestream request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.CamLiveStreamRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response with stream URL",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entity.CamLiveStreamResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request parameters",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/camera/page": {
+            "get": {
+                "description": "page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Camera"
+                ],
+                "summary": "page query",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "current page",
+                        "name": "_page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size",
+                        "name": "_page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "device_name",
+                        "name": "device_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "device_no",
+                        "name": "device_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "location_type",
+                        "name": "location_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "ward_id",
+                        "name": "ward_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "bed_id",
+                        "name": "bed_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "device_type",
+                        "name": "device_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "manufacturer",
+                        "name": "manufacturer",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "main_stream_url",
+                        "name": "main_stream_url",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "sub_stream_url",
+                        "name": "sub_stream_url",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/definitions/common.Page"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "items": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/definitions/model.Camera"
                                                             }
                                                         }
                                                     }
@@ -1051,6 +1421,171 @@ const docTemplate = `{
                 }
             }
         },
+        "/live-record": {
+            "get": {
+                "description": "query objects",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Live_record"
+                ],
+                "summary": "query objects",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "schedule_id",
+                        "name": "schedule_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_id",
+                        "name": "patient_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_id",
+                        "name": "relative_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "device_id",
+                        "name": "device_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "start_time",
+                        "name": "start_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "end_time",
+                        "name": "end_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_size",
+                        "name": "file_size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "stream_id",
+                        "name": "stream_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.Live_record"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "save",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Live_record"
+                ],
+                "summary": "save",
+                "parameters": [
+                    {
+                        "description": "object",
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Live_record"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Live_record"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/live-record-info": {
             "get": {
                 "description": "query objects",
@@ -1305,6 +1840,141 @@ const docTemplate = `{
                                                             "type": "array",
                                                             "items": {
                                                                 "$ref": "#/definitions/model.Live_record_info"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/live-record/page": {
+            "get": {
+                "description": "page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Live_record"
+                ],
+                "summary": "page query",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "current page",
+                        "name": "_page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size",
+                        "name": "_page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "schedule_id",
+                        "name": "schedule_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_id",
+                        "name": "patient_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_id",
+                        "name": "relative_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "device_id",
+                        "name": "device_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "start_time",
+                        "name": "start_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "end_time",
+                        "name": "end_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_size",
+                        "name": "file_size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "stream_id",
+                        "name": "stream_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/definitions/common.Page"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "items": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/definitions/model.Live_record"
                                                             }
                                                         }
                                                     }
@@ -3144,6 +3814,92 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/zlm/on-record-mp4": {
+            "post": {
+                "description": "zlm on record mp4 callback",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Zlm"
+                ],
+                "summary": "zlm on record mp4",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "stream_id",
+                        "name": "stream_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "type",
+                        "name": "type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/definitions/common.Page"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "items": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/definitions/model.Ward"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -3174,31 +3930,109 @@ const docTemplate = `{
                 }
             }
         },
+        "entity.CamLiveStreamRequest": {
+            "type": "object",
+            "required": [
+                "camera_id",
+                "user_id"
+            ],
+            "properties": {
+                "camera_id": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.CamLiveStreamResponse": {
+            "type": "object",
+            "properties": {
+                "camera_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "stream_url_suffix": {
+                    "type": "string"
+                }
+            }
+        },
         "model.Bed_info": {
             "type": "object",
             "properties": {
                 "bed_no": {
-                    "description": "bed_no",
+                    "description": "床位号",
                     "type": "string"
                 },
                 "id": {
-                    "description": "id",
+                    "description": "病床ID",
                     "type": "string"
                 },
                 "status": {
-                    "description": "status",
+                    "description": "床位状态",
                     "type": "integer"
                 },
                 "type": {
-                    "description": "type",
+                    "description": "床位类型",
                     "type": "integer"
                 },
                 "ward_id": {
-                    "description": "ward_id",
+                    "description": "病房ID",
                     "type": "string"
                 },
                 "ward_name": {
-                    "description": "ward_name",
+                    "description": "病房名称",
+                    "type": "string"
+                }
+            }
+        },
+        "model.Camera": {
+            "type": "object",
+            "properties": {
+                "bed_id": {
+                    "description": "所属床位",
+                    "type": "string"
+                },
+                "device_name": {
+                    "description": "设备名称",
+                    "type": "string"
+                },
+                "device_no": {
+                    "description": "设备编号",
+                    "type": "string"
+                },
+                "device_type": {
+                    "description": "设备类型",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "摄像头ID",
+                    "type": "string"
+                },
+                "location_type": {
+                    "description": "位置类型",
+                    "type": "integer"
+                },
+                "main_stream_url": {
+                    "description": "主码流URL",
+                    "type": "string"
+                },
+                "manufacturer": {
+                    "description": "设备厂商",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "状态",
+                    "type": "integer"
+                },
+                "sub_stream_url": {
+                    "description": "辅码流URL",
+                    "type": "string"
+                },
+                "ward_id": {
+                    "description": "所属病房",
                     "type": "string"
                 }
             }
@@ -3207,55 +4041,55 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "bed_id": {
-                    "description": "bed_id",
+                    "description": "所属床位ID",
                     "type": "string"
                 },
                 "bed_no": {
-                    "description": "bed_no",
+                    "description": "床位号",
                     "type": "string"
                 },
                 "device_name": {
-                    "description": "device_name",
+                    "description": "设备名称",
                     "type": "string"
                 },
                 "device_no": {
-                    "description": "device_no",
+                    "description": "设备编号",
                     "type": "string"
                 },
                 "device_type": {
-                    "description": "device_type",
+                    "description": "设备类型",
                     "type": "integer"
                 },
                 "id": {
-                    "description": "id",
+                    "description": "摄像头ID",
                     "type": "string"
                 },
                 "location_type": {
-                    "description": "location_type",
+                    "description": "位置类型",
                     "type": "integer"
                 },
                 "main_stream_url": {
-                    "description": "main_stream_url",
+                    "description": "主码流URL",
                     "type": "string"
                 },
                 "manufacturer": {
-                    "description": "manufacturer",
+                    "description": "设备厂商",
                     "type": "string"
                 },
                 "status": {
-                    "description": "status",
+                    "description": "状态",
                     "type": "integer"
                 },
                 "sub_stream_url": {
-                    "description": "sub_stream_url",
+                    "description": "辅码流URL",
                     "type": "string"
                 },
                 "ward_id": {
-                    "description": "ward_id",
+                    "description": "所属病房ID",
                     "type": "string"
                 },
                 "ward_name": {
-                    "description": "ward_name",
+                    "description": "病房名称",
                     "type": "string"
                 }
             }
@@ -3341,27 +4175,72 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "device_name": {
-                    "description": "device_name",
+                    "description": "设备名称",
                     "type": "string"
                 },
                 "device_no": {
-                    "description": "device_no",
+                    "description": "设备编号",
                     "type": "string"
                 },
                 "id": {
-                    "description": "id",
+                    "description": "头显ID",
                     "type": "string"
                 },
                 "model": {
-                    "description": "model",
+                    "description": "型号",
                     "type": "string"
                 },
                 "ward_id": {
-                    "description": "ward_id",
+                    "description": "病房ID",
                     "type": "string"
                 },
                 "ward_name": {
-                    "description": "ward_name",
+                    "description": "病房名称",
+                    "type": "string"
+                }
+            }
+        },
+        "model.Live_record": {
+            "type": "object",
+            "properties": {
+                "device_id": {
+                    "description": "设备ID",
+                    "type": "string"
+                },
+                "end_time": {
+                    "description": "直播结束时间",
+                    "type": "string"
+                },
+                "file_size": {
+                    "description": "文件大小",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "直播记录ID",
+                    "type": "string"
+                },
+                "patient_id": {
+                    "description": "病患ID",
+                    "type": "string"
+                },
+                "relative_id": {
+                    "description": "家属ID",
+                    "type": "string"
+                },
+                "schedule_id": {
+                    "description": "探视排班ID",
+                    "type": "string"
+                },
+                "start_time": {
+                    "description": "直播开始时间",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "状态(0:未开始,1:直播中,2:已结束)",
+                    "type": "integer"
+                },
+                "stream_id": {
+                    "description": "流ID",
                     "type": "string"
                 }
             }
@@ -3370,51 +4249,51 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "device_id": {
-                    "description": "device_id",
+                    "description": "设备ID",
                     "type": "string"
                 },
                 "end_time": {
-                    "description": "end_time",
+                    "description": "直播结束时间",
                     "type": "string"
                 },
                 "file_size": {
-                    "description": "file_size",
+                    "description": "文件大小",
                     "type": "integer"
                 },
                 "id": {
-                    "description": "id",
+                    "description": "直播记录ID",
                     "type": "string"
                 },
                 "patient_bed_no": {
-                    "description": "patient_bed_no",
+                    "description": "床位号",
                     "type": "string"
                 },
                 "patient_id": {
-                    "description": "patient_id",
+                    "description": "病患ID",
                     "type": "string"
                 },
                 "patient_name": {
-                    "description": "patient_name",
+                    "description": "病患姓名",
                     "type": "string"
                 },
                 "patient_ward_name": {
-                    "description": "patient_ward_name",
+                    "description": "病房名称",
                     "type": "string"
                 },
                 "relative_id": {
-                    "description": "relative_id",
+                    "description": "家属ID",
                     "type": "string"
                 },
                 "schedule_id": {
-                    "description": "schedule_id",
+                    "description": "探视排班ID",
                     "type": "string"
                 },
                 "start_time": {
-                    "description": "start_time",
+                    "description": "直播开始时间",
                     "type": "string"
                 },
                 "status": {
-                    "description": "status",
+                    "description": "状态(0:未开始,1:直播中,2:已结束)",
                     "type": "integer"
                 }
             }
@@ -3423,39 +4302,39 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "bed_id": {
-                    "description": "bed_id",
+                    "description": "床位ID",
                     "type": "string"
                 },
                 "bed_no": {
-                    "description": "bed_no",
+                    "description": "床位号",
                     "type": "string"
                 },
                 "hospital_no": {
-                    "description": "hospital_no",
+                    "description": "住院号",
                     "type": "string"
                 },
                 "id": {
-                    "description": "id",
+                    "description": "病患ID",
                     "type": "string"
                 },
                 "name": {
-                    "description": "name",
+                    "description": "病患姓名",
                     "type": "string"
                 },
                 "remark": {
-                    "description": "remark",
+                    "description": "备注",
                     "type": "string"
                 },
                 "status": {
-                    "description": "status",
+                    "description": "状态",
                     "type": "integer"
                 },
                 "ward_id": {
-                    "description": "ward_id",
+                    "description": "病房ID",
                     "type": "string"
                 },
                 "ward_name": {
-                    "description": "ward_name",
+                    "description": "病房名称",
                     "type": "string"
                 }
             }
@@ -3567,59 +4446,59 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "id": {
-                    "description": "id",
+                    "description": "探视记录ID",
                     "type": "string"
                 },
                 "patient_bed_no": {
-                    "description": "patient_bed_no",
+                    "description": "床位号",
                     "type": "string"
                 },
                 "patient_id": {
-                    "description": "patient_id",
+                    "description": "病患ID",
                     "type": "string"
                 },
                 "patient_name": {
-                    "description": "patient_name",
+                    "description": "病患姓名",
                     "type": "string"
                 },
                 "patient_ward_name": {
-                    "description": "patient_ward_name",
+                    "description": "病房名称",
                     "type": "string"
                 },
                 "relationship": {
-                    "description": "relationship",
+                    "description": "探视人关系",
                     "type": "string"
                 },
                 "relative_id": {
-                    "description": "relative_id",
+                    "description": "家属ID",
                     "type": "string"
                 },
                 "remark": {
-                    "description": "remark",
+                    "description": "备注",
                     "type": "string"
                 },
                 "status": {
-                    "description": "status",
+                    "description": "状态",
                     "type": "integer"
                 },
                 "visit_end_time": {
-                    "description": "visit_end_time",
+                    "description": "探视结束时间",
                     "type": "string"
                 },
                 "visit_start_time": {
-                    "description": "visit_start_time",
+                    "description": "探视开始时间",
                     "type": "string"
                 },
                 "visitor_id_card": {
-                    "description": "visitor_id_card",
+                    "description": "探视人身份证号",
                     "type": "string"
                 },
                 "visitor_name": {
-                    "description": "visitor_name",
+                    "description": "探视人姓名",
                     "type": "string"
                 },
                 "visitor_phone": {
-                    "description": "visitor_phone",
+                    "description": "探视人电话",
                     "type": "string"
                 }
             }

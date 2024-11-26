@@ -18,67 +18,122 @@ definitions:
       status:
         type: integer
     type: object
+  entity.CamLiveStreamRequest:
+    properties:
+      camera_id:
+        type: string
+      user_id:
+        type: string
+    required:
+    - camera_id
+    - user_id
+    type: object
+  entity.CamLiveStreamResponse:
+    properties:
+      camera_id:
+        type: string
+      status:
+        type: integer
+      stream_url_suffix:
+        type: string
+    type: object
   model.Bed_info:
     properties:
       bed_no:
-        description: bed_no
+        description: 床位号
         type: string
       id:
-        description: id
+        description: 病床ID
         type: string
       status:
-        description: status
+        description: 床位状态
         type: integer
       type:
-        description: type
+        description: 床位类型
         type: integer
       ward_id:
-        description: ward_id
+        description: 病房ID
         type: string
       ward_name:
-        description: ward_name
+        description: 病房名称
+        type: string
+    type: object
+  model.Camera:
+    properties:
+      bed_id:
+        description: 所属床位
+        type: string
+      device_name:
+        description: 设备名称
+        type: string
+      device_no:
+        description: 设备编号
+        type: string
+      device_type:
+        description: 设备类型
+        type: integer
+      id:
+        description: 摄像头ID
+        type: string
+      location_type:
+        description: 位置类型
+        type: integer
+      main_stream_url:
+        description: 主码流URL
+        type: string
+      manufacturer:
+        description: 设备厂商
+        type: string
+      status:
+        description: 状态
+        type: integer
+      sub_stream_url:
+        description: 辅码流URL
+        type: string
+      ward_id:
+        description: 所属病房
         type: string
     type: object
   model.Camera_info:
     properties:
       bed_id:
-        description: bed_id
+        description: 所属床位ID
         type: string
       bed_no:
-        description: bed_no
+        description: 床位号
         type: string
       device_name:
-        description: device_name
+        description: 设备名称
         type: string
       device_no:
-        description: device_no
+        description: 设备编号
         type: string
       device_type:
-        description: device_type
+        description: 设备类型
         type: integer
       id:
-        description: id
+        description: 摄像头ID
         type: string
       location_type:
-        description: location_type
+        description: 位置类型
         type: integer
       main_stream_url:
-        description: main_stream_url
+        description: 主码流URL
         type: string
       manufacturer:
-        description: manufacturer
+        description: 设备厂商
         type: string
       status:
-        description: status
+        description: 状态
         type: integer
       sub_stream_url:
-        description: sub_stream_url
+        description: 辅码流URL
         type: string
       ward_id:
-        description: ward_id
+        description: 所属病房ID
         type: string
       ward_name:
-        description: ward_name
+        description: 病房名称
         type: string
     type: object
   model.Family_member_info:
@@ -141,91 +196,124 @@ definitions:
   model.Head_display_info:
     properties:
       device_name:
-        description: device_name
+        description: 设备名称
         type: string
       device_no:
-        description: device_no
+        description: 设备编号
         type: string
       id:
-        description: id
+        description: 头显ID
         type: string
       model:
-        description: model
+        description: 型号
         type: string
       ward_id:
-        description: ward_id
+        description: 病房ID
         type: string
       ward_name:
-        description: ward_name
+        description: 病房名称
+        type: string
+    type: object
+  model.Live_record:
+    properties:
+      device_id:
+        description: 设备ID
+        type: string
+      end_time:
+        description: 直播结束时间
+        type: string
+      file_size:
+        description: 文件大小
+        type: integer
+      id:
+        description: 直播记录ID
+        type: string
+      patient_id:
+        description: 病患ID
+        type: string
+      relative_id:
+        description: 家属ID
+        type: string
+      schedule_id:
+        description: 探视排班ID
+        type: string
+      start_time:
+        description: 直播开始时间
+        type: string
+      status:
+        description: 状态(0:未开始,1:直播中,2:已结束)
+        type: integer
+      stream_id:
+        description: 流ID
         type: string
     type: object
   model.Live_record_info:
     properties:
       device_id:
-        description: device_id
+        description: 设备ID
         type: string
       end_time:
-        description: end_time
+        description: 直播结束时间
         type: string
       file_size:
-        description: file_size
+        description: 文件大小
         type: integer
       id:
-        description: id
+        description: 直播记录ID
         type: string
       patient_bed_no:
-        description: patient_bed_no
+        description: 床位号
         type: string
       patient_id:
-        description: patient_id
+        description: 病患ID
         type: string
       patient_name:
-        description: patient_name
+        description: 病患姓名
         type: string
       patient_ward_name:
-        description: patient_ward_name
+        description: 病房名称
         type: string
       relative_id:
-        description: relative_id
+        description: 家属ID
         type: string
       schedule_id:
-        description: schedule_id
+        description: 探视排班ID
         type: string
       start_time:
-        description: start_time
+        description: 直播开始时间
         type: string
       status:
-        description: status
+        description: 状态(0:未开始,1:直播中,2:已结束)
         type: integer
     type: object
   model.Patient_info:
     properties:
       bed_id:
-        description: bed_id
+        description: 床位ID
         type: string
       bed_no:
-        description: bed_no
+        description: 床位号
         type: string
       hospital_no:
-        description: hospital_no
+        description: 住院号
         type: string
       id:
-        description: id
+        description: 病患ID
         type: string
       name:
-        description: name
+        description: 病患姓名
         type: string
       remark:
-        description: remark
+        description: 备注
         type: string
       status:
-        description: status
+        description: 状态
         type: integer
       ward_id:
-        description: ward_id
+        description: 病房ID
         type: string
       ward_name:
-        description: ward_name
+        description: 病房名称
         type: string
     type: object
   model.Schedule_camera:
@@ -306,46 +394,46 @@ definitions:
   model.Visit_record_info:
     properties:
       id:
-        description: id
+        description: 探视记录ID
         type: string
       patient_bed_no:
-        description: patient_bed_no
+        description: 床位号
         type: string
       patient_id:
-        description: patient_id
+        description: 病患ID
         type: string
       patient_name:
-        description: patient_name
+        description: 病患姓名
         type: string
       patient_ward_name:
-        description: patient_ward_name
+        description: 病房名称
         type: string
       relationship:
-        description: relationship
+        description: 探视人关系
         type: string
       relative_id:
-        description: relative_id
+        description: 家属ID
         type: string
       remark:
-        description: remark
+        description: 备注
         type: string
       status:
-        description: status
+        description: 状态
         type: integer
       visit_end_time:
-        description: visit_end_time
+        description: 探视结束时间
         type: string
       visit_start_time:
-        description: visit_start_time
+        description: 探视开始时间
         type: string
       visitor_id_card:
-        description: visitor_id_card
+        description: 探视人身份证号
         type: string
       visitor_name:
-        description: visitor_name
+        description: 探视人姓名
         type: string
       visitor_phone:
-        description: visitor_phone
+        description: 探视人电话
         type: string
     type: object
   model.Visit_schedule:
@@ -516,6 +604,113 @@ paths:
       summary: page query
       tags:
       - Bed_info
+  /camera:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: device_name
+        in: query
+        name: device_name
+        type: string
+      - description: device_no
+        in: query
+        name: device_no
+        type: string
+      - description: location_type
+        in: query
+        name: location_type
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: bed_id
+        in: query
+        name: bed_id
+        type: string
+      - description: device_type
+        in: query
+        name: device_type
+        type: string
+      - description: manufacturer
+        in: query
+        name: manufacturer
+        type: string
+      - description: main_stream_url
+        in: query
+        name: main_stream_url
+        type: string
+      - description: sub_stream_url
+        in: query
+        name: sub_stream_url
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Camera'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Camera
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Camera'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Camera'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - Camera
   /camera-info:
     get:
       description: query objects
@@ -698,6 +893,130 @@ paths:
       summary: page query
       tags:
       - Camera_info
+  /camera/livestream/start:
+    post:
+      consumes:
+      - application/json
+      description: Start a camera livestream for a specific room
+      parameters:
+      - description: Camera livestream request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/entity.CamLiveStreamRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success response with stream URL
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/entity.CamLiveStreamResponse'
+              type: object
+        "400":
+          description: Invalid request parameters
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: Start camera livestream
+      tags:
+      - Camera
+  /camera/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: device_name
+        in: query
+        name: device_name
+        type: string
+      - description: device_no
+        in: query
+        name: device_no
+        type: string
+      - description: location_type
+        in: query
+        name: location_type
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: bed_id
+        in: query
+        name: bed_id
+        type: string
+      - description: device_type
+        in: query
+        name: device_type
+        type: string
+      - description: manufacturer
+        in: query
+        name: manufacturer
+        type: string
+      - description: main_stream_url
+        in: query
+        name: main_stream_url
+        type: string
+      - description: sub_stream_url
+        in: query
+        name: sub_stream_url
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Camera'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Camera
   /family-member-info:
     get:
       description: query objects
@@ -1046,6 +1365,109 @@ paths:
       summary: page query
       tags:
       - Head_display_info
+  /live-record:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: device_id
+        in: query
+        name: device_id
+        type: string
+      - description: start_time
+        in: query
+        name: start_time
+        type: string
+      - description: end_time
+        in: query
+        name: end_time
+        type: string
+      - description: file_size
+        in: query
+        name: file_size
+        type: string
+      - description: stream_id
+        in: query
+        name: stream_id
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Live_record'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - Live_record
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Live_record'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Live_record'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - Live_record
   /live-record-info:
     get:
       description: query objects
@@ -1220,6 +1642,91 @@ paths:
       summary: page query
       tags:
       - Live_record_info
+  /live-record/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: device_id
+        in: query
+        name: device_id
+        type: string
+      - description: start_time
+        in: query
+        name: start_time
+        type: string
+      - description: end_time
+        in: query
+        name: end_time
+        type: string
+      - description: file_size
+        in: query
+        name: file_size
+        type: string
+      - description: stream_id
+        in: query
+        name: stream_id
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Live_record'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - Live_record
   /patient-info:
     get:
       description: query objects
@@ -2356,4 +2863,55 @@ paths:
       summary: page query
       tags:
       - Ward
+  /zlm/on-record-mp4:
+    post:
+      description: zlm on record mp4 callback
+      parameters:
+      - description: stream_id
+        in: query
+        name: stream_id
+        required: true
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Ward'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: zlm on record mp4
+      tags:
+      - Zlm
 swagger: "2.0"

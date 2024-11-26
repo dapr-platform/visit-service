@@ -28,7 +28,7 @@ Table: v_head_display_info
 
 JSON Sample
 -------------------------------------
-{    "id": "flbOqttoJtiPpctTMLyFgYuyp",    "device_name": "dUcanCTeEEsiigKNgWyBQmhrt",    "device_no": "AeLKHRNMUQxUCVMLledPqTjLq",    "model": "vPnYimqymeZXVscdSjcIewaVE",    "ward_id": "ujJJViZttvLaFnkjuTaMbiaLB",    "ward_name": "mEaPkwFmibenmsrdeEYHJwSwU"}
+{    "id": "WMHiswDkVllNyOIAOYCgZAwGv",    "device_name": "JLRGJssIESxHqgEYKqXXHTLkM",    "device_no": "ZjAMSUJiVpMmyEfLksvhHKGRY",    "model": "RSHQSsbxYNTfZkycawfxufocX",    "ward_id": "eDtjeSlBxEsPfdFcdFZOCexNf",    "ward_name": "XGydamvPaZwLeoiypUGYxloTl"}
 
 
 Comments
@@ -57,12 +57,12 @@ var (
 
 // Head_display_info struct is a row record of the v_head_display_info table in the  database
 type Head_display_info struct {
-	ID         string `json:"id"`          //id
-	DeviceName string `json:"device_name"` //device_name
-	DeviceNo   string `json:"device_no"`   //device_no
-	Model      string `json:"model"`       //model
-	WardID     string `json:"ward_id"`     //ward_id
-	WardName   string `json:"ward_name"`   //ward_name
+	ID         string `json:"id"`          //头显ID
+	DeviceName string `json:"device_name"` //设备名称
+	DeviceNo   string `json:"device_no"`   //设备编号
+	Model      string `json:"model"`       //型号
+	WardID     string `json:"ward_id"`     //病房ID
+	WardName   string `json:"ward_name"`   //病房名称
 
 }
 
@@ -73,7 +73,7 @@ var Head_display_infoTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:   0,
 			Name:    "id",
-			Comment: `id`,
+			Comment: `头显ID`,
 			Notes: `Warning table: v_head_display_info does not have a primary key defined, setting col position 1 id as primary key
 Warning table: v_head_display_info primary key column id is nullable column, setting it as NOT NULL
 `,
@@ -96,7 +96,7 @@ Warning table: v_head_display_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              1,
 			Name:               "device_name",
-			Comment:            `device_name`,
+			Comment:            `设备名称`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -117,7 +117,7 @@ Warning table: v_head_display_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              2,
 			Name:               "device_no",
-			Comment:            `device_no`,
+			Comment:            `设备编号`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -138,7 +138,7 @@ Warning table: v_head_display_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              3,
 			Name:               "model",
-			Comment:            `model`,
+			Comment:            `型号`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -159,7 +159,7 @@ Warning table: v_head_display_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              4,
 			Name:               "ward_id",
-			Comment:            `ward_id`,
+			Comment:            `病房ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -180,7 +180,7 @@ Warning table: v_head_display_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              5,
 			Name:               "ward_name",
-			Comment:            `ward_name`,
+			Comment:            `病房名称`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",

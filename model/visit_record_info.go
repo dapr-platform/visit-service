@@ -36,7 +36,7 @@ Table: v_visit_record_info
 
 JSON Sample
 -------------------------------------
-{    "id": "PMRetrdACJKqjRlJMVxeRTWYn",    "patient_id": "HhUSwMREtrcjnkFsOtwSREgvF",    "relative_id": "ZRpuKVspEPIGiKLuaeeYmQoCq",    "visit_start_time": 42,    "visit_end_time": 16,    "visitor_name": "tFOEMrQRsCwmavnkHYObgtvBB",    "visitor_phone": "eaXXtpeVeUvdbbTjQLynOJyCe",    "visitor_id_card": "GCTpjUyDOXAripjtAjxcZldCI",    "relationship": "TynaGeCjiJEDXLZLorwiPSBYC",    "status": 7,    "remark": "TEnKxsAgAXomUIDpOlGynjdqp",    "patient_name": "vdMnWqVqQNKXpBuFpgrjnyTat",    "patient_ward_name": "iArHyMphWOYDrvIvmIZswqAwF",    "patient_bed_no": "vRsCdYjehqPPiKEkWDPOwpKRe"}
+{    "id": "xoFPjwtmcdeSJTsDmsRahOsTB",    "patient_id": "GOdypfIXXBNBRalQXFcjhWSds",    "relative_id": "UqWWDAjJDUHMTmuMDDcQESgPN",    "visit_start_time": 82,    "visit_end_time": 15,    "visitor_name": "ZyCBwPlngMSFEuFGmbgjGsdhb",    "visitor_phone": "VamgpFMXnxvSRoJnNnKjvDyOu",    "visitor_id_card": "RUTiVOsgMhHlHBRZFxirHBdui",    "relationship": "xgRRNgvGksSmYcmeWKaeeBisA",    "status": 92,    "remark": "cBxYSpTHwmuHcYpEbGSmQjFKH",    "patient_name": "KhfXuSqIGXSVWAvxNKFoeFBxi",    "patient_ward_name": "WstglgKGidgZIShVwjoxKHVJm",    "patient_bed_no": "UdZyCQCToFHZEKIqjfQCYZhIb"}
 
 
 Comments
@@ -81,20 +81,20 @@ var (
 
 // Visit_record_info struct is a row record of the v_visit_record_info table in the  database
 type Visit_record_info struct {
-	ID              string           `json:"id"`                //id
-	PatientID       string           `json:"patient_id"`        //patient_id
-	RelativeID      string           `json:"relative_id"`       //relative_id
-	VisitStartTime  common.LocalTime `json:"visit_start_time"`  //visit_start_time
-	VisitEndTime    common.LocalTime `json:"visit_end_time"`    //visit_end_time
-	VisitorName     string           `json:"visitor_name"`      //visitor_name
-	VisitorPhone    string           `json:"visitor_phone"`     //visitor_phone
-	VisitorIDCard   string           `json:"visitor_id_card"`   //visitor_id_card
-	Relationship    string           `json:"relationship"`      //relationship
-	Status          int32            `json:"status"`            //status
-	Remark          string           `json:"remark"`            //remark
-	PatientName     string           `json:"patient_name"`      //patient_name
-	PatientWardName string           `json:"patient_ward_name"` //patient_ward_name
-	PatientBedNo    string           `json:"patient_bed_no"`    //patient_bed_no
+	ID              string           `json:"id"`                //探视记录ID
+	PatientID       string           `json:"patient_id"`        //病患ID
+	RelativeID      string           `json:"relative_id"`       //家属ID
+	VisitStartTime  common.LocalTime `json:"visit_start_time"`  //探视开始时间
+	VisitEndTime    common.LocalTime `json:"visit_end_time"`    //探视结束时间
+	VisitorName     string           `json:"visitor_name"`      //探视人姓名
+	VisitorPhone    string           `json:"visitor_phone"`     //探视人电话
+	VisitorIDCard   string           `json:"visitor_id_card"`   //探视人身份证号
+	Relationship    string           `json:"relationship"`      //探视人关系
+	Status          int32            `json:"status"`            //状态
+	Remark          string           `json:"remark"`            //备注
+	PatientName     string           `json:"patient_name"`      //病患姓名
+	PatientWardName string           `json:"patient_ward_name"` //病房名称
+	PatientBedNo    string           `json:"patient_bed_no"`    //床位号
 
 }
 
@@ -105,7 +105,7 @@ var Visit_record_infoTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:   0,
 			Name:    "id",
-			Comment: `id`,
+			Comment: `探视记录ID`,
 			Notes: `Warning table: v_visit_record_info does not have a primary key defined, setting col position 1 id as primary key
 Warning table: v_visit_record_info primary key column id is nullable column, setting it as NOT NULL
 `,
@@ -128,7 +128,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              1,
 			Name:               "patient_id",
-			Comment:            `patient_id`,
+			Comment:            `病患ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -149,7 +149,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              2,
 			Name:               "relative_id",
-			Comment:            `relative_id`,
+			Comment:            `家属ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -170,7 +170,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              3,
 			Name:               "visit_start_time",
-			Comment:            `visit_start_time`,
+			Comment:            `探视开始时间`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "TIMESTAMP",
@@ -191,7 +191,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              4,
 			Name:               "visit_end_time",
-			Comment:            `visit_end_time`,
+			Comment:            `探视结束时间`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "TIMESTAMP",
@@ -212,7 +212,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              5,
 			Name:               "visitor_name",
-			Comment:            `visitor_name`,
+			Comment:            `探视人姓名`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -233,7 +233,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              6,
 			Name:               "visitor_phone",
-			Comment:            `visitor_phone`,
+			Comment:            `探视人电话`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -254,7 +254,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              7,
 			Name:               "visitor_id_card",
-			Comment:            `visitor_id_card`,
+			Comment:            `探视人身份证号`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -275,7 +275,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              8,
 			Name:               "relationship",
-			Comment:            `relationship`,
+			Comment:            `探视人关系`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -296,7 +296,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              9,
 			Name:               "status",
-			Comment:            `status`,
+			Comment:            `状态`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT4",
@@ -317,7 +317,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              10,
 			Name:               "remark",
-			Comment:            `remark`,
+			Comment:            `备注`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -338,7 +338,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              11,
 			Name:               "patient_name",
-			Comment:            `patient_name`,
+			Comment:            `病患姓名`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -359,7 +359,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              12,
 			Name:               "patient_ward_name",
-			Comment:            `patient_ward_name`,
+			Comment:            `病房名称`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -380,7 +380,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              13,
 			Name:               "patient_bed_no",
-			Comment:            `patient_bed_no`,
+			Comment:            `床位号`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",

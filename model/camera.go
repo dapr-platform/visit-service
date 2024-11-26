@@ -17,94 +17,77 @@ DB Table Details
 -------------------------------------
 
 
-Table: v_camera_info
-[ 0] id                                             VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 1] device_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 2] device_no                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 3] location_type                                  INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+Table: o_camera
+[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 1] device_name                                    VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[ 2] device_no                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 3] location_type                                  INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 [ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 5] bed_id                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 6] device_type                                    INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[ 7] manufacturer                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 8] main_stream_url                                VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
-[ 9] sub_stream_url                                 VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
-[10] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[11] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[12] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[ 6] device_type                                    INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[ 7] manufacturer                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[ 8] main_stream_url                                VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+[ 9] sub_stream_url                                 VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+[10] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 
 JSON Sample
 -------------------------------------
-{    "id": "LAlyPohXbeNAXUUbNoOnXKOSm",    "device_name": "bccFFChRfNkQGisCeBShQVTqU",    "device_no": "BpleDJIHsLRUGRVUFyBauTWZI",    "location_type": 31,    "ward_id": "vVdQhfHWtlaDAJdIfEnQbmsfd",    "bed_id": "qZgvJvIQcQYHIyJJEtwUnBuTg",    "device_type": 35,    "manufacturer": "UNsahMCNiWybRdaDnJCefOIOG",    "main_stream_url": "HbUNSdkIegNxSAXTKcAZigYsQ",    "sub_stream_url": "pHensydjXnqilcJXolsVTcJcx",    "status": 74,    "bed_no": "YsHxVlHfTrGPHWwQpjxEVEdmR",    "ward_name": "SZEuasPBXEPyLKgekMQnbJEoJ"}
-
-
-Comments
--------------------------------------
-[ 0] Warning table: v_camera_info does not have a primary key defined, setting col position 1 id as primary key
-Warning table: v_camera_info primary key column id is nullable column, setting it as NOT NULL
-
+{    "id": "RkAEXsTgQyHPJyraFplQiaLSs",    "device_name": "WjEXxFlShIhqnNTrRxciliUwk",    "device_no": "BvwAFSrvATWcCpIbbSuVtprRP",    "location_type": 80,    "ward_id": "baEWvZfuCDtfTrZfQCYjjyvrh",    "bed_id": "ZKfvSLQINJVnBdXwKivisXJMn",    "device_type": 12,    "manufacturer": "PkCWTQlGBBiDHjmcwYfntxKbi",    "main_stream_url": "mkXSnVtkhEJjAcATGLwccnYKM",    "sub_stream_url": "cnuirHGnKldJryTiBGQIBIGdI",    "status": 99}
 
 
 
 */
 
 var (
-	Camera_info_FIELD_NAME_id = "id"
+	Camera_FIELD_NAME_id = "id"
 
-	Camera_info_FIELD_NAME_device_name = "device_name"
+	Camera_FIELD_NAME_device_name = "device_name"
 
-	Camera_info_FIELD_NAME_device_no = "device_no"
+	Camera_FIELD_NAME_device_no = "device_no"
 
-	Camera_info_FIELD_NAME_location_type = "location_type"
+	Camera_FIELD_NAME_location_type = "location_type"
 
-	Camera_info_FIELD_NAME_ward_id = "ward_id"
+	Camera_FIELD_NAME_ward_id = "ward_id"
 
-	Camera_info_FIELD_NAME_bed_id = "bed_id"
+	Camera_FIELD_NAME_bed_id = "bed_id"
 
-	Camera_info_FIELD_NAME_device_type = "device_type"
+	Camera_FIELD_NAME_device_type = "device_type"
 
-	Camera_info_FIELD_NAME_manufacturer = "manufacturer"
+	Camera_FIELD_NAME_manufacturer = "manufacturer"
 
-	Camera_info_FIELD_NAME_main_stream_url = "main_stream_url"
+	Camera_FIELD_NAME_main_stream_url = "main_stream_url"
 
-	Camera_info_FIELD_NAME_sub_stream_url = "sub_stream_url"
+	Camera_FIELD_NAME_sub_stream_url = "sub_stream_url"
 
-	Camera_info_FIELD_NAME_status = "status"
-
-	Camera_info_FIELD_NAME_bed_no = "bed_no"
-
-	Camera_info_FIELD_NAME_ward_name = "ward_name"
+	Camera_FIELD_NAME_status = "status"
 )
 
-// Camera_info struct is a row record of the v_camera_info table in the  database
-type Camera_info struct {
+// Camera struct is a row record of the o_camera table in the  database
+type Camera struct {
 	ID            string `json:"id"`              //摄像头ID
 	DeviceName    string `json:"device_name"`     //设备名称
 	DeviceNo      string `json:"device_no"`       //设备编号
 	LocationType  int32  `json:"location_type"`   //位置类型
-	WardID        string `json:"ward_id"`         //所属病房ID
-	BedID         string `json:"bed_id"`          //所属床位ID
+	WardID        string `json:"ward_id"`         //所属病房
+	BedID         string `json:"bed_id"`          //所属床位
 	DeviceType    int32  `json:"device_type"`     //设备类型
 	Manufacturer  string `json:"manufacturer"`    //设备厂商
 	MainStreamURL string `json:"main_stream_url"` //主码流URL
 	SubStreamURL  string `json:"sub_stream_url"`  //辅码流URL
 	Status        int32  `json:"status"`          //状态
-	BedNo         string `json:"bed_no"`          //床位号
-	WardName      string `json:"ward_name"`       //病房名称
 
 }
 
-var Camera_infoTableInfo = &TableInfo{
-	Name: "v_camera_info",
+var CameraTableInfo = &TableInfo{
+	Name: "o_camera",
 	Columns: []*ColumnInfo{
 
 		&ColumnInfo{
-			Index:   0,
-			Name:    "id",
-			Comment: `摄像头ID`,
-			Notes: `Warning table: v_camera_info does not have a primary key defined, setting col position 1 id as primary key
-Warning table: v_camera_info primary key column id is nullable column, setting it as NOT NULL
-`,
+			Index:              0,
+			Name:               "id",
+			Comment:            `摄像头ID`,
+			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
 			DatabaseTypePretty: "VARCHAR(32)",
@@ -126,7 +109,7 @@ Warning table: v_camera_info primary key column id is nullable column, setting i
 			Name:               "device_name",
 			Comment:            `设备名称`,
 			Notes:              ``,
-			Nullable:           true,
+			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
 			DatabaseTypePretty: "VARCHAR(255)",
 			IsPrimaryKey:       false,
@@ -147,7 +130,7 @@ Warning table: v_camera_info primary key column id is nullable column, setting i
 			Name:               "device_no",
 			Comment:            `设备编号`,
 			Notes:              ``,
-			Nullable:           true,
+			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
 			DatabaseTypePretty: "VARCHAR(32)",
 			IsPrimaryKey:       false,
@@ -168,7 +151,7 @@ Warning table: v_camera_info primary key column id is nullable column, setting i
 			Name:               "location_type",
 			Comment:            `位置类型`,
 			Notes:              ``,
-			Nullable:           true,
+			Nullable:           false,
 			DatabaseTypeName:   "INT4",
 			DatabaseTypePretty: "INT4",
 			IsPrimaryKey:       false,
@@ -187,7 +170,7 @@ Warning table: v_camera_info primary key column id is nullable column, setting i
 		&ColumnInfo{
 			Index:              4,
 			Name:               "ward_id",
-			Comment:            `所属病房ID`,
+			Comment:            `所属病房`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -208,7 +191,7 @@ Warning table: v_camera_info primary key column id is nullable column, setting i
 		&ColumnInfo{
 			Index:              5,
 			Name:               "bed_id",
-			Comment:            `所属床位ID`,
+			Comment:            `所属床位`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -231,7 +214,7 @@ Warning table: v_camera_info primary key column id is nullable column, setting i
 			Name:               "device_type",
 			Comment:            `设备类型`,
 			Notes:              ``,
-			Nullable:           true,
+			Nullable:           false,
 			DatabaseTypeName:   "INT4",
 			DatabaseTypePretty: "INT4",
 			IsPrimaryKey:       false,
@@ -252,7 +235,7 @@ Warning table: v_camera_info primary key column id is nullable column, setting i
 			Name:               "manufacturer",
 			Comment:            `设备厂商`,
 			Notes:              ``,
-			Nullable:           true,
+			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
 			DatabaseTypePretty: "VARCHAR(255)",
 			IsPrimaryKey:       false,
@@ -273,7 +256,7 @@ Warning table: v_camera_info primary key column id is nullable column, setting i
 			Name:               "main_stream_url",
 			Comment:            `主码流URL`,
 			Notes:              ``,
-			Nullable:           true,
+			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
 			DatabaseTypePretty: "VARCHAR(1024)",
 			IsPrimaryKey:       false,
@@ -294,7 +277,7 @@ Warning table: v_camera_info primary key column id is nullable column, setting i
 			Name:               "sub_stream_url",
 			Comment:            `辅码流URL`,
 			Notes:              ``,
-			Nullable:           true,
+			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
 			DatabaseTypePretty: "VARCHAR(1024)",
 			IsPrimaryKey:       false,
@@ -315,7 +298,7 @@ Warning table: v_camera_info primary key column id is nullable column, setting i
 			Name:               "status",
 			Comment:            `状态`,
 			Notes:              ``,
-			Nullable:           true,
+			Nullable:           false,
 			DatabaseTypeName:   "INT4",
 			DatabaseTypePretty: "INT4",
 			IsPrimaryKey:       false,
@@ -330,71 +313,29 @@ Warning table: v_camera_info primary key column id is nullable column, setting i
 			ProtobufType:       "int32",
 			ProtobufPos:        11,
 		},
-
-		&ColumnInfo{
-			Index:              11,
-			Name:               "bed_no",
-			Comment:            `床位号`,
-			Notes:              ``,
-			Nullable:           true,
-			DatabaseTypeName:   "VARCHAR",
-			DatabaseTypePretty: "VARCHAR(32)",
-			IsPrimaryKey:       false,
-			IsAutoIncrement:    false,
-			IsArray:            false,
-			ColumnType:         "VARCHAR",
-			ColumnLength:       32,
-			GoFieldName:        "BedNo",
-			GoFieldType:        "string",
-			JSONFieldName:      "bed_no",
-			ProtobufFieldName:  "bed_no",
-			ProtobufType:       "string",
-			ProtobufPos:        12,
-		},
-
-		&ColumnInfo{
-			Index:              12,
-			Name:               "ward_name",
-			Comment:            `病房名称`,
-			Notes:              ``,
-			Nullable:           true,
-			DatabaseTypeName:   "VARCHAR",
-			DatabaseTypePretty: "VARCHAR(255)",
-			IsPrimaryKey:       false,
-			IsAutoIncrement:    false,
-			IsArray:            false,
-			ColumnType:         "VARCHAR",
-			ColumnLength:       255,
-			GoFieldName:        "WardName",
-			GoFieldType:        "string",
-			JSONFieldName:      "ward_name",
-			ProtobufFieldName:  "ward_name",
-			ProtobufType:       "string",
-			ProtobufPos:        13,
-		},
 	},
 }
 
 // TableName sets the insert table name for this struct type
-func (c *Camera_info) TableName() string {
-	return "v_camera_info"
+func (c *Camera) TableName() string {
+	return "o_camera"
 }
 
 // BeforeSave invoked before saving, return an error if field is not populated.
-func (c *Camera_info) BeforeSave() error {
+func (c *Camera) BeforeSave() error {
 	return nil
 }
 
 // Prepare invoked before saving, can be used to populate fields etc.
-func (c *Camera_info) Prepare() {
+func (c *Camera) Prepare() {
 }
 
 // Validate invoked before performing action, return an error if field is not populated.
-func (c *Camera_info) Validate(action Action) error {
+func (c *Camera) Validate(action Action) error {
 	return nil
 }
 
 // TableInfo return table meta data
-func (c *Camera_info) TableInfo() *TableInfo {
-	return Camera_infoTableInfo
+func (c *Camera) TableInfo() *TableInfo {
+	return CameraTableInfo
 }

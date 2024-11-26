@@ -4,17 +4,16 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 	"visit-service/api"
 	_ "visit-service/docs"
 	"visit-service/service"
-	"time"
 
 	"github.com/dapr-platform/common"
 	daprd "github.com/dapr/go-sdk/service/http"
 	"github.com/go-chi/chi/v5"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	httpSwagger "github.com/swaggo/http-swagger"
-	"context"
 )
 
 var (
@@ -43,7 +42,7 @@ func main() {
 	go func() {
 		// 等待服务启动
 		time.Sleep(time.Second * 2)
-		
+
 		// 初始化系统配置
 		if err := service.InitSystemConfig(); err != nil {
 			common.Logger.Errorf("Failed to initialize system config: %v", err)

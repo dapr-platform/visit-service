@@ -25,11 +25,12 @@ func InitManualHandler(r chi.Router) {
 // @Router /manual/init-visit-schedule [post]
 func ManualInitVisitScheduleHandler(w http.ResponseWriter, r *http.Request) {
 	err := service.ManualInitVisitSchedule()
-	if err != nil {
-		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
-		return
-	}
-	common.HttpResult(w, common.OK)
+	go func() {
+		if err != nil {
+			common.Logger.Error("init visit schedule error", err)
+		}
+	}()
+	common.HttpResult(w, common.OK.AppendMsg("后台运行，请查看日志"))
 }
 
 // @Summary 手动删除排班
@@ -49,10 +50,11 @@ func DeleteVisitScheduleHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
 		return
 	}
-	err = service.DeleteVisitSchedule(startDay)
-	if err != nil {
-		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
-		return
-	}
-	common.HttpResult(w, common.OK)
+	go func() {
+		err = service.DeleteVisitSchedule(startDay)
+		if err != nil {
+			common.Logger.Error("delete visit schedule error", err)
+		}
+	}()
+	common.HttpResult(w, common.OK.AppendMsg("后台运行，请查看日志"))
 }

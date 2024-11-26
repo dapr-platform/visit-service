@@ -37,6 +37,13 @@ definitions:
       stream_url_suffix:
         type: string
     type: object
+  entity.VisitRecordStats:
+    properties:
+      count:
+        type: integer
+      month:
+        type: string
+    type: object
   model.Bed_info:
     properties:
       bed_no:
@@ -443,6 +450,44 @@ definitions:
           32      default: []'
         type: string
     type: object
+  model.Patient:
+    properties:
+      bed_id:
+        description: '[ 2] bed_id                                         VARCHAR(32)          null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          32      default: []'
+        type: string
+      hospital_no:
+        description: '[ 4] hospital_no                                    VARCHAR(32)          null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          32      default: []'
+        type: string
+      id:
+        description: '[ 0] id                                             VARCHAR(32)          null:
+          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
+          32      default: []'
+        type: string
+      name:
+        description: '[ 3] name                                           VARCHAR(255)         null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          255     default: []'
+        type: string
+      remark:
+        description: '[ 6] remark                                         VARCHAR(1024)        null:
+          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          1024    default: []'
+        type: string
+      status:
+        description: '[ 5] status                                         INT4                 null:
+          false  primary: false  isArray: false  auto: false  col: INT4            len:
+          -1      default: [0]'
+        type: integer
+      ward_id:
+        description: '[ 1] ward_id                                        VARCHAR(32)          null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          32      default: []'
+        type: string
+    type: object
   model.Patient_info:
     properties:
       bed_id:
@@ -551,6 +596,99 @@ definitions:
           false  primary: false  isArray: false  auto: false  col: INT4            len:
           -1      default: [0]'
         type: integer
+    type: object
+  model.User:
+    properties:
+      address:
+        description: '[ 7] address                                        VARCHAR(1024)        null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          1024    default: []'
+        type: string
+      avatar_url:
+        description: '[13] avatar_url                                     VARCHAR(255)         null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          255     default: []'
+        type: string
+      create_at:
+        description: '[14] create_at                                      TIMESTAMP            null:
+          false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
+          -1      default: []'
+        type: string
+      email:
+        description: '[ 3] email                                          VARCHAR(255)         null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          255     default: []'
+        type: string
+      gender:
+        description: '[ 6] gender                                         INT4                 null:
+          false  primary: false  isArray: false  auto: false  col: INT4            len:
+          -1      default: [0]'
+        type: integer
+      id:
+        description: '[ 0] id                                             VARCHAR(25)          null:
+          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
+          25      default: []'
+        type: string
+      id_card:
+        description: '[11] id_card                                        VARCHAR(255)         null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          255     default: []'
+        type: string
+      identity:
+        description: '[ 4] identity                                       VARCHAR(255)         null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          255     default: []'
+        type: string
+      mobile:
+        description: '[ 2] mobile                                         VARCHAR(15)          null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          15      default: []'
+        type: string
+      name:
+        description: '[ 5] name                                           VARCHAR(255)         null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          255     default: []'
+        type: string
+      org_id:
+        description: '[10] org_id                                         VARCHAR(255)         null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          255     default: []'
+        type: string
+      password:
+        description: '[ 8] password                                       VARCHAR(255)         null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          255     default: []'
+        type: string
+      remark:
+        description: '[16] remark                                         VARCHAR(255)         null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          255     default: []'
+        type: string
+      status:
+        description: '[17] status                                         INT4                 null:
+          false  primary: false  isArray: false  auto: false  col: INT4            len:
+          -1      default: [0]'
+        type: integer
+      tenant_id:
+        description: '[ 1] tenant_id                                      VARCHAR(25)          null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          25      default: []'
+        type: string
+      type:
+        description: '[ 9] type                                           INT4                 null:
+          false  primary: false  isArray: false  auto: false  col: INT4            len:
+          -1      default: [0]'
+        type: integer
+      update_at:
+        description: '[15] update_at                                      TIMESTAMP            null:
+          false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
+          -1      default: []'
+        type: string
+      work_number:
+        description: '[12] work_number                                    VARCHAR(255)         null:
+          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
+          255     default: []'
+        type: string
     type: object
   model.Visit_record:
     properties:
@@ -1284,6 +1422,54 @@ paths:
       summary: page query
       tags:
       - 摄像头
+  /dashboard/monthly-stats:
+    get:
+      description: 获取探视预约按月数量统计
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 月度统计数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/entity.VisitRecordStats'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: 获取探视预约按月数量统计
+      tags:
+      - 仪表盘
+  /dashboard/stats:
+    get:
+      description: 获取探视预约总量，当前系统普通用户人数，当前系统病患人数，当前家属人数
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 统计数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  additionalProperties:
+                    type: integer
+                  type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: 获取探视预约总量，当前系统普通用户人数，当前系统病患人数，当前家属人数
+      tags:
+      - 仪表盘
   /family-member-info:
     get:
       description: query objects
@@ -2054,6 +2240,97 @@ paths:
       summary: 手动初始化排班
       tags:
       - Manual
+  /patient:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: bed_id
+        in: query
+        name: bed_id
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: hospital_no
+        in: query
+        name: hospital_no
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Patient'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - 病患
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Patient'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Patient'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - 病患
   /patient-info:
     get:
       description: query objects
@@ -2204,6 +2481,79 @@ paths:
       summary: page query
       tags:
       - 病患信息视图
+  /patient/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: ward_id
+        in: query
+        name: ward_id
+        type: string
+      - description: bed_id
+        in: query
+        name: bed_id
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: hospital_no
+        in: query
+        name: hospital_no
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Patient'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - 病患
   /schedule-camera:
     get:
       description: query objects
@@ -2508,6 +2858,258 @@ paths:
       summary: page query
       tags:
       - 系统配置
+  /user:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: tenant_id
+        in: query
+        name: tenant_id
+        type: string
+      - description: mobile
+        in: query
+        name: mobile
+        type: string
+      - description: email
+        in: query
+        name: email
+        type: string
+      - description: identity
+        in: query
+        name: identity
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: gender
+        in: query
+        name: gender
+        type: string
+      - description: address
+        in: query
+        name: address
+        type: string
+      - description: password
+        in: query
+        name: password
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: org_id
+        in: query
+        name: org_id
+        type: string
+      - description: id_card
+        in: query
+        name: id_card
+        type: string
+      - description: work_number
+        in: query
+        name: work_number
+        type: string
+      - description: avatar_url
+        in: query
+        name: avatar_url
+        type: string
+      - description: create_at
+        in: query
+        name: create_at
+        type: string
+      - description: update_at
+        in: query
+        name: update_at
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.User'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.User'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - User
+  /user/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: tenant_id
+        in: query
+        name: tenant_id
+        type: string
+      - description: mobile
+        in: query
+        name: mobile
+        type: string
+      - description: email
+        in: query
+        name: email
+        type: string
+      - description: identity
+        in: query
+        name: identity
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: gender
+        in: query
+        name: gender
+        type: string
+      - description: address
+        in: query
+        name: address
+        type: string
+      - description: password
+        in: query
+        name: password
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: org_id
+        in: query
+        name: org_id
+        type: string
+      - description: id_card
+        in: query
+        name: id_card
+        type: string
+      - description: work_number
+        in: query
+        name: work_number
+        type: string
+      - description: avatar_url
+        in: query
+        name: avatar_url
+        type: string
+      - description: create_at
+        in: query
+        name: create_at
+        type: string
+      - description: update_at
+        in: query
+        name: update_at
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.User'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - User
   /visit-record:
     get:
       description: query objects

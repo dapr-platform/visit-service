@@ -14,18 +14,19 @@ import (
 const (
 	CONFIG_VIDEO_RETENTION_DAYS        = "video_retention_days"
 	CONFIG_RELATIVE_PATIENT_AUTO_AUDIT = "relative_patient_auto_audit"
-	CONFIG_LATEST_VISIT_PERIOD        = "latest_visit_period"
-	CONFIG_EARLIEST_VISIT_PERIOD      = "earliest_visit_period"
-	CONFIG_SYSTEM_DEPLOY_TIME         = "system_deploy_time"
-	CONFIG_NURSE_VISIT_NOTIFY_TIME    = "nurse_visit_notify_time"
-	CONFIG_RELATIVE_VISIT_NOTIFY_TIME = "relative_visit_notify_time"
-	CONFIG_VISIT_REGISTER_AUTO_AUDIT  = "visit_register_auto_audit"
-	CONFIG_SCHEDULE_INTERVAL          = "schedule_interval"
-	CONFIG_SCHEDULE_HOUR_BEGIN        = "schedule_hour_begin"
-	CONFIG_SCHEDULE_HOUR_END          = "schedule_hour_end"
-	CONFIG_SCHEDULE_TIME_SPAN         = "schedule_time_span"
-	CONFIG_SCHEDULE_GENERATE_DAYS     = "schedule_generate_days"
-	CONFIG_SCHEDULE_MAX_VISITORS      = "schedule_max_visitors"
+	CONFIG_LATEST_VISIT_PERIOD         = "latest_visit_period"
+	CONFIG_EARLIEST_VISIT_PERIOD       = "earliest_visit_period"
+	CONFIG_SYSTEM_DEPLOY_TIME          = "system_deploy_time"
+	CONFIG_NURSE_VISIT_NOTIFY_TIME     = "nurse_visit_notify_time"
+	CONFIG_RELATIVE_VISIT_NOTIFY_TIME  = "relative_visit_notify_time"
+	CONFIG_VISIT_REGISTER_AUTO_AUDIT   = "visit_register_auto_audit"
+	CONFIG_SCHEDULE_INTERVAL           = "schedule_interval"
+	CONFIG_SCHEDULE_HOUR_BEGIN         = "schedule_hour_begin"
+	CONFIG_SCHEDULE_HOUR_END           = "schedule_hour_end"
+	CONFIG_SCHEDULE_TIME_SPAN          = "schedule_time_span"
+	CONFIG_SCHEDULE_GENERATE_DAYS      = "schedule_generate_days"
+	CONFIG_SCHEDULE_MAX_VISITORS       = "schedule_max_visitors"
+	CONFIG_SCHEDULE_AUTO_GEN_STATUS    = "schedule_auto_gen_status"
 )
 
 // ConfigManager 系统配置管理器
@@ -140,23 +141,31 @@ var (
 		ConfigDesc:  "每个时段最大访客数",
 		Status:      1,
 	}
+	scheduleAutoGenStatus = model.System_config{
+		ConfigName:  CONFIG_SCHEDULE_AUTO_GEN_STATUS,
+		ConfigValue: "1",
+		ConfigType:  "number",
+		ConfigDesc:  "自动排班默认状态(1：可预约,0:不可预约)",
+		Status:      1,
+	}
 
 	// 默认配置映射
 	defaultSystemConfigListMap = map[string]*model.System_config{
 		CONFIG_VIDEO_RETENTION_DAYS:        &videoRetentionDays,
 		CONFIG_RELATIVE_PATIENT_AUTO_AUDIT: &relativePatientAutoAudit,
-		CONFIG_LATEST_VISIT_PERIOD:        &latestVisitPeriod,
-		CONFIG_EARLIEST_VISIT_PERIOD:      &earliestVisitPeriod,
-		CONFIG_SYSTEM_DEPLOY_TIME:         &systemDeployTime,
-		CONFIG_NURSE_VISIT_NOTIFY_TIME:    &nurseVisitNotifyTime,
-		CONFIG_RELATIVE_VISIT_NOTIFY_TIME: &relativeVisitNotifyTime,
-		CONFIG_VISIT_REGISTER_AUTO_AUDIT:  &visitRegisterAutoAudit,
-		CONFIG_SCHEDULE_INTERVAL:          &scheduleInterval,
-		CONFIG_SCHEDULE_HOUR_BEGIN:        &scheduleHourBegin,
-		CONFIG_SCHEDULE_HOUR_END:          &scheduleHourEnd,
-		CONFIG_SCHEDULE_TIME_SPAN:         &scheduleTimeSpan,
-		CONFIG_SCHEDULE_GENERATE_DAYS:     &scheduleGenerateDays,
-		CONFIG_SCHEDULE_MAX_VISITORS:      &scheduleMaxVisitors,
+		CONFIG_LATEST_VISIT_PERIOD:         &latestVisitPeriod,
+		CONFIG_EARLIEST_VISIT_PERIOD:       &earliestVisitPeriod,
+		CONFIG_SYSTEM_DEPLOY_TIME:          &systemDeployTime,
+		CONFIG_NURSE_VISIT_NOTIFY_TIME:     &nurseVisitNotifyTime,
+		CONFIG_RELATIVE_VISIT_NOTIFY_TIME:  &relativeVisitNotifyTime,
+		CONFIG_VISIT_REGISTER_AUTO_AUDIT:   &visitRegisterAutoAudit,
+		CONFIG_SCHEDULE_INTERVAL:           &scheduleInterval,
+		CONFIG_SCHEDULE_HOUR_BEGIN:         &scheduleHourBegin,
+		CONFIG_SCHEDULE_HOUR_END:           &scheduleHourEnd,
+		CONFIG_SCHEDULE_TIME_SPAN:          &scheduleTimeSpan,
+		CONFIG_SCHEDULE_GENERATE_DAYS:      &scheduleGenerateDays,
+		CONFIG_SCHEDULE_MAX_VISITORS:       &scheduleMaxVisitors,
+		CONFIG_SCHEDULE_AUTO_GEN_STATUS:    &scheduleAutoGenStatus,
 	}
 )
 

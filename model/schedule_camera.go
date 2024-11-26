@@ -26,7 +26,7 @@ Table: o_schedule_camera
 
 JSON Sample
 -------------------------------------
-{    "id": "NMqVkdbqfRnrgYmmELuSFgLvZ",    "schedule_id": "NnSvTSPqmXstYuFIIfjunYOGa",    "camera_id": "WIIEqwXOIkJRFVDviWBAfLRef",    "status": 43}
+{    "id": "IsAcXvDXuJxRIKUrLQfSqXUYu",    "schedule_id": "hAGkELKGZssNdKdVWvmfqtlcV",    "camera_id": "jgDuXhpoFYENFwGmlvuPfRguH",    "status": 44}
 
 
 

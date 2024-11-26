@@ -33,7 +33,7 @@ Table: o_camera
 
 JSON Sample
 -------------------------------------
-{    "id": "mbUlgdoROPLiGPOxHtYVTrfVs",    "device_name": "dhliyyMZVxvxvVwOHfuYPIMNi",    "device_no": "EHyOIlCHuGSPDSYNZtqmPUxEw",    "location_type": 94,    "ward_id": "iDWPcIVRhCbbcrnlayHSkEMFy",    "bed_id": "fsRALmLTwxLwQDRkuoVtMZOsB",    "device_type": 12,    "manufacturer": "xspRoRLJKgVirScEprwlIVEXh",    "main_stream_url": "PTlsiUyAPaohRVgJftcNqTgUG",    "sub_stream_url": "gBbkPBmtfCJBnGlFkJTxpcykP",    "status": 10}
+{    "id": "vKcWTVMZPjhwWRwKSkIhUxyLV",    "device_name": "KpxMrIvUyCfXaHxodubQBSTuw",    "device_no": "SZFtUnnGIfqYyanvxwYMMishm",    "location_type": 75,    "ward_id": "PUWLHAIXjTXcocYStXIxUnnSW",    "bed_id": "gPkPIhLiYqVpTTBVsKxQsDPQU",    "device_type": 99,    "manufacturer": "yitIeZEVIEXXEmBaCDWOxjJdx",    "main_stream_url": "XxfyZuShZRbsJlmwfBfDtCdLy",    "sub_stream_url": "lUVfPDApeBXOSnQJBTOWEQLgC",    "status": 68}
 
 
 

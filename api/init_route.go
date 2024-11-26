@@ -18,4 +18,5 @@ func InitRoute(r chi.Router) {
 	InitCustomCamRoute(r)
 	InitZlmCbHandler(r)
 	InitManualHandler(r)
+	InitDashboardRoute(r)
 }

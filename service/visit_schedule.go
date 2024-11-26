@@ -129,14 +129,18 @@ func initVisitScheduleDaily() error {
 		common.Logger.Errorf("Failed to get schedule_max_visitors config: %v", err)
 		return err
 	}
-
+	autoGenStatusConfig, err := GetConfig(CONFIG_SCHEDULE_AUTO_GEN_STATUS)
+	if err != nil {
+		common.Logger.Errorf("Failed to get schedule_auto_gen_status config: %v", err)
+		return err
+	}
 	startHour := cast.ToInt(hourBeginConfig.ConfigValue)
 	endHour := cast.ToInt(hourEndConfig.ConfigValue)
 	interval := cast.ToInt(intervalConfig.ConfigValue)
 	timeSpan := cast.ToInt(timeSpanConfig.ConfigValue)
 	generateDays := cast.ToInt(generateDaysConfig.ConfigValue)
 	maxVisitors := cast.ToInt(visitorsConfig.ConfigValue)
-
+	autoGenStatus := cast.ToInt(autoGenStatusConfig.ConfigValue)
 	// 从明天开始生成
 	startDate := time.Now().AddDate(0, 0, 1)
 
@@ -176,7 +180,7 @@ func initVisitScheduleDaily() error {
 					EndTime:           common.LocalTime(endTime),
 					TotalVisitors:     int32(maxVisitors),
 					RemainingVisitors: int32(maxVisitors),
-					Status:            1,
+					Status:            int32(autoGenStatus),
 				}
 
 				// 插入数据库

@@ -38,7 +38,7 @@ func FindVisitScheduleByStartTime(ctx context.Context, startTime common.LocalTim
 }
 func DecreaseVisitScheduleRemainingVisitors(ctx context.Context, schedule *model.Visit_schedule) error {
 	schedule.RemainingVisitors--
-	err := common.DbUpsert[model.Visit_schedule](ctx, common.GetDaprClient(), *schedule, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
+	err := common.DbUpsert[model.Visit_schedule](ctx, common.GetDaprClient(), schedule, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
 	if err != nil {
 		return err
 	}

@@ -9,6 +9,7 @@ func InitRoute(r chi.Router) {
 	InitHead_display_infoRoute(r)
 	InitLive_record_infoRoute(r)
 	InitPatient_infoRoute(r)
+	InitPatientRoute(r)
 	InitSystem_configRoute(r)
 	InitVisit_recordRoute(r)
 	InitVisit_record_infoRoute(r)

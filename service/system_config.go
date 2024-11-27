@@ -21,12 +21,13 @@ const (
 	CONFIG_RELATIVE_VISIT_NOTIFY_TIME  = "relative_visit_notify_time"
 	CONFIG_VISIT_REGISTER_AUTO_AUDIT   = "visit_register_auto_audit"
 	CONFIG_SCHEDULE_INTERVAL           = "schedule_interval"
-	CONFIG_SCHEDULE_HOUR_BEGIN         = "schedule_hour_begin"
-	CONFIG_SCHEDULE_HOUR_END           = "schedule_hour_end"
+	CONFIG_SCHEDULE_BEGIN_HOUR         = "schedule_begin_hour"
+	CONFIG_SCHEDULE_END_HOUR           = "schedule_end_hour"
 	CONFIG_SCHEDULE_TIME_SPAN          = "schedule_time_span"
 	CONFIG_SCHEDULE_GENERATE_DAYS      = "schedule_generate_days"
 	CONFIG_SCHEDULE_MAX_VISITORS       = "schedule_max_visitors"
-	CONFIG_SCHEDULE_AUTO_GEN_STATUS    = "schedule_auto_gen_status"
+	CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR = "schedule_state_auto_available_begin_hour"
+	CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR   = "schedule_state_auto_available_end_hour"
 )
 
 // ConfigManager 系统配置管理器
@@ -106,15 +107,15 @@ var (
 		ConfigDesc:  "排班间隔时间(分钟)",
 		Status:      1,
 	}
-	scheduleHourBegin = model.System_config{
-		ConfigName:  CONFIG_SCHEDULE_HOUR_BEGIN,
+	scheduleBeginHour = model.System_config{
+		ConfigName:  CONFIG_SCHEDULE_BEGIN_HOUR,
 		ConfigValue: "0",
 		ConfigType:  "number",
 		ConfigDesc:  "排班开始时间（小时）0-23",
 		Status:      1,
 	}
-	scheduleHourEnd = model.System_config{
-		ConfigName:  CONFIG_SCHEDULE_HOUR_END,
+	scheduleEndHour = model.System_config{
+		ConfigName:  CONFIG_SCHEDULE_END_HOUR,
 		ConfigValue: "23",
 		ConfigType:  "number",
 		ConfigDesc:  "排班结束时间（小时）0-23",
@@ -141,11 +142,18 @@ var (
 		ConfigDesc:  "每个时段最大访客数",
 		Status:      1,
 	}
-	scheduleAutoGenStatus = model.System_config{
-		ConfigName:  CONFIG_SCHEDULE_AUTO_GEN_STATUS,
-		ConfigValue: "1",
+	scheduleStateAutoAvailableBeginHour = model.System_config{
+		ConfigName:  CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR,
+		ConfigValue: "15",
 		ConfigType:  "number",
-		ConfigDesc:  "自动排班默认状态(1：可预约,0:不可预约)",
+		ConfigDesc:  "排班状态自动可预约开始时间(小时)",
+		Status:      1,
+	}
+	scheduleStateAutoAvailableEndHour = model.System_config{
+		ConfigName:  CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR,
+		ConfigValue: "16",
+		ConfigType:  "number",
+		ConfigDesc:  "排班状态自动可预约结束时间(小时)",
 		Status:      1,
 	}
 
@@ -160,12 +168,13 @@ var (
 		CONFIG_RELATIVE_VISIT_NOTIFY_TIME:  &relativeVisitNotifyTime,
 		CONFIG_VISIT_REGISTER_AUTO_AUDIT:   &visitRegisterAutoAudit,
 		CONFIG_SCHEDULE_INTERVAL:           &scheduleInterval,
-		CONFIG_SCHEDULE_HOUR_BEGIN:         &scheduleHourBegin,
-		CONFIG_SCHEDULE_HOUR_END:           &scheduleHourEnd,
+		CONFIG_SCHEDULE_BEGIN_HOUR:         &scheduleBeginHour,
+		CONFIG_SCHEDULE_END_HOUR:           &scheduleEndHour,
 		CONFIG_SCHEDULE_TIME_SPAN:          &scheduleTimeSpan,
 		CONFIG_SCHEDULE_GENERATE_DAYS:      &scheduleGenerateDays,
 		CONFIG_SCHEDULE_MAX_VISITORS:       &scheduleMaxVisitors,
-		CONFIG_SCHEDULE_AUTO_GEN_STATUS:    &scheduleAutoGenStatus,
+		CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR: &scheduleStateAutoAvailableBeginHour,
+		CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR:   &scheduleStateAutoAvailableEndHour,
 	}
 )
 

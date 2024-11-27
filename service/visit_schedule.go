@@ -99,14 +99,25 @@ func checkTimeSlotExists(startTime time.Time) (bool, error) {
 
 func initVisitScheduleDaily() error {
 	// 获取配置，如果出错则记录日志并返回
-	hourBeginConfig, err := GetConfig(CONFIG_SCHEDULE_HOUR_BEGIN)
+	beginHourConfig, err := GetConfig(CONFIG_SCHEDULE_BEGIN_HOUR)
 	if err != nil {
-		common.Logger.Errorf("Failed to get schedule_hour_begin config: %v", err)
+		common.Logger.Errorf("Failed to get schedule_begin_hour config: %v", err)
 		return err
 	}
-	hourEndConfig, err := GetConfig(CONFIG_SCHEDULE_HOUR_END)
+	endHourConfig, err := GetConfig(CONFIG_SCHEDULE_END_HOUR)
 	if err != nil {
-		common.Logger.Errorf("Failed to get schedule_hour_end config: %v", err)
+		common.Logger.Errorf("Failed to get schedule_end_hour config: %v", err)
+		return err
+	}
+
+	autoAvailableBeginHourConfig, err := GetConfig(CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR)
+	if err != nil {
+		common.Logger.Errorf("Failed to get schedule_state_auto_available_begin_hour config: %v", err)
+		return err
+	}
+	autoAvailableEndHourConfig, err := GetConfig(CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR)
+	if err != nil {
+		common.Logger.Errorf("Failed to get schedule_state_auto_available_end_hour config: %v", err)
 		return err
 	}
 	intervalConfig, err := GetConfig(CONFIG_SCHEDULE_INTERVAL)
@@ -129,18 +140,14 @@ func initVisitScheduleDaily() error {
 		common.Logger.Errorf("Failed to get schedule_max_visitors config: %v", err)
 		return err
 	}
-	autoGenStatusConfig, err := GetConfig(CONFIG_SCHEDULE_AUTO_GEN_STATUS)
-	if err != nil {
-		common.Logger.Errorf("Failed to get schedule_auto_gen_status config: %v", err)
-		return err
-	}
-	startHour := cast.ToInt(hourBeginConfig.ConfigValue)
-	endHour := cast.ToInt(hourEndConfig.ConfigValue)
+
+	startHour := cast.ToInt(beginHourConfig.ConfigValue)
+	endHour := cast.ToInt(endHourConfig.ConfigValue)
 	interval := cast.ToInt(intervalConfig.ConfigValue)
 	timeSpan := cast.ToInt(timeSpanConfig.ConfigValue)
 	generateDays := cast.ToInt(generateDaysConfig.ConfigValue)
 	maxVisitors := cast.ToInt(visitorsConfig.ConfigValue)
-	autoGenStatus := cast.ToInt(autoGenStatusConfig.ConfigValue)
+
 	// 从明天开始生成
 	startDate := time.Now().AddDate(0, 0, 1)
 
@@ -172,6 +179,10 @@ func initVisitScheduleDaily() error {
 				if exists {
 					continue
 				}
+				status := 0
+				if startTime.Hour() >= cast.ToInt(autoAvailableBeginHourConfig.ConfigValue) && startTime.Hour() <= cast.ToInt(autoAvailableEndHourConfig.ConfigValue) {
+					status = 1
+				}
 
 				// 创建排班记录
 				schedule := model.Visit_schedule{
@@ -180,7 +191,7 @@ func initVisitScheduleDaily() error {
 					EndTime:           common.LocalTime(endTime),
 					TotalVisitors:     int32(maxVisitors),
 					RemainingVisitors: int32(maxVisitors),
-					Status:            int32(autoGenStatus),
+					Status:            int32(status),
 				}
 
 				// 插入数据库

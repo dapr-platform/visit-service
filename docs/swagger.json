@@ -4341,6 +4341,38 @@
                 }
             }
         },
+        "/visit-schedule/set-all-status": {
+            "post": {
+                "description": "设置全部排班状态",
+                "tags": [
+                    "探视排班"
+                ],
+                "summary": "设置全部排班状态",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "状态",
+                        "name": "status",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/ward": {
             "get": {
                 "description": "query objects",

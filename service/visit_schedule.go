@@ -28,8 +28,6 @@ func init() {
 	scheduleCron.Start()
 }
 
-
-
 func FindVisitScheduleByStartTime(ctx context.Context, startTime common.LocalTime) (*model.Visit_schedule, error) {
 	qstr := model.Visit_schedule_FIELD_NAME_start_time + "=" + startTime.DbString()
 	schedule, err := common.DbGetOne[model.Visit_schedule](ctx, common.GetDaprClient(), model.Visit_scheduleTableInfo.Name, qstr)
@@ -105,6 +103,15 @@ func DeleteVisitSchedule(startDay time.Time) error {
 		[]any{startDay.Format("2006-01-02T00:00:00")},
 	)
 }
+func SetAllVisitScheduleStatus(ctx context.Context, status int) error {
+	return common.DbUpdateByOps(
+		ctx,
+		common.GetDaprClient(),
+		model.Visit_scheduleTableInfo.Name,
+		[]string{model.Visit_schedule_FIELD_NAME_status},
+		[]any{status},
+	)
+}
 
 // checkTimeSlotExists 检查时间段是否已存在
 func checkTimeSlotExists(startTime time.Time) (bool, error) {
@@ -167,6 +174,11 @@ func initVisitScheduleDaily() error {
 		common.Logger.Errorf("Failed to get schedule_max_visitors config: %v", err)
 		return err
 	}
+	autoAvailableVisitorsConfig, err := GetConfig(CONFIG_SCHEDULE_AUTO_AVAILABLE_MAX_VISITORS)
+	if err != nil {
+		common.Logger.Errorf("Failed to get schedule_auto_available_max_visitors config: %v", err)
+		return err
+	}
 
 	startHour := cast.ToInt(beginHourConfig.ConfigValue)
 	endHour := cast.ToInt(endHourConfig.ConfigValue)
@@ -207,8 +219,11 @@ func initVisitScheduleDaily() error {
 					continue
 				}
 				status := 0
+				totalVisitors := maxVisitors
+				autoAvailableVisitors := cast.ToInt(autoAvailableVisitorsConfig.ConfigValue)
 				if startTime.Hour() >= cast.ToInt(autoAvailableBeginHourConfig.ConfigValue) && startTime.Hour() <= cast.ToInt(autoAvailableEndHourConfig.ConfigValue) {
 					status = 1
+					totalVisitors = autoAvailableVisitors
 				}
 
 				// 创建排班记录
@@ -216,8 +231,8 @@ func initVisitScheduleDaily() error {
 					ID:                startTime.Format("20060102150405"),
 					StartTime:         common.LocalTime(startTime),
 					EndTime:           common.LocalTime(endTime),
-					TotalVisitors:     int32(maxVisitors),
-					RemainingVisitors: int32(maxVisitors),
+					TotalVisitors:     int32(totalVisitors),
+					RemainingVisitors: int32(totalVisitors),
 					Status:            int32(status),
 				}
 

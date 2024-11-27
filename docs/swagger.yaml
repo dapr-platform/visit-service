@@ -3326,6 +3326,27 @@ paths:
       summary: page query
       tags:
       - 探视排班
+  /visit-schedule/set-all-status:
+    post:
+      description: 设置全部排班状态
+      parameters:
+      - description: 状态
+        in: query
+        name: status
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: 设置全部排班状态
+      tags:
+      - 探视排班
   /ward:
     get:
       description: query objects

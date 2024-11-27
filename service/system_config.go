@@ -25,6 +25,7 @@ const (
 	CONFIG_SCHEDULE_END_HOUR                        = "schedule_end_hour"
 	CONFIG_SCHEDULE_TIME_SPAN                       = "schedule_time_span"
 	CONFIG_SCHEDULE_GENERATE_DAYS                   = "schedule_generate_days"
+	CONFIG_SCHEDULE_AUTO_AVAILABLE_MAX_VISITORS     = "schedule_auto_available_max_visitors"
 	CONFIG_SCHEDULE_MAX_VISITORS                    = "schedule_max_visitors"
 	CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR = "schedule_state_auto_available_begin_hour"
 	CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR   = "schedule_state_auto_available_end_hour"
@@ -135,9 +136,16 @@ var (
 		ConfigDesc:  "排班生成天数",
 		Status:      1,
 	}
+	scheduleAutoAvailableMaxVisitors = model.System_config{
+		ConfigName:  CONFIG_SCHEDULE_AUTO_AVAILABLE_MAX_VISITORS,
+		ConfigValue: "10",
+		ConfigType:  "number",
+		ConfigDesc:  "自动可预约时段最大访客数",
+		Status:      1,
+	}
 	scheduleMaxVisitors = model.System_config{
 		ConfigName:  CONFIG_SCHEDULE_MAX_VISITORS,
-		ConfigValue: "10",
+		ConfigValue: "1",
 		ConfigType:  "number",
 		ConfigDesc:  "每个时段最大访客数",
 		Status:      1,
@@ -172,7 +180,8 @@ var (
 		CONFIG_SCHEDULE_END_HOUR:                        &scheduleEndHour,
 		CONFIG_SCHEDULE_TIME_SPAN:                       &scheduleTimeSpan,
 		CONFIG_SCHEDULE_GENERATE_DAYS:                   &scheduleGenerateDays,
-		CONFIG_SCHEDULE_MAX_VISITORS:                    &scheduleMaxVisitors,
+		CONFIG_SCHEDULE_AUTO_AVAILABLE_MAX_VISITORS:     &scheduleAutoAvailableMaxVisitors,
+		CONFIG_SCHEDULE_MAX_VISITORS:                     &scheduleMaxVisitors,
 		CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR: &scheduleStateAutoAvailableBeginHour,
 		CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR:   &scheduleStateAutoAvailableEndHour,
 	}

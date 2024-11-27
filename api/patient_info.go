@@ -28,6 +28,8 @@ func InitPatient_infoRoute(r chi.Router) {
 // @Param status query string false "status"
 // @Param remark query string false "remark"
 // @Param bed_no query string false "bed_no"
+// @Param camera_id query string false "camera_id"
+// @Param vr_camera_id query string false "vr_camera_id"
 // @Param ward_name query string false "ward_name"
 // @Produce  json
 // @Success 200 {object} common.Response{data=common.Page{items=[]model.Patient_info}} "objects array"
@@ -58,6 +60,8 @@ func Patient_infoPageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param status query string false "status"
 // @Param remark query string false "remark"
 // @Param bed_no query string false "bed_no"
+// @Param camera_id query string false "camera_id"
+// @Param vr_camera_id query string false "vr_camera_id"
 // @Param ward_name query string false "ward_name"
 // @Produce  json
 // @Success 200 {object} common.Response{data=[]model.Patient_info} "objects array"

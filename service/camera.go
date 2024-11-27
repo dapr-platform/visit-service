@@ -13,13 +13,25 @@ import (
 	"github.com/dapr-platform/common"
 )
 
+var LOCATION_TYPE_MOVABLE = 1
+var LOCATION_TYPE_FIXED = 0
+var DEVICE_TYPE_VR = 2
+var DEVICE_TYPE_NORMAL = 0
+var DEVICE_TYPE_NORMAL_PTZ = 1
+
 type AddStreamResponse struct {
 	Code int `json:"code"`
 	Data struct {
 		Key string `json:"key"`
 	} `json:"data"`
 }
-
+func FindMovableCameras(ctx context.Context) ([]model.Camera_info, error) {
+	cameras, err := common.DbQuery[model.Camera_info](ctx, common.GetDaprClient(), model.Camera_infoTableInfo.Name, fmt.Sprintf("location_type=%d", LOCATION_TYPE_MOVABLE))
+	if err != nil {
+		return nil, err
+	}
+	return cameras, nil
+}
 func StartCamLiveStream(cameraID string) (string, error) {
 	// 1. 获取摄像头信息
 	cameras, err := common.DbQuery[model.Camera_info](context.Background(), common.GetDaprClient(), model.Camera_infoTableInfo.Name, fmt.Sprintf("id=%s", cameraID))

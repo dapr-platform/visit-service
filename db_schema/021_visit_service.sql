@@ -112,7 +112,7 @@ COMMENT ON COLUMN o_patient.status IS '状态(0:正常,1:出院)';
 COMMENT ON COLUMN o_patient.remark IS '备注';
 
 CREATE OR REPLACE VIEW v_patient_info AS
-SELECT p.*,b.bed_no,w.name as ward_name FROM o_patient p,o_bed b,o_ward w WHERE p.bed_id = b.id AND b.ward_id = w.id;
+SELECT p.*,b.bed_no,b.camera_id,b.vr_camera_id,w.name as ward_name FROM o_patient p,o_bed b,o_ward w WHERE p.bed_id = b.id AND b.ward_id = w.id;
 
 COMMENT ON VIEW v_patient_info IS '病患信息视图';
 COMMENT ON COLUMN v_patient_info.id IS '病患ID';
@@ -123,6 +123,8 @@ COMMENT ON COLUMN v_patient_info.hospital_no IS '住院号';
 COMMENT ON COLUMN v_patient_info.status IS '状态(0:正常,1:出院)';
 COMMENT ON COLUMN v_patient_info.remark IS '备注';
 COMMENT ON COLUMN v_patient_info.bed_no IS '床位号';
+COMMENT ON COLUMN v_patient_info.camera_id IS '床头摄像头ID';
+COMMENT ON COLUMN v_patient_info.vr_camera_id IS 'VR摄像头ID';
 COMMENT ON COLUMN v_patient_info.ward_name IS '病房名称';
 
 -- 探视排班表
@@ -135,6 +137,7 @@ CREATE TABLE o_visit_schedule (
     status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
+CREATE INDEX idx_visit_schedule_start_time ON o_visit_schedule (start_time);
 COMMENT ON TABLE o_visit_schedule IS '探视排班表';
 COMMENT ON COLUMN o_visit_schedule.id IS '排班ID';
 COMMENT ON COLUMN o_visit_schedule.start_time IS '开始时间';
@@ -155,6 +158,8 @@ CREATE TABLE o_live_record (
     end_time TIMESTAMP,
     file_size BIGINT,
     stream_id VARCHAR(32),
+    camera_id VARCHAR(32),
+    vr_camera_id VARCHAR(32),
     status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
@@ -168,6 +173,8 @@ COMMENT ON COLUMN o_live_record.start_time IS '直播开始时间';
 COMMENT ON COLUMN o_live_record.end_time IS '直播结束时间';
 COMMENT ON COLUMN o_live_record.file_size IS '文件大小';
 COMMENT ON COLUMN o_live_record.stream_id IS '流ID';
+COMMENT ON COLUMN o_live_record.camera_id IS '床头摄像头ID';
+COMMENT ON COLUMN o_live_record.vr_camera_id IS 'VR摄像头ID';
 COMMENT ON COLUMN o_live_record.status IS '状态(0:未开始,1:直播中,2:已结束)';
 
 CREATE OR REPLACE VIEW v_live_record_info AS
@@ -207,6 +214,7 @@ CREATE TABLE o_visit_record (
     remark VARCHAR(1024) DEFAULT '',
     PRIMARY KEY (id)
 );
+CREATE INDEX idx_visit_record_visit_start_time ON o_visit_record (visit_start_time);
 COMMENT ON TABLE o_visit_record IS '探视登记表';
 COMMENT ON COLUMN o_visit_record.id IS '探视登记ID';
 COMMENT ON COLUMN o_visit_record.patient_id IS '病患ID';

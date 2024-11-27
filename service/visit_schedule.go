@@ -28,6 +28,23 @@ func init() {
 	scheduleCron.Start()
 }
 
+func FindVisitScheduleByStartTime(ctx context.Context, startTime common.LocalTime) (*model.Visit_schedule, error) {
+	qstr := model.Visit_schedule_FIELD_NAME_start_time + "=" + startTime.DbString()
+	schedule, err := common.DbGetOne[model.Visit_schedule](ctx, common.GetDaprClient(), model.Visit_scheduleTableInfo.Name, qstr)
+	if err != nil {
+		return nil, err
+	}
+	return schedule, nil
+}
+func DecreaseVisitScheduleRemainingVisitors(ctx context.Context, schedule *model.Visit_schedule) error {
+	schedule.RemainingVisitors--
+	err := common.DbUpsert[model.Visit_schedule](ctx, common.GetDaprClient(), *schedule, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 // ManuAddVisitSchedule 手动添加排班
 func ManuAddVisitSchedule(startTime time.Time, endTime time.Time, totalVisitors int) error {
 	// 检查时间段是否已存在

@@ -31,6 +31,8 @@ func InitLive_recordRoute(r chi.Router) {
 // @Param end_time query string false "end_time"
 // @Param file_size query string false "file_size"
 // @Param stream_id query string false "stream_id"
+// @Param camera_id query string false "camera_id"
+// @Param vr_camera_id query string false "vr_camera_id"
 // @Param status query string false "status"
 // @Produce  json
 // @Success 200 {object} common.Response{data=common.Page{items=[]model.Live_record}} "objects array"
@@ -62,6 +64,8 @@ func Live_recordPageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param end_time query string false "end_time"
 // @Param file_size query string false "file_size"
 // @Param stream_id query string false "stream_id"
+// @Param camera_id query string false "camera_id"
+// @Param vr_camera_id query string false "vr_camera_id"
 // @Param status query string false "status"
 // @Produce  json
 // @Success 200 {object} common.Response{data=[]model.Live_record} "objects array"

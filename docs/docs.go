@@ -1582,6 +1582,18 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "status",
                         "name": "status",
                         "in": "query"
@@ -1747,6 +1759,18 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "status",
                         "name": "status",
                         "in": "query"
@@ -1884,6 +1908,18 @@ const docTemplate = `{
                         "type": "string",
                         "description": "stream_id",
                         "name": "stream_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
                         "in": "query"
                     },
                     {
@@ -2037,6 +2073,18 @@ const docTemplate = `{
                         "type": "string",
                         "description": "stream_id",
                         "name": "stream_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
                         "in": "query"
                     },
                     {
@@ -2388,6 +2436,18 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "ward_name",
                         "name": "ward_name",
                         "in": "query"
@@ -2501,6 +2561,18 @@ const docTemplate = `{
                         "type": "string",
                         "description": "bed_no",
                         "name": "bed_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
                         "in": "query"
                     },
                     {
@@ -4903,6 +4975,10 @@ const docTemplate = `{
         "model.Live_record": {
             "type": "object",
             "properties": {
+                "camera_id": {
+                    "description": "床头摄像头ID",
+                    "type": "string"
+                },
                 "device_id": {
                     "description": "设备ID",
                     "type": "string"
@@ -4942,12 +5018,20 @@ const docTemplate = `{
                 "stream_id": {
                     "description": "流ID",
                     "type": "string"
+                },
+                "vr_camera_id": {
+                    "description": "VR摄像头ID",
+                    "type": "string"
                 }
             }
         },
         "model.Live_record_info": {
             "type": "object",
             "properties": {
+                "camera_id": {
+                    "description": "camera_id",
+                    "type": "string"
+                },
                 "device_id": {
                     "description": "设备ID",
                     "type": "string"
@@ -4999,6 +5083,10 @@ const docTemplate = `{
                 "stream_id": {
                     "description": "流ID",
                     "type": "string"
+                },
+                "vr_camera_id": {
+                    "description": "vr_camera_id",
+                    "type": "string"
                 }
             }
         },
@@ -5046,6 +5134,10 @@ const docTemplate = `{
                     "description": "床位号",
                     "type": "string"
                 },
+                "camera_id": {
+                    "description": "床头摄像头ID",
+                    "type": "string"
+                },
                 "hospital_no": {
                     "description": "住院号",
                     "type": "string"
@@ -5065,6 +5157,10 @@ const docTemplate = `{
                 "status": {
                     "description": "状态(0:正常,1:出院)",
                     "type": "integer"
+                },
+                "vr_camera_id": {
+                    "description": "VR摄像头ID",
+                    "type": "string"
                 },
                 "ward_id": {
                     "description": "病房ID",

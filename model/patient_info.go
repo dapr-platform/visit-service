@@ -26,12 +26,14 @@ Table: v_patient_info
 [ 5] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
 [ 6] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
 [ 7] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 8] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[ 8] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 9] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[10] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "ywOSYcSIshwTRWfcUKAVMnfmX",    "ward_id": "qYLAoCikRaZgaoXrKyGvycXSL",    "bed_id": "CgUmWoYqHYQocWmpkExGlshrC",    "name": "SPRYjSJlfCHutHbPShKwgSllW",    "hospital_no": "nEsQtaVeMfCsuqiiylLkpSYBu",    "status": 29,    "remark": "eSfmuvmcXhRqNMxkJeFMROhPr",    "bed_no": "ZwlyAtOesvqUqBOwpoIvqoNfA",    "ward_name": "UwRKhqhrdXiBmdjOPLJyPGFdW"}
+{    "id": "eMSKIVnTTaUuRSYmIfkxoGXCE",    "ward_id": "KDtIStugFuRVDnsJOEdYQfbgR",    "bed_id": "erfLDfFlRNIopoxChfGTApiwy",    "name": "smlIPARvXWCpdLJyqCJFSqhfu",    "hospital_no": "OJMCAstZKGsRiBbHxIMpMGfrc",    "status": 60,    "remark": "JbsCQkQKYBiLEiEVirJGdjwQr",    "bed_no": "OPFGfflnXhWfAjdHuHTRxssdX",    "camera_id": "TcVNSJXuWgKuOukkdHvFHlxWu",    "vr_camera_id": "JxRArQxBBitFUxvniCNbxYsuw",    "ward_name": "cFOEVnsMHlKidtuTCJLwZgLTE"}
 
 
 Comments
@@ -61,6 +63,10 @@ var (
 
 	Patient_info_FIELD_NAME_bed_no = "bed_no"
 
+	Patient_info_FIELD_NAME_camera_id = "camera_id"
+
+	Patient_info_FIELD_NAME_vr_camera_id = "vr_camera_id"
+
 	Patient_info_FIELD_NAME_ward_name = "ward_name"
 )
 
@@ -81,6 +87,10 @@ type Patient_info struct {
 	Remark string `json:"remark"` //备注
 
 	BedNo string `json:"bed_no"` //床位号
+
+	CameraID string `json:"camera_id"` //床头摄像头ID
+
+	VrCameraID string `json:"vr_camera_id"` //VR摄像头ID
 
 	WardName string `json:"ward_name"` //病房名称
 
@@ -262,6 +272,48 @@ Warning table: v_patient_info primary key column id is nullable column, setting 
 
 		&ColumnInfo{
 			Index:              8,
+			Name:               "camera_id",
+			Comment:            `床头摄像头ID`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "CameraID",
+			GoFieldType:        "string",
+			JSONFieldName:      "camera_id",
+			ProtobufFieldName:  "camera_id",
+			ProtobufType:       "string",
+			ProtobufPos:        9,
+		},
+
+		&ColumnInfo{
+			Index:              9,
+			Name:               "vr_camera_id",
+			Comment:            `VR摄像头ID`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "VrCameraID",
+			GoFieldType:        "string",
+			JSONFieldName:      "vr_camera_id",
+			ProtobufFieldName:  "vr_camera_id",
+			ProtobufType:       "string",
+			ProtobufPos:        10,
+		},
+
+		&ColumnInfo{
+			Index:              10,
 			Name:               "ward_name",
 			Comment:            `病房名称`,
 			Notes:              ``,
@@ -278,7 +330,7 @@ Warning table: v_patient_info primary key column id is nullable column, setting 
 			JSONFieldName:      "ward_name",
 			ProtobufFieldName:  "ward_name",
 			ProtobufType:       "string",
-			ProtobufPos:        9,
+			ProtobufPos:        11,
 		},
 	},
 }

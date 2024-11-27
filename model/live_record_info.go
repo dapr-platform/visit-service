@@ -27,15 +27,17 @@ Table: v_live_record_info
 [ 6] end_time                                       TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
 [ 7] file_size                                      INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
 [ 8] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 9] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[10] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[11] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[12] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 9] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[10] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[11] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[12] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[13] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[14] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "yiVOIAodhqfuLFcovsbBRLasi",    "schedule_id": "wTsHnhicuTAuQopWwMTdyuOsG",    "patient_id": "MKRoshGmHPOWFEFgJJuuVdMpt",    "relative_id": "OpYcxJsELEVeRvCkDcRGgHcDM",    "device_id": "IQWZtgUfqTWAiRZtFYXMIKpMp",    "start_time": 40,    "end_time": 87,    "file_size": 82,    "stream_id": "VNEyhMvRorTfiZSqsEiViXuxn",    "status": 81,    "patient_name": "oFTQlWHVFfAwqLxffAlxYZdEp",    "patient_ward_name": "CoAkeyfOoWYiUDmkqVPxtIxoV",    "patient_bed_no": "tYRoSAFeNKTQncDNsTYojBxQh"}
+{    "id": "sELDFKuyfZSNcxlEIrrOUAYnd",    "schedule_id": "KfWxwiyjOBUBwPTCMxmhYFYfN",    "patient_id": "rtObNqNGFMixrLdfvEQNloFWS",    "relative_id": "iPJWtjPeRtSXdeFHoRbwYnoWU",    "device_id": "PoRBbOBsOqxqLXICECwaCnNRI",    "start_time": 87,    "end_time": 85,    "file_size": 97,    "stream_id": "tZuwKEJsSGTmICcLgQiDkBdXH",    "camera_id": "MLbCCqAvBEZlCGBkyjaLxcHrd",    "vr_camera_id": "RuUWiNUAROVgIEvCCkyFqkgqq",    "status": 33,    "patient_name": "YSIQjECNTqiXpBLIpxKRCguEk",    "patient_ward_name": "KSdAaOCRysTsQxJLUWXFoNWuk",    "patient_bed_no": "FTyiWRyWSTHjVYyaDSwTdKgDO"}
 
 
 Comments
@@ -67,6 +69,10 @@ var (
 
 	Live_record_info_FIELD_NAME_stream_id = "stream_id"
 
+	Live_record_info_FIELD_NAME_camera_id = "camera_id"
+
+	Live_record_info_FIELD_NAME_vr_camera_id = "vr_camera_id"
+
 	Live_record_info_FIELD_NAME_status = "status"
 
 	Live_record_info_FIELD_NAME_patient_name = "patient_name"
@@ -95,6 +101,10 @@ type Live_record_info struct {
 	FileSize int32 `json:"file_size"` //文件大小
 
 	StreamID string `json:"stream_id"` //流ID
+
+	CameraID string `json:"camera_id"` //camera_id
+
+	VrCameraID string `json:"vr_camera_id"` //vr_camera_id
 
 	Status int32 `json:"status"` //状态(0:未开始,1:直播中,2:已结束)
 
@@ -303,6 +313,48 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 
 		&ColumnInfo{
 			Index:              9,
+			Name:               "camera_id",
+			Comment:            `camera_id`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "CameraID",
+			GoFieldType:        "string",
+			JSONFieldName:      "camera_id",
+			ProtobufFieldName:  "camera_id",
+			ProtobufType:       "string",
+			ProtobufPos:        10,
+		},
+
+		&ColumnInfo{
+			Index:              10,
+			Name:               "vr_camera_id",
+			Comment:            `vr_camera_id`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "VrCameraID",
+			GoFieldType:        "string",
+			JSONFieldName:      "vr_camera_id",
+			ProtobufFieldName:  "vr_camera_id",
+			ProtobufType:       "string",
+			ProtobufPos:        11,
+		},
+
+		&ColumnInfo{
+			Index:              11,
 			Name:               "status",
 			Comment:            `状态(0:未开始,1:直播中,2:已结束)`,
 			Notes:              ``,
@@ -319,11 +371,11 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
-			ProtobufPos:        10,
+			ProtobufPos:        12,
 		},
 
 		&ColumnInfo{
-			Index:              10,
+			Index:              12,
 			Name:               "patient_name",
 			Comment:            `病患姓名`,
 			Notes:              ``,
@@ -340,11 +392,11 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 			JSONFieldName:      "patient_name",
 			ProtobufFieldName:  "patient_name",
 			ProtobufType:       "string",
-			ProtobufPos:        11,
+			ProtobufPos:        13,
 		},
 
 		&ColumnInfo{
-			Index:              11,
+			Index:              13,
 			Name:               "patient_ward_name",
 			Comment:            `病房名称`,
 			Notes:              ``,
@@ -361,11 +413,11 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 			JSONFieldName:      "patient_ward_name",
 			ProtobufFieldName:  "patient_ward_name",
 			ProtobufType:       "string",
-			ProtobufPos:        12,
+			ProtobufPos:        14,
 		},
 
 		&ColumnInfo{
-			Index:              12,
+			Index:              14,
 			Name:               "patient_bed_no",
 			Comment:            `床位号`,
 			Notes:              ``,
@@ -382,7 +434,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 			JSONFieldName:      "patient_bed_no",
 			ProtobufFieldName:  "patient_bed_no",
 			ProtobufType:       "string",
-			ProtobufPos:        13,
+			ProtobufPos:        15,
 		},
 	},
 }

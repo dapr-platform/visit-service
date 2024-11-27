@@ -12,20 +12,20 @@ import (
 
 // 系统配置项名称常量
 const (
-	CONFIG_VIDEO_RETENTION_DAYS        = "video_retention_days"
-	CONFIG_RELATIVE_PATIENT_AUTO_AUDIT = "relative_patient_auto_audit"
-	CONFIG_LATEST_VISIT_PERIOD         = "latest_visit_period"
-	CONFIG_EARLIEST_VISIT_PERIOD       = "earliest_visit_period"
-	CONFIG_SYSTEM_DEPLOY_TIME          = "system_deploy_time"
-	CONFIG_NURSE_VISIT_NOTIFY_TIME     = "nurse_visit_notify_time"
-	CONFIG_RELATIVE_VISIT_NOTIFY_TIME  = "relative_visit_notify_time"
-	CONFIG_VISIT_REGISTER_AUTO_AUDIT   = "visit_register_auto_audit"
-	CONFIG_SCHEDULE_INTERVAL           = "schedule_interval"
-	CONFIG_SCHEDULE_BEGIN_HOUR         = "schedule_begin_hour"
-	CONFIG_SCHEDULE_END_HOUR           = "schedule_end_hour"
-	CONFIG_SCHEDULE_TIME_SPAN          = "schedule_time_span"
-	CONFIG_SCHEDULE_GENERATE_DAYS      = "schedule_generate_days"
-	CONFIG_SCHEDULE_MAX_VISITORS       = "schedule_max_visitors"
+	CONFIG_VIDEO_RETENTION_DAYS                     = "video_retention_days"
+	CONFIG_RELATIVE_PATIENT_AUTO_AUDIT              = "relative_patient_auto_audit"
+	CONFIG_LATEST_VISIT_PERIOD                      = "latest_visit_period"
+	CONFIG_EARLIEST_VISIT_PERIOD                    = "earliest_visit_period"
+	CONFIG_SYSTEM_DEPLOY_TIME                       = "system_deploy_time"
+	CONFIG_NURSE_VISIT_NOTIFY_TIME                  = "nurse_visit_notify_time"
+	CONFIG_RELATIVE_VISIT_NOTIFY_TIME               = "relative_visit_notify_time"
+	CONFIG_VISIT_REGISTER_AUTO_AUDIT                = "visit_register_auto_audit"
+	CONFIG_SCHEDULE_INTERVAL                        = "schedule_interval"
+	CONFIG_SCHEDULE_BEGIN_HOUR                      = "schedule_begin_hour"
+	CONFIG_SCHEDULE_END_HOUR                        = "schedule_end_hour"
+	CONFIG_SCHEDULE_TIME_SPAN                       = "schedule_time_span"
+	CONFIG_SCHEDULE_GENERATE_DAYS                   = "schedule_generate_days"
+	CONFIG_SCHEDULE_MAX_VISITORS                    = "schedule_max_visitors"
 	CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR = "schedule_state_auto_available_begin_hour"
 	CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR   = "schedule_state_auto_available_end_hour"
 )
@@ -159,20 +159,20 @@ var (
 
 	// 默认配置映射
 	defaultSystemConfigListMap = map[string]*model.System_config{
-		CONFIG_VIDEO_RETENTION_DAYS:        &videoRetentionDays,
-		CONFIG_RELATIVE_PATIENT_AUTO_AUDIT: &relativePatientAutoAudit,
-		CONFIG_LATEST_VISIT_PERIOD:         &latestVisitPeriod,
-		CONFIG_EARLIEST_VISIT_PERIOD:       &earliestVisitPeriod,
-		CONFIG_SYSTEM_DEPLOY_TIME:          &systemDeployTime,
-		CONFIG_NURSE_VISIT_NOTIFY_TIME:     &nurseVisitNotifyTime,
-		CONFIG_RELATIVE_VISIT_NOTIFY_TIME:  &relativeVisitNotifyTime,
-		CONFIG_VISIT_REGISTER_AUTO_AUDIT:   &visitRegisterAutoAudit,
-		CONFIG_SCHEDULE_INTERVAL:           &scheduleInterval,
-		CONFIG_SCHEDULE_BEGIN_HOUR:         &scheduleBeginHour,
-		CONFIG_SCHEDULE_END_HOUR:           &scheduleEndHour,
-		CONFIG_SCHEDULE_TIME_SPAN:          &scheduleTimeSpan,
-		CONFIG_SCHEDULE_GENERATE_DAYS:      &scheduleGenerateDays,
-		CONFIG_SCHEDULE_MAX_VISITORS:       &scheduleMaxVisitors,
+		CONFIG_VIDEO_RETENTION_DAYS:                     &videoRetentionDays,
+		CONFIG_RELATIVE_PATIENT_AUTO_AUDIT:              &relativePatientAutoAudit,
+		CONFIG_LATEST_VISIT_PERIOD:                      &latestVisitPeriod,
+		CONFIG_EARLIEST_VISIT_PERIOD:                    &earliestVisitPeriod,
+		CONFIG_SYSTEM_DEPLOY_TIME:                       &systemDeployTime,
+		CONFIG_NURSE_VISIT_NOTIFY_TIME:                  &nurseVisitNotifyTime,
+		CONFIG_RELATIVE_VISIT_NOTIFY_TIME:               &relativeVisitNotifyTime,
+		CONFIG_VISIT_REGISTER_AUTO_AUDIT:                &visitRegisterAutoAudit,
+		CONFIG_SCHEDULE_INTERVAL:                        &scheduleInterval,
+		CONFIG_SCHEDULE_BEGIN_HOUR:                      &scheduleBeginHour,
+		CONFIG_SCHEDULE_END_HOUR:                        &scheduleEndHour,
+		CONFIG_SCHEDULE_TIME_SPAN:                       &scheduleTimeSpan,
+		CONFIG_SCHEDULE_GENERATE_DAYS:                   &scheduleGenerateDays,
+		CONFIG_SCHEDULE_MAX_VISITORS:                    &scheduleMaxVisitors,
 		CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR: &scheduleStateAutoAvailableBeginHour,
 		CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR:   &scheduleStateAutoAvailableEndHour,
 	}
@@ -184,9 +184,7 @@ func init() {
 		configManager.configs[name] = config
 	}
 
-	common.RegisterUpsertBeforeHook("System_config", func(r *http.Request, in any) (out any, err error) {
-		return in, nil
-	})
+	common.RegisterUpsertBeforeHook("System_config", UpsertSystem_config)
 }
 
 // GetConfig 获取配置，如果配置未加载会尝试加载

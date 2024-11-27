@@ -40,7 +40,7 @@ Table: v_family_member_info
 
 JSON Sample
 -------------------------------------
-{    "id": "phmhtGipRWSYNbZVkFIGkpSPJ",    "tenant_id": "wqwBUYwuOwJbLpecdQfrOigDD",    "mobile": "JTrPKpqDGbgWSUlcmFNiMcBAD",    "email": "VsqiujoDiMCUUXqbfyKrqCUSo",    "identity": "rTencaGMpHGTMtEdNUSpKlUUc",    "name": "McJELsxQnlptkhLdfpFQNLxCp",    "gender": 36,    "address": "aSWAsVqYZDxXylKfmNqIyIfyC",    "password": "PVktksDBsfFHYtetunNALbFdf",    "type": 63,    "org_id": "HtoTiVYlBEiapWsCplAcjylaR",    "id_card": "IJFZdEfYOlETALRbFDcrIdclg",    "work_number": "ofUhFkPAombgiwWYHQSZruPAe",    "avatar_url": "qYFfmVGIHDNZvLimJBHuErsGQ",    "create_at": 93,    "update_at": 53,    "remark": "eSTatpMjNArBaFjmsDqHuWtwR",    "status": 59}
+{    "id": "KcGGElPBEspDkxBpeJEhmbJJl",    "tenant_id": "EfxPnDXJbnXPBPTUTNmojiOBv",    "mobile": "HsDMWuaedqRgoNPpdOQyhOgrD",    "email": "FKvsngwpLQvvGxNNYYknlvBnD",    "identity": "qsjcofIAlcIuCYKEFYXgROcXw",    "name": "FQKgjCjgjhnBswSDdXNZsWAjr",    "gender": 83,    "address": "tDnLtfyPtwPlOeiinAAinwLLV",    "password": "SDARleXnlAThMXyEtjqZjnUKK",    "type": 70,    "org_id": "kAslyycdlllSLyOkyPQynCSvt",    "id_card": "HjYtuIXtOfWYNVdjCyZDIxvex",    "work_number": "rwtUXOCOYmbYwsqlikodrLbdk",    "avatar_url": "GOXcxavHZRIRXElIxuLAmKShP",    "create_at": 31,    "update_at": 61,    "remark": "EJJuciywJudMmBoYjMHZwYUuC",    "status": 19}
 
 
 Comments
@@ -93,41 +93,41 @@ var (
 
 // Family_member_info struct is a row record of the v_family_member_info table in the  database
 type Family_member_info struct {
-	ID string `json:"id"` // [ 0] id                                             VARCHAR(25)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 25      default: []
+	ID string `json:"id"` //id
 
-	TenantID string `json:"tenant_id"` // [ 1] tenant_id                                      VARCHAR(25)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 25      default: []
+	TenantID string `json:"tenant_id"` //tenant_id
 
-	Mobile string `json:"mobile"` // [ 2] mobile                                         VARCHAR(15)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 15      default: []
+	Mobile string `json:"mobile"` //mobile
 
-	Email string `json:"email"` // [ 3] email                                          VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Email string `json:"email"` //email
 
-	Identity string `json:"identity"` // [ 4] identity                                       VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Identity string `json:"identity"` //identity
 
-	Name string `json:"name"` // [ 5] name                                           VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Name string `json:"name"` //name
 
-	Gender int32 `json:"gender"` // [ 6] gender                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	Gender int32 `json:"gender"` //gender
 
-	Address string `json:"address"` // [ 7] address                                        VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+	Address string `json:"address"` //address
 
-	Password string `json:"password"` // [ 8] password                                       VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Password string `json:"password"` //password
 
-	Type int32 `json:"type"` // [ 9] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	Type int32 `json:"type"` //type
 
-	OrgID string `json:"org_id"` // [10] org_id                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	OrgID string `json:"org_id"` //org_id
 
-	IDCard string `json:"id_card"` // [11] id_card                                        VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	IDCard string `json:"id_card"` //id_card
 
-	WorkNumber string `json:"work_number"` // [12] work_number                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	WorkNumber string `json:"work_number"` //work_number
 
-	AvatarURL string `json:"avatar_url"` // [13] avatar_url                                     VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	AvatarURL string `json:"avatar_url"` //avatar_url
 
-	CreateAt common.LocalTime `json:"create_at"` // [14] create_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	CreateAt common.LocalTime `json:"create_at"` //create_at
 
-	UpdateAt common.LocalTime `json:"update_at"` // [15] update_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	UpdateAt common.LocalTime `json:"update_at"` //update_at
 
-	Remark string `json:"remark"` // [16] remark                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Remark string `json:"remark"` //remark
 
-	Status int32 `json:"status"` // [17] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	Status int32 `json:"status"` //status
 
 }
 

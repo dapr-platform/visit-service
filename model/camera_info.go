@@ -32,7 +32,7 @@ Table: v_camera_info
 
 JSON Sample
 -------------------------------------
-{    "id": "HpXSuelJfnJNtOZoycZCjiMrf",    "device_name": "aloSaZvjUMabZMgtBvHrkpjYO",    "device_no": "eXlwnuinCARiEAHCYAAdviuKB",    "location_type": 93,    "device_type": 72,    "manufacturer": "uVMQNQWnLxtmwybRqhmxUclQR",    "main_stream_url": "ILeEWBMEQXKsifbNaKDYapjEC",    "sub_stream_url": "DaCtXxomDhxDBcLREYxYerpel",    "rel_vr_camera_id": "yFrdlyueEIpTumMGlfpVtfaMb",    "status": 30}
+{    "id": "bqvvsZwTuLohqkeVYoPvZfMdY",    "device_name": "OrGgbfoZOyjkZohnpOLLZcLUq",    "device_no": "RmBuFwmnCFVYCnmerJMwhPmOy",    "location_type": 95,    "device_type": 98,    "manufacturer": "GHToKwVFogfagpeqWKBeinCfU",    "main_stream_url": "YIMcmTDsZNkjtkDHiaEvaqrRm",    "sub_stream_url": "TUmhZTpgxRYtPdUPkpnpZRoCI",    "rel_vr_camera_id": "ZUAZPYrCaGLPGvRWllcJvwCJC",    "status": 32}
 
 
 Comments
@@ -69,25 +69,25 @@ var (
 
 // Camera_info struct is a row record of the v_camera_info table in the  database
 type Camera_info struct {
-	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	ID string `json:"id"` //摄像头ID
 
-	DeviceName string `json:"device_name"` // [ 1] device_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	DeviceName string `json:"device_name"` //设备名称
 
-	DeviceNo string `json:"device_no"` // [ 2] device_no                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	DeviceNo string `json:"device_no"` //设备编号
 
-	LocationType int32 `json:"location_type"` // [ 3] location_type                                  INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	LocationType int32 `json:"location_type"` //位置类型(0:固定,1:可移动)
 
-	DeviceType int32 `json:"device_type"` // [ 4] device_type                                    INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	DeviceType int32 `json:"device_type"` //设备类型(0:普通,1:普通云台,2:VR)
 
-	Manufacturer string `json:"manufacturer"` // [ 5] manufacturer                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Manufacturer string `json:"manufacturer"` //设备厂商
 
-	MainStreamURL string `json:"main_stream_url"` // [ 6] main_stream_url                                VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+	MainStreamURL string `json:"main_stream_url"` //主码流URL
 
-	SubStreamURL string `json:"sub_stream_url"` // [ 7] sub_stream_url                                 VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+	SubStreamURL string `json:"sub_stream_url"` //辅码流URL
 
-	RelVrCameraID string `json:"rel_vr_camera_id"` // [ 8] rel_vr_camera_id                               VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	RelVrCameraID string `json:"rel_vr_camera_id"` //关联VR摄像头ID(当位置为可移动时，需关联VR摄像头)
 
-	Status int32 `json:"status"` // [ 9] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	Status int32 `json:"status"` //状态(0:正常,1:禁用)
 
 }
 

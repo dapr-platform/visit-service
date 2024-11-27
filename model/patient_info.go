@@ -31,7 +31,7 @@ Table: v_patient_info
 
 JSON Sample
 -------------------------------------
-{    "id": "DmBgtaHpimCAtPLuCvsaElrxr",    "ward_id": "JgdmXcTBMennPsiwErreknGms",    "bed_id": "PwlLgnhBbHlofcDciFPKPuKoA",    "name": "rHGCBTNfTuYUvPibfosjlOgYT",    "hospital_no": "EHFLGScmPFXJqvGdfFjAtPsuJ",    "status": 82,    "remark": "ynfcMXTJcpTphCtGcgMpYiYkS",    "bed_no": "WdXkSukHwpZFxgCmfwHYOursG",    "ward_name": "GWewWnpBkmxiFtWflLEbrAIiy"}
+{    "id": "ywOSYcSIshwTRWfcUKAVMnfmX",    "ward_id": "qYLAoCikRaZgaoXrKyGvycXSL",    "bed_id": "CgUmWoYqHYQocWmpkExGlshrC",    "name": "SPRYjSJlfCHutHbPShKwgSllW",    "hospital_no": "nEsQtaVeMfCsuqiiylLkpSYBu",    "status": 29,    "remark": "eSfmuvmcXhRqNMxkJeFMROhPr",    "bed_no": "ZwlyAtOesvqUqBOwpoIvqoNfA",    "ward_name": "UwRKhqhrdXiBmdjOPLJyPGFdW"}
 
 
 Comments
@@ -66,23 +66,23 @@ var (
 
 // Patient_info struct is a row record of the v_patient_info table in the  database
 type Patient_info struct {
-	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	ID string `json:"id"` //病患ID
 
-	WardID string `json:"ward_id"` // [ 1] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	WardID string `json:"ward_id"` //病房ID
 
-	BedID string `json:"bed_id"` // [ 2] bed_id                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	BedID string `json:"bed_id"` //床位ID
 
-	Name string `json:"name"` // [ 3] name                                           VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Name string `json:"name"` //病患姓名
 
-	HospitalNo string `json:"hospital_no"` // [ 4] hospital_no                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	HospitalNo string `json:"hospital_no"` //住院号
 
-	Status int32 `json:"status"` // [ 5] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	Status int32 `json:"status"` //状态(0:正常,1:出院)
 
-	Remark string `json:"remark"` // [ 6] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+	Remark string `json:"remark"` //备注
 
-	BedNo string `json:"bed_no"` // [ 7] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	BedNo string `json:"bed_no"` //床位号
 
-	WardName string `json:"ward_name"` // [ 8] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	WardName string `json:"ward_name"` //病房名称
 
 }
 

@@ -28,7 +28,7 @@ Table: o_visit_schedule
 
 JSON Sample
 -------------------------------------
-{    "id": "meofQnbyklcabvrSOWKPuQGSb",    "start_time": 87,    "end_time": 12,    "total_visitors": 92,    "remaining_visitors": 58,    "status": 74}
+{    "id": "ilhLvHADqljMvNqZVjqwcCaeL",    "start_time": 77,    "end_time": 69,    "total_visitors": 94,    "remaining_visitors": 40,    "status": 64}
 
 
 
@@ -50,17 +50,17 @@ var (
 
 // Visit_schedule struct is a row record of the o_visit_schedule table in the  database
 type Visit_schedule struct {
-	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	ID string `json:"id"` //排班ID
 
-	StartTime common.LocalTime `json:"start_time"` // [ 1] start_time                                     TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	StartTime common.LocalTime `json:"start_time"` //开始时间
 
-	EndTime common.LocalTime `json:"end_time"` // [ 2] end_time                                       TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	EndTime common.LocalTime `json:"end_time"` //结束时间
 
-	TotalVisitors int32 `json:"total_visitors"` // [ 3] total_visitors                                 INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	TotalVisitors int32 `json:"total_visitors"` //探视总人数
 
-	RemainingVisitors int32 `json:"remaining_visitors"` // [ 4] remaining_visitors                             INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+	RemainingVisitors int32 `json:"remaining_visitors"` //探视剩余人数
 
-	Status int32 `json:"status"` // [ 5] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+	Status int32 `json:"status"` //状态(0:可预约,1:不可预约)
 
 }
 

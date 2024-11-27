@@ -28,7 +28,7 @@ Table: v_head_display_info
 
 JSON Sample
 -------------------------------------
-{    "id": "REadfTFxvAPMdhSlFZhoOYDtw",    "device_name": "BkiKvPiIBSiSKCBHwyuoYtNop",    "device_no": "fGiryHLGseqhfRmeZhyZUxePb",    "model": "FmXxObsKMwAXLWTuEgpoKVcKL",    "ward_id": "sHNHpmbsoFxuRbXiBwCysjIIR",    "ward_name": "CBhCayWCnGUZhqpJVtSnALonE"}
+{    "id": "gktFntlYuumnTsyAKyYUNlppy",    "device_name": "lqnnlLGyJOiOCtPoWNpKxPqVl",    "device_no": "tlYMTJpfEvSphujqJvGsJutkO",    "model": "yqiBIBmxihJOPtVSHIuPLyiQO",    "ward_id": "IbXvaNjwSfrBgFWWtpKqTSjiM",    "ward_name": "NjtwfLsifYJYBMKyRFMfeEkhu"}
 
 
 Comments
@@ -57,17 +57,17 @@ var (
 
 // Head_display_info struct is a row record of the v_head_display_info table in the  database
 type Head_display_info struct {
-	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	ID string `json:"id"` //头显ID
 
-	DeviceName string `json:"device_name"` // [ 1] device_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	DeviceName string `json:"device_name"` //设备名称
 
-	DeviceNo string `json:"device_no"` // [ 2] device_no                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	DeviceNo string `json:"device_no"` //设备编号
 
-	Model string `json:"model"` // [ 3] model                                          VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Model string `json:"model"` //型号
 
-	WardID string `json:"ward_id"` // [ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	WardID string `json:"ward_id"` //病房ID
 
-	WardName string `json:"ward_name"` // [ 5] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	WardName string `json:"ward_name"` //病房名称
 
 }
 

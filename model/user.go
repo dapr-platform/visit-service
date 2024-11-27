@@ -40,7 +40,7 @@ Table: o_user
 
 JSON Sample
 -------------------------------------
-{    "id": "auppHrTttEhojCqnSiuQHxDUi",    "tenant_id": "lRXFNXpGXyEIKtqAtDdWJHved",    "mobile": "eyivsrOCEWIaQUVAgFaZmpXGN",    "email": "OUCbQPFWLdQOsMRxYifvdsTmu",    "identity": "qBdZQrQjUTqFRAevPdRTKgISd",    "name": "VauJHKImmiOMxwfprBnCUBNnt",    "gender": 51,    "address": "ptyQkbNCItyVaJCbBNUIMkpBT",    "password": "mAAtbtlrFblrDBlhGkYybJmgm",    "type": 65,    "org_id": "tMkfpNobVZKMFFVnPxHHPAxlR",    "id_card": "toVuhFBfHJbjniCjQHumYjgQv",    "work_number": "cjVIsuKTOXCYZKAQkLVHwnppe",    "avatar_url": "bTmkqFyHmObEUgKAbeUeMYrsx",    "create_at": 99,    "update_at": 88,    "remark": "RTpWHWIMYTaFqMyBTPGXlwyCI",    "status": 55}
+{    "id": "MailLJGCqLTUBpLSvAxRDFsHY",    "tenant_id": "WHwpsPSgMlmBOZZTqpgMUwHwr",    "mobile": "XKSncdjhmPSfdXPnQhYBAjncy",    "email": "uPrclUUplvYpECGBgIZRpqpVC",    "identity": "dluCmOyoeAVOpTYNafNJNwsmp",    "name": "TfPRWJbceGoqyUUbBitEIJTTO",    "gender": 27,    "address": "XSGAMcsgEBOsnAVpUGjOWZggD",    "password": "anZieKTEUODWWoJkHEpyBqiXN",    "type": 13,    "org_id": "livUyxcrZRBKtYOleTBHgTbJP",    "id_card": "duelusBXGSbuBgfgQZClqfGuT",    "work_number": "froDdfuKZcqYSAjfKEsUFHjdA",    "avatar_url": "KpJRHeWiKThqWBuLuJetBAaRL",    "create_at": 31,    "update_at": 52,    "remark": "RWnIVXhayKpXIetNUNBEFGfUA",    "status": 96}
 
 
 
@@ -86,41 +86,41 @@ var (
 
 // User struct is a row record of the o_user table in the  database
 type User struct {
-	ID string `json:"id"` // [ 0] id                                             VARCHAR(25)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 25      default: []
+	ID string `json:"id"` //Primary Key
 
-	TenantID string `json:"tenant_id"` // [ 1] tenant_id                                      VARCHAR(25)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 25      default: []
+	TenantID string `json:"tenant_id"` //tenant_id
 
-	Mobile string `json:"mobile"` // [ 2] mobile                                         VARCHAR(15)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 15      default: []
+	Mobile string `json:"mobile"` //mobile
 
-	Email string `json:"email"` // [ 3] email                                          VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Email string `json:"email"` //email
 
-	Identity string `json:"identity"` // [ 4] identity                                       VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Identity string `json:"identity"` //用户标识
 
-	Name string `json:"name"` // [ 5] name                                           VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Name string `json:"name"` //name
 
-	Gender int32 `json:"gender"` // [ 6] gender                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+	Gender int32 `json:"gender"` //gender
 
-	Address string `json:"address"` // [ 7] address                                        VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+	Address string `json:"address"` //address
 
-	Password string `json:"password"` // [ 8] password                                       VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Password string `json:"password"` //password
 
-	Type int32 `json:"type"` // [ 9] type                                           INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+	Type int32 `json:"type"` //用户类型,1:管理员,2:普通用户,3:访客
 
-	OrgID string `json:"org_id"` // [10] org_id                                         VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	OrgID string `json:"org_id"` //组织ID
 
-	IDCard string `json:"id_card"` // [11] id_card                                        VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	IDCard string `json:"id_card"` //身份证
 
-	WorkNumber string `json:"work_number"` // [12] work_number                                    VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	WorkNumber string `json:"work_number"` //工号
 
-	AvatarURL string `json:"avatar_url"` // [13] avatar_url                                     VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	AvatarURL string `json:"avatar_url"` //头像
 
-	CreateAt common.LocalTime `json:"create_at"` // [14] create_at                                      TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	CreateAt common.LocalTime `json:"create_at"` //创建时间
 
-	UpdateAt common.LocalTime `json:"update_at"` // [15] update_at                                      TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	UpdateAt common.LocalTime `json:"update_at"` //更新时间
 
-	Remark string `json:"remark"` // [16] remark                                         VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Remark string `json:"remark"` //备注
 
-	Status int32 `json:"status"` // [17] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+	Status int32 `json:"status"` //状态(1正常，2:禁止登陆，3:删除
 
 }
 

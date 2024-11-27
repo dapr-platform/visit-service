@@ -36,7 +36,7 @@ Table: o_visit_record
 
 JSON Sample
 -------------------------------------
-{    "id": "WkGFYnXPfdoajsTaItguaCVAJ",    "patient_id": "alPJjxluTeyDtbhmGBVdKJenD",    "relative_id": "TDLAvSgOsJysEOuKNxnehWKUI",    "visit_start_time": 23,    "visit_end_time": 56,    "visitor_name": "XjLrpebPtbjZvbrrGuFPkIGKE",    "visitor_phone": "GqimNCTgVYruptexLkWrwwxbK",    "visitor_id_card": "fAPAyXlnaYllHaMNWltoltLeW",    "relationship": "dotxRIRgEdJFMqveqiLugVIjO",    "camera_id": "CsIKheCvREwKHjqocwsRdGuQa",    "vr_camera_id": "epJBMDBcirPoQTLXymJZPNewa",    "check_status": 37,    "status": 25,    "remark": "AVIHuqfBVdxWMbuDLWyNiyOaL"}
+{    "id": "jucFgywORVVcQyWqrHLmwehsW",    "patient_id": "jNKhbYgTFfNdeidKbNFhKCmTt",    "relative_id": "HwsaYuTcZBreokxukefYlhKRV",    "visit_start_time": 52,    "visit_end_time": 74,    "visitor_name": "HfcygeqNhtnLpLMcxoXfARdRM",    "visitor_phone": "dlrgDHuIVjpkLUdPWKkFrwXqE",    "visitor_id_card": "pAqFgRvMWyDZruZVTatEyhVKm",    "relationship": "yITAUuuyndVngqoyLfsrXwkGB",    "camera_id": "LOFeamBdjWtRVvMZuKrdDmRQV",    "vr_camera_id": "QpReoRDYNAZevlKLsinwxLdZs",    "check_status": 46,    "status": 28,    "remark": "AudgfvBYnxYKBFMfwprFtJCBv"}
 
 
 
@@ -74,33 +74,33 @@ var (
 
 // Visit_record struct is a row record of the o_visit_record table in the  database
 type Visit_record struct {
-	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	ID string `json:"id"` //探视登记ID
 
-	PatientID string `json:"patient_id"` // [ 1] patient_id                                     VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	PatientID string `json:"patient_id"` //病患ID
 
-	RelativeID string `json:"relative_id"` // [ 2] relative_id                                    VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	RelativeID string `json:"relative_id"` //家属ID
 
-	VisitStartTime common.LocalTime `json:"visit_start_time"` // [ 3] visit_start_time                               TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	VisitStartTime common.LocalTime `json:"visit_start_time"` //探视开始时间
 
-	VisitEndTime common.LocalTime `json:"visit_end_time"` // [ 4] visit_end_time                                 TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	VisitEndTime common.LocalTime `json:"visit_end_time"` //探视结束时间
 
-	VisitorName string `json:"visitor_name"` // [ 5] visitor_name                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	VisitorName string `json:"visitor_name"` //探视人
 
-	VisitorPhone string `json:"visitor_phone"` // [ 6] visitor_phone                                  VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	VisitorPhone string `json:"visitor_phone"` //探视人电话
 
-	VisitorIDCard string `json:"visitor_id_card"` // [ 7] visitor_id_card                                VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	VisitorIDCard string `json:"visitor_id_card"` //探视人身份证号
 
-	Relationship string `json:"relationship"` // [ 8] relationship                                   VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	Relationship string `json:"relationship"` //探视人与患者关系(父母，配偶，子女，其他)
 
-	CameraID string `json:"camera_id"` // [ 9] camera_id                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	CameraID string `json:"camera_id"` //床头摄像头ID
 
-	VrCameraID string `json:"vr_camera_id"` // [10] vr_camera_id                                   VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	VrCameraID string `json:"vr_camera_id"` //VR摄像头ID
 
-	CheckStatus int32 `json:"check_status"` // [11] check_status                                   INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+	CheckStatus int32 `json:"check_status"` //审核状态(0:未审核,1:已审核,2:审核不通过)
 
-	Status int32 `json:"status"` // [12] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+	Status int32 `json:"status"` //状态(0:正常,1:取消)
 
-	Remark string `json:"remark"` // [13] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+	Remark string `json:"remark"` //备注
 
 }
 

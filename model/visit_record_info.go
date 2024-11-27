@@ -40,7 +40,7 @@ Table: v_visit_record_info
 
 JSON Sample
 -------------------------------------
-{    "id": "kXPZjBLcfxgOAKSeYjZsAwIJq",    "patient_id": "atVwKHtwuYsUCimsODdIxFnff",    "relative_id": "pKFdFOJUUfvsqLKUsiwYpyJAK",    "visit_start_time": 20,    "visit_end_time": 73,    "visitor_name": "ujBxGiesnbEHJIVfWtojGBaLu",    "visitor_phone": "qmIlcprqnQUZRMCajgJnZuCQf",    "visitor_id_card": "jyVwktaLOTQQngXkshryUqlJo",    "relationship": "nmddACrWLdcNlAWZeJhCZGbwl",    "camera_id": "BOMlZnmhsvEnjpxHnGhmBfsTL",    "vr_camera_id": "HeuNBgwEiYLXViIfQacqsEkGo",    "check_status": 8,    "status": 16,    "remark": "lPVkctfUrARjTWkStfEbhauUy",    "patient_name": "uXLNDMyfbAgheBtlIrmdFyxcE",    "patient_ward_name": "MdKvuNaHhySxKEeRAhAWHbZRl",    "patient_bed_no": "haqFHPZMsTuvchpbRgWQCiaQG",    "stream_id": "DZaEZGFmPtvocWGlmskZLDmhc"}
+{    "id": "rAIOIUHFwCJantZvAFVTOqYIG",    "patient_id": "kmIQyCyWyMeGCshbtJkYBMDxR",    "relative_id": "cPxpsxxLCVwrnkdlgDwgKkOmA",    "visit_start_time": 56,    "visit_end_time": 3,    "visitor_name": "BFnvxPtkxLproPMBcbFNSeWVP",    "visitor_phone": "qjiWBlRbtStvNJfNvJoalndgE",    "visitor_id_card": "eRVXEshmoAWgpKTsNLwlnWmoC",    "relationship": "RyGGnmJbgEKBgMDnbttavfijT",    "camera_id": "RhkcQDjEHwoknUQERqjXQfOYu",    "vr_camera_id": "AErQhPtvEAoySbbcIDBIvoHQu",    "check_status": 23,    "status": 13,    "remark": "ggJlJIbTaWgNLQCoFyojVmWhH",    "patient_name": "sxVXKYiagjRExNNsqoqCrolaK",    "patient_ward_name": "tarGHVcYRHxMXygmifaUCMkUb",    "patient_bed_no": "aKTCYbBADkPGAsMexfZpRFyMY",    "stream_id": "PfwBhntYUlEtTtbadBqeQoOua"}
 
 
 Comments
@@ -93,41 +93,41 @@ var (
 
 // Visit_record_info struct is a row record of the v_visit_record_info table in the  database
 type Visit_record_info struct {
-	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	ID string `json:"id"` //探视记录ID
 
-	PatientID string `json:"patient_id"` // [ 1] patient_id                                     VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	PatientID string `json:"patient_id"` //病患ID
 
-	RelativeID string `json:"relative_id"` // [ 2] relative_id                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	RelativeID string `json:"relative_id"` //家属ID
 
-	VisitStartTime common.LocalTime `json:"visit_start_time"` // [ 3] visit_start_time                               TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	VisitStartTime common.LocalTime `json:"visit_start_time"` //探视开始时间
 
-	VisitEndTime common.LocalTime `json:"visit_end_time"` // [ 4] visit_end_time                                 TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	VisitEndTime common.LocalTime `json:"visit_end_time"` //探视结束时间
 
-	VisitorName string `json:"visitor_name"` // [ 5] visitor_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	VisitorName string `json:"visitor_name"` //探视人姓名
 
-	VisitorPhone string `json:"visitor_phone"` // [ 6] visitor_phone                                  VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	VisitorPhone string `json:"visitor_phone"` //探视人电话
 
-	VisitorIDCard string `json:"visitor_id_card"` // [ 7] visitor_id_card                                VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	VisitorIDCard string `json:"visitor_id_card"` //探视人身份证号
 
-	Relationship string `json:"relationship"` // [ 8] relationship                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	Relationship string `json:"relationship"` //探视人与患者关系(父母，配偶，子女，其他)
 
-	CameraID string `json:"camera_id"` // [ 9] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	CameraID string `json:"camera_id"` //床头摄像头ID
 
-	VrCameraID string `json:"vr_camera_id"` // [10] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	VrCameraID string `json:"vr_camera_id"` //VR摄像头ID
 
-	CheckStatus int32 `json:"check_status"` // [11] check_status                                   INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	CheckStatus int32 `json:"check_status"` //审核状态(0:未审核,1:已审核,2:审核不通过)
 
-	Status int32 `json:"status"` // [12] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	Status int32 `json:"status"` //状态(0:正常,1:取消)
 
-	Remark string `json:"remark"` // [13] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+	Remark string `json:"remark"` //备注
 
-	PatientName string `json:"patient_name"` // [14] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	PatientName string `json:"patient_name"` //病患姓名
 
-	PatientWardName string `json:"patient_ward_name"` // [15] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	PatientWardName string `json:"patient_ward_name"` //病房名称
 
-	PatientBedNo string `json:"patient_bed_no"` // [16] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	PatientBedNo string `json:"patient_bed_no"` //床位号
 
-	StreamID string `json:"stream_id"` // [17] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	StreamID string `json:"stream_id"` //直播流ID
 
 }
 

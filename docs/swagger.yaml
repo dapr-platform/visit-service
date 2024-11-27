@@ -47,846 +47,526 @@ definitions:
   model.Bed_info:
     properties:
       bed_no:
-        description: '[ 2] bed_no                                         VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 床位号
         type: string
       camera_id:
-        description: '[ 3] camera_id                                      VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: camera_id
         type: string
       camera_name:
-        description: '[ 8] camera_name                                    VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 床头摄像头名称
         type: string
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病床ID
         type: string
       status:
-        description: '[ 6] status                                         INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: 床位状态(0:空闲,1:占用)
         type: integer
       type:
-        description: '[ 5] type                                           INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: 床位类型(0:普通,1:ICU)
         type: integer
       vr_camera_id:
-        description: '[ 4] vr_camera_id                                   VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: vr_camera_id
         type: string
       vr_camera_name:
-        description: '[ 9] vr_camera_name                                 VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: VR摄像头名称
         type: string
       ward_id:
-        description: '[ 1] ward_id                                        VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病房ID
         type: string
       ward_name:
-        description: '[ 7] ward_name                                      VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 病房名称
         type: string
     type: object
   model.Camera:
     properties:
       device_name:
-        description: '[ 1] device_name                                    VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 设备名称
         type: string
       device_no:
-        description: '[ 2] device_no                                      VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 设备编号
         type: string
       device_type:
-        description: '[ 4] device_type                                    INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 设备类型
         type: integer
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 摄像头ID
         type: string
       location_type:
-        description: '[ 3] location_type                                  INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 位置类型
         type: integer
       main_stream_url:
-        description: '[ 6] main_stream_url                                VARCHAR(1024)        null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: 主码流URL
         type: string
       manufacturer:
-        description: '[ 5] manufacturer                                   VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 设备厂商
         type: string
       rel_vr_camera_id:
-        description: '[ 8] rel_vr_camera_id                               VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 关联VR摄像头ID(当位置为可移动时，需关联VR摄像头)
         type: string
       status:
-        description: '[ 9] status                                         INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 状态(0:正常,1:禁用)
         type: integer
       sub_stream_url:
-        description: '[ 7] sub_stream_url                                 VARCHAR(1024)        null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: 辅码流URL
         type: string
     type: object
   model.Camera_info:
     properties:
       device_name:
-        description: '[ 1] device_name                                    VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 设备名称
         type: string
       device_no:
-        description: '[ 2] device_no                                      VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 设备编号
         type: string
       device_type:
-        description: '[ 4] device_type                                    INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: 设备类型(0:普通,1:普通云台,2:VR)
         type: integer
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 摄像头ID
         type: string
       location_type:
-        description: '[ 3] location_type                                  INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: 位置类型(0:固定,1:可移动)
         type: integer
       main_stream_url:
-        description: '[ 6] main_stream_url                                VARCHAR(1024)        null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: 主码流URL
         type: string
       manufacturer:
-        description: '[ 5] manufacturer                                   VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 设备厂商
         type: string
       rel_vr_camera_id:
-        description: '[ 8] rel_vr_camera_id                               VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 关联VR摄像头ID(当位置为可移动时，需关联VR摄像头)
         type: string
       status:
-        description: '[ 9] status                                         INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: 状态(0:正常,1:禁用)
         type: integer
       sub_stream_url:
-        description: '[ 7] sub_stream_url                                 VARCHAR(1024)        null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: 辅码流URL
         type: string
     type: object
   model.Family_member_info:
     properties:
       address:
-        description: '[ 7] address                                        VARCHAR(1024)        null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: address
         type: string
       avatar_url:
-        description: '[13] avatar_url                                     VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: avatar_url
         type: string
       create_at:
-        description: '[14] create_at                                      TIMESTAMP            null:
-          true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: create_at
         type: string
       email:
-        description: '[ 3] email                                          VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: email
         type: string
       gender:
-        description: '[ 6] gender                                         INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: gender
         type: integer
       id:
-        description: '[ 0] id                                             VARCHAR(25)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          25      default: []'
+        description: id
         type: string
       id_card:
-        description: '[11] id_card                                        VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: id_card
         type: string
       identity:
-        description: '[ 4] identity                                       VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: identity
         type: string
       mobile:
-        description: '[ 2] mobile                                         VARCHAR(15)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          15      default: []'
+        description: mobile
         type: string
       name:
-        description: '[ 5] name                                           VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: name
         type: string
       org_id:
-        description: '[10] org_id                                         VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: org_id
         type: string
       password:
-        description: '[ 8] password                                       VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: password
         type: string
       remark:
-        description: '[16] remark                                         VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: remark
         type: string
       status:
-        description: '[17] status                                         INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: status
         type: integer
       tenant_id:
-        description: '[ 1] tenant_id                                      VARCHAR(25)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          25      default: []'
+        description: tenant_id
         type: string
       type:
-        description: '[ 9] type                                           INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: type
         type: integer
       update_at:
-        description: '[15] update_at                                      TIMESTAMP            null:
-          true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: update_at
         type: string
       work_number:
-        description: '[12] work_number                                    VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: work_number
         type: string
     type: object
   model.Head_display_info:
     properties:
       device_name:
-        description: '[ 1] device_name                                    VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 设备名称
         type: string
       device_no:
-        description: '[ 2] device_no                                      VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 设备编号
         type: string
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 头显ID
         type: string
       model:
-        description: '[ 3] model                                          VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 型号
         type: string
       ward_id:
-        description: '[ 4] ward_id                                        VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病房ID
         type: string
       ward_name:
-        description: '[ 5] ward_name                                      VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 病房名称
         type: string
     type: object
   model.Live_record:
     properties:
       device_id:
-        description: '[ 4] device_id                                      VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 设备ID
         type: string
       end_time:
-        description: '[ 6] end_time                                       TIMESTAMP            null:
-          true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 直播结束时间
         type: string
       file_size:
-        description: '[ 7] file_size                                      INT8                 null:
-          true   primary: false  isArray: false  auto: false  col: INT8            len:
-          -1      default: []'
+        description: 文件大小
         type: integer
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 直播记录ID
         type: string
       patient_id:
-        description: '[ 2] patient_id                                     VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病患ID
         type: string
       relative_id:
-        description: '[ 3] relative_id                                    VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 家属ID
         type: string
       schedule_id:
-        description: '[ 1] schedule_id                                    VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 探视排班ID
         type: string
       start_time:
-        description: '[ 5] start_time                                     TIMESTAMP            null:
-          false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 直播开始时间
         type: string
       status:
-        description: '[ 9] status                                         INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 状态(0:未开始,1:直播中,2:已结束)
         type: integer
       stream_id:
-        description: '[ 8] stream_id                                      VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 流ID
         type: string
     type: object
   model.Live_record_info:
     properties:
       device_id:
-        description: '[ 4] device_id                                      VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 设备ID
         type: string
       end_time:
-        description: '[ 6] end_time                                       TIMESTAMP            null:
-          true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 直播结束时间
         type: string
       file_size:
-        description: '[ 7] file_size                                      INT8                 null:
-          true   primary: false  isArray: false  auto: false  col: INT8            len:
-          -1      default: []'
+        description: 文件大小
         type: integer
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 直播记录ID
         type: string
       patient_bed_no:
-        description: '[12] patient_bed_no                                 VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 床位号
         type: string
       patient_id:
-        description: '[ 2] patient_id                                     VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病患ID
         type: string
       patient_name:
-        description: '[10] patient_name                                   VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 病患姓名
         type: string
       patient_ward_name:
-        description: '[11] patient_ward_name                              VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 病房名称
         type: string
       relative_id:
-        description: '[ 3] relative_id                                    VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 家属ID
         type: string
       schedule_id:
-        description: '[ 1] schedule_id                                    VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 探视排班ID
         type: string
       start_time:
-        description: '[ 5] start_time                                     TIMESTAMP            null:
-          true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 直播开始时间
         type: string
       status:
-        description: '[ 9] status                                         INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: 状态(0:未开始,1:直播中,2:已结束)
         type: integer
       stream_id:
-        description: '[ 8] stream_id                                      VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 流ID
         type: string
     type: object
   model.Patient:
     properties:
       bed_id:
-        description: '[ 2] bed_id                                         VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 床位ID
         type: string
       hospital_no:
-        description: '[ 4] hospital_no                                    VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 住院号
         type: string
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病患ID
         type: string
       name:
-        description: '[ 3] name                                           VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 病患姓名
         type: string
       remark:
-        description: '[ 6] remark                                         VARCHAR(1024)        null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: 备注
         type: string
       status:
-        description: '[ 5] status                                         INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 状态(0:正常,1:出院)
         type: integer
       ward_id:
-        description: '[ 1] ward_id                                        VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病房ID
         type: string
     type: object
   model.Patient_info:
     properties:
       bed_id:
-        description: '[ 2] bed_id                                         VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 床位ID
         type: string
       bed_no:
-        description: '[ 7] bed_no                                         VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 床位号
         type: string
       hospital_no:
-        description: '[ 4] hospital_no                                    VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 住院号
         type: string
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病患ID
         type: string
       name:
-        description: '[ 3] name                                           VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 病患姓名
         type: string
       remark:
-        description: '[ 6] remark                                         VARCHAR(1024)        null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: 备注
         type: string
       status:
-        description: '[ 5] status                                         INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: 状态(0:正常,1:出院)
         type: integer
       ward_id:
-        description: '[ 1] ward_id                                        VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病房ID
         type: string
       ward_name:
-        description: '[ 8] ward_name                                      VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 病房名称
         type: string
     type: object
   model.System_config:
     properties:
       config_desc:
-        description: '[ 5] config_desc                                    VARCHAR(1024)        null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: 配置描述
         type: string
       config_name:
-        description: '[ 1] config_name                                    VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 配置名称
         type: string
       config_type:
-        description: '[ 3] config_type                                    VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: [string]'
+        description: 配置类型
         type: string
       config_unit:
-        description: '[ 4] config_unit                                    VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 配置单位
         type: string
       config_value:
-        description: '[ 2] config_value                                   VARCHAR(1024)        null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: 配置值
         type: string
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 配置ID
         type: string
       status:
-        description: '[ 6] status                                         INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 状态
         type: integer
     type: object
   model.User:
     properties:
       address:
-        description: '[ 7] address                                        VARCHAR(1024)        null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: address
         type: string
       avatar_url:
-        description: '[13] avatar_url                                     VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 头像
         type: string
       create_at:
-        description: '[14] create_at                                      TIMESTAMP            null:
-          false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 创建时间
         type: string
       email:
-        description: '[ 3] email                                          VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: email
         type: string
       gender:
-        description: '[ 6] gender                                         INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: gender
         type: integer
       id:
-        description: '[ 0] id                                             VARCHAR(25)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          25      default: []'
+        description: Primary Key
         type: string
       id_card:
-        description: '[11] id_card                                        VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 身份证
         type: string
       identity:
-        description: '[ 4] identity                                       VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 用户标识
         type: string
       mobile:
-        description: '[ 2] mobile                                         VARCHAR(15)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          15      default: []'
+        description: mobile
         type: string
       name:
-        description: '[ 5] name                                           VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: name
         type: string
       org_id:
-        description: '[10] org_id                                         VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 组织ID
         type: string
       password:
-        description: '[ 8] password                                       VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: password
         type: string
       remark:
-        description: '[16] remark                                         VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 备注
         type: string
       status:
-        description: '[17] status                                         INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 状态(1正常，2:禁止登陆，3:删除
         type: integer
       tenant_id:
-        description: '[ 1] tenant_id                                      VARCHAR(25)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          25      default: []'
+        description: tenant_id
         type: string
       type:
-        description: '[ 9] type                                           INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 用户类型,1:管理员,2:普通用户,3:访客
         type: integer
       update_at:
-        description: '[15] update_at                                      TIMESTAMP            null:
-          false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 更新时间
         type: string
       work_number:
-        description: '[12] work_number                                    VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 工号
         type: string
     type: object
   model.Visit_record:
     properties:
       camera_id:
-        description: '[ 9] camera_id                                      VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 床头摄像头ID
         type: string
       check_status:
-        description: '[11] check_status                                   INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 审核状态(0:未审核,1:已审核,2:审核不通过)
         type: integer
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 探视登记ID
         type: string
       patient_id:
-        description: '[ 1] patient_id                                     VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病患ID
         type: string
       relationship:
-        description: '[ 8] relationship                                   VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 探视人与患者关系(父母，配偶，子女，其他)
         type: string
       relative_id:
-        description: '[ 2] relative_id                                    VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 家属ID
         type: string
       remark:
-        description: '[13] remark                                         VARCHAR(1024)        null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: 备注
         type: string
       status:
-        description: '[12] status                                         INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 状态(0:正常,1:取消)
         type: integer
       visit_end_time:
-        description: '[ 4] visit_end_time                                 TIMESTAMP            null:
-          false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 探视结束时间
         type: string
       visit_start_time:
-        description: '[ 3] visit_start_time                               TIMESTAMP            null:
-          false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 探视开始时间
         type: string
       visitor_id_card:
-        description: '[ 7] visitor_id_card                                VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 探视人身份证号
         type: string
       visitor_name:
-        description: '[ 5] visitor_name                                   VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 探视人
         type: string
       visitor_phone:
-        description: '[ 6] visitor_phone                                  VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 探视人电话
         type: string
       vr_camera_id:
-        description: '[10] vr_camera_id                                   VARCHAR(32)          null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: VR摄像头ID
         type: string
     type: object
   model.Visit_record_info:
     properties:
       camera_id:
-        description: '[ 9] camera_id                                      VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 床头摄像头ID
         type: string
       check_status:
-        description: '[11] check_status                                   INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: 审核状态(0:未审核,1:已审核,2:审核不通过)
         type: integer
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 探视记录ID
         type: string
       patient_bed_no:
-        description: '[16] patient_bed_no                                 VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 床位号
         type: string
       patient_id:
-        description: '[ 1] patient_id                                     VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病患ID
         type: string
       patient_name:
-        description: '[14] patient_name                                   VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 病患姓名
         type: string
       patient_ward_name:
-        description: '[15] patient_ward_name                              VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 病房名称
         type: string
       relationship:
-        description: '[ 8] relationship                                   VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 探视人与患者关系(父母，配偶，子女，其他)
         type: string
       relative_id:
-        description: '[ 2] relative_id                                    VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 家属ID
         type: string
       remark:
-        description: '[13] remark                                         VARCHAR(1024)        null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          1024    default: []'
+        description: 备注
         type: string
       status:
-        description: '[12] status                                         INT4                 null:
-          true   primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: 状态(0:正常,1:取消)
         type: integer
       stream_id:
-        description: '[17] stream_id                                      VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 直播流ID
         type: string
       visit_end_time:
-        description: '[ 4] visit_end_time                                 TIMESTAMP            null:
-          true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 探视结束时间
         type: string
       visit_start_time:
-        description: '[ 3] visit_start_time                               TIMESTAMP            null:
-          true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 探视开始时间
         type: string
       visitor_id_card:
-        description: '[ 7] visitor_id_card                                VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 探视人身份证号
         type: string
       visitor_name:
-        description: '[ 5] visitor_name                                   VARCHAR(255)         null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 探视人姓名
         type: string
       visitor_phone:
-        description: '[ 6] visitor_phone                                  VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 探视人电话
         type: string
       vr_camera_id:
-        description: '[10] vr_camera_id                                   VARCHAR(32)          null:
-          true   primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: VR摄像头ID
         type: string
     type: object
   model.Visit_schedule:
     properties:
       end_time:
-        description: '[ 2] end_time                                       TIMESTAMP            null:
-          false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 结束时间
         type: string
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 排班ID
         type: string
       remaining_visitors:
-        description: '[ 4] remaining_visitors                             INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 探视剩余人数
         type: integer
       start_time:
-        description: '[ 1] start_time                                     TIMESTAMP            null:
-          false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len:
-          -1      default: []'
+        description: 开始时间
         type: string
       status:
-        description: '[ 5] status                                         INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 状态(0:可预约,1:不可预约)
         type: integer
       total_visitors:
-        description: '[ 3] total_visitors                                 INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: []'
+        description: 探视总人数
         type: integer
     type: object
   model.Ward:
     properties:
       id:
-        description: '[ 0] id                                             VARCHAR(32)          null:
-          false  primary: true   isArray: false  auto: false  col: VARCHAR         len:
-          32      default: []'
+        description: 病房ID
         type: string
       name:
-        description: '[ 1] name                                           VARCHAR(255)         null:
-          false  primary: false  isArray: false  auto: false  col: VARCHAR         len:
-          255     default: []'
+        description: 病房名称
         type: string
       status:
-        description: '[ 3] status                                         INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 病房状态(0:空闲,1:占用)
         type: integer
       type:
-        description: '[ 2] type                                           INT4                 null:
-          false  primary: false  isArray: false  auto: false  col: INT4            len:
-          -1      default: [0]'
+        description: 病房类型(0:普通,1:ICU)
         type: integer
     type: object
 info:

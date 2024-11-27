@@ -35,7 +35,7 @@ Table: v_live_record_info
 
 JSON Sample
 -------------------------------------
-{    "id": "DMEMpJxZWcYumNxVLYCwuLiQW",    "schedule_id": "rCaiQEhNRKDpkoMYKNZgBaQDQ",    "patient_id": "RCUMKlYkjxRZiuPWXpRVjYKyL",    "relative_id": "xLqEqTcomdgBEnthLxNgNenHg",    "device_id": "CFNigYaawOvYmZBGftYOXtgoi",    "start_time": 58,    "end_time": 0,    "file_size": 86,    "stream_id": "ARyUugwHkMkVlDDhWOecgPpUK",    "status": 88,    "patient_name": "hPKERExkIkHdebkIFCdHBrHxu",    "patient_ward_name": "ejqbEeJOhCeYXOsjoSmqqTjnT",    "patient_bed_no": "TcsfVIYayTjiubtDnCrnwTNcT"}
+{    "id": "yiVOIAodhqfuLFcovsbBRLasi",    "schedule_id": "wTsHnhicuTAuQopWwMTdyuOsG",    "patient_id": "MKRoshGmHPOWFEFgJJuuVdMpt",    "relative_id": "OpYcxJsELEVeRvCkDcRGgHcDM",    "device_id": "IQWZtgUfqTWAiRZtFYXMIKpMp",    "start_time": 40,    "end_time": 87,    "file_size": 82,    "stream_id": "VNEyhMvRorTfiZSqsEiViXuxn",    "status": 81,    "patient_name": "oFTQlWHVFfAwqLxffAlxYZdEp",    "patient_ward_name": "CoAkeyfOoWYiUDmkqVPxtIxoV",    "patient_bed_no": "tYRoSAFeNKTQncDNsTYojBxQh"}
 
 
 Comments
@@ -78,31 +78,31 @@ var (
 
 // Live_record_info struct is a row record of the v_live_record_info table in the  database
 type Live_record_info struct {
-	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	ID string `json:"id"` //直播记录ID
 
-	ScheduleID string `json:"schedule_id"` // [ 1] schedule_id                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	ScheduleID string `json:"schedule_id"` //探视排班ID
 
-	PatientID string `json:"patient_id"` // [ 2] patient_id                                     VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	PatientID string `json:"patient_id"` //病患ID
 
-	RelativeID string `json:"relative_id"` // [ 3] relative_id                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	RelativeID string `json:"relative_id"` //家属ID
 
-	DeviceID string `json:"device_id"` // [ 4] device_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	DeviceID string `json:"device_id"` //设备ID
 
-	StartTime common.LocalTime `json:"start_time"` // [ 5] start_time                                     TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	StartTime common.LocalTime `json:"start_time"` //直播开始时间
 
-	EndTime common.LocalTime `json:"end_time"` // [ 6] end_time                                       TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+	EndTime common.LocalTime `json:"end_time"` //直播结束时间
 
-	FileSize int32 `json:"file_size"` // [ 7] file_size                                      INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
+	FileSize int32 `json:"file_size"` //文件大小
 
-	StreamID string `json:"stream_id"` // [ 8] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	StreamID string `json:"stream_id"` //流ID
 
-	Status int32 `json:"status"` // [ 9] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	Status int32 `json:"status"` //状态(0:未开始,1:直播中,2:已结束)
 
-	PatientName string `json:"patient_name"` // [10] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	PatientName string `json:"patient_name"` //病患姓名
 
-	PatientWardName string `json:"patient_ward_name"` // [11] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	PatientWardName string `json:"patient_ward_name"` //病房名称
 
-	PatientBedNo string `json:"patient_bed_no"` // [12] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	PatientBedNo string `json:"patient_bed_no"` //床位号
 
 }
 

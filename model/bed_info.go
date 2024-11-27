@@ -32,7 +32,7 @@ Table: v_bed_info
 
 JSON Sample
 -------------------------------------
-{    "id": "gMgbveQEYRcHukAlsJXHjjJeY",    "ward_id": "TMocrTOclQIQqYTYCfuTiifme",    "bed_no": "FDgQZFhNlTmykwRPdRIXolEuc",    "camera_id": "CnXSebZIcJxpfYmyPDJWMJSCT",    "vr_camera_id": "rHkgbaaXIFpudbxmIkLxgOlWM",    "type": 15,    "status": 5,    "ward_name": "qXHrmZjPiKbnomoaLktrSOOGy",    "camera_name": "ylZfFDsEopXFVnJtTHFYnOkNR",    "vr_camera_name": "uHEHyhLeTRHvHsnJIbIITjsTq"}
+{    "id": "XdHSMlSnMseKCsgByypftRUPi",    "ward_id": "OOrWrnPtsyNtVnkTxCiOMocMM",    "bed_no": "btxIAvcxJjAOZagJkjvKQTJwE",    "camera_id": "TBgVKKmuYasetJJJMUcVsGGQE",    "vr_camera_id": "aqacsRRiWNYySJontgGNxURUx",    "type": 96,    "status": 54,    "ward_name": "oFlpBiWiRmdDVKGntikiwxhOd",    "camera_name": "HlFEEGrFMWNoVtggwPfoDFFlo",    "vr_camera_name": "LTTUDfTqltOOhMZnHkKFplfpu"}
 
 
 Comments
@@ -69,25 +69,25 @@ var (
 
 // Bed_info struct is a row record of the v_bed_info table in the  database
 type Bed_info struct {
-	ID string `json:"id"` // [ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	ID string `json:"id"` //病床ID
 
-	WardID string `json:"ward_id"` // [ 1] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	WardID string `json:"ward_id"` //病房ID
 
-	BedNo string `json:"bed_no"` // [ 2] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	BedNo string `json:"bed_no"` //床位号
 
-	CameraID string `json:"camera_id"` // [ 3] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	CameraID string `json:"camera_id"` //camera_id
 
-	VrCameraID string `json:"vr_camera_id"` // [ 4] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	VrCameraID string `json:"vr_camera_id"` //vr_camera_id
 
-	Type int32 `json:"type"` // [ 5] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	Type int32 `json:"type"` //床位类型(0:普通,1:ICU)
 
-	Status int32 `json:"status"` // [ 6] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	Status int32 `json:"status"` //床位状态(0:空闲,1:占用)
 
-	WardName string `json:"ward_name"` // [ 7] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	WardName string `json:"ward_name"` //病房名称
 
-	CameraName string `json:"camera_name"` // [ 8] camera_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	CameraName string `json:"camera_name"` //床头摄像头名称
 
-	VrCameraName string `json:"vr_camera_name"` // [ 9] vr_camera_name                                 VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	VrCameraName string `json:"vr_camera_name"` //VR摄像头名称
 
 }
 

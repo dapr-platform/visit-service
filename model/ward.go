@@ -26,7 +26,7 @@ Table: o_ward
 
 JSON Sample
 -------------------------------------
-{    "id": "TdHDNVcyDLRQBRABcKkUmyLcx",    "name": "SFgpmMjtsYDlTHDBLLnLXelSP",    "type": 71,    "status": 11}
+{    "id": "VFqlbVfqBhnJlZoHaTGlJToqT",    "name": "kpydAtXXicdTMoAsWkSIohdgJ",    "type": 66,    "status": 77}
 
 
 
@@ -103,7 +103,7 @@ var WardTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:              2,
 			Name:               "type",
-			Comment:            `病房类型`,
+			Comment:            `病房类型(0:普通,1:ICU)`,
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "INT4",
@@ -124,7 +124,7 @@ var WardTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:              3,
 			Name:               "status",
-			Comment:            `病房状态`,
+			Comment:            `病房状态(0:空闲,1:占用)`,
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "INT4",

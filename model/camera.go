@@ -22,18 +22,17 @@ Table: o_camera
 [ 1] device_name                                    VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 2] device_no                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 3] location_type                                  INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
-[ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 5] bed_id                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 6] device_type                                    INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
-[ 7] manufacturer                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 8] main_stream_url                                VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
-[ 9] sub_stream_url                                 VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
-[10] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[ 4] device_type                                    INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[ 5] manufacturer                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[ 6] main_stream_url                                VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+[ 7] sub_stream_url                                 VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+[ 8] rel_vr_camera_id                               VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 9] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 
 JSON Sample
 -------------------------------------
-{    "id": "vKcWTVMZPjhwWRwKSkIhUxyLV",    "device_name": "KpxMrIvUyCfXaHxodubQBSTuw",    "device_no": "SZFtUnnGIfqYyanvxwYMMishm",    "location_type": 75,    "ward_id": "PUWLHAIXjTXcocYStXIxUnnSW",    "bed_id": "gPkPIhLiYqVpTTBVsKxQsDPQU",    "device_type": 99,    "manufacturer": "yitIeZEVIEXXEmBaCDWOxjJdx",    "main_stream_url": "XxfyZuShZRbsJlmwfBfDtCdLy",    "sub_stream_url": "lUVfPDApeBXOSnQJBTOWEQLgC",    "status": 68}
+{    "id": "eJnuPorOqyChMYUIWpucbgFLh",    "device_name": "ByRfOBtmBjtDFpKROZmVMTnYH",    "device_no": "pYMfpSmHHaaCTtPcEBIZgfDjf",    "location_type": 1,    "device_type": 44,    "manufacturer": "QvftsKbtbuDFQiSBbaEsmYFww",    "main_stream_url": "KhLCfPKORKoYLrIckqFxWKRiy",    "sub_stream_url": "AMFAlIomZexNgIUeGjXUnGqkn",    "rel_vr_camera_id": "gSxJJnLQXYpaqHYchjOgAlurx",    "status": 72}
 
 
 
@@ -48,10 +47,6 @@ var (
 
 	Camera_FIELD_NAME_location_type = "location_type"
 
-	Camera_FIELD_NAME_ward_id = "ward_id"
-
-	Camera_FIELD_NAME_bed_id = "bed_id"
-
 	Camera_FIELD_NAME_device_type = "device_type"
 
 	Camera_FIELD_NAME_manufacturer = "manufacturer"
@@ -59,6 +54,8 @@ var (
 	Camera_FIELD_NAME_main_stream_url = "main_stream_url"
 
 	Camera_FIELD_NAME_sub_stream_url = "sub_stream_url"
+
+	Camera_FIELD_NAME_rel_vr_camera_id = "rel_vr_camera_id"
 
 	Camera_FIELD_NAME_status = "status"
 )
@@ -73,19 +70,17 @@ type Camera struct {
 
 	LocationType int32 `json:"location_type"` // [ 3] location_type                                  INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
-	WardID string `json:"ward_id"` // [ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	DeviceType int32 `json:"device_type"` // [ 4] device_type                                    INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
-	BedID string `json:"bed_id"` // [ 5] bed_id                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	Manufacturer string `json:"manufacturer"` // [ 5] manufacturer                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 
-	DeviceType int32 `json:"device_type"` // [ 6] device_type                                    INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+	MainStreamURL string `json:"main_stream_url"` // [ 6] main_stream_url                                VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
 
-	Manufacturer string `json:"manufacturer"` // [ 7] manufacturer                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	SubStreamURL string `json:"sub_stream_url"` // [ 7] sub_stream_url                                 VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
 
-	MainStreamURL string `json:"main_stream_url"` // [ 8] main_stream_url                                VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+	RelVrCameraID string `json:"rel_vr_camera_id"` // [ 8] rel_vr_camera_id                               VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
-	SubStreamURL string `json:"sub_stream_url"` // [ 9] sub_stream_url                                 VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
-
-	Status int32 `json:"status"` // [10] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+	Status int32 `json:"status"` // [ 9] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 }
 
@@ -179,48 +174,6 @@ var CameraTableInfo = &TableInfo{
 
 		&ColumnInfo{
 			Index:              4,
-			Name:               "ward_id",
-			Comment:            `所属病房`,
-			Notes:              ``,
-			Nullable:           true,
-			DatabaseTypeName:   "VARCHAR",
-			DatabaseTypePretty: "VARCHAR(32)",
-			IsPrimaryKey:       false,
-			IsAutoIncrement:    false,
-			IsArray:            false,
-			ColumnType:         "VARCHAR",
-			ColumnLength:       32,
-			GoFieldName:        "WardID",
-			GoFieldType:        "string",
-			JSONFieldName:      "ward_id",
-			ProtobufFieldName:  "ward_id",
-			ProtobufType:       "string",
-			ProtobufPos:        5,
-		},
-
-		&ColumnInfo{
-			Index:              5,
-			Name:               "bed_id",
-			Comment:            `所属床位`,
-			Notes:              ``,
-			Nullable:           true,
-			DatabaseTypeName:   "VARCHAR",
-			DatabaseTypePretty: "VARCHAR(32)",
-			IsPrimaryKey:       false,
-			IsAutoIncrement:    false,
-			IsArray:            false,
-			ColumnType:         "VARCHAR",
-			ColumnLength:       32,
-			GoFieldName:        "BedID",
-			GoFieldType:        "string",
-			JSONFieldName:      "bed_id",
-			ProtobufFieldName:  "bed_id",
-			ProtobufType:       "string",
-			ProtobufPos:        6,
-		},
-
-		&ColumnInfo{
-			Index:              6,
 			Name:               "device_type",
 			Comment:            `设备类型`,
 			Notes:              ``,
@@ -237,11 +190,11 @@ var CameraTableInfo = &TableInfo{
 			JSONFieldName:      "device_type",
 			ProtobufFieldName:  "device_type",
 			ProtobufType:       "int32",
-			ProtobufPos:        7,
+			ProtobufPos:        5,
 		},
 
 		&ColumnInfo{
-			Index:              7,
+			Index:              5,
 			Name:               "manufacturer",
 			Comment:            `设备厂商`,
 			Notes:              ``,
@@ -258,11 +211,11 @@ var CameraTableInfo = &TableInfo{
 			JSONFieldName:      "manufacturer",
 			ProtobufFieldName:  "manufacturer",
 			ProtobufType:       "string",
-			ProtobufPos:        8,
+			ProtobufPos:        6,
 		},
 
 		&ColumnInfo{
-			Index:              8,
+			Index:              6,
 			Name:               "main_stream_url",
 			Comment:            `主码流URL`,
 			Notes:              ``,
@@ -279,11 +232,11 @@ var CameraTableInfo = &TableInfo{
 			JSONFieldName:      "main_stream_url",
 			ProtobufFieldName:  "main_stream_url",
 			ProtobufType:       "string",
-			ProtobufPos:        9,
+			ProtobufPos:        7,
 		},
 
 		&ColumnInfo{
-			Index:              9,
+			Index:              7,
 			Name:               "sub_stream_url",
 			Comment:            `辅码流URL`,
 			Notes:              ``,
@@ -300,13 +253,34 @@ var CameraTableInfo = &TableInfo{
 			JSONFieldName:      "sub_stream_url",
 			ProtobufFieldName:  "sub_stream_url",
 			ProtobufType:       "string",
-			ProtobufPos:        10,
+			ProtobufPos:        8,
 		},
 
 		&ColumnInfo{
-			Index:              10,
+			Index:              8,
+			Name:               "rel_vr_camera_id",
+			Comment:            `关联VR摄像头ID(当位置为可移动时，需关联VR摄像头)`,
+			Notes:              ``,
+			Nullable:           false,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "RelVrCameraID",
+			GoFieldType:        "string",
+			JSONFieldName:      "rel_vr_camera_id",
+			ProtobufFieldName:  "rel_vr_camera_id",
+			ProtobufType:       "string",
+			ProtobufPos:        9,
+		},
+
+		&ColumnInfo{
+			Index:              9,
 			Name:               "status",
-			Comment:            `状态`,
+			Comment:            `状态(0:正常,1:禁用)`,
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "INT4",
@@ -321,7 +295,7 @@ var CameraTableInfo = &TableInfo{
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
-			ProtobufPos:        11,
+			ProtobufPos:        10,
 		},
 	},
 }

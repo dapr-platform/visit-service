@@ -31,6 +31,9 @@ func InitVisit_recordRoute(r chi.Router) {
 // @Param visitor_phone query string false "visitor_phone"
 // @Param visitor_id_card query string false "visitor_id_card"
 // @Param relationship query string false "relationship"
+// @Param camera_id query string false "camera_id"
+// @Param vr_camera_id query string false "vr_camera_id"
+// @Param check_status query string false "check_status"
 // @Param status query string false "status"
 // @Param remark query string false "remark"
 // @Produce  json
@@ -63,6 +66,9 @@ func Visit_recordPageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param visitor_phone query string false "visitor_phone"
 // @Param visitor_id_card query string false "visitor_id_card"
 // @Param relationship query string false "relationship"
+// @Param camera_id query string false "camera_id"
+// @Param vr_camera_id query string false "vr_camera_id"
+// @Param check_status query string false "check_status"
 // @Param status query string false "status"
 // @Param remark query string false "remark"
 // @Produce  json

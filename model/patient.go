@@ -29,7 +29,7 @@ Table: o_patient
 
 JSON Sample
 -------------------------------------
-{    "id": "oHerXXWpamfuiGXimQHeOVtPD",    "ward_id": "byWRhltsCKVEFGqGkRLxLUEOM",    "bed_id": "PrNbEIrrkQjbNYcKaceFhswsj",    "name": "PKDJhLRgRGCQCgIYQlFRdGeiL",    "hospital_no": "YQuQtZCEQhBbLgvHjwDLIpHmL",    "status": 42,    "remark": "KVqLpJShWdNcDnQGyfcoUJwTg"}
+{    "id": "TyBymooTlNKSfLRouVeCtEVVP",    "ward_id": "CnYPJHnKTvWFGNmUNiJciAcvU",    "bed_id": "lhfYMISLePqCDYswGNWjtfeeJ",    "name": "sGqrQZIvdiomrxExaBtjnaKeM",    "hospital_no": "NfCrTdQaDonlVvShcAOAQYyFt",    "status": 3,    "remark": "DihKdEluFFEyfoFRHYDwZlvAM"}
 
 
 
@@ -181,7 +181,7 @@ var PatientTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:              5,
 			Name:               "status",
-			Comment:            `状态`,
+			Comment:            `状态(0:正常,1:出院)`,
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "INT4",

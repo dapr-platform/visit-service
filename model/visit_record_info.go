@@ -27,17 +27,20 @@ Table: v_visit_record_info
 [ 6] visitor_phone                                  VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 7] visitor_id_card                                VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 8] relationship                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 9] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[10] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
-[11] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[12] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[13] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[14] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 9] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[10] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[11] check_status                                   INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[12] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[13] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+[14] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[15] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[16] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[17] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "UgFZldLEXZnUUMUrSuMFtcOVQ",    "patient_id": "xPkDooGfTNiYmLqrkXHBmOZQU",    "relative_id": "MIPETFOTyJFfFXnkLkhVcQVGt",    "visit_start_time": 8,    "visit_end_time": 37,    "visitor_name": "NilEISIHeFSQmaGFwRNxoeiRr",    "visitor_phone": "tGZxaGkIjplJaKdtNpaTneLHn",    "visitor_id_card": "PxCpJSLGexglqNbplhciLhyxn",    "relationship": "OCEjcFrOfrlqsrcBrfylIOIow",    "status": 14,    "remark": "bDfCGJrClxFHHqxhPnINroQOM",    "patient_name": "VgMXdyQMVkuuWNlEPZGdbnRkK",    "patient_ward_name": "GqYMJACrbgrbvTXSSksIGaCGi",    "patient_bed_no": "WwMPrlTKQGnZrKmcDNpTmgOTy",    "stream_id": "tQhomQZPijYZuncxHJuTNCcTv"}
+{    "id": "kXPZjBLcfxgOAKSeYjZsAwIJq",    "patient_id": "atVwKHtwuYsUCimsODdIxFnff",    "relative_id": "pKFdFOJUUfvsqLKUsiwYpyJAK",    "visit_start_time": 20,    "visit_end_time": 73,    "visitor_name": "ujBxGiesnbEHJIVfWtojGBaLu",    "visitor_phone": "qmIlcprqnQUZRMCajgJnZuCQf",    "visitor_id_card": "jyVwktaLOTQQngXkshryUqlJo",    "relationship": "nmddACrWLdcNlAWZeJhCZGbwl",    "camera_id": "BOMlZnmhsvEnjpxHnGhmBfsTL",    "vr_camera_id": "HeuNBgwEiYLXViIfQacqsEkGo",    "check_status": 8,    "status": 16,    "remark": "lPVkctfUrARjTWkStfEbhauUy",    "patient_name": "uXLNDMyfbAgheBtlIrmdFyxcE",    "patient_ward_name": "MdKvuNaHhySxKEeRAhAWHbZRl",    "patient_bed_no": "haqFHPZMsTuvchpbRgWQCiaQG",    "stream_id": "DZaEZGFmPtvocWGlmskZLDmhc"}
 
 
 Comments
@@ -68,6 +71,12 @@ var (
 	Visit_record_info_FIELD_NAME_visitor_id_card = "visitor_id_card"
 
 	Visit_record_info_FIELD_NAME_relationship = "relationship"
+
+	Visit_record_info_FIELD_NAME_camera_id = "camera_id"
+
+	Visit_record_info_FIELD_NAME_vr_camera_id = "vr_camera_id"
+
+	Visit_record_info_FIELD_NAME_check_status = "check_status"
 
 	Visit_record_info_FIELD_NAME_status = "status"
 
@@ -102,17 +111,23 @@ type Visit_record_info struct {
 
 	Relationship string `json:"relationship"` // [ 8] relationship                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
-	Status int32 `json:"status"` // [ 9] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	CameraID string `json:"camera_id"` // [ 9] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
-	Remark string `json:"remark"` // [10] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+	VrCameraID string `json:"vr_camera_id"` // [10] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
-	PatientName string `json:"patient_name"` // [11] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	CheckStatus int32 `json:"check_status"` // [11] check_status                                   INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
 
-	PatientWardName string `json:"patient_ward_name"` // [12] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Status int32 `json:"status"` // [12] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
 
-	PatientBedNo string `json:"patient_bed_no"` // [13] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	Remark string `json:"remark"` // [13] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
 
-	StreamID string `json:"stream_id"` // [14] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+	PatientName string `json:"patient_name"` // [14] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	PatientWardName string `json:"patient_ward_name"` // [15] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	PatientBedNo string `json:"patient_bed_no"` // [16] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	StreamID string `json:"stream_id"` // [17] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
 }
 
@@ -293,7 +308,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              8,
 			Name:               "relationship",
-			Comment:            `探视人关系`,
+			Comment:            `探视人与患者关系(父母，配偶，子女，其他)`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -313,8 +328,71 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 
 		&ColumnInfo{
 			Index:              9,
+			Name:               "camera_id",
+			Comment:            `床头摄像头ID`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "CameraID",
+			GoFieldType:        "string",
+			JSONFieldName:      "camera_id",
+			ProtobufFieldName:  "camera_id",
+			ProtobufType:       "string",
+			ProtobufPos:        10,
+		},
+
+		&ColumnInfo{
+			Index:              10,
+			Name:               "vr_camera_id",
+			Comment:            `VR摄像头ID`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "VrCameraID",
+			GoFieldType:        "string",
+			JSONFieldName:      "vr_camera_id",
+			ProtobufFieldName:  "vr_camera_id",
+			ProtobufType:       "string",
+			ProtobufPos:        11,
+		},
+
+		&ColumnInfo{
+			Index:              11,
+			Name:               "check_status",
+			Comment:            `审核状态(0:未审核,1:已审核,2:审核不通过)`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "INT4",
+			DatabaseTypePretty: "INT4",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "INT4",
+			ColumnLength:       -1,
+			GoFieldName:        "CheckStatus",
+			GoFieldType:        "int32",
+			JSONFieldName:      "check_status",
+			ProtobufFieldName:  "check_status",
+			ProtobufType:       "int32",
+			ProtobufPos:        12,
+		},
+
+		&ColumnInfo{
+			Index:              12,
 			Name:               "status",
-			Comment:            `状态`,
+			Comment:            `状态(0:正常,1:取消)`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT4",
@@ -329,11 +407,11 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
-			ProtobufPos:        10,
+			ProtobufPos:        13,
 		},
 
 		&ColumnInfo{
-			Index:              10,
+			Index:              13,
 			Name:               "remark",
 			Comment:            `备注`,
 			Notes:              ``,
@@ -350,11 +428,11 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			JSONFieldName:      "remark",
 			ProtobufFieldName:  "remark",
 			ProtobufType:       "string",
-			ProtobufPos:        11,
+			ProtobufPos:        14,
 		},
 
 		&ColumnInfo{
-			Index:              11,
+			Index:              14,
 			Name:               "patient_name",
 			Comment:            `病患姓名`,
 			Notes:              ``,
@@ -371,11 +449,11 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			JSONFieldName:      "patient_name",
 			ProtobufFieldName:  "patient_name",
 			ProtobufType:       "string",
-			ProtobufPos:        12,
+			ProtobufPos:        15,
 		},
 
 		&ColumnInfo{
-			Index:              12,
+			Index:              15,
 			Name:               "patient_ward_name",
 			Comment:            `病房名称`,
 			Notes:              ``,
@@ -392,11 +470,11 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			JSONFieldName:      "patient_ward_name",
 			ProtobufFieldName:  "patient_ward_name",
 			ProtobufType:       "string",
-			ProtobufPos:        13,
+			ProtobufPos:        16,
 		},
 
 		&ColumnInfo{
-			Index:              13,
+			Index:              16,
 			Name:               "patient_bed_no",
 			Comment:            `床位号`,
 			Notes:              ``,
@@ -413,13 +491,13 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			JSONFieldName:      "patient_bed_no",
 			ProtobufFieldName:  "patient_bed_no",
 			ProtobufType:       "string",
-			ProtobufPos:        14,
+			ProtobufPos:        17,
 		},
 
 		&ColumnInfo{
-			Index:              14,
+			Index:              17,
 			Name:               "stream_id",
-			Comment:            `stream_id`,
+			Comment:            `直播流ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -434,7 +512,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			JSONFieldName:      "stream_id",
 			ProtobufFieldName:  "stream_id",
 			ProtobufType:       "string",
-			ProtobufPos:        15,
+			ProtobufPos:        18,
 		},
 	},
 }

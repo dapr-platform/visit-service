@@ -27,13 +27,16 @@ Table: o_visit_record
 [ 6] visitor_phone                                  VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 7] visitor_id_card                                VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 8] relationship                                   VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 9] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
-[10] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+[ 9] camera_id                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[10] vr_camera_id                                   VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[11] check_status                                   INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[12] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[13] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "mjUqnaZdFLAxFISLpybTJiJFq",    "patient_id": "bZCogbQXfRuZeJEUWIiWUyTpT",    "relative_id": "MfEjWWsDPRGONJIneXgNwPAei",    "visit_start_time": 56,    "visit_end_time": 61,    "visitor_name": "ZLLeBTCLZFnsorCMvxTICSmCA",    "visitor_phone": "GucApNCpkKmHOxCFBkeRISYjT",    "visitor_id_card": "mhGKsfJlGSBaEYFctNWeAeFVQ",    "relationship": "GWgujCvlhfRvLyORQxRbIvlSv",    "status": 56,    "remark": "NXLOQSudIeRcNBSfrMOmObmsm"}
+{    "id": "WkGFYnXPfdoajsTaItguaCVAJ",    "patient_id": "alPJjxluTeyDtbhmGBVdKJenD",    "relative_id": "TDLAvSgOsJysEOuKNxnehWKUI",    "visit_start_time": 23,    "visit_end_time": 56,    "visitor_name": "XjLrpebPtbjZvbrrGuFPkIGKE",    "visitor_phone": "GqimNCTgVYruptexLkWrwwxbK",    "visitor_id_card": "fAPAyXlnaYllHaMNWltoltLeW",    "relationship": "dotxRIRgEdJFMqveqiLugVIjO",    "camera_id": "CsIKheCvREwKHjqocwsRdGuQa",    "vr_camera_id": "epJBMDBcirPoQTLXymJZPNewa",    "check_status": 37,    "status": 25,    "remark": "AVIHuqfBVdxWMbuDLWyNiyOaL"}
 
 
 
@@ -57,6 +60,12 @@ var (
 	Visit_record_FIELD_NAME_visitor_id_card = "visitor_id_card"
 
 	Visit_record_FIELD_NAME_relationship = "relationship"
+
+	Visit_record_FIELD_NAME_camera_id = "camera_id"
+
+	Visit_record_FIELD_NAME_vr_camera_id = "vr_camera_id"
+
+	Visit_record_FIELD_NAME_check_status = "check_status"
 
 	Visit_record_FIELD_NAME_status = "status"
 
@@ -83,9 +92,15 @@ type Visit_record struct {
 
 	Relationship string `json:"relationship"` // [ 8] relationship                                   VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
-	Status int32 `json:"status"` // [ 9] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+	CameraID string `json:"camera_id"` // [ 9] camera_id                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
-	Remark string `json:"remark"` // [10] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+	VrCameraID string `json:"vr_camera_id"` // [10] vr_camera_id                                   VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+
+	CheckStatus int32 `json:"check_status"` // [11] check_status                                   INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+
+	Status int32 `json:"status"` // [12] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+
+	Remark string `json:"remark"` // [13] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
 
 }
 
@@ -264,7 +279,7 @@ var Visit_recordTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:              8,
 			Name:               "relationship",
-			Comment:            `探视人关系`,
+			Comment:            `探视人与患者关系(父母，配偶，子女，其他)`,
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
@@ -284,8 +299,71 @@ var Visit_recordTableInfo = &TableInfo{
 
 		&ColumnInfo{
 			Index:              9,
+			Name:               "camera_id",
+			Comment:            `床头摄像头ID`,
+			Notes:              ``,
+			Nullable:           false,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "CameraID",
+			GoFieldType:        "string",
+			JSONFieldName:      "camera_id",
+			ProtobufFieldName:  "camera_id",
+			ProtobufType:       "string",
+			ProtobufPos:        10,
+		},
+
+		&ColumnInfo{
+			Index:              10,
+			Name:               "vr_camera_id",
+			Comment:            `VR摄像头ID`,
+			Notes:              ``,
+			Nullable:           false,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "VrCameraID",
+			GoFieldType:        "string",
+			JSONFieldName:      "vr_camera_id",
+			ProtobufFieldName:  "vr_camera_id",
+			ProtobufType:       "string",
+			ProtobufPos:        11,
+		},
+
+		&ColumnInfo{
+			Index:              11,
+			Name:               "check_status",
+			Comment:            `审核状态(0:未审核,1:已审核,2:审核不通过)`,
+			Notes:              ``,
+			Nullable:           false,
+			DatabaseTypeName:   "INT4",
+			DatabaseTypePretty: "INT4",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "INT4",
+			ColumnLength:       -1,
+			GoFieldName:        "CheckStatus",
+			GoFieldType:        "int32",
+			JSONFieldName:      "check_status",
+			ProtobufFieldName:  "check_status",
+			ProtobufType:       "int32",
+			ProtobufPos:        12,
+		},
+
+		&ColumnInfo{
+			Index:              12,
 			Name:               "status",
-			Comment:            `状态`,
+			Comment:            `状态(0:正常,1:取消)`,
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "INT4",
@@ -300,11 +378,11 @@ var Visit_recordTableInfo = &TableInfo{
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
-			ProtobufPos:        10,
+			ProtobufPos:        13,
 		},
 
 		&ColumnInfo{
-			Index:              10,
+			Index:              13,
 			Name:               "remark",
 			Comment:            `备注`,
 			Notes:              ``,
@@ -321,7 +399,7 @@ var Visit_recordTableInfo = &TableInfo{
 			JSONFieldName:      "remark",
 			ProtobufFieldName:  "remark",
 			ProtobufType:       "string",
-			ProtobufPos:        11,
+			ProtobufPos:        14,
 		},
 	},
 }

@@ -58,6 +58,18 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "type",
                         "name": "type",
                         "in": "query"
@@ -72,6 +84,18 @@ const docTemplate = `{
                         "type": "string",
                         "description": "ward_name",
                         "name": "ward_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "camera_name",
+                        "name": "camera_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_name",
+                        "name": "vr_camera_name",
                         "in": "query"
                     }
                 ],
@@ -157,6 +181,18 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "type",
                         "name": "type",
                         "in": "query"
@@ -171,6 +207,18 @@ const docTemplate = `{
                         "type": "string",
                         "description": "ward_name",
                         "name": "ward_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "camera_name",
+                        "name": "camera_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_name",
+                        "name": "vr_camera_name",
                         "in": "query"
                     }
                 ],
@@ -266,18 +314,6 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "ward_id",
-                        "name": "ward_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "bed_id",
-                        "name": "bed_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
                         "description": "device_type",
                         "name": "device_type",
                         "in": "query"
@@ -298,6 +334,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "sub_stream_url",
                         "name": "sub_stream_url",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "rel_vr_camera_id",
+                        "name": "rel_vr_camera_id",
                         "in": "query"
                     },
                     {
@@ -437,18 +479,6 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "ward_id",
-                        "name": "ward_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "bed_id",
-                        "name": "bed_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
                         "description": "device_type",
                         "name": "device_type",
                         "in": "query"
@@ -473,20 +503,14 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "rel_vr_camera_id",
+                        "name": "rel_vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "status",
                         "name": "status",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "bed_no",
-                        "name": "bed_no",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "ward_name",
-                        "name": "ward_name",
                         "in": "query"
                     }
                 ],
@@ -578,18 +602,6 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "ward_id",
-                        "name": "ward_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "bed_id",
-                        "name": "bed_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
                         "description": "device_type",
                         "name": "device_type",
                         "in": "query"
@@ -614,20 +626,14 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "rel_vr_camera_id",
+                        "name": "rel_vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "status",
                         "name": "status",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "bed_no",
-                        "name": "bed_no",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "ward_name",
-                        "name": "ward_name",
                         "in": "query"
                     }
                 ],
@@ -789,18 +795,6 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "ward_id",
-                        "name": "ward_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "bed_id",
-                        "name": "bed_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
                         "description": "device_type",
                         "name": "device_type",
                         "in": "query"
@@ -821,6 +815,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "sub_stream_url",
                         "name": "sub_stream_url",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "rel_vr_camera_id",
+                        "name": "rel_vr_camera_id",
                         "in": "query"
                     },
                     {
@@ -3637,6 +3637,24 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "check_status",
+                        "name": "check_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "status",
                         "name": "status",
                         "in": "query"
@@ -3808,6 +3826,24 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "check_status",
+                        "name": "check_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "status",
                         "name": "status",
                         "in": "query"
@@ -3834,6 +3870,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "patient_bed_no",
                         "name": "patient_bed_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "stream_id",
+                        "name": "stream_id",
                         "in": "query"
                     }
                 ],
@@ -3955,6 +3997,24 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "check_status",
+                        "name": "check_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "status",
                         "name": "status",
                         "in": "query"
@@ -3981,6 +4041,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "patient_bed_no",
                         "name": "patient_bed_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "stream_id",
+                        "name": "stream_id",
                         "in": "query"
                     }
                 ],
@@ -4110,6 +4176,24 @@ const docTemplate = `{
                         "type": "string",
                         "description": "relationship",
                         "name": "relationship",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "check_status",
+                        "name": "check_status",
                         "in": "query"
                     },
                     {
@@ -4810,24 +4894,40 @@ const docTemplate = `{
                     "description": "[ 2] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
+                "camera_id": {
+                    "description": "[ 3] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
+                    "type": "string"
+                },
+                "camera_name": {
+                    "description": "[ 8] camera_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
+                    "type": "string"
+                },
                 "id": {
                     "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "[ 4] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
+                    "description": "[ 6] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "type": {
-                    "description": "[ 3] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
+                    "description": "[ 5] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
+                },
+                "vr_camera_id": {
+                    "description": "[ 4] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
+                    "type": "string"
+                },
+                "vr_camera_name": {
+                    "description": "[ 9] vr_camera_name                                 VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
+                    "type": "string"
                 },
                 "ward_id": {
                     "description": "[ 1] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "ward_name": {
-                    "description": "[ 5] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
+                    "description": "[ 7] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 }
             }
@@ -4835,10 +4935,6 @@ const docTemplate = `{
         "model.Camera": {
             "type": "object",
             "properties": {
-                "bed_id": {
-                    "description": "[ 5] bed_id                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
-                    "type": "string"
-                },
                 "device_name": {
                     "description": "[ 1] device_name                                    VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
@@ -4848,7 +4944,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "device_type": {
-                    "description": "[ 6] device_type                                    INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
+                    "description": "[ 4] device_type                                    INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 },
                 "id": {
@@ -4860,23 +4956,23 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "main_stream_url": {
-                    "description": "[ 8] main_stream_url                                VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
+                    "description": "[ 6] main_stream_url                                VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "manufacturer": {
-                    "description": "[ 7] manufacturer                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
+                    "description": "[ 5] manufacturer                                   VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
+                    "type": "string"
+                },
+                "rel_vr_camera_id": {
+                    "description": "[ 8] rel_vr_camera_id                               VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "[10] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
+                    "description": "[ 9] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 },
                 "sub_stream_url": {
-                    "description": "[ 9] sub_stream_url                                 VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
-                    "type": "string"
-                },
-                "ward_id": {
-                    "description": "[ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
+                    "description": "[ 7] sub_stream_url                                 VARCHAR(1024)        null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 }
             }
@@ -4884,14 +4980,6 @@ const docTemplate = `{
         "model.Camera_info": {
             "type": "object",
             "properties": {
-                "bed_id": {
-                    "description": "[ 5] bed_id                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
-                    "type": "string"
-                },
-                "bed_no": {
-                    "description": "[11] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
-                    "type": "string"
-                },
                 "device_name": {
                     "description": "[ 1] device_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
@@ -4901,7 +4989,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "device_type": {
-                    "description": "[ 6] device_type                                    INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
+                    "description": "[ 4] device_type                                    INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "id": {
@@ -4913,27 +5001,23 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "main_stream_url": {
-                    "description": "[ 8] main_stream_url                                VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
+                    "description": "[ 6] main_stream_url                                VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "manufacturer": {
-                    "description": "[ 7] manufacturer                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
+                    "description": "[ 5] manufacturer                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
+                    "type": "string"
+                },
+                "rel_vr_camera_id": {
+                    "description": "[ 8] rel_vr_camera_id                               VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "[10] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
+                    "description": "[ 9] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
                 },
                 "sub_stream_url": {
-                    "description": "[ 9] sub_stream_url                                 VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
-                    "type": "string"
-                },
-                "ward_id": {
-                    "description": "[ 4] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
-                    "type": "string"
-                },
-                "ward_name": {
-                    "description": "[12] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
+                    "description": "[ 7] sub_stream_url                                 VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 }
             }
@@ -5354,6 +5438,14 @@ const docTemplate = `{
         "model.Visit_record": {
             "type": "object",
             "properties": {
+                "camera_id": {
+                    "description": "[ 9] camera_id                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
+                    "type": "string"
+                },
+                "check_status": {
+                    "description": "[11] check_status                                   INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
+                    "type": "integer"
+                },
                 "id": {
                     "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
@@ -5371,11 +5463,11 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "remark": {
-                    "description": "[10] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
+                    "description": "[13] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "[ 9] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
+                    "description": "[12] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]",
                     "type": "integer"
                 },
                 "visit_end_time": {
@@ -5397,18 +5489,30 @@ const docTemplate = `{
                 "visitor_phone": {
                     "description": "[ 6] visitor_phone                                  VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
+                },
+                "vr_camera_id": {
+                    "description": "[10] vr_camera_id                                   VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
+                    "type": "string"
                 }
             }
         },
         "model.Visit_record_info": {
             "type": "object",
             "properties": {
+                "camera_id": {
+                    "description": "[ 9] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
+                    "type": "string"
+                },
+                "check_status": {
+                    "description": "[11] check_status                                   INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
+                    "type": "integer"
+                },
                 "id": {
                     "description": "[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "patient_bed_no": {
-                    "description": "[13] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
+                    "description": "[16] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 },
                 "patient_id": {
@@ -5416,11 +5520,11 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "patient_name": {
-                    "description": "[11] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
+                    "description": "[14] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "patient_ward_name": {
-                    "description": "[12] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
+                    "description": "[15] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []",
                     "type": "string"
                 },
                 "relationship": {
@@ -5432,12 +5536,16 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "remark": {
-                    "description": "[10] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
+                    "description": "[13] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []",
                     "type": "string"
                 },
                 "status": {
-                    "description": "[ 9] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
+                    "description": "[12] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []",
                     "type": "integer"
+                },
+                "stream_id": {
+                    "description": "[17] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
+                    "type": "string"
                 },
                 "visit_end_time": {
                     "description": "[ 4] visit_end_time                                 TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []",
@@ -5457,6 +5565,10 @@ const docTemplate = `{
                 },
                 "visitor_phone": {
                     "description": "[ 6] visitor_phone                                  VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
+                    "type": "string"
+                },
+                "vr_camera_id": {
+                    "description": "[10] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []",
                     "type": "string"
                 }
             }

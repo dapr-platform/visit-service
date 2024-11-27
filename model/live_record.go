@@ -32,7 +32,7 @@ Table: o_live_record
 
 JSON Sample
 -------------------------------------
-{    "id": "dlGUHirJDgZpcAglhDPywYfHh",    "schedule_id": "dBfPDUAaRluYCpRPsTkhpBTfV",    "patient_id": "egfoWKHjpYijPjEFKkUtKcpoK",    "relative_id": "GZOMoqYCPVeFWAkmhHZZFCjEK",    "device_id": "HQKaeEXSJgcwpLAUBTEcPGVsI",    "start_time": 16,    "end_time": 11,    "file_size": 43,    "stream_id": "imKLIQTDMdgkLLjVcwTqHRPEH",    "status": 46}
+{    "id": "jbIQEUfoHHqRSkBXjonfgfHKJ",    "schedule_id": "gfFkSOmkybnUynJnRsMDyYVrM",    "patient_id": "QOvZGrYjKroxOEUBnwGOQmMBw",    "relative_id": "cOgAurEGXnhKlUWUnnDNxkWls",    "device_id": "kEIFQnBUNxQpQewkXHhWcFNsC",    "start_time": 3,    "end_time": 60,    "file_size": 66,    "stream_id": "pFLegwDXKDwAQlCEgqFYQWtAH",    "status": 4}
 
 
 

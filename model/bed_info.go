@@ -21,14 +21,18 @@ Table: v_bed_info
 [ 0] id                                             VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 1] ward_id                                        VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 2] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 3] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[ 4] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[ 5] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[ 3] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 4] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 5] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[ 6] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[ 7] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[ 8] camera_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[ 9] vr_camera_name                                 VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "IdvshYSldCWmENxlpRIFfXqdQ",    "ward_id": "IdQwMhxbenQsNwMpxfMcDDLpo",    "bed_no": "FgcvXGLfDCdKEWmMdCpKPkTmJ",    "type": 87,    "status": 52,    "ward_name": "tureGEhAURcmRnSAUOseWpQiF"}
+{    "id": "gMgbveQEYRcHukAlsJXHjjJeY",    "ward_id": "TMocrTOclQIQqYTYCfuTiifme",    "bed_no": "FDgQZFhNlTmykwRPdRIXolEuc",    "camera_id": "CnXSebZIcJxpfYmyPDJWMJSCT",    "vr_camera_id": "rHkgbaaXIFpudbxmIkLxgOlWM",    "type": 15,    "status": 5,    "ward_name": "qXHrmZjPiKbnomoaLktrSOOGy",    "camera_name": "ylZfFDsEopXFVnJtTHFYnOkNR",    "vr_camera_name": "uHEHyhLeTRHvHsnJIbIITjsTq"}
 
 
 Comments
@@ -48,11 +52,19 @@ var (
 
 	Bed_info_FIELD_NAME_bed_no = "bed_no"
 
+	Bed_info_FIELD_NAME_camera_id = "camera_id"
+
+	Bed_info_FIELD_NAME_vr_camera_id = "vr_camera_id"
+
 	Bed_info_FIELD_NAME_type = "type"
 
 	Bed_info_FIELD_NAME_status = "status"
 
 	Bed_info_FIELD_NAME_ward_name = "ward_name"
+
+	Bed_info_FIELD_NAME_camera_name = "camera_name"
+
+	Bed_info_FIELD_NAME_vr_camera_name = "vr_camera_name"
 )
 
 // Bed_info struct is a row record of the v_bed_info table in the  database
@@ -63,11 +75,19 @@ type Bed_info struct {
 
 	BedNo string `json:"bed_no"` // [ 2] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
-	Type int32 `json:"type"` // [ 3] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	CameraID string `json:"camera_id"` // [ 3] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
-	Status int32 `json:"status"` // [ 4] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+	VrCameraID string `json:"vr_camera_id"` // [ 4] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
-	WardName string `json:"ward_name"` // [ 5] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+	Type int32 `json:"type"` // [ 5] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+
+	Status int32 `json:"status"` // [ 6] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+
+	WardName string `json:"ward_name"` // [ 7] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	CameraName string `json:"camera_name"` // [ 8] camera_name                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+
+	VrCameraName string `json:"vr_camera_name"` // [ 9] vr_camera_name                                 VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 
 }
 
@@ -142,8 +162,50 @@ Warning table: v_bed_info primary key column id is nullable column, setting it a
 
 		&ColumnInfo{
 			Index:              3,
+			Name:               "camera_id",
+			Comment:            `camera_id`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "CameraID",
+			GoFieldType:        "string",
+			JSONFieldName:      "camera_id",
+			ProtobufFieldName:  "camera_id",
+			ProtobufType:       "string",
+			ProtobufPos:        4,
+		},
+
+		&ColumnInfo{
+			Index:              4,
+			Name:               "vr_camera_id",
+			Comment:            `vr_camera_id`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "VrCameraID",
+			GoFieldType:        "string",
+			JSONFieldName:      "vr_camera_id",
+			ProtobufFieldName:  "vr_camera_id",
+			ProtobufType:       "string",
+			ProtobufPos:        5,
+		},
+
+		&ColumnInfo{
+			Index:              5,
 			Name:               "type",
-			Comment:            `床位类型`,
+			Comment:            `床位类型(0:普通,1:ICU)`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT4",
@@ -158,13 +220,13 @@ Warning table: v_bed_info primary key column id is nullable column, setting it a
 			JSONFieldName:      "type",
 			ProtobufFieldName:  "type",
 			ProtobufType:       "int32",
-			ProtobufPos:        4,
+			ProtobufPos:        6,
 		},
 
 		&ColumnInfo{
-			Index:              4,
+			Index:              6,
 			Name:               "status",
-			Comment:            `床位状态`,
+			Comment:            `床位状态(0:空闲,1:占用)`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT4",
@@ -179,11 +241,11 @@ Warning table: v_bed_info primary key column id is nullable column, setting it a
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
-			ProtobufPos:        5,
+			ProtobufPos:        7,
 		},
 
 		&ColumnInfo{
-			Index:              5,
+			Index:              7,
 			Name:               "ward_name",
 			Comment:            `病房名称`,
 			Notes:              ``,
@@ -200,7 +262,49 @@ Warning table: v_bed_info primary key column id is nullable column, setting it a
 			JSONFieldName:      "ward_name",
 			ProtobufFieldName:  "ward_name",
 			ProtobufType:       "string",
-			ProtobufPos:        6,
+			ProtobufPos:        8,
+		},
+
+		&ColumnInfo{
+			Index:              8,
+			Name:               "camera_name",
+			Comment:            `床头摄像头名称`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(255)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       255,
+			GoFieldName:        "CameraName",
+			GoFieldType:        "string",
+			JSONFieldName:      "camera_name",
+			ProtobufFieldName:  "camera_name",
+			ProtobufType:       "string",
+			ProtobufPos:        9,
+		},
+
+		&ColumnInfo{
+			Index:              9,
+			Name:               "vr_camera_name",
+			Comment:            `VR摄像头名称`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(255)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       255,
+			GoFieldName:        "VrCameraName",
+			GoFieldType:        "string",
+			JSONFieldName:      "vr_camera_name",
+			ProtobufFieldName:  "vr_camera_name",
+			ProtobufType:       "string",
+			ProtobufPos:        10,
 		},
 	},
 }

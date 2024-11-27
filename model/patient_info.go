@@ -31,7 +31,7 @@ Table: v_patient_info
 
 JSON Sample
 -------------------------------------
-{    "id": "YXvDWOylOeMfXjqJsdIYxNOuJ",    "ward_id": "CrSBFbEyvGDLmJQZufPQgJZel",    "bed_id": "HFiUnaHTlwPXSQqxKqhmkTKLH",    "name": "GHfSWUpwKHbEYZFqJrdMDZbyL",    "hospital_no": "rcpCDTODFCmHuEliqRbiWMapd",    "status": 5,    "remark": "IZefsysMgDibSAcpWUgQXCiCJ",    "bed_no": "sloypQwlpMBjIuxmfOpXOYsBC",    "ward_name": "NBXhGFpsRLaoZBEuPIHsrDsem"}
+{    "id": "DmBgtaHpimCAtPLuCvsaElrxr",    "ward_id": "JgdmXcTBMennPsiwErreknGms",    "bed_id": "PwlLgnhBbHlofcDciFPKPuKoA",    "name": "rHGCBTNfTuYUvPibfosjlOgYT",    "hospital_no": "EHFLGScmPFXJqvGdfFjAtPsuJ",    "status": 82,    "remark": "ynfcMXTJcpTphCtGcgMpYiYkS",    "bed_no": "WdXkSukHwpZFxgCmfwHYOursG",    "ward_name": "GWewWnpBkmxiFtWflLEbrAIiy"}
 
 
 Comments
@@ -200,7 +200,7 @@ Warning table: v_patient_info primary key column id is nullable column, setting 
 		&ColumnInfo{
 			Index:              5,
 			Name:               "status",
-			Comment:            `状态`,
+			Comment:            `状态(0:正常,1:出院)`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT4",

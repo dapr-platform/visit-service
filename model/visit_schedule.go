@@ -28,7 +28,7 @@ Table: o_visit_schedule
 
 JSON Sample
 -------------------------------------
-{    "id": "ZlQUpagHOvTfdRtqwvRtvqxLd",    "start_time": 75,    "end_time": 60,    "total_visitors": 65,    "remaining_visitors": 43,    "status": 24}
+{    "id": "meofQnbyklcabvrSOWKPuQGSb",    "start_time": 87,    "end_time": 12,    "total_visitors": 92,    "remaining_visitors": 58,    "status": 74}
 
 
 
@@ -176,7 +176,7 @@ var Visit_scheduleTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:              5,
 			Name:               "status",
-			Comment:            `状态`,
+			Comment:            `状态(0:可预约,1:不可预约)`,
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "INT4",

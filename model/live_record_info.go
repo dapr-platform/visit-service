@@ -35,7 +35,7 @@ Table: v_live_record_info
 
 JSON Sample
 -------------------------------------
-{    "id": "mYUOxlmJiyVmIRwMeIckNKuBD",    "schedule_id": "kqimKMEXstjExJkXTngOWFvqJ",    "patient_id": "ymxMelwkdXABFFkJsysOOfBvr",    "relative_id": "TAtiEPOqlYBdIWjdJJBdshGrn",    "device_id": "FWnroFHZVnFPjbfhgSDaQYWAS",    "start_time": 49,    "end_time": 62,    "file_size": 40,    "stream_id": "rWvySaHHCoFbAWPbthWFiRKCV",    "status": 14,    "patient_name": "YmPlfiuGoJeRarhPrOgYVBDiU",    "patient_ward_name": "yXWEwACPalHNOtUGYoNbyOUgd",    "patient_bed_no": "AwtPLnJbJwowcfdbHCFYDDJdG"}
+{    "id": "DMEMpJxZWcYumNxVLYCwuLiQW",    "schedule_id": "rCaiQEhNRKDpkoMYKNZgBaQDQ",    "patient_id": "RCUMKlYkjxRZiuPWXpRVjYKyL",    "relative_id": "xLqEqTcomdgBEnthLxNgNenHg",    "device_id": "CFNigYaawOvYmZBGftYOXtgoi",    "start_time": 58,    "end_time": 0,    "file_size": 86,    "stream_id": "ARyUugwHkMkVlDDhWOecgPpUK",    "status": 88,    "patient_name": "hPKERExkIkHdebkIFCdHBrHxu",    "patient_ward_name": "ejqbEeJOhCeYXOsjoSmqqTjnT",    "patient_bed_no": "TcsfVIYayTjiubtDnCrnwTNcT"}
 
 
 Comments

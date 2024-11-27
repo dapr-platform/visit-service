@@ -5,6 +5,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"net/http"
 	"visit-service/model"
+
+	"strings"
 )
 
 func InitUserRoute(r chi.Router) {
@@ -14,6 +16,43 @@ func InitUserRoute(r chi.Router) {
 
 	r.Post(common.BASE_CONTEXT+"/user", UpsertUserHandler)
 
+	r.Delete(common.BASE_CONTEXT+"/user/{id}", DeleteUserHandler)
+
+	r.Post(common.BASE_CONTEXT+"/user/batch-delete", batchDeleteUserHandler)
+
+	r.Post(common.BASE_CONTEXT+"/user/batch-upsert", batchUpsertUserHandler)
+
+}
+
+// @Summary batch update
+// @Description batch update
+// @Tags User
+// @Accept  json
+// @Param entities body []map[string]any true "objects array"
+// @Produce  json
+// @Success 200 {object} common.Response ""
+// @Failure 500 {object} common.Response ""
+// @Router /user/batch-upsert [post]
+func batchUpsertUserHandler(w http.ResponseWriter, r *http.Request) {
+
+	var entities []map[string]any
+	err := common.ReadRequestBody(r, &entities)
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
+		return
+	}
+	if len(entities) == 0 {
+		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
+		return
+	}
+
+	err = common.DbBatchUpsert[map[string]any](r.Context(), common.GetDaprClient(), entities, model.UserTableInfo.Name, model.User_FIELD_NAME_id)
+	if err != nil {
+		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
+		return
+	}
+
+	common.HttpResult(w, common.OK)
 }
 
 // @Summary page query
@@ -119,4 +158,64 @@ func UpsertUserHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	common.HttpSuccess(w, common.OK.WithData(val))
+}
+
+// @Summary delete
+// @Description delete
+// @Tags User
+// @Param id  path string true "实例id"
+// @Produce  json
+// @Success 200 {object} common.Response{data=model.User} "object"
+// @Failure 500 {object} common.Response ""
+// @Router /user/{id} [delete]
+func DeleteUserHandler(w http.ResponseWriter, r *http.Request) {
+	id := chi.URLParam(r, "id")
+	beforeHook, exists := common.GetDeleteBeforeHook("User")
+	if exists {
+		_, err1 := beforeHook(r, id)
+		if err1 != nil {
+			common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+			return
+		}
+	}
+	common.CommonDelete(w, r, common.GetDaprClient(), "o_user", "id", "id")
+}
+
+// @Summary batch delete
+// @Description batch delete
+// @Tags User
+// @Accept  json
+// @Param ids body []string true "id array"
+// @Produce  json
+// @Success 200 {object} common.Response ""
+// @Failure 500 {object} common.Response ""
+// @Router /user/batch-delete [post]
+func batchDeleteUserHandler(w http.ResponseWriter, r *http.Request) {
+
+	var ids []string
+	err := common.ReadRequestBody(r, &ids)
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
+		return
+	}
+	if len(ids) == 0 {
+		common.HttpResult(w, common.ErrParam.AppendMsg("len of ids is 0"))
+		return
+	}
+	beforeHook, exists := common.GetBatchDeleteBeforeHook("User")
+	if exists {
+		_, err1 := beforeHook(r, ids)
+		if err1 != nil {
+			common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+			return
+		}
+	}
+	idstr := strings.Join(ids, ",")
+	err = common.DbDeleteByOps(r.Context(), common.GetDaprClient(), "o_user", []string{"id"}, []string{"in"}, []any{idstr})
+	if err != nil {
+		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
+		return
+	}
+
+	common.HttpResult(w, common.OK)
 }

@@ -5,6 +5,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"net/http"
 	"visit-service/model"
+
+	"strings"
 )
 
 func InitCameraRoute(r chi.Router) {
@@ -14,6 +16,43 @@ func InitCameraRoute(r chi.Router) {
 
 	r.Post(common.BASE_CONTEXT+"/camera", UpsertCameraHandler)
 
+	r.Delete(common.BASE_CONTEXT+"/camera/{id}", DeleteCameraHandler)
+
+	r.Post(common.BASE_CONTEXT+"/camera/batch-delete", batchDeleteCameraHandler)
+
+	r.Post(common.BASE_CONTEXT+"/camera/batch-upsert", batchUpsertCameraHandler)
+
+}
+
+// @Summary batch update
+// @Description batch update
+// @Tags 摄像头
+// @Accept  json
+// @Param entities body []map[string]any true "objects array"
+// @Produce  json
+// @Success 200 {object} common.Response ""
+// @Failure 500 {object} common.Response ""
+// @Router /camera/batch-upsert [post]
+func batchUpsertCameraHandler(w http.ResponseWriter, r *http.Request) {
+
+	var entities []map[string]any
+	err := common.ReadRequestBody(r, &entities)
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
+		return
+	}
+	if len(entities) == 0 {
+		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
+		return
+	}
+
+	err = common.DbBatchUpsert[map[string]any](r.Context(), common.GetDaprClient(), entities, model.CameraTableInfo.Name, model.Camera_FIELD_NAME_id)
+	if err != nil {
+		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
+		return
+	}
+
+	common.HttpResult(w, common.OK)
 }
 
 // @Summary page query
@@ -103,4 +142,64 @@ func UpsertCameraHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	common.HttpSuccess(w, common.OK.WithData(val))
+}
+
+// @Summary delete
+// @Description delete
+// @Tags 摄像头
+// @Param id  path string true "实例id"
+// @Produce  json
+// @Success 200 {object} common.Response{data=model.Camera} "object"
+// @Failure 500 {object} common.Response ""
+// @Router /camera/{id} [delete]
+func DeleteCameraHandler(w http.ResponseWriter, r *http.Request) {
+	id := chi.URLParam(r, "id")
+	beforeHook, exists := common.GetDeleteBeforeHook("Camera")
+	if exists {
+		_, err1 := beforeHook(r, id)
+		if err1 != nil {
+			common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+			return
+		}
+	}
+	common.CommonDelete(w, r, common.GetDaprClient(), "o_camera", "id", "id")
+}
+
+// @Summary batch delete
+// @Description batch delete
+// @Tags 摄像头
+// @Accept  json
+// @Param ids body []string true "id array"
+// @Produce  json
+// @Success 200 {object} common.Response ""
+// @Failure 500 {object} common.Response ""
+// @Router /camera/batch-delete [post]
+func batchDeleteCameraHandler(w http.ResponseWriter, r *http.Request) {
+
+	var ids []string
+	err := common.ReadRequestBody(r, &ids)
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
+		return
+	}
+	if len(ids) == 0 {
+		common.HttpResult(w, common.ErrParam.AppendMsg("len of ids is 0"))
+		return
+	}
+	beforeHook, exists := common.GetBatchDeleteBeforeHook("Camera")
+	if exists {
+		_, err1 := beforeHook(r, ids)
+		if err1 != nil {
+			common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+			return
+		}
+	}
+	idstr := strings.Join(ids, ",")
+	err = common.DbDeleteByOps(r.Context(), common.GetDaprClient(), "o_camera", []string{"id"}, []string{"in"}, []any{idstr})
+	if err != nil {
+		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
+		return
+	}
+
+	common.HttpResult(w, common.OK)
 }

@@ -5,6 +5,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"net/http"
 	"visit-service/model"
+
+	"strings"
 )
 
 func InitLive_recordRoute(r chi.Router) {
@@ -14,6 +16,43 @@ func InitLive_recordRoute(r chi.Router) {
 
 	r.Post(common.BASE_CONTEXT+"/live-record", UpsertLive_recordHandler)
 
+	r.Delete(common.BASE_CONTEXT+"/live-record/{id}", DeleteLive_recordHandler)
+
+	r.Post(common.BASE_CONTEXT+"/live-record/batch-delete", batchDeleteLive_recordHandler)
+
+	r.Post(common.BASE_CONTEXT+"/live-record/batch-upsert", batchUpsertLive_recordHandler)
+
+}
+
+// @Summary batch update
+// @Description batch update
+// @Tags 直播记录
+// @Accept  json
+// @Param entities body []map[string]any true "objects array"
+// @Produce  json
+// @Success 200 {object} common.Response ""
+// @Failure 500 {object} common.Response ""
+// @Router /live-record/batch-upsert [post]
+func batchUpsertLive_recordHandler(w http.ResponseWriter, r *http.Request) {
+
+	var entities []map[string]any
+	err := common.ReadRequestBody(r, &entities)
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
+		return
+	}
+	if len(entities) == 0 {
+		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
+		return
+	}
+
+	err = common.DbBatchUpsert[map[string]any](r.Context(), common.GetDaprClient(), entities, model.Live_recordTableInfo.Name, model.Live_record_FIELD_NAME_id)
+	if err != nil {
+		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
+		return
+	}
+
+	common.HttpResult(w, common.OK)
 }
 
 // @Summary page query
@@ -107,4 +146,64 @@ func UpsertLive_recordHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	common.HttpSuccess(w, common.OK.WithData(val))
+}
+
+// @Summary delete
+// @Description delete
+// @Tags 直播记录
+// @Param id  path string true "实例id"
+// @Produce  json
+// @Success 200 {object} common.Response{data=model.Live_record} "object"
+// @Failure 500 {object} common.Response ""
+// @Router /live-record/{id} [delete]
+func DeleteLive_recordHandler(w http.ResponseWriter, r *http.Request) {
+	id := chi.URLParam(r, "id")
+	beforeHook, exists := common.GetDeleteBeforeHook("Live_record")
+	if exists {
+		_, err1 := beforeHook(r, id)
+		if err1 != nil {
+			common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+			return
+		}
+	}
+	common.CommonDelete(w, r, common.GetDaprClient(), "o_live_record", "id", "id")
+}
+
+// @Summary batch delete
+// @Description batch delete
+// @Tags 直播记录
+// @Accept  json
+// @Param ids body []string true "id array"
+// @Produce  json
+// @Success 200 {object} common.Response ""
+// @Failure 500 {object} common.Response ""
+// @Router /live-record/batch-delete [post]
+func batchDeleteLive_recordHandler(w http.ResponseWriter, r *http.Request) {
+
+	var ids []string
+	err := common.ReadRequestBody(r, &ids)
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
+		return
+	}
+	if len(ids) == 0 {
+		common.HttpResult(w, common.ErrParam.AppendMsg("len of ids is 0"))
+		return
+	}
+	beforeHook, exists := common.GetBatchDeleteBeforeHook("Live_record")
+	if exists {
+		_, err1 := beforeHook(r, ids)
+		if err1 != nil {
+			common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+			return
+		}
+	}
+	idstr := strings.Join(ids, ",")
+	err = common.DbDeleteByOps(r.Context(), common.GetDaprClient(), "o_live_record", []string{"id"}, []string{"in"}, []any{idstr})
+	if err != nil {
+		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
+		return
+	}
+
+	common.HttpResult(w, common.OK)
 }

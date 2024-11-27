@@ -5,6 +5,7 @@ import "github.com/go-chi/chi/v5"
 func InitRoute(r chi.Router) {
 	InitBed_infoRoute(r)
 	InitCamera_infoRoute(r)
+	InitCameraRoute(r)
 	InitFamily_member_infoRoute(r)
 	InitHead_display_infoRoute(r)
 	InitLive_record_infoRoute(r)
@@ -20,4 +21,5 @@ func InitRoute(r chi.Router) {
 	InitManualHandler(r)
 	InitDashboardRoute(r)
 	InitVisit_scheduleExtRoute(r)
+	InitUserRoute(r)
 }

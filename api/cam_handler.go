@@ -15,7 +15,7 @@ func InitCustomCamRoute(r chi.Router) {
 
 // @Summary Start camera livestream
 // @Description Start a camera livestream for a specific room
-// @Tags Camera
+// @Tags 摄像头
 // @Accept json
 // @Param request body entity.CamLiveStreamRequest true "Camera livestream request"
 // @Produce json

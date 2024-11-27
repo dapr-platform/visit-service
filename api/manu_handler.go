@@ -24,8 +24,9 @@ func InitManualHandler(r chi.Router) {
 // @Failure 500 {object} common.Response "Internal server error"
 // @Router /manual/init-visit-schedule [post]
 func ManualInitVisitScheduleHandler(w http.ResponseWriter, r *http.Request) {
-	err := service.ManualInitVisitSchedule()
+
 	go func() {
+		err := service.ManualInitVisitSchedule()
 		if err != nil {
 			common.Logger.Error("init visit schedule error", err)
 		}

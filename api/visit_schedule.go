@@ -5,6 +5,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"net/http"
 	"visit-service/model"
+
+	"strings"
 )
 
 func InitVisit_scheduleRoute(r chi.Router) {
@@ -14,6 +16,43 @@ func InitVisit_scheduleRoute(r chi.Router) {
 
 	r.Post(common.BASE_CONTEXT+"/visit-schedule", UpsertVisit_scheduleHandler)
 
+	r.Delete(common.BASE_CONTEXT+"/visit-schedule/{id}", DeleteVisit_scheduleHandler)
+
+	r.Post(common.BASE_CONTEXT+"/visit-schedule/batch-delete", batchDeleteVisit_scheduleHandler)
+
+	r.Post(common.BASE_CONTEXT+"/visit-schedule/batch-upsert", batchUpsertVisit_scheduleHandler)
+
+}
+
+// @Summary batch update
+// @Description batch update
+// @Tags 探视排班
+// @Accept  json
+// @Param entities body []map[string]any true "objects array"
+// @Produce  json
+// @Success 200 {object} common.Response ""
+// @Failure 500 {object} common.Response ""
+// @Router /visit-schedule/batch-upsert [post]
+func batchUpsertVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
+
+	var entities []map[string]any
+	err := common.ReadRequestBody(r, &entities)
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
+		return
+	}
+	if len(entities) == 0 {
+		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
+		return
+	}
+
+	err = common.DbBatchUpsert[map[string]any](r.Context(), common.GetDaprClient(), entities, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
+	if err != nil {
+		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
+		return
+	}
+
+	common.HttpResult(w, common.OK)
 }
 
 // @Summary page query
@@ -95,4 +134,64 @@ func UpsertVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	common.HttpSuccess(w, common.OK.WithData(val))
+}
+
+// @Summary delete
+// @Description delete
+// @Tags 探视排班
+// @Param id  path string true "实例id"
+// @Produce  json
+// @Success 200 {object} common.Response{data=model.Visit_schedule} "object"
+// @Failure 500 {object} common.Response ""
+// @Router /visit-schedule/{id} [delete]
+func DeleteVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
+	id := chi.URLParam(r, "id")
+	beforeHook, exists := common.GetDeleteBeforeHook("Visit_schedule")
+	if exists {
+		_, err1 := beforeHook(r, id)
+		if err1 != nil {
+			common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+			return
+		}
+	}
+	common.CommonDelete(w, r, common.GetDaprClient(), "o_visit_schedule", "id", "id")
+}
+
+// @Summary batch delete
+// @Description batch delete
+// @Tags 探视排班
+// @Accept  json
+// @Param ids body []string true "id array"
+// @Produce  json
+// @Success 200 {object} common.Response ""
+// @Failure 500 {object} common.Response ""
+// @Router /visit-schedule/batch-delete [post]
+func batchDeleteVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
+
+	var ids []string
+	err := common.ReadRequestBody(r, &ids)
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
+		return
+	}
+	if len(ids) == 0 {
+		common.HttpResult(w, common.ErrParam.AppendMsg("len of ids is 0"))
+		return
+	}
+	beforeHook, exists := common.GetBatchDeleteBeforeHook("Visit_schedule")
+	if exists {
+		_, err1 := beforeHook(r, ids)
+		if err1 != nil {
+			common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+			return
+		}
+	}
+	idstr := strings.Join(ids, ",")
+	err = common.DbDeleteByOps(r.Context(), common.GetDaprClient(), "o_visit_schedule", []string{"id"}, []string{"in"}, []any{idstr})
+	if err != nil {
+		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
+		return
+	}
+
+	common.HttpResult(w, common.OK)
 }

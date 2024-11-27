@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 	"strconv"
+	"visit-service/service"
 
 	"github.com/dapr-platform/common"
 	"github.com/go-chi/chi/v5"

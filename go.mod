@@ -5,7 +5,7 @@ go 1.22.7
 toolchain go1.23.1
 
 require (
-	github.com/dapr-platform/common v0.0.0-20241126064634-9e0caac3991a
+	github.com/dapr-platform/common v0.0.0-20241127025703-2471d32dc0a8
 	github.com/dapr/go-sdk v1.11.0
 	github.com/go-chi/chi/v5 v5.1.0
 	github.com/prometheus/client_golang v1.19.1

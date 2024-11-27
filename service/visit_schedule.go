@@ -104,12 +104,17 @@ func DeleteVisitSchedule(startDay time.Time) error {
 	)
 }
 func SetAllVisitScheduleStatus(ctx context.Context, status int) error {
+	params := map[string]any{
+		model.Visit_schedule_FIELD_NAME_status: status,
+	}
 	return common.DbUpdateByOps(
 		ctx,
 		common.GetDaprClient(),
 		model.Visit_scheduleTableInfo.Name,
-		[]string{model.Visit_schedule_FIELD_NAME_status},
-		[]any{status},
+		params,
+		[]string{},
+		[]string{},
+		[]any{},
 	)
 }
 

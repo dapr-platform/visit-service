@@ -11,9 +11,11 @@ import (
 	"github.com/spf13/cast"
 )
 
-var CHECK_STATUS_UNCHECKED int32 = 0    //未审核
-var CHECK_STATUS_CHECKED int32 = 1      //已审核
-var CHECK_STATUS_CHECK_FAILED int32 = 2 //审核不通过
+var CHECK_STATUS_UNCHECKED int32 = 0     //未审核
+var CHECK_STATUS_CHECKED int32 = 1       //已审核
+var CHECK_STATUS_CHECK_FAILED int32 = 2  //审核不通过
+var VISIT_RECORD_STATUS_NORMAL int32 = 0 //正常
+var VISIT_RECORD_STATUS_CANCEL int32 = 1 //取消
 
 var visitRecordNewLock = sync.Mutex{}
 
@@ -24,13 +26,32 @@ func init() {
 
 func UpsertVisit_record(r *http.Request, in any) (out any, err error) {
 	record := in.(model.Visit_record)
-	if record.CheckStatus == CHECK_STATUS_UNCHECKED { //未审核，第一次新建
-		err = newAddVisitRecord(r.Context(), &record)
+	if record.CheckStatus == CHECK_STATUS_UNCHECKED { //未审核
+		if record.Status == VISIT_RECORD_STATUS_NORMAL { //正常状态可以新建
+			err = newAddVisitRecord(r.Context(), &record)
+		} else if record.Status == VISIT_RECORD_STATUS_CANCEL { //取消状态，需要释放摄像头,并增加排班剩余人数
+			err = cancelVisitRecord(r.Context(), &record)
+		}
 	} else if record.CheckStatus == CHECK_STATUS_CHECK_FAILED { //审核不通过，删除摄像头信息
 		record.CameraID = ""
 		record.VrCameraID = ""
 	}
 	return record, err
+}
+func cancelVisitRecord(ctx context.Context, record *model.Visit_record) error {
+	schedule, err := FindVisitScheduleByStartTime(ctx, record.VisitStartTime)
+	if err != nil {
+		return errors.Wrap(err, "查询排班信息失败")
+	}
+	if schedule != nil {
+		err = IncreaseVisitScheduleRemainingVisitors(ctx, schedule)
+		if err != nil {
+			return errors.Wrap(err, "增加排班剩余人数失败")
+		}
+	}
+	record.CameraID = ""
+	record.VrCameraID = ""
+	return nil
 }
 
 func newAddVisitRecord(ctx context.Context, record *model.Visit_record) error {

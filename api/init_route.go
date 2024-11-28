@@ -21,4 +21,6 @@ func InitRoute(r chi.Router) {
 	InitDashboardRoute(r)
 	InitVisit_scheduleExtRoute(r)
 	InitUserRoute(r)
+	InitBedRoute(r)
+	InitHead_displayRoute(r)
 }

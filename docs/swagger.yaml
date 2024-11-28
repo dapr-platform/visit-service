@@ -2100,58 +2100,6 @@ paths:
       summary: page query
       tags:
       - 直播记录
-  /manual/delete-visit-schedule:
-    post:
-      consumes:
-      - application/json
-      description: 手动删除排班
-      parameters:
-      - description: 删除开始时间，2006-01-02
-        in: query
-        name: start_day
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success response
-          schema:
-            $ref: '#/definitions/common.Response'
-        "400":
-          description: Invalid request parameters
-          schema:
-            $ref: '#/definitions/common.Response'
-        "500":
-          description: Internal server error
-          schema:
-            $ref: '#/definitions/common.Response'
-      summary: 手动删除排班
-      tags:
-      - Manual
-  /manual/init-visit-schedule:
-    post:
-      consumes:
-      - application/json
-      description: 手动初始化排班
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success response
-          schema:
-            $ref: '#/definitions/common.Response'
-        "400":
-          description: Invalid request parameters
-          schema:
-            $ref: '#/definitions/common.Response'
-        "500":
-          description: Internal server error
-          schema:
-            $ref: '#/definitions/common.Response'
-      summary: 手动初始化排班
-      tags:
-      - Manual
   /patient:
     get:
       description: query objects
@@ -3850,6 +3798,63 @@ paths:
           schema:
             $ref: '#/definitions/common.Response'
       summary: batch update
+      tags:
+      - 探视排班
+  /visit-schedule/delete-visit-schedule:
+    post:
+      consumes:
+      - application/json
+      description: 手动删除排班
+      parameters:
+      - description: 删除开始时间，2006-01-02
+        in: query
+        name: start_day
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success response
+          schema:
+            $ref: '#/definitions/common.Response'
+        "400":
+          description: Invalid request parameters
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: 手动删除排班
+      tags:
+      - 探视排班
+  /visit-schedule/init-visit-schedule:
+    post:
+      consumes:
+      - application/json
+      description: 手动初始化排班
+      parameters:
+      - description: '是否强制更新, true: 强制更新, false: 不强制更新'
+        in: query
+        name: force_update
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success response
+          schema:
+            $ref: '#/definitions/common.Response'
+        "400":
+          description: Invalid request parameters
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: 手动初始化排班
       tags:
       - 探视排班
   /visit-schedule/page:

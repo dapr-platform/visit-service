@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 	"strconv"
+	"time"
 	"visit-service/service"
 
 	"github.com/dapr-platform/common"
@@ -12,7 +13,55 @@ import (
 
 func InitVisit_scheduleExtRoute(r chi.Router) {
 	r.Post(common.BASE_CONTEXT+"/visit-schedule/set-all-status", SetVisitScheduleStatusHandler)
+	r.Post(common.BASE_CONTEXT+"/visit-schedule/init-visit-schedule", ManualInitVisitScheduleHandler)
+	r.Post(common.BASE_CONTEXT+"/visit-schedule/delete-visit-schedule", DeleteVisitScheduleHandler)
+}
 
+// @Summary 手动初始化排班
+// @Description 手动初始化排班
+// @Tags 探视排班
+// @Accept json
+// @Produce json
+// @Param force_update query bool false "是否强制更新, true: 强制更新, false: 不强制更新"
+// @Success 200 {object} common.Response "Success response"
+// @Failure 400 {object} common.Response "Invalid request parameters"
+// @Failure 500 {object} common.Response "Internal server error"
+// @Router /visit-schedule/init-visit-schedule [post]
+func ManualInitVisitScheduleHandler(w http.ResponseWriter, r *http.Request) {
+	forceUpdate := r.FormValue("force_update") == "true"
+	go func() {
+		err := service.ManualInitVisitSchedule(forceUpdate)
+		if err != nil {
+			common.Logger.Error("init visit schedule error", err)
+		}
+	}()
+	common.HttpResult(w, common.OK.AppendMsg("后台运行，请查看日志"))
+}
+
+// @Summary 手动删除排班
+// @Description 手动删除排班
+// @Tags 探视排班
+// @Accept json
+// @Produce json
+// @Param start_day query string true "删除开始时间，2006-01-02"
+// @Success 200 {object} common.Response "Success response"
+// @Failure 400 {object} common.Response "Invalid request parameters"
+// @Failure 500 {object} common.Response "Internal server error"
+// @Router /visit-schedule/delete-visit-schedule [post]
+func DeleteVisitScheduleHandler(w http.ResponseWriter, r *http.Request) {
+	startDayStr := r.URL.Query().Get("start_day")
+	startDay, err := time.Parse(startDayStr, "2006-01-02")
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
+		return
+	}
+	go func() {
+		err = service.DeleteVisitSchedule(startDay)
+		if err != nil {
+			common.Logger.Error("delete visit schedule error", err)
+		}
+	}()
+	common.HttpResult(w, common.OK.AppendMsg("后台运行，请查看日志"))
 }
 
 // 设置全部排班状态

@@ -18,7 +18,7 @@ func init() {
 	scheduleCron = cron.New(cron.WithSeconds())
 	// 每天凌晨1点执行
 	_, err := scheduleCron.AddFunc("0 0 1 * * ?", func() {
-		if err := initVisitScheduleDaily(); err != nil {
+		if err := initVisitScheduleDaily(false); err != nil {
 			common.Logger.Errorf("Failed to init visit schedule: %v", err)
 		}
 	})
@@ -89,8 +89,8 @@ func ManuAddVisitSchedule(startTime time.Time, endTime time.Time, totalVisitors 
 }
 
 // ManualInitVisitSchedule 用于调试的初始化函数
-func ManualInitVisitSchedule() error {
-	return initVisitScheduleDaily()
+func ManualInitVisitSchedule(forceUpdate bool) error {
+	return initVisitScheduleDaily(forceUpdate)
 }
 
 func DeleteVisitSchedule(startDay time.Time) error {
@@ -136,7 +136,7 @@ func checkTimeSlotExists(startTime time.Time) (bool, error) {
 	return len(schedules) > 0, nil
 }
 
-func initVisitScheduleDaily() error {
+func initVisitScheduleDaily(forceUpdate bool) error {
 	// 获取配置，如果出错则记录日志并返回
 	beginHourConfig, err := GetConfig(CONFIG_SCHEDULE_BEGIN_HOUR)
 	if err != nil {
@@ -220,7 +220,7 @@ func initVisitScheduleDaily() error {
 					common.Logger.Errorf("Error checking time slot: %v", err)
 					continue
 				}
-				if exists {
+				if exists && !forceUpdate {
 					continue
 				}
 				status := 0

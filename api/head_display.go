@@ -45,6 +45,11 @@ func batchUpsertHead_displayHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
 		return
 	}
+	for _, v := range entities {
+		if v["id"] == "" {
+			v["id"] = common.NanoId()
+		}
+	}
 
 	err = common.DbBatchUpsert[map[string]any](r.Context(), common.GetDaprClient(), entities, model.Head_displayTableInfo.Name, model.Head_display_FIELD_NAME_id)
 	if err != nil {
@@ -115,6 +120,9 @@ func UpsertHead_displayHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
 		return
+	}
+	if val.ID == "" {
+		val.ID = common.NanoId()
 	}
 	beforeHook, exists := common.GetUpsertBeforeHook("Head_display")
 	if exists {

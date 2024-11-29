@@ -28,7 +28,7 @@ Table: o_visit_schedule
 
 JSON Sample
 -------------------------------------
-{    "id": "yRTVXhslkRIteNIliWttBHZQo",    "start_time": 63,    "end_time": 83,    "total_visitors": 74,    "remaining_visitors": 76,    "status": 3}
+{    "id": "HFxVKMeWRGKvcpZReeALqumSG",    "start_time": 0,    "end_time": 6,    "total_visitors": 65,    "remaining_visitors": 49,    "status": 81}
 
 
 

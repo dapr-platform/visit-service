@@ -45,6 +45,11 @@ func batchUpsertSystem_configHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
 		return
 	}
+	for _, v := range entities {
+		if v["id"] == "" {
+			v["id"] = common.NanoId()
+		}
+	}
 
 	err = common.DbBatchUpsert[map[string]any](r.Context(), common.GetDaprClient(), entities, model.System_configTableInfo.Name, model.System_config_FIELD_NAME_id)
 	if err != nil {
@@ -119,6 +124,9 @@ func UpsertSystem_configHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
 		return
+	}
+	if val.ID == "" {
+		val.ID = common.NanoId()
 	}
 	beforeHook, exists := common.GetUpsertBeforeHook("System_config")
 	if exists {

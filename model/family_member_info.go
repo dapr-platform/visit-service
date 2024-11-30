@@ -24,23 +24,24 @@ Table: v_family_member_info
 [ 3] email                                          VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 4] identity                                       VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 5] name                                           VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 6] gender                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[ 7] address                                        VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
-[ 8] password                                       VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 9] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[10] org_id                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[11] id_card                                        VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[12] work_number                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[13] avatar_url                                     VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[14] create_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
-[15] update_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
-[16] remark                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[17] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[ 6] zh_name                                        VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[ 7] gender                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[ 8] address                                        VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+[ 9] password                                       VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[10] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[11] org_id                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[12] id_card                                        VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[13] work_number                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[14] avatar_url                                     VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[15] create_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+[16] update_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+[17] remark                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[18] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "WMoaymglnJkCMOUooNrsJggmv",    "tenant_id": "PZejZPtXnbrnDYjmNDIgcsgPJ",    "mobile": "qMVEUTTJqGJgwHTuImZKXBwSN",    "email": "puIogMvOjRnGDOfVMbsIKEUsa",    "identity": "UGQokBVZyakXBYEvtkdgxGUqh",    "name": "PhvWdQKSVrvtNdlEhIahlVSkc",    "gender": 25,    "address": "KgGqhwsBqkQPuptCCcwOrgnyj",    "password": "fvluyYqfqvDxayUJoMKKShAHy",    "type": 19,    "org_id": "BvOGCSrUiqPiBVByojcXEflgR",    "id_card": "JxPukbODiDVLpOfnKlowxmEAp",    "work_number": "EaOJBrqRwawaDCOxVdgwUKmKv",    "avatar_url": "qSkGlatHpTQwjkwCTAcgmVOYR",    "create_at": 41,    "update_at": 90,    "remark": "KcnEphbcIvtpqHtWRtOFXyejT",    "status": 0}
+{    "id": "jXuDryhPhPeySnZWOuaajlDCc",    "tenant_id": "bSRpRuHSOVmKguZuXinwWXexH",    "mobile": "vqjcaFdQbNeisFJhCjevIRNFM",    "email": "EqJUhMnuYuyaihPvfIfTHHJAC",    "identity": "HHnReaSdWoHLTdtoRgnITggkk",    "name": "xdfhpqJIdeGCGsOpgkjmsiOto",    "zh_name": "DqNDkToxetyPXAgSSDfHNaEKK",    "gender": 95,    "address": "ZkkQOPJRNWxxOqITSAHUXBYLG",    "password": "WplVZEuSorMyBUMFTbvYSdVYU",    "type": 89,    "org_id": "ttFAokALleBpLVEcpRVJYaWPM",    "id_card": "nBTyTQnZcEYATtKbjYuoTjExx",    "work_number": "aZuklPDBWheGXYnRsQVxybBAi",    "avatar_url": "eUEsdVDqsNTIQiqHqOpUcnpbG",    "create_at": 41,    "update_at": 14,    "remark": "pVODIcIuSeCXvcbnrXoArFIQJ",    "status": 80}
 
 
 Comments
@@ -65,6 +66,8 @@ var (
 	Family_member_info_FIELD_NAME_identity = "identity"
 
 	Family_member_info_FIELD_NAME_name = "name"
+
+	Family_member_info_FIELD_NAME_zh_name = "zh_name"
 
 	Family_member_info_FIELD_NAME_gender = "gender"
 
@@ -104,6 +107,8 @@ type Family_member_info struct {
 	Identity string `json:"identity"` //identity
 
 	Name string `json:"name"` //name
+
+	ZhName string `json:"zh_name"` //zh_name
 
 	Gender int32 `json:"gender"` //gender
 
@@ -265,6 +270,27 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 
 		&ColumnInfo{
 			Index:              6,
+			Name:               "zh_name",
+			Comment:            `zh_name`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(255)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       255,
+			GoFieldName:        "ZhName",
+			GoFieldType:        "string",
+			JSONFieldName:      "zh_name",
+			ProtobufFieldName:  "zh_name",
+			ProtobufType:       "string",
+			ProtobufPos:        7,
+		},
+
+		&ColumnInfo{
+			Index:              7,
 			Name:               "gender",
 			Comment:            `gender`,
 			Notes:              ``,
@@ -281,11 +307,11 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "gender",
 			ProtobufFieldName:  "gender",
 			ProtobufType:       "int32",
-			ProtobufPos:        7,
+			ProtobufPos:        8,
 		},
 
 		&ColumnInfo{
-			Index:              7,
+			Index:              8,
 			Name:               "address",
 			Comment:            `address`,
 			Notes:              ``,
@@ -302,11 +328,11 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "address",
 			ProtobufFieldName:  "address",
 			ProtobufType:       "string",
-			ProtobufPos:        8,
+			ProtobufPos:        9,
 		},
 
 		&ColumnInfo{
-			Index:              8,
+			Index:              9,
 			Name:               "password",
 			Comment:            `password`,
 			Notes:              ``,
@@ -323,11 +349,11 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "password",
 			ProtobufFieldName:  "password",
 			ProtobufType:       "string",
-			ProtobufPos:        9,
+			ProtobufPos:        10,
 		},
 
 		&ColumnInfo{
-			Index:              9,
+			Index:              10,
 			Name:               "type",
 			Comment:            `type`,
 			Notes:              ``,
@@ -344,11 +370,11 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "type",
 			ProtobufFieldName:  "type",
 			ProtobufType:       "int32",
-			ProtobufPos:        10,
+			ProtobufPos:        11,
 		},
 
 		&ColumnInfo{
-			Index:              10,
+			Index:              11,
 			Name:               "org_id",
 			Comment:            `org_id`,
 			Notes:              ``,
@@ -365,11 +391,11 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "org_id",
 			ProtobufFieldName:  "org_id",
 			ProtobufType:       "string",
-			ProtobufPos:        11,
+			ProtobufPos:        12,
 		},
 
 		&ColumnInfo{
-			Index:              11,
+			Index:              12,
 			Name:               "id_card",
 			Comment:            `id_card`,
 			Notes:              ``,
@@ -386,11 +412,11 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "id_card",
 			ProtobufFieldName:  "id_card",
 			ProtobufType:       "string",
-			ProtobufPos:        12,
+			ProtobufPos:        13,
 		},
 
 		&ColumnInfo{
-			Index:              12,
+			Index:              13,
 			Name:               "work_number",
 			Comment:            `work_number`,
 			Notes:              ``,
@@ -407,11 +433,11 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "work_number",
 			ProtobufFieldName:  "work_number",
 			ProtobufType:       "string",
-			ProtobufPos:        13,
+			ProtobufPos:        14,
 		},
 
 		&ColumnInfo{
-			Index:              13,
+			Index:              14,
 			Name:               "avatar_url",
 			Comment:            `avatar_url`,
 			Notes:              ``,
@@ -428,11 +454,11 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "avatar_url",
 			ProtobufFieldName:  "avatar_url",
 			ProtobufType:       "string",
-			ProtobufPos:        14,
+			ProtobufPos:        15,
 		},
 
 		&ColumnInfo{
-			Index:              14,
+			Index:              15,
 			Name:               "create_at",
 			Comment:            `create_at`,
 			Notes:              ``,
@@ -449,11 +475,11 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "create_at",
 			ProtobufFieldName:  "create_at",
 			ProtobufType:       "uint64",
-			ProtobufPos:        15,
+			ProtobufPos:        16,
 		},
 
 		&ColumnInfo{
-			Index:              15,
+			Index:              16,
 			Name:               "update_at",
 			Comment:            `update_at`,
 			Notes:              ``,
@@ -470,11 +496,11 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "update_at",
 			ProtobufFieldName:  "update_at",
 			ProtobufType:       "uint64",
-			ProtobufPos:        16,
+			ProtobufPos:        17,
 		},
 
 		&ColumnInfo{
-			Index:              16,
+			Index:              17,
 			Name:               "remark",
 			Comment:            `remark`,
 			Notes:              ``,
@@ -491,11 +517,11 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "remark",
 			ProtobufFieldName:  "remark",
 			ProtobufType:       "string",
-			ProtobufPos:        17,
+			ProtobufPos:        18,
 		},
 
 		&ColumnInfo{
-			Index:              17,
+			Index:              18,
 			Name:               "status",
 			Comment:            `status`,
 			Notes:              ``,
@@ -512,7 +538,7 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
-			ProtobufPos:        18,
+			ProtobufPos:        19,
 		},
 	},
 }

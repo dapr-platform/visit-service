@@ -9,6 +9,8 @@ github.com/dapr-platform/common v0.0.0-20241126064634-9e0caac3991a h1:xBJ+EoORBC
 github.com/dapr-platform/common v0.0.0-20241126064634-9e0caac3991a/go.mod h1:n4eOSWTax7yQK4845OmCXW4qiBvPZ4v6ZrsYdH/uIpM=
 github.com/dapr-platform/common v0.0.0-20241127025703-2471d32dc0a8 h1:IGJu2Mv5VZglF7zBm2Y6aIjYvxgZtS26BeBfLf7dkSo=
 github.com/dapr-platform/common v0.0.0-20241127025703-2471d32dc0a8/go.mod h1:n4eOSWTax7yQK4845OmCXW4qiBvPZ4v6ZrsYdH/uIpM=
+github.com/dapr-platform/common v1.0.0-20241129-1 h1:m3XVPvnWFRfpMEonC8bDxe7HP11Z3Lvh55yFdWEgxjM=
+github.com/dapr-platform/common v1.0.0-20241129-1/go.mod h1:n4eOSWTax7yQK4845OmCXW4qiBvPZ4v6ZrsYdH/uIpM=
 github.com/dapr/dapr v1.14.4 h1:OEyAFvpW4AK+MWyX5xp9zVLiC+oY/5ziDzh16F+aoWU=
 github.com/dapr/dapr v1.14.4/go.mod h1:pZGJvUGT4IDhEuWVXBvJ73TkPnLAW34SDagth7G3f8w=
 github.com/dapr/go-sdk v1.11.0 h1:clANpOQd6MsfvSa6snaX8MVk6eRx26Vsj5GxGdQ6mpE=

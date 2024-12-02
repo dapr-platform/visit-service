@@ -35,7 +35,7 @@ func InitCameraRoute(r chi.Router) {
 // @Router /camera/batch-upsert [post]
 func batchUpsertCameraHandler(w http.ResponseWriter, r *http.Request) {
 
-	var entities []map[string]any
+	var entities []model.Camera
 	err := common.ReadRequestBody(r, &entities)
 	if err != nil {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
@@ -45,13 +45,25 @@ func batchUpsertCameraHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
 		return
 	}
+
+	beforeHook, exists := common.GetUpsertBeforeHook("Camera")
+	if exists {
+		for _, v := range entities {
+			_, err1 := beforeHook(r, v)
+			if err1 != nil {
+				common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+				return
+			}
+		}
+
+	}
 	for _, v := range entities {
-		if v["id"] == "" {
-			v["id"] = common.NanoId()
+		if v.ID == "" {
+			v.ID = common.NanoId()
 		}
 	}
 
-	err = common.DbBatchUpsert[map[string]any](r.Context(), common.GetDaprClient(), entities, model.CameraTableInfo.Name, model.Camera_FIELD_NAME_id)
+	err = common.DbBatchUpsert[model.Camera](r.Context(), common.GetDaprClient(), entities, model.CameraTableInfo.Name, model.Camera_FIELD_NAME_id)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
@@ -131,9 +143,7 @@ func UpsertCameraHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
 		return
 	}
-	if val.ID == "" {
-		val.ID = common.NanoId()
-	}
+
 	beforeHook, exists := common.GetUpsertBeforeHook("Camera")
 	if exists {
 		v, err1 := beforeHook(r, val)
@@ -143,7 +153,9 @@ func UpsertCameraHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		val = v.(model.Camera)
 	}
-
+	if val.ID == "" {
+		val.ID = common.NanoId()
+	}
 	err = common.DbUpsert[model.Camera](r.Context(), common.GetDaprClient(), val, model.CameraTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

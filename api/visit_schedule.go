@@ -35,7 +35,7 @@ func InitVisit_scheduleRoute(r chi.Router) {
 // @Router /visit-schedule/batch-upsert [post]
 func batchUpsertVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
 
-	var entities []map[string]any
+	var entities []model.Visit_schedule
 	err := common.ReadRequestBody(r, &entities)
 	if err != nil {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
@@ -45,13 +45,25 @@ func batchUpsertVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
 		return
 	}
+
+	beforeHook, exists := common.GetUpsertBeforeHook("Visit_schedule")
+	if exists {
+		for _, v := range entities {
+			_, err1 := beforeHook(r, v)
+			if err1 != nil {
+				common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+				return
+			}
+		}
+
+	}
 	for _, v := range entities {
-		if v["id"] == "" {
-			v["id"] = common.NanoId()
+		if v.ID == "" {
+			v.ID = common.NanoId()
 		}
 	}
 
-	err = common.DbBatchUpsert[map[string]any](r.Context(), common.GetDaprClient(), entities, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
+	err = common.DbBatchUpsert[model.Visit_schedule](r.Context(), common.GetDaprClient(), entities, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
@@ -123,9 +135,7 @@ func UpsertVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
 		return
 	}
-	if val.ID == "" {
-		val.ID = common.NanoId()
-	}
+
 	beforeHook, exists := common.GetUpsertBeforeHook("Visit_schedule")
 	if exists {
 		v, err1 := beforeHook(r, val)
@@ -135,7 +145,9 @@ func UpsertVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		val = v.(model.Visit_schedule)
 	}
-
+	if val.ID == "" {
+		val.ID = common.NanoId()
+	}
 	err = common.DbUpsert[model.Visit_schedule](r.Context(), common.GetDaprClient(), val, model.Visit_scheduleTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

@@ -1548,6 +1548,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "zh_name",
+                        "name": "zh_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "gender",
                         "name": "gender",
                         "in": "query"
@@ -1556,12 +1562,6 @@ const docTemplate = `{
                         "type": "string",
                         "description": "address",
                         "name": "address",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "password",
-                        "name": "password",
                         "in": "query"
                     },
                     {
@@ -1616,6 +1616,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "status",
                         "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patients",
+                        "name": "patients",
                         "in": "query"
                     }
                 ],
@@ -1719,6 +1725,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "zh_name",
+                        "name": "zh_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "gender",
                         "name": "gender",
                         "in": "query"
@@ -1727,12 +1739,6 @@ const docTemplate = `{
                         "type": "string",
                         "description": "address",
                         "name": "address",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "password",
-                        "name": "password",
                         "in": "query"
                     },
                     {
@@ -1787,6 +1793,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "status",
                         "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patients",
+                        "name": "patients",
                         "in": "query"
                     }
                 ],
@@ -3586,6 +3598,392 @@ const docTemplate = `{
                 }
             }
         },
+        "/patient-relative": {
+            "get": {
+                "description": "query objects",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "病患-家属关联"
+                ],
+                "summary": "query objects",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_id",
+                        "name": "patient_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_id",
+                        "name": "relative_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relationship",
+                        "name": "relationship",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "create_time",
+                        "name": "create_time",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.Patient_relative"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "save",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "病患-家属关联"
+                ],
+                "summary": "save",
+                "parameters": [
+                    {
+                        "description": "object",
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Patient_relative"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Patient_relative"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/patient-relative/batch-delete": {
+            "post": {
+                "description": "batch delete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "病患-家属关联"
+                ],
+                "summary": "batch delete",
+                "parameters": [
+                    {
+                        "description": "id array",
+                        "name": "ids",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/patient-relative/batch-upsert": {
+            "post": {
+                "description": "batch update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "病患-家属关联"
+                ],
+                "summary": "batch update",
+                "parameters": [
+                    {
+                        "description": "objects array",
+                        "name": "entities",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/patient-relative/page": {
+            "get": {
+                "description": "page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "病患-家属关联"
+                ],
+                "summary": "page query",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "current page",
+                        "name": "_page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size",
+                        "name": "_page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_id",
+                        "name": "patient_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_id",
+                        "name": "relative_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relationship",
+                        "name": "relationship",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "create_time",
+                        "name": "create_time",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/definitions/common.Page"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "items": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/definitions/model.Patient_relative"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/patient-relative/{id}": {
+            "delete": {
+                "description": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "病患-家属关联"
+                ],
+                "summary": "delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "实例id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Patient_relative"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/patient/batch-delete": {
             "post": {
                 "description": "batch delete",
@@ -4242,7 +4640,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User"
+                    "用户"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -4292,6 +4690,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "name",
                         "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "zh_name",
+                        "name": "zh_name",
                         "in": "query"
                     },
                     {
@@ -4406,7 +4810,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User"
+                    "用户"
                 ],
                 "summary": "save",
                 "parameters": [
@@ -4458,7 +4862,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User"
+                    "用户"
                 ],
                 "summary": "batch delete",
                 "parameters": [
@@ -4501,7 +4905,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User"
+                    "用户"
                 ],
                 "summary": "batch update",
                 "parameters": [
@@ -4542,7 +4946,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User"
+                    "用户"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -4600,6 +5004,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "name",
                         "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "zh_name",
+                        "name": "zh_name",
                         "in": "query"
                     },
                     {
@@ -4725,7 +5135,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User"
+                    "用户"
                 ],
                 "summary": "delete",
                 "parameters": [
@@ -6787,75 +7197,78 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "address": {
-                    "description": "address",
+                    "description": "地址",
                     "type": "string"
                 },
                 "avatar_url": {
-                    "description": "avatar_url",
+                    "description": "头像",
                     "type": "string"
                 },
                 "create_at": {
-                    "description": "create_at",
+                    "description": "创建时间",
                     "type": "string"
                 },
                 "email": {
-                    "description": "email",
+                    "description": "邮箱",
                     "type": "string"
                 },
                 "gender": {
-                    "description": "gender",
+                    "description": "性别(0:未知,1:男,2:女)",
                     "type": "integer"
                 },
                 "id": {
-                    "description": "id",
+                    "description": "家属ID",
                     "type": "string"
                 },
                 "id_card": {
-                    "description": "id_card",
+                    "description": "身份证",
                     "type": "string"
                 },
                 "identity": {
-                    "description": "identity",
+                    "description": "用户标识",
                     "type": "string"
                 },
                 "mobile": {
-                    "description": "mobile",
+                    "description": "手机号",
                     "type": "string"
                 },
                 "name": {
-                    "description": "name",
+                    "description": "姓名",
                     "type": "string"
                 },
                 "org_id": {
-                    "description": "org_id",
+                    "description": "组织ID",
                     "type": "string"
                 },
-                "password": {
-                    "description": "password",
-                    "type": "string"
+                "patients": {
+                    "description": "关联的病患信息列表"
                 },
                 "remark": {
-                    "description": "remark",
+                    "description": "备注",
                     "type": "string"
                 },
                 "status": {
-                    "description": "status",
+                    "description": "状态(1:正常,2:禁止登陆,3:删除)",
                     "type": "integer"
                 },
                 "tenant_id": {
-                    "description": "tenant_id",
+                    "description": "租户ID",
                     "type": "string"
                 },
                 "type": {
-                    "description": "type",
+                    "description": "用户类型(3:访客)",
                     "type": "integer"
                 },
                 "update_at": {
-                    "description": "update_at",
+                    "description": "更新时间",
                     "type": "string"
                 },
                 "work_number": {
-                    "description": "work_number",
+                    "description": "工号",
+                    "type": "string"
+                },
+                "zh_name": {
+                    "description": "中文名",
                     "type": "string"
                 }
             }
@@ -7114,6 +7527,35 @@ const docTemplate = `{
                 }
             }
         },
+        "model.Patient_relative": {
+            "type": "object",
+            "properties": {
+                "create_time": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "关联ID",
+                    "type": "string"
+                },
+                "patient_id": {
+                    "description": "病患ID",
+                    "type": "string"
+                },
+                "relationship": {
+                    "description": "与患者关系(父母,配偶,子女,其他)",
+                    "type": "string"
+                },
+                "relative_id": {
+                    "description": "家属ID",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "状态(0:正常,1:解除关联)",
+                    "type": "integer"
+                }
+            }
+        },
         "model.System_config": {
             "type": "object",
             "properties": {
@@ -7151,7 +7593,7 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "address": {
-                    "description": "address",
+                    "description": "地址",
                     "type": "string"
                 },
                 "avatar_url": {
@@ -7163,11 +7605,11 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "email": {
-                    "description": "email",
+                    "description": "邮箱",
                     "type": "string"
                 },
                 "gender": {
-                    "description": "gender",
+                    "description": "性别(0:未知,1:男,2:女)",
                     "type": "integer"
                 },
                 "id": {
@@ -7183,11 +7625,11 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "mobile": {
-                    "description": "mobile",
+                    "description": "手机号",
                     "type": "string"
                 },
                 "name": {
-                    "description": "name",
+                    "description": "姓名",
                     "type": "string"
                 },
                 "org_id": {
@@ -7195,7 +7637,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "password": {
-                    "description": "password",
+                    "description": "密码",
                     "type": "string"
                 },
                 "remark": {
@@ -7207,7 +7649,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "tenant_id": {
-                    "description": "tenant_id",
+                    "description": "租户ID",
                     "type": "string"
                 },
                 "type": {
@@ -7220,6 +7662,10 @@ const docTemplate = `{
                 },
                 "work_number": {
                     "description": "工号",
+                    "type": "string"
+                },
+                "zh_name": {
+                    "description": "中文名",
                     "type": "string"
                 }
             }

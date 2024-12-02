@@ -35,7 +35,7 @@ func InitLive_recordRoute(r chi.Router) {
 // @Router /live-record/batch-upsert [post]
 func batchUpsertLive_recordHandler(w http.ResponseWriter, r *http.Request) {
 
-	var entities []map[string]any
+	var entities []model.Live_record
 	err := common.ReadRequestBody(r, &entities)
 	if err != nil {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
@@ -45,13 +45,25 @@ func batchUpsertLive_recordHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
 		return
 	}
+
+	beforeHook, exists := common.GetUpsertBeforeHook("Live_record")
+	if exists {
+		for _, v := range entities {
+			_, err1 := beforeHook(r, v)
+			if err1 != nil {
+				common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+				return
+			}
+		}
+
+	}
 	for _, v := range entities {
-		if v["id"] == "" {
-			v["id"] = common.NanoId()
+		if v.ID == "" {
+			v.ID = common.NanoId()
 		}
 	}
 
-	err = common.DbBatchUpsert[map[string]any](r.Context(), common.GetDaprClient(), entities, model.Live_recordTableInfo.Name, model.Live_record_FIELD_NAME_id)
+	err = common.DbBatchUpsert[model.Live_record](r.Context(), common.GetDaprClient(), entities, model.Live_recordTableInfo.Name, model.Live_record_FIELD_NAME_id)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
@@ -135,9 +147,7 @@ func UpsertLive_recordHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
 		return
 	}
-	if val.ID == "" {
-		val.ID = common.NanoId()
-	}
+
 	beforeHook, exists := common.GetUpsertBeforeHook("Live_record")
 	if exists {
 		v, err1 := beforeHook(r, val)
@@ -147,7 +157,9 @@ func UpsertLive_recordHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		val = v.(model.Live_record)
 	}
-
+	if val.ID == "" {
+		val.ID = common.NanoId()
+	}
 	err = common.DbUpsert[model.Live_record](r.Context(), common.GetDaprClient(), val, model.Live_recordTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

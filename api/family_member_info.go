@@ -29,7 +29,6 @@ func InitFamily_member_infoRoute(r chi.Router) {
 // @Param zh_name query string false "zh_name"
 // @Param gender query string false "gender"
 // @Param address query string false "address"
-// @Param password query string false "password"
 // @Param type query string false "type"
 // @Param org_id query string false "org_id"
 // @Param id_card query string false "id_card"
@@ -39,6 +38,7 @@ func InitFamily_member_infoRoute(r chi.Router) {
 // @Param update_at query string false "update_at"
 // @Param remark query string false "remark"
 // @Param status query string false "status"
+// @Param patients query string false "patients"
 // @Produce  json
 // @Success 200 {object} common.Response{data=common.Page{items=[]model.Family_member_info}} "objects array"
 // @Failure 500 {object} common.Response ""
@@ -69,7 +69,6 @@ func Family_member_infoPageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param zh_name query string false "zh_name"
 // @Param gender query string false "gender"
 // @Param address query string false "address"
-// @Param password query string false "password"
 // @Param type query string false "type"
 // @Param org_id query string false "org_id"
 // @Param id_card query string false "id_card"
@@ -79,6 +78,7 @@ func Family_member_infoPageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param update_at query string false "update_at"
 // @Param remark query string false "remark"
 // @Param status query string false "status"
+// @Param patients query string false "patients"
 // @Produce  json
 // @Success 200 {object} common.Response{data=[]model.Family_member_info} "objects array"
 // @Failure 500 {object} common.Response ""

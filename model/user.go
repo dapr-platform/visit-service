@@ -41,7 +41,7 @@ Table: o_user
 
 JSON Sample
 -------------------------------------
-{    "id": "gEsMIICsLINIUOdGMvgXdILLt",    "tenant_id": "rZWwbPFweiRhvowbaranPVrwD",    "mobile": "QFXhPfDDLOgqSwsIFEsGIdYXf",    "email": "nvDxgcCOOIpTooTiOQEWcFTHB",    "identity": "JxcTonWhjIpZQkwLxqblvlXeS",    "name": "HJOdtTstfDXQFNHfVuVVLcFny",    "zh_name": "nXeBRGhZSEvHqaXEQPIFbsaTs",    "gender": 93,    "address": "sKKOFTFLnfSPUnjgoFxVawbpc",    "password": "kjVGwEZjFoWVhsklixDDAGVKm",    "type": 46,    "org_id": "bCPmsefNEbHVsHkxNQhkQZvBP",    "id_card": "AvhAsPZsCWPxagOYhBMvqWXDM",    "work_number": "vqcYwefcdNmUhvQLyWOaymRXL",    "avatar_url": "ZfNOZELFCeUPsTWjNryspmbFd",    "create_at": 69,    "update_at": 11,    "remark": "dYeBdfInqYpDcWqarwxtBNZwu",    "status": 3}
+{    "id": "AScNyZmfFrrjlcZXLHtFVVKAr",    "tenant_id": "gwspXliXEqiEVuudHmCJarxOk",    "mobile": "acKgdNfyRTNNbrAWhsrhvjnnO",    "email": "IYRnCUceobpxTjCXLeJqciULx",    "identity": "iVeBCYbGbxcwEcJRwZCiLxjvu",    "name": "pBqwErKXQtJtKAirBbZtkEKex",    "zh_name": "kysMqGFqwcTODpaQinIeHvwLU",    "gender": 15,    "address": "mKcthWaEEVdawVhLxIhUycmuA",    "password": "ZcvmjkyCRgpDAkPedQZgIgTFd",    "type": 51,    "org_id": "abxjGZdxlxAnkDsbfejKZCYoG",    "id_card": "uVakykYXdtNYohmnjsRsNTxVl",    "work_number": "qZThDIUJNFTcgYcYXrAHmCCmZ",    "avatar_url": "OZkeXcmQbnbOGeFcYivNhgiGT",    "create_at": 59,    "update_at": 45,    "remark": "QQupXPvcYqAvOBRydRYvAOfkQ",    "status": 86}
 
 
 

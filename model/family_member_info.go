@@ -27,21 +27,21 @@ Table: v_family_member_info
 [ 6] zh_name                                        VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 7] gender                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
 [ 8] address                                        VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
-[ 9] password                                       VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[10] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[11] org_id                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[12] id_card                                        VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[13] work_number                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[14] avatar_url                                     VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[15] create_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
-[16] update_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
-[17] remark                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[18] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[ 9] type                                           INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[10] org_id                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[11] id_card                                        VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[12] work_number                                    VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[13] avatar_url                                     VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[14] create_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+[15] update_at                                      TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+[16] remark                                         VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[17] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[18] patients                                       JSON                 null: true   primary: false  isArray: false  auto: false  col: JSON            len: -1      default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "jXuDryhPhPeySnZWOuaajlDCc",    "tenant_id": "bSRpRuHSOVmKguZuXinwWXexH",    "mobile": "vqjcaFdQbNeisFJhCjevIRNFM",    "email": "EqJUhMnuYuyaihPvfIfTHHJAC",    "identity": "HHnReaSdWoHLTdtoRgnITggkk",    "name": "xdfhpqJIdeGCGsOpgkjmsiOto",    "zh_name": "DqNDkToxetyPXAgSSDfHNaEKK",    "gender": 95,    "address": "ZkkQOPJRNWxxOqITSAHUXBYLG",    "password": "WplVZEuSorMyBUMFTbvYSdVYU",    "type": 89,    "org_id": "ttFAokALleBpLVEcpRVJYaWPM",    "id_card": "nBTyTQnZcEYATtKbjYuoTjExx",    "work_number": "aZuklPDBWheGXYnRsQVxybBAi",    "avatar_url": "eUEsdVDqsNTIQiqHqOpUcnpbG",    "create_at": 41,    "update_at": 14,    "remark": "pVODIcIuSeCXvcbnrXoArFIQJ",    "status": 80}
+{    "id": "dDUHRHQTRicJJeLLTeZSAkcsm",    "tenant_id": "QwnojTWXuMqsIPFHyCQwFIELd",    "mobile": "CnefeEwntBSJnwLbKfvHMeULx",    "email": "nOVcgxVNZnEeNxDZTECUSYwoV",    "identity": "fWWTppTvaJBwYYwmXvHunWZqx",    "name": "RyvhwftINZnyXhjqfoqkMJejj",    "zh_name": "BVZDArvxgGtTIuUpWnnbSufgv",    "gender": 10,    "address": "SAhspwHULaukKQdopjqWXNQYQ",    "type": 90,    "org_id": "JotdqhYlyZhAHEJXJFHHwwxEi",    "id_card": "AjOpXiOgvnpsGuNJyGCfRDMeb",    "work_number": "OiCssaXgejWxnlCFCKcEtnfAP",    "avatar_url": "hTghLcNOuFVyLhLnxSmEfUmZI",    "create_at": 90,    "update_at": 54,    "remark": "UeMubNdhfDQWnTpjZrQdkdbmZ",    "status": 41,    "patients": 51}
 
 
 Comments
@@ -73,8 +73,6 @@ var (
 
 	Family_member_info_FIELD_NAME_address = "address"
 
-	Family_member_info_FIELD_NAME_password = "password"
-
 	Family_member_info_FIELD_NAME_type = "type"
 
 	Family_member_info_FIELD_NAME_org_id = "org_id"
@@ -92,47 +90,49 @@ var (
 	Family_member_info_FIELD_NAME_remark = "remark"
 
 	Family_member_info_FIELD_NAME_status = "status"
+
+	Family_member_info_FIELD_NAME_patients = "patients"
 )
 
 // Family_member_info struct is a row record of the v_family_member_info table in the  database
 type Family_member_info struct {
-	ID string `json:"id"` //id
+	ID string `json:"id"` //家属ID
 
-	TenantID string `json:"tenant_id"` //tenant_id
+	TenantID string `json:"tenant_id"` //租户ID
 
-	Mobile string `json:"mobile"` //mobile
+	Mobile string `json:"mobile"` //手机号
 
-	Email string `json:"email"` //email
+	Email string `json:"email"` //邮箱
 
-	Identity string `json:"identity"` //identity
+	Identity string `json:"identity"` //用户标识
 
-	Name string `json:"name"` //name
+	Name string `json:"name"` //姓名
 
-	ZhName string `json:"zh_name"` //zh_name
+	ZhName string `json:"zh_name"` //中文名
 
-	Gender int32 `json:"gender"` //gender
+	Gender int32 `json:"gender"` //性别(0:未知,1:男,2:女)
 
-	Address string `json:"address"` //address
+	Address string `json:"address"` //地址
 
-	Password string `json:"password"` //password
+	Type int32 `json:"type"` //用户类型(3:访客)
 
-	Type int32 `json:"type"` //type
+	OrgID string `json:"org_id"` //组织ID
 
-	OrgID string `json:"org_id"` //org_id
+	IDCard string `json:"id_card"` //身份证
 
-	IDCard string `json:"id_card"` //id_card
+	WorkNumber string `json:"work_number"` //工号
 
-	WorkNumber string `json:"work_number"` //work_number
+	AvatarURL string `json:"avatar_url"` //头像
 
-	AvatarURL string `json:"avatar_url"` //avatar_url
+	CreateAt common.LocalTime `json:"create_at"` //创建时间
 
-	CreateAt common.LocalTime `json:"create_at"` //create_at
+	UpdateAt common.LocalTime `json:"update_at"` //更新时间
 
-	UpdateAt common.LocalTime `json:"update_at"` //update_at
+	Remark string `json:"remark"` //备注
 
-	Remark string `json:"remark"` //remark
+	Status int32 `json:"status"` //状态(1:正常,2:禁止登陆,3:删除)
 
-	Status int32 `json:"status"` //status
+	Patients any `json:"patients"` //关联的病患信息列表
 
 }
 
@@ -143,7 +143,7 @@ var Family_member_infoTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:   0,
 			Name:    "id",
-			Comment: `id`,
+			Comment: `家属ID`,
 			Notes: `Warning table: v_family_member_info does not have a primary key defined, setting col position 1 id as primary key
 Warning table: v_family_member_info primary key column id is nullable column, setting it as NOT NULL
 `,
@@ -166,7 +166,7 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 		&ColumnInfo{
 			Index:              1,
 			Name:               "tenant_id",
-			Comment:            `tenant_id`,
+			Comment:            `租户ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -187,7 +187,7 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 		&ColumnInfo{
 			Index:              2,
 			Name:               "mobile",
-			Comment:            `mobile`,
+			Comment:            `手机号`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -208,7 +208,7 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 		&ColumnInfo{
 			Index:              3,
 			Name:               "email",
-			Comment:            `email`,
+			Comment:            `邮箱`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -229,7 +229,7 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 		&ColumnInfo{
 			Index:              4,
 			Name:               "identity",
-			Comment:            `identity`,
+			Comment:            `用户标识`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -250,7 +250,7 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 		&ColumnInfo{
 			Index:              5,
 			Name:               "name",
-			Comment:            `name`,
+			Comment:            `姓名`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -271,7 +271,7 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 		&ColumnInfo{
 			Index:              6,
 			Name:               "zh_name",
-			Comment:            `zh_name`,
+			Comment:            `中文名`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -292,7 +292,7 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 		&ColumnInfo{
 			Index:              7,
 			Name:               "gender",
-			Comment:            `gender`,
+			Comment:            `性别(0:未知,1:男,2:女)`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT4",
@@ -313,7 +313,7 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 		&ColumnInfo{
 			Index:              8,
 			Name:               "address",
-			Comment:            `address`,
+			Comment:            `地址`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -333,29 +333,8 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 
 		&ColumnInfo{
 			Index:              9,
-			Name:               "password",
-			Comment:            `password`,
-			Notes:              ``,
-			Nullable:           true,
-			DatabaseTypeName:   "VARCHAR",
-			DatabaseTypePretty: "VARCHAR(255)",
-			IsPrimaryKey:       false,
-			IsAutoIncrement:    false,
-			IsArray:            false,
-			ColumnType:         "VARCHAR",
-			ColumnLength:       255,
-			GoFieldName:        "Password",
-			GoFieldType:        "string",
-			JSONFieldName:      "password",
-			ProtobufFieldName:  "password",
-			ProtobufType:       "string",
-			ProtobufPos:        10,
-		},
-
-		&ColumnInfo{
-			Index:              10,
 			Name:               "type",
-			Comment:            `type`,
+			Comment:            `用户类型(3:访客)`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT4",
@@ -370,13 +349,13 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "type",
 			ProtobufFieldName:  "type",
 			ProtobufType:       "int32",
-			ProtobufPos:        11,
+			ProtobufPos:        10,
 		},
 
 		&ColumnInfo{
-			Index:              11,
+			Index:              10,
 			Name:               "org_id",
-			Comment:            `org_id`,
+			Comment:            `组织ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -391,13 +370,13 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "org_id",
 			ProtobufFieldName:  "org_id",
 			ProtobufType:       "string",
-			ProtobufPos:        12,
+			ProtobufPos:        11,
 		},
 
 		&ColumnInfo{
-			Index:              12,
+			Index:              11,
 			Name:               "id_card",
-			Comment:            `id_card`,
+			Comment:            `身份证`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -412,13 +391,13 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "id_card",
 			ProtobufFieldName:  "id_card",
 			ProtobufType:       "string",
-			ProtobufPos:        13,
+			ProtobufPos:        12,
 		},
 
 		&ColumnInfo{
-			Index:              13,
+			Index:              12,
 			Name:               "work_number",
-			Comment:            `work_number`,
+			Comment:            `工号`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -433,13 +412,13 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "work_number",
 			ProtobufFieldName:  "work_number",
 			ProtobufType:       "string",
-			ProtobufPos:        14,
+			ProtobufPos:        13,
 		},
 
 		&ColumnInfo{
-			Index:              14,
+			Index:              13,
 			Name:               "avatar_url",
-			Comment:            `avatar_url`,
+			Comment:            `头像`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -454,13 +433,13 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "avatar_url",
 			ProtobufFieldName:  "avatar_url",
 			ProtobufType:       "string",
-			ProtobufPos:        15,
+			ProtobufPos:        14,
 		},
 
 		&ColumnInfo{
-			Index:              15,
+			Index:              14,
 			Name:               "create_at",
-			Comment:            `create_at`,
+			Comment:            `创建时间`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "TIMESTAMP",
@@ -475,13 +454,13 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "create_at",
 			ProtobufFieldName:  "create_at",
 			ProtobufType:       "uint64",
-			ProtobufPos:        16,
+			ProtobufPos:        15,
 		},
 
 		&ColumnInfo{
-			Index:              16,
+			Index:              15,
 			Name:               "update_at",
-			Comment:            `update_at`,
+			Comment:            `更新时间`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "TIMESTAMP",
@@ -496,13 +475,13 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "update_at",
 			ProtobufFieldName:  "update_at",
 			ProtobufType:       "uint64",
-			ProtobufPos:        17,
+			ProtobufPos:        16,
 		},
 
 		&ColumnInfo{
-			Index:              17,
+			Index:              16,
 			Name:               "remark",
-			Comment:            `remark`,
+			Comment:            `备注`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -517,13 +496,13 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "remark",
 			ProtobufFieldName:  "remark",
 			ProtobufType:       "string",
-			ProtobufPos:        18,
+			ProtobufPos:        17,
 		},
 
 		&ColumnInfo{
-			Index:              18,
+			Index:              17,
 			Name:               "status",
-			Comment:            `status`,
+			Comment:            `状态(1:正常,2:禁止登陆,3:删除)`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT4",
@@ -538,6 +517,27 @@ Warning table: v_family_member_info primary key column id is nullable column, se
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
+			ProtobufPos:        18,
+		},
+
+		&ColumnInfo{
+			Index:              18,
+			Name:               "patients",
+			Comment:            `关联的病患信息列表`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "JSON",
+			DatabaseTypePretty: "JSON",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "JSON",
+			ColumnLength:       -1,
+			GoFieldName:        "Patients",
+			GoFieldType:        "any",
+			JSONFieldName:      "patients",
+			ProtobufFieldName:  "patients",
+			ProtobufType:       "string",
 			ProtobufPos:        19,
 		},
 	},

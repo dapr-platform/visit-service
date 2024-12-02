@@ -32,7 +32,7 @@ Table: o_camera
 
 JSON Sample
 -------------------------------------
-{    "id": "paYZphKLIQthLMMlsnVSZXIkp",    "device_name": "McjTYDXDrXYAECtQumegEcmAr",    "device_no": "ZGVHscPFsdibqHfkbhcFeFLbn",    "location_type": 43,    "device_type": 40,    "manufacturer": "RCGsFxwEhNVTLMGUqcdUXqhoY",    "main_stream_url": "yvlygIOjvqlqMkAmWFWQotjGe",    "sub_stream_url": "UDusCItUWQgETtADbRmXQKSZm",    "rel_vr_camera_id": "ImbYyDvsrBDQnnXorjuXlXSwJ",    "status": 5}
+{    "id": "OOyFpOAWWLxaMalSIJRCWefrr",    "device_name": "EPDYQNanaVhrrZRUKUPQIwwAB",    "device_no": "cOqcjXNjOEZHDcLVukBcQXHgD",    "location_type": 98,    "device_type": 19,    "manufacturer": "toNUDaqQKPeShVFDRsmKiXZOG",    "main_stream_url": "FeibUwvdusgBZpfvVhrGNTMIK",    "sub_stream_url": "bttWKRcZKBAHATtdRVvoPyUYu",    "rel_vr_camera_id": "uLKAnnUomoSmFDichaxIKKVys",    "status": 24}
 
 
 

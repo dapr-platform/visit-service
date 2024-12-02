@@ -35,7 +35,7 @@ func InitHead_displayRoute(r chi.Router) {
 // @Router /head-display/batch-upsert [post]
 func batchUpsertHead_displayHandler(w http.ResponseWriter, r *http.Request) {
 
-	var entities []map[string]any
+	var entities []model.Head_display
 	err := common.ReadRequestBody(r, &entities)
 	if err != nil {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
@@ -45,13 +45,25 @@ func batchUpsertHead_displayHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
 		return
 	}
+
+	beforeHook, exists := common.GetUpsertBeforeHook("Head_display")
+	if exists {
+		for _, v := range entities {
+			_, err1 := beforeHook(r, v)
+			if err1 != nil {
+				common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+				return
+			}
+		}
+
+	}
 	for _, v := range entities {
-		if v["id"] == "" {
-			v["id"] = common.NanoId()
+		if v.ID == "" {
+			v.ID = common.NanoId()
 		}
 	}
 
-	err = common.DbBatchUpsert[map[string]any](r.Context(), common.GetDaprClient(), entities, model.Head_displayTableInfo.Name, model.Head_display_FIELD_NAME_id)
+	err = common.DbBatchUpsert[model.Head_display](r.Context(), common.GetDaprClient(), entities, model.Head_displayTableInfo.Name, model.Head_display_FIELD_NAME_id)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
@@ -121,9 +133,7 @@ func UpsertHead_displayHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
 		return
 	}
-	if val.ID == "" {
-		val.ID = common.NanoId()
-	}
+
 	beforeHook, exists := common.GetUpsertBeforeHook("Head_display")
 	if exists {
 		v, err1 := beforeHook(r, val)
@@ -133,7 +143,9 @@ func UpsertHead_displayHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		val = v.(model.Head_display)
 	}
-
+	if val.ID == "" {
+		val.ID = common.NanoId()
+	}
 	err = common.DbUpsert[model.Head_display](r.Context(), common.GetDaprClient(), val, model.Head_displayTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

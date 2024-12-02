@@ -35,7 +35,7 @@ func InitUserRoute(r chi.Router) {
 // @Router /user/batch-upsert [post]
 func batchUpsertUserHandler(w http.ResponseWriter, r *http.Request) {
 
-	var entities []map[string]any
+	var entities []model.User
 	err := common.ReadRequestBody(r, &entities)
 	if err != nil {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
@@ -45,13 +45,25 @@ func batchUpsertUserHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
 		return
 	}
+
+	beforeHook, exists := common.GetUpsertBeforeHook("User")
+	if exists {
+		for _, v := range entities {
+			_, err1 := beforeHook(r, v)
+			if err1 != nil {
+				common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
+				return
+			}
+		}
+
+	}
 	for _, v := range entities {
-		if v["id"] == "" {
-			v["id"] = common.NanoId()
+		if v.ID == "" {
+			v.ID = common.NanoId()
 		}
 	}
 
-	err = common.DbBatchUpsert[map[string]any](r.Context(), common.GetDaprClient(), entities, model.UserTableInfo.Name, model.User_FIELD_NAME_id)
+	err = common.DbBatchUpsert[model.User](r.Context(), common.GetDaprClient(), entities, model.UserTableInfo.Name, model.User_FIELD_NAME_id)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
@@ -149,9 +161,7 @@ func UpsertUserHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
 		return
 	}
-	if val.ID == "" {
-		val.ID = common.NanoId()
-	}
+
 	beforeHook, exists := common.GetUpsertBeforeHook("User")
 	if exists {
 		v, err1 := beforeHook(r, val)
@@ -161,7 +171,9 @@ func UpsertUserHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		val = v.(model.User)
 	}
-
+	if val.ID == "" {
+		val.ID = common.NanoId()
+	}
 	err = common.DbUpsert[model.User](r.Context(), common.GetDaprClient(), val, model.UserTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

@@ -170,58 +170,60 @@ definitions:
   model.Family_member_info:
     properties:
       address:
-        description: address
+        description: 地址
         type: string
       avatar_url:
-        description: avatar_url
+        description: 头像
         type: string
       create_at:
-        description: create_at
+        description: 创建时间
         type: string
       email:
-        description: email
+        description: 邮箱
         type: string
       gender:
-        description: gender
+        description: 性别(0:未知,1:男,2:女)
         type: integer
       id:
-        description: id
+        description: 家属ID
         type: string
       id_card:
-        description: id_card
+        description: 身份证
         type: string
       identity:
-        description: identity
+        description: 用户标识
         type: string
       mobile:
-        description: mobile
+        description: 手机号
         type: string
       name:
-        description: name
+        description: 姓名
         type: string
       org_id:
-        description: org_id
+        description: 组织ID
         type: string
-      password:
-        description: password
-        type: string
+      patients:
+        description: 关联的病患信息列表
       remark:
-        description: remark
+        description: 备注
         type: string
       status:
-        description: status
+        description: 状态(1:正常,2:禁止登陆,3:删除)
         type: integer
       tenant_id:
-        description: tenant_id
+        description: 租户ID
         type: string
       type:
-        description: type
+        description: 用户类型(3:访客)
         type: integer
       update_at:
-        description: update_at
+        description: 更新时间
         type: string
       work_number:
-        description: work_number
+        description: 工号
+        type: string
+      zh_name:
+        description: 中文名
         type: string
     type: object
   model.Head_display:
@@ -410,6 +412,27 @@ definitions:
         description: 病房名称
         type: string
     type: object
+  model.Patient_relative:
+    properties:
+      create_time:
+        description: 创建时间
+        type: string
+      id:
+        description: 关联ID
+        type: string
+      patient_id:
+        description: 病患ID
+        type: string
+      relationship:
+        description: 与患者关系(父母,配偶,子女,其他)
+        type: string
+      relative_id:
+        description: 家属ID
+        type: string
+      status:
+        description: 状态(0:正常,1:解除关联)
+        type: integer
+    type: object
   model.System_config:
     properties:
       config_desc:
@@ -437,7 +460,7 @@ definitions:
   model.User:
     properties:
       address:
-        description: address
+        description: 地址
         type: string
       avatar_url:
         description: 头像
@@ -446,10 +469,10 @@ definitions:
         description: 创建时间
         type: string
       email:
-        description: email
+        description: 邮箱
         type: string
       gender:
-        description: gender
+        description: 性别(0:未知,1:男,2:女)
         type: integer
       id:
         description: Primary Key
@@ -461,16 +484,16 @@ definitions:
         description: 用户标识
         type: string
       mobile:
-        description: mobile
+        description: 手机号
         type: string
       name:
-        description: name
+        description: 姓名
         type: string
       org_id:
         description: 组织ID
         type: string
       password:
-        description: password
+        description: 密码
         type: string
       remark:
         description: 备注
@@ -479,7 +502,7 @@ definitions:
         description: 状态(1正常，2:禁止登陆，3:删除
         type: integer
       tenant_id:
-        description: tenant_id
+        description: 租户ID
         type: string
       type:
         description: 用户类型,1:管理员,2:普通用户,3:访客
@@ -489,6 +512,9 @@ definitions:
         type: string
       work_number:
         description: 工号
+        type: string
+      zh_name:
+        description: 中文名
         type: string
     type: object
   model.Visit_record:
@@ -1592,6 +1618,10 @@ paths:
         in: query
         name: name
         type: string
+      - description: zh_name
+        in: query
+        name: zh_name
+        type: string
       - description: gender
         in: query
         name: gender
@@ -1599,10 +1629,6 @@ paths:
       - description: address
         in: query
         name: address
-        type: string
-      - description: password
-        in: query
-        name: password
         type: string
       - description: type
         in: query
@@ -1639,6 +1665,10 @@ paths:
       - description: status
         in: query
         name: status
+        type: string
+      - description: patients
+        in: query
+        name: patients
         type: string
       produces:
       - application/json
@@ -1704,6 +1734,10 @@ paths:
         in: query
         name: name
         type: string
+      - description: zh_name
+        in: query
+        name: zh_name
+        type: string
       - description: gender
         in: query
         name: gender
@@ -1711,10 +1745,6 @@ paths:
       - description: address
         in: query
         name: address
-        type: string
-      - description: password
-        in: query
-        name: password
         type: string
       - description: type
         in: query
@@ -1751,6 +1781,10 @@ paths:
       - description: status
         in: query
         name: status
+        type: string
+      - description: patients
+        in: query
+        name: patients
         type: string
       produces:
       - application/json
@@ -2881,6 +2915,247 @@ paths:
       summary: page query
       tags:
       - 病患信息视图
+  /patient-relative:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: relationship
+        in: query
+        name: relationship
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: create_time
+        in: query
+        name: create_time
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Patient_relative'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - 病患-家属关联
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Patient_relative'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Patient_relative'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - 病患-家属关联
+  /patient-relative/{id}:
+    delete:
+      description: delete
+      parameters:
+      - description: 实例id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Patient_relative'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: delete
+      tags:
+      - 病患-家属关联
+  /patient-relative/batch-delete:
+    post:
+      consumes:
+      - application/json
+      description: batch delete
+      parameters:
+      - description: id array
+        in: body
+        name: ids
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch delete
+      tags:
+      - 病患-家属关联
+  /patient-relative/batch-upsert:
+    post:
+      consumes:
+      - application/json
+      description: batch update
+      parameters:
+      - description: objects array
+        in: body
+        name: entities
+        required: true
+        schema:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch update
+      tags:
+      - 病患-家属关联
+  /patient-relative/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: relationship
+        in: query
+        name: relationship
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: create_time
+        in: query
+        name: create_time
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Patient_relative'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - 病患-家属关联
   /patient/{id}:
     delete:
       description: delete
@@ -3324,6 +3599,10 @@ paths:
         in: query
         name: name
         type: string
+      - description: zh_name
+        in: query
+        name: zh_name
+        type: string
       - description: gender
         in: query
         name: gender
@@ -3392,7 +3671,7 @@ paths:
             $ref: '#/definitions/common.Response'
       summary: query objects
       tags:
-      - User
+      - 用户
     post:
       consumes:
       - application/json
@@ -3422,7 +3701,7 @@ paths:
             $ref: '#/definitions/common.Response'
       summary: save
       tags:
-      - User
+      - 用户
   /user/{id}:
     delete:
       description: delete
@@ -3450,7 +3729,7 @@ paths:
             $ref: '#/definitions/common.Response'
       summary: delete
       tags:
-      - User
+      - 用户
   /user/batch-delete:
     post:
       consumes:
@@ -3478,7 +3757,7 @@ paths:
             $ref: '#/definitions/common.Response'
       summary: batch delete
       tags:
-      - User
+      - 用户
   /user/batch-upsert:
     post:
       consumes:
@@ -3507,7 +3786,7 @@ paths:
             $ref: '#/definitions/common.Response'
       summary: batch update
       tags:
-      - User
+      - 用户
   /user/page:
     get:
       description: page query, _page(from 1 begin), _page_size, _order, and others
@@ -3550,6 +3829,10 @@ paths:
       - description: name
         in: query
         name: name
+        type: string
+      - description: zh_name
+        in: query
+        name: zh_name
         type: string
       - description: gender
         in: query
@@ -3624,7 +3907,7 @@ paths:
             $ref: '#/definitions/common.Response'
       summary: page query
       tags:
-      - User
+      - 用户
   /visit-record:
     get:
       description: query objects

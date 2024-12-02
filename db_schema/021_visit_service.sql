@@ -305,16 +305,96 @@ COMMENT ON COLUMN o_system_config.config_unit IS '配置单位';
 COMMENT ON COLUMN o_system_config.config_desc IS '配置描述';
 COMMENT ON COLUMN o_system_config.status IS '状态';
 
+
+-- 病患-家属关联表
+CREATE TABLE o_patient_relative (
+    id VARCHAR(32) NOT NULL,
+    patient_id VARCHAR(32) NOT NULL,
+    relative_id VARCHAR(32) NOT NULL,
+    relationship VARCHAR(32) NOT NULL,
+    status INTEGER NOT NULL DEFAULT 0,
+    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+CREATE INDEX idx_patient_relative_patient_id ON o_patient_relative (patient_id);
+CREATE INDEX idx_patient_relative_relative_id ON o_patient_relative (relative_id);
+
+COMMENT ON TABLE o_patient_relative IS '病患-家属关联表';
+COMMENT ON COLUMN o_patient_relative.id IS '关联ID';
+COMMENT ON COLUMN o_patient_relative.patient_id IS '病患ID';
+COMMENT ON COLUMN o_patient_relative.relative_id IS '家属ID';
+COMMENT ON COLUMN o_patient_relative.relationship IS '与患者关系(父母,配偶,子女,其他)';
+COMMENT ON COLUMN o_patient_relative.status IS '状态(0:正常,1:解除关联)';
+COMMENT ON COLUMN o_patient_relative.create_time IS '创建时间';
+
 CREATE OR REPLACE VIEW v_family_member_info AS
-SELECT * FROM o_user WHERE type = 3;
+SELECT 
+    u.id,
+    u.tenant_id,
+    u.mobile,
+    u.email,
+    u.identity,
+    u.name,
+    u.zh_name,
+    u.gender,
+    u.address,
+    u.type,
+    u.org_id,
+    u.id_card,
+    u.work_number,
+    u.avatar_url,
+    u.create_at,
+    u.update_at,
+    u.remark,
+    u.status,
+    json_agg(
+        json_build_object(
+            'patient_id', p.id,
+            'patient_name', p.name,
+            'hospital_no', p.hospital_no,
+            'ward_name', w.name,
+            'bed_no', b.bed_no,
+            'relationship', pr.relationship,
+            'relative_status', pr.status
+        )
+    ) FILTER (WHERE p.id IS NOT NULL) as patients
+FROM o_user u 
+LEFT JOIN o_patient_relative pr ON u.id = pr.relative_id AND pr.status = 0
+LEFT JOIN o_patient p ON pr.patient_id = p.id AND p.status = 0
+LEFT JOIN o_bed b ON p.bed_id = b.id
+LEFT JOIN o_ward w ON p.ward_id = w.id
+WHERE u.type = 3
+GROUP BY u.id, u.tenant_id, u.mobile, u.email, u.identity, u.name, u.zh_name, 
+         u.gender, u.address, u.type, u.org_id, u.id_card, u.work_number,
+         u.avatar_url, u.create_at, u.update_at, u.remark, u.status;
 
 COMMENT ON VIEW v_family_member_info IS '家属信息视图';
+COMMENT ON COLUMN v_family_member_info.id IS '家属ID';
+COMMENT ON COLUMN v_family_member_info.tenant_id IS '租户ID';
+COMMENT ON COLUMN v_family_member_info.mobile IS '手机号';
+COMMENT ON COLUMN v_family_member_info.email IS '邮箱';
+COMMENT ON COLUMN v_family_member_info.identity IS '用户标识';
+COMMENT ON COLUMN v_family_member_info.name IS '姓名';
+COMMENT ON COLUMN v_family_member_info.zh_name IS '中文名';
+COMMENT ON COLUMN v_family_member_info.gender IS '性别(0:未知,1:男,2:女)';
+COMMENT ON COLUMN v_family_member_info.address IS '地址';
+COMMENT ON COLUMN v_family_member_info.type IS '用户类型(3:访客)';
+COMMENT ON COLUMN v_family_member_info.org_id IS '组织ID';
+COMMENT ON COLUMN v_family_member_info.id_card IS '身份证';
+COMMENT ON COLUMN v_family_member_info.work_number IS '工号';
+COMMENT ON COLUMN v_family_member_info.avatar_url IS '头像';
+COMMENT ON COLUMN v_family_member_info.create_at IS '创建时间';
+COMMENT ON COLUMN v_family_member_info.update_at IS '更新时间';
+COMMENT ON COLUMN v_family_member_info.remark IS '备注';
+COMMENT ON COLUMN v_family_member_info.status IS '状态(1:正常,2:禁止登陆,3:删除)';
+COMMENT ON COLUMN v_family_member_info.patients IS '关联的病患信息列表';
 
 -- +goose StatementEnd
 
 -- +goose Down
 -- +goose StatementBegin
 DROP VIEW IF EXISTS v_family_member_info CASCADE;
+DROP TABLE IF EXISTS o_patient_relative CASCADE;
 DROP VIEW IF EXISTS v_bed_info CASCADE;
 DROP VIEW IF EXISTS v_patient_info CASCADE;
 DROP VIEW IF EXISTS v_visit_record_info CASCADE;

@@ -433,6 +433,48 @@ definitions:
         description: 状态(0:正常,1:解除关联)
         type: integer
     type: object
+  model.Patient_relative_info:
+    properties:
+      bed_no:
+        description: 床位号
+        type: string
+      create_time:
+        description: 创建时间
+        type: string
+      hospital_no:
+        description: 住院号
+        type: string
+      id:
+        description: 关联ID
+        type: string
+      patient_id:
+        description: 病患ID
+        type: string
+      patient_name:
+        description: 病患姓名
+        type: string
+      relationship:
+        description: 与患者关系
+        type: string
+      relative_id:
+        description: 家属ID
+        type: string
+      relative_id_card:
+        description: 家属身份证号
+        type: string
+      relative_mobile:
+        description: 家属手机号
+        type: string
+      relative_name:
+        description: 家属姓名
+        type: string
+      status:
+        description: 状态
+        type: integer
+      ward_name:
+        description: 病房名称
+        type: string
+    type: object
   model.System_config:
     properties:
       config_desc:
@@ -3002,6 +3044,188 @@ paths:
       summary: save
       tags:
       - 病患-家属关联
+  /patient-relative-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: relationship
+        in: query
+        name: relationship
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: create_time
+        in: query
+        name: create_time
+        type: string
+      - description: patient_name
+        in: query
+        name: patient_name
+        type: string
+      - description: hospital_no
+        in: query
+        name: hospital_no
+        type: string
+      - description: ward_name
+        in: query
+        name: ward_name
+        type: string
+      - description: bed_no
+        in: query
+        name: bed_no
+        type: string
+      - description: relative_name
+        in: query
+        name: relative_name
+        type: string
+      - description: relative_mobile
+        in: query
+        name: relative_mobile
+        type: string
+      - description: relative_id_card
+        in: query
+        name: relative_id_card
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Patient_relative_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - 病患-家属关联信息视图
+  /patient-relative-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: relationship
+        in: query
+        name: relationship
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: create_time
+        in: query
+        name: create_time
+        type: string
+      - description: patient_name
+        in: query
+        name: patient_name
+        type: string
+      - description: hospital_no
+        in: query
+        name: hospital_no
+        type: string
+      - description: ward_name
+        in: query
+        name: ward_name
+        type: string
+      - description: bed_no
+        in: query
+        name: bed_no
+        type: string
+      - description: relative_name
+        in: query
+        name: relative_name
+        type: string
+      - description: relative_mobile
+        in: query
+        name: relative_mobile
+        type: string
+      - description: relative_id_card
+        in: query
+        name: relative_id_card
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Patient_relative_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - 病患-家属关联信息视图
   /patient-relative/{id}:
     delete:
       description: delete

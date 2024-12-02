@@ -3739,6 +3739,292 @@ const docTemplate = `{
                 }
             }
         },
+        "/patient-relative-info": {
+            "get": {
+                "description": "query objects",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "病患-家属关联信息视图"
+                ],
+                "summary": "query objects",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_id",
+                        "name": "patient_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_id",
+                        "name": "relative_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relationship",
+                        "name": "relationship",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "create_time",
+                        "name": "create_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_name",
+                        "name": "patient_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "hospital_no",
+                        "name": "hospital_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "ward_name",
+                        "name": "ward_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "bed_no",
+                        "name": "bed_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_name",
+                        "name": "relative_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_mobile",
+                        "name": "relative_mobile",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_id_card",
+                        "name": "relative_id_card",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.Patient_relative_info"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/patient-relative-info/page": {
+            "get": {
+                "description": "page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "病患-家属关联信息视图"
+                ],
+                "summary": "page query",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "current page",
+                        "name": "_page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size",
+                        "name": "_page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_id",
+                        "name": "patient_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_id",
+                        "name": "relative_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relationship",
+                        "name": "relationship",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "create_time",
+                        "name": "create_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_name",
+                        "name": "patient_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "hospital_no",
+                        "name": "hospital_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "ward_name",
+                        "name": "ward_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "bed_no",
+                        "name": "bed_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_name",
+                        "name": "relative_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_mobile",
+                        "name": "relative_mobile",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_id_card",
+                        "name": "relative_id_card",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/definitions/common.Page"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "items": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/definitions/model.Patient_relative_info"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/patient-relative/batch-delete": {
             "post": {
                 "description": "batch delete",
@@ -7553,6 +7839,63 @@ const docTemplate = `{
                 "status": {
                     "description": "状态(0:正常,1:解除关联)",
                     "type": "integer"
+                }
+            }
+        },
+        "model.Patient_relative_info": {
+            "type": "object",
+            "properties": {
+                "bed_no": {
+                    "description": "床位号",
+                    "type": "string"
+                },
+                "create_time": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "hospital_no": {
+                    "description": "住院号",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "关联ID",
+                    "type": "string"
+                },
+                "patient_id": {
+                    "description": "病患ID",
+                    "type": "string"
+                },
+                "patient_name": {
+                    "description": "病患姓名",
+                    "type": "string"
+                },
+                "relationship": {
+                    "description": "与患者关系",
+                    "type": "string"
+                },
+                "relative_id": {
+                    "description": "家属ID",
+                    "type": "string"
+                },
+                "relative_id_card": {
+                    "description": "家属身份证号",
+                    "type": "string"
+                },
+                "relative_mobile": {
+                    "description": "家属手机号",
+                    "type": "string"
+                },
+                "relative_name": {
+                    "description": "家属姓名",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "状态",
+                    "type": "integer"
+                },
+                "ward_name": {
+                    "description": "病房名称",
+                    "type": "string"
                 }
             }
         },

@@ -32,7 +32,7 @@ Table: v_bed_info
 
 JSON Sample
 -------------------------------------
-{    "id": "QwFCbcEPqEQxfLsLikKuHRnTM",    "ward_id": "UsMntSIjQZigggAfZamQcYgvU",    "bed_no": "CwZvwErDIhXYUoDAsvntRlDXK",    "camera_id": "GFyfSWBajoycnFlxFaAxYCIQr",    "vr_camera_id": "tPejoVLkRwTFmLiWFnYCXyOMS",    "type": 11,    "status": 75,    "ward_name": "RewRgThMyupgdgvjLAxpeMgeO",    "camera_name": "kigwbxjtxXFvdqglJOoyXTZeW",    "vr_camera_name": "xjDMtrZJpBdoFkWADDmvQhxho"}
+{    "id": "UPHYAmAtYvcnKdKBFqpAhohrd",    "ward_id": "fMqUtZQfZZTFvsHCngoOrvRjF",    "bed_no": "gSQkcNObBHFWNrvsWKNRYLrPV",    "camera_id": "GULRriaZjlWlnrlMLSIZpeucC",    "vr_camera_id": "OQcDpIFNeLYrvgxHhQWADrPZc",    "type": 95,    "status": 25,    "ward_name": "HeyyejdubOXblLYuoYHAmWkOs",    "camera_name": "WmBVlifZwxkiiZqwaGwDDxZlS",    "vr_camera_name": "IlRKNktBiKWWRDVAGxXJgigho"}
 
 
 Comments

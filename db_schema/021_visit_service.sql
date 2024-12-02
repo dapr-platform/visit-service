@@ -327,6 +327,38 @@ COMMENT ON COLUMN o_patient_relative.relationship IS '与患者关系(父母,配
 COMMENT ON COLUMN o_patient_relative.status IS '状态(0:正常,1:解除关联)';
 COMMENT ON COLUMN o_patient_relative.create_time IS '创建时间';
 
+CREATE OR REPLACE VIEW v_patient_relative_info AS
+SELECT 
+    pr.*,
+    p.name AS patient_name,
+    p.hospital_no,
+    w.name AS ward_name,
+    b.bed_no,
+    u.name AS relative_name,
+    u.mobile AS relative_mobile,
+    u.id_card AS relative_id_card
+FROM o_patient_relative pr
+LEFT JOIN o_patient p ON pr.patient_id = p.id
+LEFT JOIN o_bed b ON p.bed_id = b.id 
+LEFT JOIN o_ward w ON p.ward_id = w.id
+LEFT JOIN o_user u ON pr.relative_id = u.id;
+
+COMMENT ON VIEW v_patient_relative_info IS '病患-家属关联信息视图';
+COMMENT ON COLUMN v_patient_relative_info.id IS '关联ID';
+COMMENT ON COLUMN v_patient_relative_info.patient_id IS '病患ID';
+COMMENT ON COLUMN v_patient_relative_info.relative_id IS '家属ID';
+COMMENT ON COLUMN v_patient_relative_info.relationship IS '与患者关系';
+COMMENT ON COLUMN v_patient_relative_info.status IS '状态';
+COMMENT ON COLUMN v_patient_relative_info.create_time IS '创建时间';
+COMMENT ON COLUMN v_patient_relative_info.patient_name IS '病患姓名';
+COMMENT ON COLUMN v_patient_relative_info.hospital_no IS '住院号';
+COMMENT ON COLUMN v_patient_relative_info.ward_name IS '病房名称';
+COMMENT ON COLUMN v_patient_relative_info.bed_no IS '床位号';
+COMMENT ON COLUMN v_patient_relative_info.relative_name IS '家属姓名';
+COMMENT ON COLUMN v_patient_relative_info.relative_mobile IS '家属手机号';
+COMMENT ON COLUMN v_patient_relative_info.relative_id_card IS '家属身份证号';
+
+
 CREATE OR REPLACE VIEW v_family_member_info AS
 SELECT 
     u.id,
@@ -394,6 +426,7 @@ COMMENT ON COLUMN v_family_member_info.patients IS '关联的病患信息列表'
 -- +goose Down
 -- +goose StatementBegin
 DROP VIEW IF EXISTS v_family_member_info CASCADE;
+DROP VIEW IF EXISTS v_patient_relative_info CASCADE;
 DROP TABLE IF EXISTS o_patient_relative CASCADE;
 DROP VIEW IF EXISTS v_bed_info CASCADE;
 DROP VIEW IF EXISTS v_patient_info CASCADE;

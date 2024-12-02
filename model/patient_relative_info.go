@@ -26,16 +26,17 @@ Table: v_patient_relative_info
 [ 5] create_time                                    TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
 [ 6] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 7] hospital_no                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 8] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 9] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[10] relative_name                                  VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[11] relative_mobile                                VARCHAR(15)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 15      default: []
-[12] relative_id_card                               VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[ 8] patient_status                                 INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[ 9] ward_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[10] bed_no                                         VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[11] relative_name                                  VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[12] relative_mobile                                VARCHAR(15)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 15      default: []
+[13] relative_id_card                               VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "MgnytcxYITslnboEMJAHiHHbN",    "patient_id": "duEWfNvmcQGvpGHIiNgjVpqhp",    "relative_id": "JYwQsNSBtTjZutOOKQnQduerd",    "relationship": "sCDgiTYqPiYtOHOuDoNtnXOSV",    "status": 73,    "create_time": 50,    "patient_name": "xAcccaeBDlXXIIIFnywuTymxE",    "hospital_no": "aAwJFdtYWlfSEfRMsLqfLycsu",    "ward_name": "YxSDPLsUiSqVNoHZhyOmonBje",    "bed_no": "dPfHousckIIoQieAkMdwPYhWe",    "relative_name": "OKoGFCwmklUqRaNDoEjIIZYIA",    "relative_mobile": "iZdjTqMnfkySCXPHscsCxenLY",    "relative_id_card": "aKBLACKFVbajPTGrllVZbjuNT"}
+{    "id": "QvpdChtiQvpQlmQVZQelBrXfR",    "patient_id": "nwTDkOwTnWhmUHsPPeDuSsIRu",    "relative_id": "QFoOSORgQILngQvQDhMONJIXi",    "relationship": "xBiMVAMDbwZkDfxywkJHXnxbf",    "status": 83,    "create_time": 12,    "patient_name": "iGSuHSDJkpJftavuxabFTjNVa",    "hospital_no": "qkABswliVrSxjGhJNsjGRCtCw",    "patient_status": 46,    "ward_name": "NjvFcEjUGcPgFwdCGWnpOhmOQ",    "bed_no": "cigpHUHxYCJtmGEsBCkERSdXY",    "relative_name": "ewbLNVmBTPYlZQfmKCGJOeXuN",    "relative_mobile": "VYYRpFcYjftgUfBbENIdYoBqF",    "relative_id_card": "NdIrlTmFqGJWCMpajIlunnaVY"}
 
 
 Comments
@@ -65,6 +66,8 @@ var (
 
 	Patient_relative_info_FIELD_NAME_hospital_no = "hospital_no"
 
+	Patient_relative_info_FIELD_NAME_patient_status = "patient_status"
+
 	Patient_relative_info_FIELD_NAME_ward_name = "ward_name"
 
 	Patient_relative_info_FIELD_NAME_bed_no = "bed_no"
@@ -93,6 +96,8 @@ type Patient_relative_info struct {
 	PatientName string `json:"patient_name"` //病患姓名
 
 	HospitalNo string `json:"hospital_no"` //住院号
+
+	PatientStatus int32 `json:"patient_status"` //病患状态
 
 	WardName string `json:"ward_name"` //病房名称
 
@@ -282,6 +287,27 @@ Warning table: v_patient_relative_info primary key column id is nullable column,
 
 		&ColumnInfo{
 			Index:              8,
+			Name:               "patient_status",
+			Comment:            `病患状态`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "INT4",
+			DatabaseTypePretty: "INT4",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "INT4",
+			ColumnLength:       -1,
+			GoFieldName:        "PatientStatus",
+			GoFieldType:        "int32",
+			JSONFieldName:      "patient_status",
+			ProtobufFieldName:  "patient_status",
+			ProtobufType:       "int32",
+			ProtobufPos:        9,
+		},
+
+		&ColumnInfo{
+			Index:              9,
 			Name:               "ward_name",
 			Comment:            `病房名称`,
 			Notes:              ``,
@@ -298,11 +324,11 @@ Warning table: v_patient_relative_info primary key column id is nullable column,
 			JSONFieldName:      "ward_name",
 			ProtobufFieldName:  "ward_name",
 			ProtobufType:       "string",
-			ProtobufPos:        9,
+			ProtobufPos:        10,
 		},
 
 		&ColumnInfo{
-			Index:              9,
+			Index:              10,
 			Name:               "bed_no",
 			Comment:            `床位号`,
 			Notes:              ``,
@@ -319,11 +345,11 @@ Warning table: v_patient_relative_info primary key column id is nullable column,
 			JSONFieldName:      "bed_no",
 			ProtobufFieldName:  "bed_no",
 			ProtobufType:       "string",
-			ProtobufPos:        10,
+			ProtobufPos:        11,
 		},
 
 		&ColumnInfo{
-			Index:              10,
+			Index:              11,
 			Name:               "relative_name",
 			Comment:            `家属姓名`,
 			Notes:              ``,
@@ -340,11 +366,11 @@ Warning table: v_patient_relative_info primary key column id is nullable column,
 			JSONFieldName:      "relative_name",
 			ProtobufFieldName:  "relative_name",
 			ProtobufType:       "string",
-			ProtobufPos:        11,
+			ProtobufPos:        12,
 		},
 
 		&ColumnInfo{
-			Index:              11,
+			Index:              12,
 			Name:               "relative_mobile",
 			Comment:            `家属手机号`,
 			Notes:              ``,
@@ -361,11 +387,11 @@ Warning table: v_patient_relative_info primary key column id is nullable column,
 			JSONFieldName:      "relative_mobile",
 			ProtobufFieldName:  "relative_mobile",
 			ProtobufType:       "string",
-			ProtobufPos:        12,
+			ProtobufPos:        13,
 		},
 
 		&ColumnInfo{
-			Index:              12,
+			Index:              13,
 			Name:               "relative_id_card",
 			Comment:            `家属身份证号`,
 			Notes:              ``,
@@ -382,7 +408,7 @@ Warning table: v_patient_relative_info primary key column id is nullable column,
 			JSONFieldName:      "relative_id_card",
 			ProtobufFieldName:  "relative_id_card",
 			ProtobufType:       "string",
-			ProtobufPos:        13,
+			ProtobufPos:        14,
 		},
 	},
 }

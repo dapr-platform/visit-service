@@ -5,7 +5,11 @@ import (
 	"github.com/go-chi/chi/v5"
 	"net/http"
 	"visit-service/model"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitFamily_member_infoRoute(r chi.Router) {
 

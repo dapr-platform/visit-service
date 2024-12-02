@@ -3812,6 +3812,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "patient_status",
+                        "name": "patient_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "ward_name",
                         "name": "ward_name",
                         "in": "query"
@@ -3949,6 +3955,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "hospital_no",
                         "name": "hospital_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_status",
+                        "name": "patient_status",
                         "in": "query"
                     },
                     {
@@ -7868,6 +7880,10 @@ const docTemplate = `{
                 "patient_name": {
                     "description": "病患姓名",
                     "type": "string"
+                },
+                "patient_status": {
+                    "description": "病患状态",
+                    "type": "integer"
                 },
                 "relationship": {
                     "description": "与患者关系",

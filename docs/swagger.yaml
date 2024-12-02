@@ -453,6 +453,9 @@ definitions:
       patient_name:
         description: 病患姓名
         type: string
+      patient_status:
+        description: 病患状态
+        type: integer
       relationship:
         description: 与患者关系
         type: string
@@ -3088,6 +3091,10 @@ paths:
         in: query
         name: hospital_no
         type: string
+      - description: patient_status
+        in: query
+        name: patient_status
+        type: string
       - description: ward_name
         in: query
         name: ward_name
@@ -3179,6 +3186,10 @@ paths:
       - description: hospital_no
         in: query
         name: hospital_no
+        type: string
+      - description: patient_status
+        in: query
+        name: patient_status
         type: string
       - description: ward_name
         in: query

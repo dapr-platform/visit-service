@@ -5,7 +5,11 @@ import (
 	"github.com/go-chi/chi/v5"
 	"net/http"
 	"visit-service/model"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitPatient_relative_infoRoute(r chi.Router) {
 
@@ -28,6 +32,7 @@ func InitPatient_relative_infoRoute(r chi.Router) {
 // @Param create_time query string false "create_time"
 // @Param patient_name query string false "patient_name"
 // @Param hospital_no query string false "hospital_no"
+// @Param patient_status query string false "patient_status"
 // @Param ward_name query string false "ward_name"
 // @Param bed_no query string false "bed_no"
 // @Param relative_name query string false "relative_name"
@@ -62,6 +67,7 @@ func Patient_relative_infoPageListHandler(w http.ResponseWriter, r *http.Request
 // @Param create_time query string false "create_time"
 // @Param patient_name query string false "patient_name"
 // @Param hospital_no query string false "hospital_no"
+// @Param patient_status query string false "patient_status"
 // @Param ward_name query string false "ward_name"
 // @Param bed_no query string false "bed_no"
 // @Param relative_name query string false "relative_name"

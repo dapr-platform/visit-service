@@ -332,6 +332,7 @@ SELECT
     pr.*,
     p.name AS patient_name,
     p.hospital_no,
+    p.status AS patient_status,
     w.name AS ward_name,
     b.bed_no,
     u.name AS relative_name,
@@ -346,6 +347,7 @@ LEFT JOIN o_user u ON pr.relative_id = u.id;
 COMMENT ON VIEW v_patient_relative_info IS '病患-家属关联信息视图';
 COMMENT ON COLUMN v_patient_relative_info.id IS '关联ID';
 COMMENT ON COLUMN v_patient_relative_info.patient_id IS '病患ID';
+COMMENT ON COLUMN v_patient_relative_info.patient_status IS '病患状态';
 COMMENT ON COLUMN v_patient_relative_info.relative_id IS '家属ID';
 COMMENT ON COLUMN v_patient_relative_info.relationship IS '与患者关系';
 COMMENT ON COLUMN v_patient_relative_info.status IS '状态';

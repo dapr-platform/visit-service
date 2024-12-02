@@ -7,7 +7,11 @@ import (
 	"visit-service/model"
 
 	"strings"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitUserRoute(r chi.Router) {
 
@@ -61,6 +65,15 @@ func batchUpsertUserHandler(w http.ResponseWriter, r *http.Request) {
 		if v.ID == "" {
 			v.ID = common.NanoId()
 		}
+
+		if time.Time(v.CreateAt).IsZero() {
+			v.CreateAt = common.LocalTime(time.Now())
+		}
+
+		if time.Time(v.UpdateAt).IsZero() {
+			v.UpdateAt = common.LocalTime(time.Now())
+		}
+
 	}
 
 	err = common.DbBatchUpsert[model.User](r.Context(), common.GetDaprClient(), entities, model.UserTableInfo.Name, model.User_FIELD_NAME_id)
@@ -174,6 +187,15 @@ func UpsertUserHandler(w http.ResponseWriter, r *http.Request) {
 	if val.ID == "" {
 		val.ID = common.NanoId()
 	}
+
+	if time.Time(val.CreateAt).IsZero() {
+		val.CreateAt = common.LocalTime(time.Now())
+	}
+
+	if time.Time(val.UpdateAt).IsZero() {
+		val.UpdateAt = common.LocalTime(time.Now())
+	}
+
 	err = common.DbUpsert[model.User](r.Context(), common.GetDaprClient(), val, model.UserTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

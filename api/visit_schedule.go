@@ -7,7 +7,11 @@ import (
 	"visit-service/model"
 
 	"strings"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitVisit_scheduleRoute(r chi.Router) {
 
@@ -61,6 +65,15 @@ func batchUpsertVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
 		if v.ID == "" {
 			v.ID = common.NanoId()
 		}
+
+		if time.Time(v.StartTime).IsZero() {
+			v.StartTime = common.LocalTime(time.Now())
+		}
+
+		if time.Time(v.EndTime).IsZero() {
+			v.EndTime = common.LocalTime(time.Now())
+		}
+
 	}
 
 	err = common.DbBatchUpsert[model.Visit_schedule](r.Context(), common.GetDaprClient(), entities, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
@@ -148,6 +161,15 @@ func UpsertVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
 	if val.ID == "" {
 		val.ID = common.NanoId()
 	}
+
+	if time.Time(val.StartTime).IsZero() {
+		val.StartTime = common.LocalTime(time.Now())
+	}
+
+	if time.Time(val.EndTime).IsZero() {
+		val.EndTime = common.LocalTime(time.Now())
+	}
+
 	err = common.DbUpsert[model.Visit_schedule](r.Context(), common.GetDaprClient(), val, model.Visit_scheduleTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

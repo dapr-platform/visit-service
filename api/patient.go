@@ -7,7 +7,11 @@ import (
 	"visit-service/model"
 
 	"strings"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitPatientRoute(r chi.Router) {
 
@@ -61,6 +65,7 @@ func batchUpsertPatientHandler(w http.ResponseWriter, r *http.Request) {
 		if v.ID == "" {
 			v.ID = common.NanoId()
 		}
+
 	}
 
 	err = common.DbBatchUpsert[model.Patient](r.Context(), common.GetDaprClient(), entities, model.PatientTableInfo.Name, model.Patient_FIELD_NAME_id)
@@ -150,6 +155,7 @@ func UpsertPatientHandler(w http.ResponseWriter, r *http.Request) {
 	if val.ID == "" {
 		val.ID = common.NanoId()
 	}
+
 	err = common.DbUpsert[model.Patient](r.Context(), common.GetDaprClient(), val, model.PatientTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

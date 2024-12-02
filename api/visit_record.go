@@ -7,7 +7,11 @@ import (
 	"visit-service/model"
 
 	"strings"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitVisit_recordRoute(r chi.Router) {
 
@@ -61,6 +65,15 @@ func batchUpsertVisit_recordHandler(w http.ResponseWriter, r *http.Request) {
 		if v.ID == "" {
 			v.ID = common.NanoId()
 		}
+
+		if time.Time(v.VisitStartTime).IsZero() {
+			v.VisitStartTime = common.LocalTime(time.Now())
+		}
+
+		if time.Time(v.VisitEndTime).IsZero() {
+			v.VisitEndTime = common.LocalTime(time.Now())
+		}
+
 	}
 
 	err = common.DbBatchUpsert[model.Visit_record](r.Context(), common.GetDaprClient(), entities, model.Visit_recordTableInfo.Name, model.Visit_record_FIELD_NAME_id)
@@ -164,6 +177,15 @@ func UpsertVisit_recordHandler(w http.ResponseWriter, r *http.Request) {
 	if val.ID == "" {
 		val.ID = common.NanoId()
 	}
+
+	if time.Time(val.VisitStartTime).IsZero() {
+		val.VisitStartTime = common.LocalTime(time.Now())
+	}
+
+	if time.Time(val.VisitEndTime).IsZero() {
+		val.VisitEndTime = common.LocalTime(time.Now())
+	}
+
 	err = common.DbUpsert[model.Visit_record](r.Context(), common.GetDaprClient(), val, model.Visit_recordTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

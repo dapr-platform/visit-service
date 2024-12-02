@@ -7,7 +7,11 @@ import (
 	"visit-service/model"
 
 	"strings"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitSystem_configRoute(r chi.Router) {
 
@@ -61,6 +65,7 @@ func batchUpsertSystem_configHandler(w http.ResponseWriter, r *http.Request) {
 		if v.ID == "" {
 			v.ID = common.NanoId()
 		}
+
 	}
 
 	err = common.DbBatchUpsert[model.System_config](r.Context(), common.GetDaprClient(), entities, model.System_configTableInfo.Name, model.System_config_FIELD_NAME_id)
@@ -150,6 +155,7 @@ func UpsertSystem_configHandler(w http.ResponseWriter, r *http.Request) {
 	if val.ID == "" {
 		val.ID = common.NanoId()
 	}
+
 	err = common.DbUpsert[model.System_config](r.Context(), common.GetDaprClient(), val, model.System_configTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

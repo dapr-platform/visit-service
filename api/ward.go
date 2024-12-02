@@ -7,7 +7,11 @@ import (
 	"visit-service/model"
 
 	"strings"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitWardRoute(r chi.Router) {
 
@@ -61,6 +65,7 @@ func batchUpsertWardHandler(w http.ResponseWriter, r *http.Request) {
 		if v.ID == "" {
 			v.ID = common.NanoId()
 		}
+
 	}
 
 	err = common.DbBatchUpsert[model.Ward](r.Context(), common.GetDaprClient(), entities, model.WardTableInfo.Name, model.Ward_FIELD_NAME_id)
@@ -144,6 +149,7 @@ func UpsertWardHandler(w http.ResponseWriter, r *http.Request) {
 	if val.ID == "" {
 		val.ID = common.NanoId()
 	}
+
 	err = common.DbUpsert[model.Ward](r.Context(), common.GetDaprClient(), val, model.WardTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

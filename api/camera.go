@@ -7,7 +7,11 @@ import (
 	"visit-service/model"
 
 	"strings"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitCameraRoute(r chi.Router) {
 
@@ -61,6 +65,7 @@ func batchUpsertCameraHandler(w http.ResponseWriter, r *http.Request) {
 		if v.ID == "" {
 			v.ID = common.NanoId()
 		}
+
 	}
 
 	err = common.DbBatchUpsert[model.Camera](r.Context(), common.GetDaprClient(), entities, model.CameraTableInfo.Name, model.Camera_FIELD_NAME_id)
@@ -156,6 +161,7 @@ func UpsertCameraHandler(w http.ResponseWriter, r *http.Request) {
 	if val.ID == "" {
 		val.ID = common.NanoId()
 	}
+
 	err = common.DbUpsert[model.Camera](r.Context(), common.GetDaprClient(), val, model.CameraTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

@@ -34,7 +34,7 @@ Table: o_live_record
 
 JSON Sample
 -------------------------------------
-{    "id": "LwCfYZYGyPLlKlWZyMspXwYBx",    "schedule_id": "LTNhpgsDuInpispCKMussLWMn",    "patient_id": "dYpytKetWMKFyjaOZwACHASTS",    "relative_id": "hXusajMgJxTUiPZrfxOUsoQYo",    "device_id": "uLxXLLUmqFkZXyJqMpYAZGVtN",    "start_time": 65,    "end_time": 92,    "file_size": 94,    "stream_id": "oVFGWpGTfysTKfOGefnqNFNNW",    "camera_id": "OaRXBwEqbWZrMJbQFKacDTnjH",    "vr_camera_id": "iErgJkWhDYChpaFQDYHFtwTLg",    "status": 5}
+{    "id": "leGldxPuLXRmOokcvxCFyZwNH",    "schedule_id": "MLXtOmEMbqTWEtPXgYZNPxQYl",    "patient_id": "nkjcQDUfWilEWZgTfHeknabSf",    "relative_id": "aKntcQyPegDkRmpwsjYjTAErC",    "device_id": "iXEchdjlgyHmRpdYZkYbbkYRW",    "start_time": 93,    "end_time": 15,    "file_size": 37,    "stream_id": "mvuoXpvbOUXbnPBggodytedQY",    "camera_id": "unKDCyAUQSNbbokYqiUvdNLrv",    "vr_camera_id": "WqDlFYTgxxWJcHGCVUaeFAjLP",    "status": 21}
 
 
 

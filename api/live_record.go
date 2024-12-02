@@ -7,7 +7,11 @@ import (
 	"visit-service/model"
 
 	"strings"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitLive_recordRoute(r chi.Router) {
 
@@ -61,6 +65,15 @@ func batchUpsertLive_recordHandler(w http.ResponseWriter, r *http.Request) {
 		if v.ID == "" {
 			v.ID = common.NanoId()
 		}
+
+		if time.Time(v.StartTime).IsZero() {
+			v.StartTime = common.LocalTime(time.Now())
+		}
+
+		if time.Time(v.EndTime).IsZero() {
+			v.EndTime = common.LocalTime(time.Now())
+		}
+
 	}
 
 	err = common.DbBatchUpsert[model.Live_record](r.Context(), common.GetDaprClient(), entities, model.Live_recordTableInfo.Name, model.Live_record_FIELD_NAME_id)
@@ -160,6 +173,15 @@ func UpsertLive_recordHandler(w http.ResponseWriter, r *http.Request) {
 	if val.ID == "" {
 		val.ID = common.NanoId()
 	}
+
+	if time.Time(val.StartTime).IsZero() {
+		val.StartTime = common.LocalTime(time.Now())
+	}
+
+	if time.Time(val.EndTime).IsZero() {
+		val.EndTime = common.LocalTime(time.Now())
+	}
+
 	err = common.DbUpsert[model.Live_record](r.Context(), common.GetDaprClient(), val, model.Live_recordTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

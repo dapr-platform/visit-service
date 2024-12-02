@@ -7,7 +7,11 @@ import (
 	"visit-service/model"
 
 	"strings"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitPatient_relativeRoute(r chi.Router) {
 
@@ -61,6 +65,11 @@ func batchUpsertPatient_relativeHandler(w http.ResponseWriter, r *http.Request) 
 		if v.ID == "" {
 			v.ID = common.NanoId()
 		}
+
+		if time.Time(v.CreateTime).IsZero() {
+			v.CreateTime = common.LocalTime(time.Now())
+		}
+
 	}
 
 	err = common.DbBatchUpsert[model.Patient_relative](r.Context(), common.GetDaprClient(), entities, model.Patient_relativeTableInfo.Name, model.Patient_relative_FIELD_NAME_id)
@@ -148,6 +157,11 @@ func UpsertPatient_relativeHandler(w http.ResponseWriter, r *http.Request) {
 	if val.ID == "" {
 		val.ID = common.NanoId()
 	}
+
+	if time.Time(val.CreateTime).IsZero() {
+		val.CreateTime = common.LocalTime(time.Now())
+	}
+
 	err = common.DbUpsert[model.Patient_relative](r.Context(), common.GetDaprClient(), val, model.Patient_relativeTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

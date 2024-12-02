@@ -7,7 +7,11 @@ import (
 	"visit-service/model"
 
 	"strings"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitBedRoute(r chi.Router) {
 
@@ -61,6 +65,7 @@ func batchUpsertBedHandler(w http.ResponseWriter, r *http.Request) {
 		if v.ID == "" {
 			v.ID = common.NanoId()
 		}
+
 	}
 
 	err = common.DbBatchUpsert[model.Bed](r.Context(), common.GetDaprClient(), entities, model.BedTableInfo.Name, model.Bed_FIELD_NAME_id)
@@ -150,6 +155,7 @@ func UpsertBedHandler(w http.ResponseWriter, r *http.Request) {
 	if val.ID == "" {
 		val.ID = common.NanoId()
 	}
+
 	err = common.DbUpsert[model.Bed](r.Context(), common.GetDaprClient(), val, model.BedTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

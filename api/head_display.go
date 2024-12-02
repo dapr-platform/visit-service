@@ -7,7 +7,11 @@ import (
 	"visit-service/model"
 
 	"strings"
+
+	"time"
 )
+
+var _ = time.Now()
 
 func InitHead_displayRoute(r chi.Router) {
 
@@ -61,6 +65,7 @@ func batchUpsertHead_displayHandler(w http.ResponseWriter, r *http.Request) {
 		if v.ID == "" {
 			v.ID = common.NanoId()
 		}
+
 	}
 
 	err = common.DbBatchUpsert[model.Head_display](r.Context(), common.GetDaprClient(), entities, model.Head_displayTableInfo.Name, model.Head_display_FIELD_NAME_id)
@@ -146,6 +151,7 @@ func UpsertHead_displayHandler(w http.ResponseWriter, r *http.Request) {
 	if val.ID == "" {
 		val.ID = common.NanoId()
 	}
+
 	err = common.DbUpsert[model.Head_display](r.Context(), common.GetDaprClient(), val, model.Head_displayTableInfo.Name, "id")
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

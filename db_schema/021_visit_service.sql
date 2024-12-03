@@ -133,7 +133,7 @@ CREATE TABLE o_visit_schedule (
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
     total_visitors INTEGER NOT NULL,
-    remaining_visitors INTEGER NOT NULL DEFAULT 0,
+    schedule_visitors INTEGER NOT NULL DEFAULT 0,
     status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
@@ -143,7 +143,7 @@ COMMENT ON COLUMN o_visit_schedule.id IS '排班ID';
 COMMENT ON COLUMN o_visit_schedule.start_time IS '开始时间';
 COMMENT ON COLUMN o_visit_schedule.end_time IS '结束时间';
 COMMENT ON COLUMN o_visit_schedule.total_visitors IS '探视总人数';
-COMMENT ON COLUMN o_visit_schedule.remaining_visitors IS '探视剩余人数';
+COMMENT ON COLUMN o_visit_schedule.schedule_visitors IS '已预约人数';
 COMMENT ON COLUMN o_visit_schedule.status IS '状态(0:可预约,1:不可预约)';
 
 

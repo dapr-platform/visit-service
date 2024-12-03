@@ -672,8 +672,8 @@ definitions:
       id:
         description: 排班ID
         type: string
-      remaining_visitors:
-        description: 探视剩余人数
+      schedule_visitors:
+        description: 已预约人数
         type: integer
       start_time:
         description: 开始时间
@@ -4698,9 +4698,9 @@ paths:
         in: query
         name: total_visitors
         type: string
-      - description: remaining_visitors
+      - description: schedule_visitors
         in: query
-        name: remaining_visitors
+        name: schedule_visitors
         type: string
       - description: status
         in: query
@@ -4934,9 +4934,9 @@ paths:
         in: query
         name: total_visitors
         type: string
-      - description: remaining_visitors
+      - description: schedule_visitors
         in: query
-        name: remaining_visitors
+        name: schedule_visitors
         type: string
       - description: status
         in: query

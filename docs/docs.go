@@ -6350,8 +6350,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "remaining_visitors",
-                        "name": "remaining_visitors",
+                        "description": "schedule_visitors",
+                        "name": "schedule_visitors",
                         "in": "query"
                     },
                     {
@@ -6673,8 +6673,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "remaining_visitors",
-                        "name": "remaining_visitors",
+                        "description": "schedule_visitors",
+                        "name": "schedule_visitors",
                         "in": "query"
                     },
                     {
@@ -8178,8 +8178,8 @@ const docTemplate = `{
                     "description": "排班ID",
                     "type": "string"
                 },
-                "remaining_visitors": {
-                    "description": "探视剩余人数",
+                "schedule_visitors": {
+                    "description": "已预约人数",
                     "type": "integer"
                 },
                 "start_time": {

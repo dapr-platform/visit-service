@@ -95,7 +95,7 @@ func batchUpsertVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
 // @Param start_time query string false "start_time"
 // @Param end_time query string false "end_time"
 // @Param total_visitors query string false "total_visitors"
-// @Param remaining_visitors query string false "remaining_visitors"
+// @Param schedule_visitors query string false "schedule_visitors"
 // @Param status query string false "status"
 // @Produce  json
 // @Success 200 {object} common.Response{data=common.Page{items=[]model.Visit_schedule}} "objects array"
@@ -122,7 +122,7 @@ func Visit_schedulePageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param start_time query string false "start_time"
 // @Param end_time query string false "end_time"
 // @Param total_visitors query string false "total_visitors"
-// @Param remaining_visitors query string false "remaining_visitors"
+// @Param schedule_visitors query string false "schedule_visitors"
 // @Param status query string false "status"
 // @Produce  json
 // @Success 200 {object} common.Response{data=[]model.Visit_schedule} "objects array"

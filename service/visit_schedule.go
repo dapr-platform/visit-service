@@ -36,16 +36,16 @@ func FindVisitScheduleByStartTime(ctx context.Context, startTime common.LocalTim
 	}
 	return schedule, nil
 }
-func IncreaseVisitScheduleRemainingVisitors(ctx context.Context, schedule *model.Visit_schedule) error {
-	schedule.RemainingVisitors++
+func IncreaseVisitScheduleVisitors(ctx context.Context, schedule *model.Visit_schedule) error {
+	schedule.ScheduleVisitors++
 	err := common.DbUpsert[model.Visit_schedule](ctx, common.GetDaprClient(), *schedule, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
 	if err != nil {
 		return err
 	}
 	return nil
 }
-func DecreaseVisitScheduleRemainingVisitors(ctx context.Context, schedule *model.Visit_schedule) error {
-	schedule.RemainingVisitors--
+func DecreaseVisitScheduleVisitors(ctx context.Context, schedule *model.Visit_schedule) error {
+	schedule.ScheduleVisitors--
 	err := common.DbUpsert[model.Visit_schedule](ctx, common.GetDaprClient(), *schedule, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
 	if err != nil {
 		return err
@@ -70,7 +70,7 @@ func ManuAddVisitSchedule(startTime time.Time, endTime time.Time, totalVisitors 
 		StartTime:         common.LocalTime(startTime),
 		EndTime:           common.LocalTime(endTime),
 		TotalVisitors:     int32(totalVisitors),
-		RemainingVisitors: int32(totalVisitors),
+		ScheduleVisitors:  int32(0),
 		Status:            1,
 	}
 
@@ -237,7 +237,7 @@ func initVisitScheduleDaily(forceUpdate bool) error {
 					StartTime:         common.LocalTime(startTime),
 					EndTime:           common.LocalTime(endTime),
 					TotalVisitors:     int32(totalVisitors),
-					RemainingVisitors: int32(totalVisitors),
+					ScheduleVisitors:  int32(0),
 					Status:            int32(status),
 				}
 

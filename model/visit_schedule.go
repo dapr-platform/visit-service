@@ -22,13 +22,13 @@ Table: o_visit_schedule
 [ 1] start_time                                     TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
 [ 2] end_time                                       TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
 [ 3] total_visitors                                 INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[ 4] remaining_visitors                             INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[ 4] schedule_visitors                              INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 [ 5] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 
 JSON Sample
 -------------------------------------
-{    "id": "WoQoXgieqwZebyeUKpYuklClc",    "start_time": 26,    "end_time": 9,    "total_visitors": 8,    "remaining_visitors": 65,    "status": 86}
+{    "id": "ytAtbyCfQSMjmJEXALXGZbHdE",    "start_time": 10,    "end_time": 96,    "total_visitors": 4,    "schedule_visitors": 7,    "status": 73}
 
 
 
@@ -43,7 +43,7 @@ var (
 
 	Visit_schedule_FIELD_NAME_total_visitors = "total_visitors"
 
-	Visit_schedule_FIELD_NAME_remaining_visitors = "remaining_visitors"
+	Visit_schedule_FIELD_NAME_schedule_visitors = "schedule_visitors"
 
 	Visit_schedule_FIELD_NAME_status = "status"
 )
@@ -58,7 +58,7 @@ type Visit_schedule struct {
 
 	TotalVisitors int32 `json:"total_visitors"` //探视总人数
 
-	RemainingVisitors int32 `json:"remaining_visitors"` //探视剩余人数
+	ScheduleVisitors int32 `json:"schedule_visitors"` //已预约人数
 
 	Status int32 `json:"status"` //状态(0:可预约,1:不可预约)
 
@@ -154,8 +154,8 @@ var Visit_scheduleTableInfo = &TableInfo{
 
 		&ColumnInfo{
 			Index:              4,
-			Name:               "remaining_visitors",
-			Comment:            `探视剩余人数`,
+			Name:               "schedule_visitors",
+			Comment:            `已预约人数`,
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "INT4",
@@ -165,10 +165,10 @@ var Visit_scheduleTableInfo = &TableInfo{
 			IsArray:            false,
 			ColumnType:         "INT4",
 			ColumnLength:       -1,
-			GoFieldName:        "RemainingVisitors",
+			GoFieldName:        "ScheduleVisitors",
 			GoFieldType:        "int32",
-			JSONFieldName:      "remaining_visitors",
-			ProtobufFieldName:  "remaining_visitors",
+			JSONFieldName:      "schedule_visitors",
+			ProtobufFieldName:  "schedule_visitors",
 			ProtobufType:       "int32",
 			ProtobufPos:        5,
 		},

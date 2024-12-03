@@ -27,15 +27,15 @@ func init() {
 func UpsertVisit_record(r *http.Request, in any) (out any, err error) {
 	record := in.(model.Visit_record)
 	if record.CheckStatus == CHECK_STATUS_UNCHECKED { //未审核
-		if record.Status == VISIT_RECORD_STATUS_NORMAL { //正常状态可以新建
+		if record.Status == VISIT_RECORD_STATUS_NORMAL && record.ID == "" { //正常状态可以新建
 			err = newAddVisitRecord(r.Context(), &record)
-		} else if record.Status == VISIT_RECORD_STATUS_CANCEL { //取消状态，需要释放摄像头,并增加排班剩余人数
+		} else if record.Status == VISIT_RECORD_STATUS_CANCEL && record.CameraID != "" { //取消状态，需要释放摄像头,并减少排班已预约人数
 			err = cancelVisitRecord(r.Context(), &record)
 		}
-	} else if record.CheckStatus == CHECK_STATUS_CHECK_FAILED { //审核不通过，删除摄像头信息
-		record.CameraID = ""
-		record.VrCameraID = ""
+	} else if record.CheckStatus == CHECK_STATUS_CHECK_FAILED && record.CameraID != "" { //审核不通过，删除摄像头信息，并减少排班已预约人数
+		err = cancelVisitRecord(r.Context(), &record)
 	}
+
 	return record, err
 }
 func cancelVisitRecord(ctx context.Context, record *model.Visit_record) error {
@@ -44,9 +44,9 @@ func cancelVisitRecord(ctx context.Context, record *model.Visit_record) error {
 		return errors.Wrap(err, "查询排班信息失败")
 	}
 	if schedule != nil {
-		err = IncreaseVisitScheduleRemainingVisitors(ctx, schedule)
+		err = DecreaseVisitScheduleVisitors(ctx, schedule)
 		if err != nil {
-			return errors.Wrap(err, "增加排班剩余人数失败")
+			return errors.Wrap(err, "减少排班已预约人数失败")
 		}
 	}
 	record.CameraID = ""
@@ -62,8 +62,8 @@ func newAddVisitRecord(ctx context.Context, record *model.Visit_record) error {
 	if schedule == nil {
 		return errors.New("排班信息不存在")
 	}
-	if schedule.RemainingVisitors <= 0 {
-		return errors.New("排班剩余人数不足")
+	if schedule.ScheduleVisitors >= schedule.TotalVisitors {
+		return errors.New("排班已满")
 	}
 
 	patient, err := FindPatientInfo(ctx, record.PatientID)
@@ -106,9 +106,9 @@ func newAddVisitRecord(ctx context.Context, record *model.Visit_record) error {
 			}
 		}
 	}
-	err = DecreaseVisitScheduleRemainingVisitors(ctx, schedule)
+	err = IncreaseVisitScheduleVisitors(ctx, schedule)
 	if err != nil {
-		return errors.Wrap(err, "更新排班剩余人数失败")
+		return errors.Wrap(err, "更新排班已预约人数失败")
 	}
 	return nil
 }

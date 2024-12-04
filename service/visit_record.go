@@ -2,12 +2,15 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"sync"
+	"time"
 	"visit-service/model"
 
 	"github.com/dapr-platform/common"
 	"github.com/pkg/errors"
+	"github.com/robfig/cron/v3"
 	"github.com/spf13/cast"
 )
 
@@ -20,7 +23,18 @@ var VISIT_RECORD_STATUS_CANCEL int32 = 1 //取消
 var visitRecordNewLock = sync.Mutex{}
 
 func init() {
-
+	// 创建一个新的定时任务
+	scheduleCron = cron.New(cron.WithSeconds())
+	// 每分钟执行
+	_, err := scheduleCron.AddFunc("0 * * * * ?", func() {
+		if err := LoopCheckVisitRecord(); err != nil {
+			common.Logger.Errorf("Failed to loop check visit record: %v", err)
+		}
+	})
+	if err != nil {
+		panic(fmt.Sprintf("Failed to add cron job: %v", err))
+	}
+	scheduleCron.Start()
 	common.RegisterUpsertBeforeHook("Visit_record", UpsertVisit_record)
 }
 
@@ -128,4 +142,17 @@ func FindNearestVisitRecord(ctx context.Context, familyMemberID string) (*model.
 		return nil, err
 	}
 	return record, nil
+}
+
+func LoopCheckVisitRecordWillAfter5Minutes() error {
+	qstr := model.Visit_record_FIELD_NAME_visit_start_time + "=" + common.LocalTime(time.Now().Add(time.Minute * 5)).DbString()
+	qstr += "&" + model.Visit_record_FIELD_NAME_check_status + "=" + cast.ToString(CHECK_STATUS_CHECKED)
+	records, err := common.DbQuery[model.Visit_record](context.Background(), common.GetDaprClient(), model.Visit_recordTableInfo.Name, qstr)
+	if err != nil {
+		return errors.Wrap(err, "查询即将开始的预约记录失败")
+	}
+	for _, record := range records {
+		
+	}
+	return nil
 }

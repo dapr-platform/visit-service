@@ -210,6 +210,7 @@ CREATE TABLE o_visit_record (
     camera_id VARCHAR(32) NOT NULL,
     vr_camera_id VARCHAR(32) NOT NULL,
     check_status INTEGER NOT NULL DEFAULT 0,
+    send_sms_status INTEGER NOT NULL DEFAULT 0,
     status INTEGER NOT NULL DEFAULT 0,
     remark VARCHAR(1024) DEFAULT '',
     PRIMARY KEY (id)
@@ -228,11 +229,12 @@ COMMENT ON COLUMN o_visit_record.relationship IS '探视人与患者关系(父�
 COMMENT ON COLUMN o_visit_record.camera_id IS '床头摄像头ID';
 COMMENT ON COLUMN o_visit_record.vr_camera_id IS 'VR摄像头ID';
 COMMENT ON COLUMN o_visit_record.check_status IS '审核状态(0:未审核,1:已审核,2:审核不通过)';
+COMMENT ON COLUMN o_visit_record.send_sms_status IS '发送短信状态(0:未发送,1:已发送)';
 COMMENT ON COLUMN o_visit_record.status IS '状态(0:正常,1:取消)';
 COMMENT ON COLUMN o_visit_record.remark IS '备注';
 
 CREATE OR REPLACE VIEW v_visit_record_info AS
-SELECT r.*,p.name AS patient_name,p.name AS patient_ward_name,b.bed_no AS patient_bed_no,
+SELECT r.*,p.name AS patient_name,w.name AS patient_ward_name,b.bed_no AS patient_bed_no,
 (SELECT l.stream_id FROM o_live_record l WHERE l.schedule_id = r.id LIMIT 1) as stream_id
 FROM o_visit_record r,o_patient p,o_bed b,o_ward w 
 WHERE r.patient_id = p.id AND p.bed_id = b.id AND b.ward_id = w.id;
@@ -335,7 +337,7 @@ SELECT
     p.status AS patient_status,
     w.name AS ward_name,
     b.bed_no,
-    u.name AS relative_name,
+    u.zh_name AS relative_name,
     u.mobile AS relative_mobile,
     u.id_card AS relative_id_card
 FROM o_patient_relative pr

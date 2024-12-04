@@ -29,6 +29,7 @@ const (
 	CONFIG_SCHEDULE_MAX_VISITORS                    = "schedule_max_visitors"
 	CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR = "schedule_state_auto_available_begin_hour"
 	CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR   = "schedule_state_auto_available_end_hour"
+	CONFIG_NURSE_NOTIFY_PHONES                      = "nurse_notify_phones"
 )
 
 // ConfigManager 系统配置管理器
@@ -164,6 +165,13 @@ var (
 		ConfigDesc:  "排班状态自动可预约结束时间(小时)",
 		Status:      1,
 	}
+	nurseNotifyPhones = model.System_config{
+		ConfigName:  CONFIG_NURSE_NOTIFY_PHONES,
+		ConfigValue: "",
+		ConfigType:  "string",
+		ConfigDesc:  "护士短信通知手机号(多个手机号用,号分隔)",
+		Status:      1,
+	}
 
 	// 默认配置映射
 	defaultSystemConfigListMap = map[string]*model.System_config{
@@ -181,9 +189,10 @@ var (
 		CONFIG_SCHEDULE_TIME_SPAN:                       &scheduleTimeSpan,
 		CONFIG_SCHEDULE_GENERATE_DAYS:                   &scheduleGenerateDays,
 		CONFIG_SCHEDULE_AUTO_AVAILABLE_MAX_VISITORS:     &scheduleAutoAvailableMaxVisitors,
-		CONFIG_SCHEDULE_MAX_VISITORS:                     &scheduleMaxVisitors,
+		CONFIG_SCHEDULE_MAX_VISITORS:                    &scheduleMaxVisitors,
 		CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR: &scheduleStateAutoAvailableBeginHour,
 		CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR:   &scheduleStateAutoAvailableEndHour,
+		CONFIG_NURSE_NOTIFY_PHONES:                      &nurseNotifyPhones,
 	}
 )
 

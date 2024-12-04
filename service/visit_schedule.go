@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"time"
 	"visit-service/model"
 
@@ -26,6 +27,24 @@ func init() {
 		panic(fmt.Sprintf("Failed to add cron job: %v", err))
 	}
 	scheduleCron.Start()
+	common.RegisterUpsertBeforeHook("Visit_schedule", UpsertVisitSchedule)
+}
+
+func UpsertVisitSchedule(r *http.Request, in any) (out any, err error) {
+	schedule := in.(model.Visit_schedule)
+	if time.Time(schedule.StartTime).IsZero() {
+		return nil, fmt.Errorf("start time is zero")
+	}
+	intervalConfig, err := GetConfig(CONFIG_SCHEDULE_INTERVAL)
+	if err != nil {
+		common.Logger.Errorf("Failed to get schedule_interval config: %v", err)
+			return
+	}
+	schedule.EndTime = common.LocalTime(time.Time(schedule.StartTime).Add(time.Duration(cast.ToInt(intervalConfig.ConfigValue)) * time.Minute))
+	if schedule.ID == "" {
+		schedule.ID = time.Time(schedule.StartTime).Format("20060102150405")
+	}
+	return schedule, nil
 }
 
 func FindVisitScheduleByStartTime(ctx context.Context, startTime common.LocalTime) (*model.Visit_schedule, error) {

@@ -25,6 +25,7 @@ type AddStreamResponse struct {
 		Key string `json:"key"`
 	} `json:"data"`
 }
+
 func FindMovableCameras(ctx context.Context) ([]model.Camera_info, error) {
 	cameras, err := common.DbQuery[model.Camera_info](ctx, common.GetDaprClient(), model.Camera_infoTableInfo.Name, fmt.Sprintf("location_type=%d", LOCATION_TYPE_MOVABLE))
 	if err != nil {
@@ -32,7 +33,7 @@ func FindMovableCameras(ctx context.Context) ([]model.Camera_info, error) {
 	}
 	return cameras, nil
 }
-func StartCamLiveStream(cameraID string) (string, error) {
+func StartCamLiveStream(cameraID string, disableSaveMp4 bool) (string, error) {
 	// 1. 获取摄像头信息
 	cameras, err := common.DbQuery[model.Camera_info](context.Background(), common.GetDaprClient(), model.Camera_infoTableInfo.Name, fmt.Sprintf("id=%s", cameraID))
 	if err != nil {
@@ -55,7 +56,11 @@ func StartCamLiveStream(cameraID string) (string, error) {
 	params.Set("app", "live")
 	params.Set("stream", streamID)
 	params.Set("url", camera.MainStreamURL)
-	params.Set("enable_mp4", "1")
+	if disableSaveMp4 {
+		params.Set("enable_mp4", "0")
+	} else {
+		params.Set("enable_mp4", "1")
+	}
 	params.Set("enable_rtmp", "1")
 	params.Set("enable_audio", "1")
 	params.Set("mp4_save_path", streamPath)
@@ -78,7 +83,7 @@ func StartCamLiveStream(cameraID string) (string, error) {
 	if result.Code != 0 {
 		return "", fmt.Errorf("ZLMediaKit API returned error code: %d", result.Code)
 	}
-	
+
 	// 3. 返回流ID
 	return streamID, nil
 }

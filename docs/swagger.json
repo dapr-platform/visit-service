@@ -1158,6 +1158,64 @@
                 }
             }
         },
+        "/camera/livestream/preview": {
+            "post": {
+                "description": "Start a camera livestream preview, only for preview",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "摄像头"
+                ],
+                "summary": "Start camera livestream preview",
+                "parameters": [
+                    {
+                        "description": "Camera livestream preview request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.CamLiveStreamRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response with stream URL",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entity.CamLiveStreamResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request parameters",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/camera/livestream/start": {
             "post": {
                 "description": "Start a camera livestream for a specific room",
@@ -7285,6 +7343,9 @@
             "properties": {
                 "camera_id": {
                     "type": "string"
+                },
+                "disable_save_mp4": {
+                    "type": "boolean"
                 },
                 "user_id": {
                     "type": "string"

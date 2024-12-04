@@ -22,6 +22,8 @@ definitions:
     properties:
       camera_id:
         type: string
+      disable_save_mp4:
+        type: boolean
       user_id:
         type: string
     required:
@@ -1457,6 +1459,41 @@ paths:
           schema:
             $ref: '#/definitions/common.Response'
       summary: batch update
+      tags:
+      - 摄像头
+  /camera/livestream/preview:
+    post:
+      consumes:
+      - application/json
+      description: Start a camera livestream preview, only for preview
+      parameters:
+      - description: Camera livestream preview request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/entity.CamLiveStreamRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success response with stream URL
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/entity.CamLiveStreamResponse'
+              type: object
+        "400":
+          description: Invalid request parameters
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: Start camera livestream preview
       tags:
       - 摄像头
   /camera/livestream/start:

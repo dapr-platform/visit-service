@@ -5637,6 +5637,18 @@ const docTemplate = `{
                         "description": "remark",
                         "name": "remark",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "send_sms_status",
+                        "name": "send_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "send_prompt_sms_status",
+                        "name": "send_prompt_sms_status",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -6266,6 +6278,18 @@ const docTemplate = `{
                         "type": "string",
                         "description": "remark",
                         "name": "remark",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "send_sms_status",
+                        "name": "send_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "send_prompt_sms_status",
+                        "name": "send_prompt_sms_status",
                         "in": "query"
                     }
                 ],
@@ -8120,6 +8144,14 @@ const docTemplate = `{
                 "remark": {
                     "description": "备注",
                     "type": "string"
+                },
+                "send_prompt_sms_status": {
+                    "description": "发送提醒短信状态(0:未发送,1:已发送)",
+                    "type": "integer"
+                },
+                "send_sms_status": {
+                    "description": "发送短信状态(0:未发送,1:已发送)",
+                    "type": "integer"
                 },
                 "status": {
                     "description": "状态(0:正常,1:取消)",

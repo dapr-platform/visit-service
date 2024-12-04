@@ -32,11 +32,13 @@ Table: o_visit_record
 [11] check_status                                   INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 [12] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 [13] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+[14] send_sms_status                                INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[15] send_prompt_sms_status                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 
 JSON Sample
 -------------------------------------
-{    "id": "XOHJrjHaSnHInytGZqaDhIYXL",    "patient_id": "UStYrsZpVNHpkaQZHPyoBcTQs",    "relative_id": "CNqgHIwpGYJiBHfDehRaJvlFy",    "visit_start_time": 71,    "visit_end_time": 23,    "visitor_name": "mjBegqhmwdqVkmMLWMAWcNSEC",    "visitor_phone": "EvhZqkJLOsyOseDGTjniEFNhP",    "visitor_id_card": "QJUfpxPjyIMlPWxVOTIGrrapv",    "relationship": "IDDZrdTcdMIstaFlBEtBMFJlP",    "camera_id": "sKYuXnOgMDHgsMAcLhZgTlySK",    "vr_camera_id": "ysBtsvArhsDRCPIkngCCroTTu",    "check_status": 84,    "status": 64,    "remark": "kIYvqtRSRapXeBMQPcQwHFsmw"}
+{    "id": "AYPqDFMQrqEpbgwdttcfDUmVN",    "patient_id": "nULHVCcADaHVVjOuBxxDlOQnh",    "relative_id": "ApVMjTgciqjrSKZKdCVAiJImR",    "visit_start_time": 25,    "visit_end_time": 46,    "visitor_name": "TXIEWCBGdMQoMSQWprwuSfrja",    "visitor_phone": "kviiXsoXXnWoBYHVyHVpmOJti",    "visitor_id_card": "iYPvGidIsybbRUjbfDXHAqKLf",    "relationship": "USXNuFKvmjkWmSoJppXeojMBo",    "camera_id": "TFwNPeVytEydyuaVsCZqAjfgi",    "vr_camera_id": "sveywwgVNyUXIpNKgCppasXwA",    "check_status": 9,    "status": 50,    "remark": "bBsGPoYHyKYGQpdpBBmjWnkBm",    "send_sms_status": 47,    "send_prompt_sms_status": 5}
 
 
 
@@ -70,6 +72,10 @@ var (
 	Visit_record_FIELD_NAME_status = "status"
 
 	Visit_record_FIELD_NAME_remark = "remark"
+
+	Visit_record_FIELD_NAME_send_sms_status = "send_sms_status"
+
+	Visit_record_FIELD_NAME_send_prompt_sms_status = "send_prompt_sms_status"
 )
 
 // Visit_record struct is a row record of the o_visit_record table in the  database
@@ -101,6 +107,10 @@ type Visit_record struct {
 	Status int32 `json:"status"` //状态(0:正常,1:取消)
 
 	Remark string `json:"remark"` //备注
+
+	SendSmsStatus int32 `json:"send_sms_status"` //发送短信状态(0:未发送,1:已发送)
+
+	SendPromptSmsStatus int32 `json:"send_prompt_sms_status"` //发送提醒短信状态(0:未发送,1:已发送)
 
 }
 
@@ -400,6 +410,48 @@ var Visit_recordTableInfo = &TableInfo{
 			ProtobufFieldName:  "remark",
 			ProtobufType:       "string",
 			ProtobufPos:        14,
+		},
+
+		&ColumnInfo{
+			Index:              14,
+			Name:               "send_sms_status",
+			Comment:            `发送短信状态(0:未发送,1:已发送)`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "INT4",
+			DatabaseTypePretty: "INT4",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "INT4",
+			ColumnLength:       -1,
+			GoFieldName:        "SendSmsStatus",
+			GoFieldType:        "int32",
+			JSONFieldName:      "send_sms_status",
+			ProtobufFieldName:  "send_sms_status",
+			ProtobufType:       "int32",
+			ProtobufPos:        15,
+		},
+
+		&ColumnInfo{
+			Index:              15,
+			Name:               "send_prompt_sms_status",
+			Comment:            `发送提醒短信状态(0:未发送,1:已发送)`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "INT4",
+			DatabaseTypePretty: "INT4",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "INT4",
+			ColumnLength:       -1,
+			GoFieldName:        "SendPromptSmsStatus",
+			GoFieldType:        "int32",
+			JSONFieldName:      "send_prompt_sms_status",
+			ProtobufFieldName:  "send_prompt_sms_status",
+			ProtobufType:       "int32",
+			ProtobufPos:        16,
 		},
 	},
 }

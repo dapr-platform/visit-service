@@ -105,6 +105,8 @@ func batchUpsertVisit_recordHandler(w http.ResponseWriter, r *http.Request) {
 // @Param check_status query string false "check_status"
 // @Param status query string false "status"
 // @Param remark query string false "remark"
+// @Param send_sms_status query string false "send_sms_status"
+// @Param send_prompt_sms_status query string false "send_prompt_sms_status"
 // @Produce  json
 // @Success 200 {object} common.Response{data=common.Page{items=[]model.Visit_record}} "objects array"
 // @Failure 500 {object} common.Response ""
@@ -140,6 +142,8 @@ func Visit_recordPageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param check_status query string false "check_status"
 // @Param status query string false "status"
 // @Param remark query string false "remark"
+// @Param send_sms_status query string false "send_sms_status"
+// @Param send_prompt_sms_status query string false "send_prompt_sms_status"
 // @Produce  json
 // @Success 200 {object} common.Response{data=[]model.Visit_record} "objects array"
 // @Failure 500 {object} common.Response ""

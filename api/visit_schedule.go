@@ -167,7 +167,6 @@ func UpsertVisit_scheduleHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if time.Time(val.EndTime).IsZero() {
-		
 		val.EndTime = common.LocalTime(time.Now())
 	}
 

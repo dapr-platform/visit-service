@@ -587,6 +587,12 @@ definitions:
       remark:
         description: 备注
         type: string
+      send_prompt_sms_status:
+        description: 发送提醒短信状态(0:未发送,1:已发送)
+        type: integer
+      send_sms_status:
+        description: 发送短信状态(0:未发送,1:已发送)
+        type: integer
       status:
         description: 状态(0:正常,1:取消)
         type: integer
@@ -4248,6 +4254,14 @@ paths:
         in: query
         name: remark
         type: string
+      - description: send_sms_status
+        in: query
+        name: send_sms_status
+        type: string
+      - description: send_prompt_sms_status
+        in: query
+        name: send_prompt_sms_status
+        type: string
       produces:
       - application/json
       responses:
@@ -4680,6 +4694,14 @@ paths:
       - description: remark
         in: query
         name: remark
+        type: string
+      - description: send_sms_status
+        in: query
+        name: send_sms_status
+        type: string
+      - description: send_prompt_sms_status
+        in: query
+        name: send_prompt_sms_status
         type: string
       produces:
       - application/json

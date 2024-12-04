@@ -29,7 +29,7 @@ Table: o_system_config
 
 JSON Sample
 -------------------------------------
-{    "id": "KIZyQwjUqEjJPhSouRpLSVgPW",    "config_name": "HsmocccbLaWppbJNwPvjuTLEl",    "config_value": "VuaxfVhyZpLQpnOYQNEKCyqjS",    "config_type": "MwTCeIhvCIsTXKbZgTKvbZaBK",    "config_unit": "MMZvPRZGjhtfJNwokFKquQarq",    "config_desc": "OUarqkykeNbAkiIGsgagnplsb",    "status": 13}
+{    "id": "xodPmDjEcywZxGQHSdqQDTSUd",    "config_name": "KHlOgdYrkqQYQhGdCbOhwPXUx",    "config_value": "KyYlmXtgOjwnIUGFtEscCCGXN",    "config_type": "fxAtdfXDByEEwsWAbmKaEUNRK",    "config_unit": "NMKYCDVMOkdmpGTkijWgWyptW",    "config_desc": "IhVOMVMnDRFxCqeMraUyJsshk",    "status": 9}
 
 
 

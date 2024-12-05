@@ -57,7 +57,7 @@ type ZlmOnRecordMp4Req struct {
 func ZlmOnRecordMp4Handler(w http.ResponseWriter, r *http.Request) {
 	var req ZlmOnRecordMp4Req
 	common.ReadRequestBody(r, &req)
-	service.StopLiveRecord(r.Context(), req.Stream)
+	service.StopLiveRecord(r.Context(), req.Stream,req.FileSize,req.URL)
 	resp := make(map[string]any)
 	resp["code"] = 0
 	resp["msg"] = "success"

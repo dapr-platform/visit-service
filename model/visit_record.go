@@ -38,7 +38,7 @@ Table: o_visit_record
 
 JSON Sample
 -------------------------------------
-{    "id": "AYPqDFMQrqEpbgwdttcfDUmVN",    "patient_id": "nULHVCcADaHVVjOuBxxDlOQnh",    "relative_id": "ApVMjTgciqjrSKZKdCVAiJImR",    "visit_start_time": 25,    "visit_end_time": 46,    "visitor_name": "TXIEWCBGdMQoMSQWprwuSfrja",    "visitor_phone": "kviiXsoXXnWoBYHVyHVpmOJti",    "visitor_id_card": "iYPvGidIsybbRUjbfDXHAqKLf",    "relationship": "USXNuFKvmjkWmSoJppXeojMBo",    "camera_id": "TFwNPeVytEydyuaVsCZqAjfgi",    "vr_camera_id": "sveywwgVNyUXIpNKgCppasXwA",    "check_status": 9,    "status": 50,    "remark": "bBsGPoYHyKYGQpdpBBmjWnkBm",    "send_sms_status": 47,    "send_prompt_sms_status": 5}
+{    "id": "wUuKTvxbaQLkqkFSONNuWISJV",    "patient_id": "ifCwvonIAsGUQVrMHvIfaGtrj",    "relative_id": "jNfXWRLllKjkpDXufeqbpbLSC",    "visit_start_time": 4,    "visit_end_time": 63,    "visitor_name": "moatytitPXqMJXLWJhoTVjRey",    "visitor_phone": "NuQnQALwyMcIhOMqnticLyHxQ",    "visitor_id_card": "KKMRyfoTaaIZnqRCiqKqLjOKY",    "relationship": "lhjuxsyNDxkCrJcGWtxCmMwpB",    "camera_id": "ydiSUCCUduLZsHfUpwRyLaEsl",    "vr_camera_id": "DIuTYjUELwHkTUSxBvimRQOpb",    "check_status": 68,    "status": 74,    "remark": "FQFTsdDTVXhHgdTejKyQyWdft",    "send_sms_status": 13,    "send_prompt_sms_status": 5}
 
 
 

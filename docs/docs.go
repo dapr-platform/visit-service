@@ -2558,6 +2558,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "stream_url_suffix",
+                        "name": "stream_url_suffix",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "camera_id",
                         "name": "camera_id",
                         "in": "query"
@@ -2663,7 +2669,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "直播记录信息视图"
+                    "Live_record_info"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -2731,6 +2737,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "stream_id",
                         "name": "stream_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "stream_url_suffix",
+                        "name": "stream_url_suffix",
                         "in": "query"
                     },
                     {
@@ -2808,7 +2820,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "直播记录信息视图"
+                    "Live_record_info"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -2884,6 +2896,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "stream_id",
                         "name": "stream_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "stream_url_suffix",
+                        "name": "stream_url_suffix",
                         "in": "query"
                     },
                     {
@@ -3136,6 +3154,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "stream_id",
                         "name": "stream_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "stream_url_suffix",
+                        "name": "stream_url_suffix",
                         "in": "query"
                     },
                     {
@@ -5841,6 +5865,18 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "send_sms_status",
+                        "name": "send_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "send_prompt_sms_status",
+                        "name": "send_prompt_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "patient_name",
                         "name": "patient_name",
                         "in": "query"
@@ -5861,6 +5897,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "stream_id",
                         "name": "stream_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "stream_url_suffix",
+                        "name": "stream_url_suffix",
                         "in": "query"
                     }
                 ],
@@ -6012,6 +6054,18 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "send_sms_status",
+                        "name": "send_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "send_prompt_sms_status",
+                        "name": "send_prompt_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "patient_name",
                         "name": "patient_name",
                         "in": "query"
@@ -6032,6 +6086,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "stream_id",
                         "name": "stream_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "stream_url_suffix",
+                        "name": "stream_url_suffix",
                         "in": "query"
                     }
                 ],
@@ -7389,6 +7449,9 @@ const docTemplate = `{
                 "camera_id": {
                     "type": "string"
                 },
+                "mp4_stream_url_suffix": {
+                    "type": "string"
+                },
                 "status": {
                     "type": "integer"
                 },
@@ -7757,6 +7820,10 @@ const docTemplate = `{
                     "description": "流ID",
                     "type": "string"
                 },
+                "stream_url_suffix": {
+                    "description": "流URL后缀",
+                    "type": "string"
+                },
                 "vr_camera_id": {
                     "description": "VR摄像头ID",
                     "type": "string"
@@ -7771,55 +7838,59 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "device_id": {
-                    "description": "设备ID",
+                    "description": "device_id",
                     "type": "string"
                 },
                 "end_time": {
-                    "description": "直播结束时间",
+                    "description": "end_time",
                     "type": "string"
                 },
                 "file_size": {
-                    "description": "文件大小",
+                    "description": "file_size",
                     "type": "integer"
                 },
                 "id": {
-                    "description": "直播记录ID",
+                    "description": "id",
                     "type": "string"
                 },
                 "patient_bed_no": {
-                    "description": "床位号",
+                    "description": "patient_bed_no",
                     "type": "string"
                 },
                 "patient_id": {
-                    "description": "病患ID",
+                    "description": "patient_id",
                     "type": "string"
                 },
                 "patient_name": {
-                    "description": "病患姓名",
+                    "description": "patient_name",
                     "type": "string"
                 },
                 "patient_ward_name": {
-                    "description": "病房名称",
+                    "description": "patient_ward_name",
                     "type": "string"
                 },
                 "relative_id": {
-                    "description": "家属ID",
+                    "description": "relative_id",
                     "type": "string"
                 },
                 "schedule_id": {
-                    "description": "探视排班ID",
+                    "description": "schedule_id",
                     "type": "string"
                 },
                 "start_time": {
-                    "description": "直播开始时间",
+                    "description": "start_time",
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态(0:未开始,1:直播中,2:已结束)",
+                    "description": "status",
                     "type": "integer"
                 },
                 "stream_id": {
-                    "description": "流ID",
+                    "description": "stream_id",
+                    "type": "string"
+                },
+                "stream_url_suffix": {
+                    "description": "stream_url_suffix",
                     "type": "string"
                 },
                 "vr_camera_id": {
@@ -8226,12 +8297,24 @@ const docTemplate = `{
                     "description": "备注",
                     "type": "string"
                 },
+                "send_prompt_sms_status": {
+                    "description": "send_prompt_sms_status",
+                    "type": "integer"
+                },
+                "send_sms_status": {
+                    "description": "send_sms_status",
+                    "type": "integer"
+                },
                 "status": {
                     "description": "状态(0:正常,1:取消)",
                     "type": "integer"
                 },
                 "stream_id": {
                     "description": "直播流ID",
+                    "type": "string"
+                },
+                "stream_url_suffix": {
+                    "description": "stream_url_suffix",
                     "type": "string"
                 },
                 "visit_end_time": {

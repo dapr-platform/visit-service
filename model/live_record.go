@@ -27,14 +27,15 @@ Table: o_live_record
 [ 6] end_time                                       TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
 [ 7] file_size                                      INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
 [ 8] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[ 9] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[10] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[11] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[ 9] stream_url_suffix                              VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+[10] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[11] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[12] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 
 JSON Sample
 -------------------------------------
-{    "id": "HKeItsjdPxrVDeBRVnsotrsHK",    "schedule_id": "amLxhiuSrlUIsKFywdNSkAXUp",    "patient_id": "cSIhOjgKntXABdpgjAlblFfjJ",    "relative_id": "NuaBoVXDKTheablDpvSYPkELV",    "device_id": "uATJgICgBiRfNotTytKFKbMIH",    "start_time": 19,    "end_time": 3,    "file_size": 62,    "stream_id": "fekTxKAKtngvwILnhtEeenVoJ",    "camera_id": "tJFMEZcukAMAbFmKguwjMSdAH",    "vr_camera_id": "ghQxMXBjZARaPdRcEbVGpWQdK",    "status": 13}
+{    "id": "MxocpNQFgqkcvYnKxSRIhSaSn",    "schedule_id": "cReUFcFFhXGTfoNnJrcYELuxb",    "patient_id": "EIyQuCXKkdXvLbEronDKLdRQK",    "relative_id": "QEGvwoEjLKZOwNHVnpuAskiYE",    "device_id": "CmRnSuZuAXYrTfvuTiuQyjlDQ",    "start_time": 75,    "end_time": 42,    "file_size": 59,    "stream_id": "bqFZUpXRdZdREnYuuwYUkIIki",    "stream_url_suffix": "pidUaNZHvjnsLQPyluxgIgiyb",    "camera_id": "tBTWMJBSqTZwSXxbPKcDXpQfR",    "vr_camera_id": "yXCtPnmhJDhsAcGybiXnVPOvC",    "status": 24}
 
 
 
@@ -58,6 +59,8 @@ var (
 	Live_record_FIELD_NAME_file_size = "file_size"
 
 	Live_record_FIELD_NAME_stream_id = "stream_id"
+
+	Live_record_FIELD_NAME_stream_url_suffix = "stream_url_suffix"
 
 	Live_record_FIELD_NAME_camera_id = "camera_id"
 
@@ -85,6 +88,8 @@ type Live_record struct {
 	FileSize int32 `json:"file_size"` //文件大小
 
 	StreamID string `json:"stream_id"` //流ID
+
+	StreamURLSuffix string `json:"stream_url_suffix"` //流URL后缀
 
 	CameraID string `json:"camera_id"` //床头摄像头ID
 
@@ -289,6 +294,27 @@ var Live_recordTableInfo = &TableInfo{
 
 		&ColumnInfo{
 			Index:              9,
+			Name:               "stream_url_suffix",
+			Comment:            `流URL后缀`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(1024)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       1024,
+			GoFieldName:        "StreamURLSuffix",
+			GoFieldType:        "string",
+			JSONFieldName:      "stream_url_suffix",
+			ProtobufFieldName:  "stream_url_suffix",
+			ProtobufType:       "string",
+			ProtobufPos:        10,
+		},
+
+		&ColumnInfo{
+			Index:              10,
 			Name:               "camera_id",
 			Comment:            `床头摄像头ID`,
 			Notes:              ``,
@@ -305,11 +331,11 @@ var Live_recordTableInfo = &TableInfo{
 			JSONFieldName:      "camera_id",
 			ProtobufFieldName:  "camera_id",
 			ProtobufType:       "string",
-			ProtobufPos:        10,
+			ProtobufPos:        11,
 		},
 
 		&ColumnInfo{
-			Index:              10,
+			Index:              11,
 			Name:               "vr_camera_id",
 			Comment:            `VR摄像头ID`,
 			Notes:              ``,
@@ -326,11 +352,11 @@ var Live_recordTableInfo = &TableInfo{
 			JSONFieldName:      "vr_camera_id",
 			ProtobufFieldName:  "vr_camera_id",
 			ProtobufType:       "string",
-			ProtobufPos:        11,
+			ProtobufPos:        12,
 		},
 
 		&ColumnInfo{
-			Index:              11,
+			Index:              12,
 			Name:               "status",
 			Comment:            `状态(0:未开始,1:直播中,2:已结束)`,
 			Notes:              ``,
@@ -347,7 +373,7 @@ var Live_recordTableInfo = &TableInfo{
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
-			ProtobufPos:        12,
+			ProtobufPos:        13,
 		},
 	},
 }

@@ -28,7 +28,7 @@ Table: o_patient_relative
 
 JSON Sample
 -------------------------------------
-{    "id": "cftbTUQsCrHbPXOFLxpGGclnr",    "patient_id": "PmjCCjVWvDDumoeEAdUdmGxJy",    "relative_id": "hSjTHwWnrdkDjeUGmVuOuiqXf",    "relationship": "tpUCKyILRZHxTuhFLbiMDqONQ",    "status": 77,    "create_time": 94}
+{    "id": "nuISWSgFukGcpPMeVfasrohap",    "patient_id": "CnbEQWftxiHuLNlgMlnAWKawh",    "relative_id": "oxxLAxCFaUAIJEWPWGCtQptbu",    "relationship": "MDZbqqIJOuRHXWEcZNXTVGPxI",    "status": 15,    "create_time": 13}
 
 
 

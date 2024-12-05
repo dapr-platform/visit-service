@@ -27,7 +27,7 @@ Table: o_head_display
 
 JSON Sample
 -------------------------------------
-{    "id": "bQFYATYTtZHyeexcdWfVDOuRC",    "device_name": "eUvFDvOHLpCktmQkFDJHeBZNe",    "device_no": "bSwdwaGttTTVYtCKDJMeYgRmY",    "model": "LSCMUKxVnVqBOEHSGWKVnkInI",    "ward_id": "PfnKoWxwXuFuFZebyGLLrcDue"}
+{    "id": "qkeLdBeEvQZfgISQasfSFXIbQ",    "device_name": "aMSwIoTCBfJxEgCaxLbBWZqKF",    "device_no": "YrxlQLnuOEMgnBJuWZvFqviYT",    "model": "dlchIkiOUourdqQQSPHLuYdMP",    "ward_id": "uIGdwICjgimnIiFvtkshoDDKY"}
 
 
 

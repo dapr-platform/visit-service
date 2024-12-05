@@ -8,6 +8,7 @@ type CamLiveStreamRequest struct {
 }
 type CamLiveStreamResponse struct {
 	StreamUrlSuffix string `json:"stream_url_suffix"`
+	Mp4StreamUrlSuffix string `json:"mp4_stream_url_suffix"`
 	CameraID        string `json:"camera_id"`
 	Status          int    `json:"status"`
 }

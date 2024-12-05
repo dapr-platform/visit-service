@@ -158,6 +158,7 @@ CREATE TABLE o_live_record (
     end_time TIMESTAMP,
     file_size BIGINT,
     stream_id VARCHAR(32),
+    stream_url_suffix VARCHAR(1024),
     camera_id VARCHAR(32),
     vr_camera_id VARCHAR(32),
     status INTEGER NOT NULL DEFAULT 0,
@@ -173,6 +174,7 @@ COMMENT ON COLUMN o_live_record.start_time IS '直播开始时间';
 COMMENT ON COLUMN o_live_record.end_time IS '直播结束时间';
 COMMENT ON COLUMN o_live_record.file_size IS '文件大小';
 COMMENT ON COLUMN o_live_record.stream_id IS '流ID';
+COMMENT ON COLUMN o_live_record.stream_url_suffix IS '流URL后缀';
 COMMENT ON COLUMN o_live_record.camera_id IS '床头摄像头ID';
 COMMENT ON COLUMN o_live_record.vr_camera_id IS 'VR摄像头ID';
 COMMENT ON COLUMN o_live_record.status IS '状态(0:未开始,1:直播中,2:已结束)';
@@ -237,7 +239,8 @@ COMMENT ON COLUMN o_visit_record.remark IS '备注';
 
 CREATE OR REPLACE VIEW v_visit_record_info AS
 SELECT r.*,p.name AS patient_name,w.name AS patient_ward_name,b.bed_no AS patient_bed_no,
-(SELECT l.stream_id FROM o_live_record l WHERE l.schedule_id = r.id LIMIT 1) as stream_id
+(SELECT l.stream_id FROM o_live_record l WHERE l.schedule_id = r.id LIMIT 1) as stream_id,
+(SELECT l.stream_url_suffix FROM o_live_record l WHERE l.schedule_id = r.id LIMIT 1) as stream_url_suffix
 FROM o_visit_record r,o_patient p,o_bed b,o_ward w 
 WHERE r.patient_id = p.id AND p.bed_id = b.id AND b.ward_id = w.id;
 

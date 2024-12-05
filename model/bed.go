@@ -29,7 +29,7 @@ Table: o_bed
 
 JSON Sample
 -------------------------------------
-{    "id": "FbDFNvhdggMdkvmTrsjmHWVlx",    "ward_id": "TgCICuXmtRGHLmrpUjlBpVZPf",    "bed_no": "OpSGuxYFhrbsCYrAaNDJwIDiN",    "camera_id": "qjxRvKkRSRJLkYuQlOkTCgSiZ",    "vr_camera_id": "MmPeLWZeTJqPoHgebLOdWnnLh",    "type": 31,    "status": 18}
+{    "id": "dujUbMRffIFCfrtZSkoHkwDmr",    "ward_id": "frmlWNHWDfORcvAOIeyMRjMwO",    "bed_no": "XLQuqWQptHKYPSFoZnKSehZav",    "camera_id": "aCGIUeumCJWqiLixdkpnDUiTm",    "vr_camera_id": "inmylNbgrLInjnsguCBiJiYIb",    "type": 91,    "status": 19}
 
 
 

@@ -20,7 +20,7 @@ func InitLive_record_infoRoute(r chi.Router) {
 
 // @Summary page query
 // @Description page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%
-// @Tags 直播记录信息视图
+// @Tags Live_record_info
 // @Param _page query int true "current page"
 // @Param _page_size query int true "page size"
 // @Param _order query string false "order"
@@ -33,6 +33,7 @@ func InitLive_record_infoRoute(r chi.Router) {
 // @Param end_time query string false "end_time"
 // @Param file_size query string false "file_size"
 // @Param stream_id query string false "stream_id"
+// @Param stream_url_suffix query string false "stream_url_suffix"
 // @Param camera_id query string false "camera_id"
 // @Param vr_camera_id query string false "vr_camera_id"
 // @Param status query string false "status"
@@ -57,7 +58,7 @@ func Live_record_infoPageListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary query objects
 // @Description query objects
-// @Tags 直播记录信息视图
+// @Tags Live_record_info
 // @Param _select query string false "_select"
 // @Param _order query string false "order"
 // @Param id query string false "id"
@@ -69,6 +70,7 @@ func Live_record_infoPageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param end_time query string false "end_time"
 // @Param file_size query string false "file_size"
 // @Param stream_id query string false "stream_id"
+// @Param stream_url_suffix query string false "stream_url_suffix"
 // @Param camera_id query string false "camera_id"
 // @Param vr_camera_id query string false "vr_camera_id"
 // @Param status query string false "status"

@@ -32,7 +32,7 @@ Table: v_camera_info
 
 JSON Sample
 -------------------------------------
-{    "id": "NcdNGTQqTatiSgPWpiRCeljHo",    "device_name": "cigFhDXmfVCZRumLjclIuEnEH",    "device_no": "foXevdtGmObndTtxsWJDLwqMe",    "location_type": 49,    "device_type": 81,    "manufacturer": "XhSItkBnWUTJsEQdVKBENCXUH",    "main_stream_url": "jIjKuHKUumSndcSaiIchQdkQy",    "sub_stream_url": "rGNAIiTdlGiBdMVOTjjWioLmc",    "rel_vr_camera_id": "GwGhBDrfHlPYWeqmLnnDghuXW",    "status": 44}
+{    "id": "JiDwRBTPNrKhwvWwSsedTJIJN",    "device_name": "MdlgCINHpyktDnRleYcGgqblt",    "device_no": "xDyJNAoLBTvvkaQnNWIdewdlb",    "location_type": 68,    "device_type": 73,    "manufacturer": "QDvGTbnWrdxEmulNwktctHbwm",    "main_stream_url": "oljgOWXmLVvmTqgDNGkTeXZvr",    "sub_stream_url": "SEksgRNyTOlZyuBpkIgAGBFmf",    "rel_vr_camera_id": "yZPrwOvDQMIYHYesVsatoKgFy",    "status": 76}
 
 
 Comments

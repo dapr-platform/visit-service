@@ -35,15 +35,17 @@ func StartCamLiveStreamPreviewHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Start the camera livestream
-	streamID, err := service.StartCamLiveStream(req.CameraID, req.DisableSaveMp4)
+	streamID, playbackPath, err := service.StartCamLiveStream(req.CameraID, req.DisableSaveMp4)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
 	}
+	common.Logger.Infof("streamID: %s, playbackPath: %s", streamID, playbackPath)
 	response := entity.CamLiveStreamResponse{
-		StreamUrlSuffix: "/stream/live/" + streamID + ".live.flv",
-		CameraID:        req.CameraID,
-		Status:          1,
+		StreamUrlSuffix:    "/stream/live/" + streamID + ".live.flv",
+		Mp4StreamUrlSuffix: "/stream/live/" + streamID + ".live.mp4",
+		CameraID:           req.CameraID,
+		Status:             1,
 	}
 	common.HttpSuccess(w, common.OK.WithData(response))
 }
@@ -87,22 +89,27 @@ func StartCamLiveStreamHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Start the camera livestream
-	streamID, err := service.StartCamLiveStream(req.CameraID, req.DisableSaveMp4)
+	streamID, playbackPath, err := service.StartCamLiveStream(req.CameraID, req.DisableSaveMp4)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
 	}
+	playbackUrlSuffix := playbackPath + "/" + streamID + ".mp4"
+	if req.DisableSaveMp4 {
+		playbackUrlSuffix = ""
+	}
 
-	err = service.AddLiveRecord(r.Context(), visitRecord, req.UserID, req.CameraID, streamID)
+	err = service.AddLiveRecord(r.Context(), visitRecord, req.UserID, req.CameraID, streamID, playbackUrlSuffix)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
 	}
 
 	response := entity.CamLiveStreamResponse{
-		StreamUrlSuffix: "/stream/live/" + streamID + ".live.flv",
-		CameraID:        req.CameraID,
-		Status:          1,
+		StreamUrlSuffix:    "/stream/live/" + streamID + ".live.flv",
+		Mp4StreamUrlSuffix: "/stream/live/" + streamID + ".live.mp4",
+		CameraID:           req.CameraID,
+		Status:             1,
 	}
 
 	common.HttpSuccess(w, common.OK.WithData(response))

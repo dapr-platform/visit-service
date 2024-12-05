@@ -11,16 +11,17 @@ import (
 var RECORD_STATUS_STARTING = 1
 var RECORD_STATUS_ENDING = 2
 
-func AddLiveRecord(ctx context.Context, visitRecord *model.Visit_record, userID, cameraID, streamID string) error {
+func AddLiveRecord(ctx context.Context, visitRecord *model.Visit_record, userID, cameraID, streamID, playbackPath string) error {
 	record := &model.Live_record{
 		ID:         common.NanoId(),
 		ScheduleID: visitRecord.ID,
 		PatientID:  visitRecord.PatientID,
 		RelativeID: visitRecord.RelativeID,
 		DeviceID:   cameraID,
-		StreamID:   streamID,
-		StartTime:  common.LocalTime(time.Now()),
-		Status:     int32(RECORD_STATUS_STARTING),
+		StreamID:       streamID,
+		StreamURLSuffix: playbackPath,
+		StartTime:      common.LocalTime(time.Now()),
+		Status:         int32(RECORD_STATUS_STARTING),
 	}
 	_, err := common.DbInsert(ctx, common.GetDaprClient(), record, model.Live_recordTableInfo.Name)
 	return err

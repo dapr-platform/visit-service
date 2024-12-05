@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"time"
 	"visit-service/config"
 	"visit-service/model"
 
@@ -86,5 +85,5 @@ func StartCamLiveStream(cameraID string, disableSaveMp4 bool) (string, error) {
 	}
 
 	// 3. 返回流ID
-	return streamID,  nil
+	return streamID, nil
 }

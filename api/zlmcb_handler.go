@@ -57,7 +57,12 @@ type ZlmOnRecordMp4Req struct {
 func ZlmOnRecordMp4Handler(w http.ResponseWriter, r *http.Request) {
 	var req ZlmOnRecordMp4Req
 	common.ReadRequestBody(r, &req)
-	service.StopLiveRecord(r.Context(), req.Stream,req.FileSize,req.URL)
+	common.Logger.Info("zlm on record mp4", "req", req)
+	if req.Stream == "" || req.URL == "" || req.FileSize == 0 {
+		common.Logger.Error("zlm on record mp4", "req", req)
+	} else {
+		service.StopLiveRecord(r.Context(), req.Stream, req.FileSize, req.URL)
+	}
 	resp := make(map[string]any)
 	resp["code"] = 0
 	resp["msg"] = "success"

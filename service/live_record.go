@@ -14,14 +14,14 @@ var RECORD_STATUS_ENDING = 2
 
 func AddLiveRecord(ctx context.Context, visitRecord *model.Visit_record, userID, cameraID, streamID string) error {
 	record := &model.Live_record{
-		ID:              common.NanoId(),
-		ScheduleID:      visitRecord.ID,
-		PatientID:       visitRecord.PatientID,
-		RelativeID:      visitRecord.RelativeID,
-		DeviceID:        cameraID,
-		StreamID:        streamID,
-		StartTime:       common.LocalTime(time.Now()),
-		Status:          int32(RECORD_STATUS_STARTING),
+		ID:         common.NanoId(),
+		ScheduleID: visitRecord.ID,
+		PatientID:  visitRecord.PatientID,
+		RelativeID: visitRecord.RelativeID,
+		DeviceID:   cameraID,
+		StreamID:   streamID,
+		StartTime:  common.LocalTime(time.Now()),
+		Status:     int32(RECORD_STATUS_STARTING),
 	}
 	_, err := common.DbInsert(ctx, common.GetDaprClient(), record, model.Live_recordTableInfo.Name)
 	return err
@@ -31,6 +31,10 @@ func StopLiveRecord(ctx context.Context, streamID string, fileSize int64, url st
 	record, err := common.DbGetOne[model.Live_record](ctx, common.GetDaprClient(), model.Live_recordTableInfo.Name, qstr)
 	if err != nil {
 		return err
+	}
+	if record == nil {
+		common.Logger.Error("stop live record", "streamID", streamID, "record", record)
+		return nil
 	}
 	record.EndTime = common.LocalTime(time.Now())
 	record.Status = int32(RECORD_STATUS_ENDING)

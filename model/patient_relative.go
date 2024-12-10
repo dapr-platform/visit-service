@@ -24,11 +24,12 @@ Table: o_patient_relative
 [ 3] relationship                                   VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 4] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 [ 5] create_time                                    TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: [CURRENT_TIMESTAMP]
+[ 6] check_status                                   INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 
 JSON Sample
 -------------------------------------
-{    "id": "nuISWSgFukGcpPMeVfasrohap",    "patient_id": "CnbEQWftxiHuLNlgMlnAWKawh",    "relative_id": "oxxLAxCFaUAIJEWPWGCtQptbu",    "relationship": "MDZbqqIJOuRHXWEcZNXTVGPxI",    "status": 15,    "create_time": 13}
+{    "id": "KsFqALTZasydlaTKoOsxPlULO",    "patient_id": "kvOyXFeiuADFmCwFLXDRWJkyv",    "relative_id": "GhgHqPmoZwrJBNTwOeLrfmMrI",    "relationship": "sqKdqXmWlkTQTiZGTcuackdMC",    "status": 48,    "create_time": 5,    "check_status": 21}
 
 
 
@@ -46,6 +47,8 @@ var (
 	Patient_relative_FIELD_NAME_status = "status"
 
 	Patient_relative_FIELD_NAME_create_time = "create_time"
+
+	Patient_relative_FIELD_NAME_check_status = "check_status"
 )
 
 // Patient_relative struct is a row record of the o_patient_relative table in the  database
@@ -61,6 +64,8 @@ type Patient_relative struct {
 	Status int32 `json:"status"` //状态(0:正常,1:解除关联)
 
 	CreateTime common.LocalTime `json:"create_time"` //创建时间
+
+	CheckStatus int32 `json:"check_status"` //审核状态(0:未审核,1:已审核,2:审核不通过)
 
 }
 
@@ -192,6 +197,27 @@ var Patient_relativeTableInfo = &TableInfo{
 			ProtobufFieldName:  "create_time",
 			ProtobufType:       "uint64",
 			ProtobufPos:        6,
+		},
+
+		&ColumnInfo{
+			Index:              6,
+			Name:               "check_status",
+			Comment:            `审核状态(0:未审核,1:已审核,2:审核不通过)`,
+			Notes:              ``,
+			Nullable:           false,
+			DatabaseTypeName:   "INT4",
+			DatabaseTypePretty: "INT4",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "INT4",
+			ColumnLength:       -1,
+			GoFieldName:        "CheckStatus",
+			GoFieldType:        "int32",
+			JSONFieldName:      "check_status",
+			ProtobufFieldName:  "check_status",
+			ProtobufType:       "int32",
+			ProtobufPos:        7,
 		},
 	},
 }

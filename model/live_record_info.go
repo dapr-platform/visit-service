@@ -38,7 +38,7 @@ Table: v_live_record_info
 
 JSON Sample
 -------------------------------------
-{    "id": "lnuumKtmGdDoVShSLhlhoEkhf",    "schedule_id": "eIdcNsKmNXFKtkbqnmyRRFyDI",    "patient_id": "FOKJhNWmlIeojGOUXQLPYFLLA",    "relative_id": "xuKqIatSpyoQWBGuJlqgjLmIB",    "device_id": "voBYubIeUDSYWUGkIybCOMafR",    "start_time": 94,    "end_time": 83,    "file_size": 99,    "stream_id": "kFollKwlDhpjYNHPCucjZIZec",    "stream_url_suffix": "HnAQVXhheCHYaWyMMDDhREfvm",    "camera_id": "pshZcPgDOUPWDJnrnbmXDVRil",    "vr_camera_id": "KGipCibfFvUWkBoPuIiRhqAiB",    "status": 34,    "patient_name": "ZYvhesOshLJQrtjfkUVfoQPDD",    "patient_ward_name": "nnfAWlUkXAiMJpguvnSlnUZpF",    "patient_bed_no": "NLaVFnUySuTJxeqPueVpdfPEO"}
+{    "id": "yMJSWdZjeneKyJiTdKfrdMmWr",    "schedule_id": "lnbojIWehOPbfDTnPnALEngHM",    "patient_id": "VKKftOrAMHEijbXBoDnDkuaDj",    "relative_id": "isaJOnsDnMYTAxNkqjvXSsOIL",    "device_id": "nISsIxRlxOHBrdkjmfkJsKnJg",    "start_time": 24,    "end_time": 66,    "file_size": 57,    "stream_id": "rSCMmVipapwvTNRAZPAIiUwTx",    "stream_url_suffix": "NuqMbmddftUvXTfVyHTAinraE",    "camera_id": "NyLcWZgVKfdtRMqNaXkWjoTLt",    "vr_camera_id": "GfXUUNinkFkBHqQTcFwmoBBdN",    "status": 19,    "patient_name": "MSAaTQkJfQRSeVMWgnUogPvjM",    "patient_ward_name": "gkAIfVQOuaScURukGrEWefmGV",    "patient_bed_no": "htYZKdADKpMXyleosxDmhhmoP"}
 
 
 Comments

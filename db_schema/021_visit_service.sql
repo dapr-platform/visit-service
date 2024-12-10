@@ -323,6 +323,7 @@ CREATE TABLE o_patient_relative (
     relative_id VARCHAR(32) NOT NULL,
     relationship VARCHAR(32) NOT NULL,
     status INTEGER NOT NULL DEFAULT 0,
+    check_status INTEGER NOT NULL DEFAULT 0,
     create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );
@@ -335,7 +336,9 @@ COMMENT ON COLUMN o_patient_relative.patient_id IS '病患ID';
 COMMENT ON COLUMN o_patient_relative.relative_id IS '家属ID';
 COMMENT ON COLUMN o_patient_relative.relationship IS '与患者关系(父母,配偶,子女,其他)';
 COMMENT ON COLUMN o_patient_relative.status IS '状态(0:正常,1:解除关联)';
+COMMENT ON COLUMN o_patient_relative.check_status IS '审核状态(0:未审核,1:已审核,2:审核不通过)';
 COMMENT ON COLUMN o_patient_relative.create_time IS '创建时间';
+
 
 CREATE OR REPLACE VIEW v_patient_relative_info AS
 SELECT 
@@ -361,6 +364,7 @@ COMMENT ON COLUMN v_patient_relative_info.patient_status IS '病患状态';
 COMMENT ON COLUMN v_patient_relative_info.relative_id IS '家属ID';
 COMMENT ON COLUMN v_patient_relative_info.relationship IS '与患者关系';
 COMMENT ON COLUMN v_patient_relative_info.status IS '状态';
+COMMENT ON COLUMN v_patient_relative_info.check_status IS '审核状态(0:未审核,1:已审核,2:审核不通过)';
 COMMENT ON COLUMN v_patient_relative_info.create_time IS '创建时间';
 COMMENT ON COLUMN v_patient_relative_info.patient_name IS '病患姓名';
 COMMENT ON COLUMN v_patient_relative_info.hospital_no IS '住院号';

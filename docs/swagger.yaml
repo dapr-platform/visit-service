@@ -424,6 +424,9 @@ definitions:
     type: object
   model.Patient_relative:
     properties:
+      check_status:
+        description: 审核状态(0:未审核,1:已审核,2:审核不通过)
+        type: integer
       create_time:
         description: 创建时间
         type: string
@@ -448,6 +451,9 @@ definitions:
       bed_no:
         description: 床位号
         type: string
+      check_status:
+        description: 审核状态(0:未审核,1:已审核,2:审核不通过)
+        type: integer
       create_time:
         description: 创建时间
         type: string
@@ -3072,6 +3078,10 @@ paths:
         in: query
         name: create_time
         type: string
+      - description: check_status
+        in: query
+        name: check_status
+        type: string
       produces:
       - application/json
       responses:
@@ -3158,6 +3168,10 @@ paths:
       - description: create_time
         in: query
         name: create_time
+        type: string
+      - description: check_status
+        in: query
+        name: check_status
         type: string
       - description: patient_name
         in: query
@@ -3254,6 +3268,10 @@ paths:
       - description: create_time
         in: query
         name: create_time
+        type: string
+      - description: check_status
+        in: query
+        name: check_status
         type: string
       - description: patient_name
         in: query
@@ -3440,6 +3458,10 @@ paths:
       - description: create_time
         in: query
         name: create_time
+        type: string
+      - description: check_status
+        in: query
+        name: check_status
         type: string
       produces:
       - application/json

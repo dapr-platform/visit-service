@@ -3738,6 +3738,12 @@ const docTemplate = `{
                         "description": "create_time",
                         "name": "create_time",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "check_status",
+                        "name": "check_status",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -3878,6 +3884,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "create_time",
                         "name": "create_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "check_status",
+                        "name": "check_status",
                         "in": "query"
                     },
                     {
@@ -4025,6 +4037,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "create_time",
                         "name": "create_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "check_status",
+                        "name": "check_status",
                         "in": "query"
                     },
                     {
@@ -4271,6 +4289,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "create_time",
                         "name": "create_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "check_status",
+                        "name": "check_status",
                         "in": "query"
                     }
                 ],
@@ -7984,6 +8008,10 @@ const docTemplate = `{
         "model.Patient_relative": {
             "type": "object",
             "properties": {
+                "check_status": {
+                    "description": "审核状态(0:未审核,1:已审核,2:审核不通过)",
+                    "type": "integer"
+                },
                 "create_time": {
                     "description": "创建时间",
                     "type": "string"
@@ -8016,6 +8044,10 @@ const docTemplate = `{
                 "bed_no": {
                     "description": "床位号",
                     "type": "string"
+                },
+                "check_status": {
+                    "description": "审核状态(0:未审核,1:已审核,2:审核不通过)",
+                    "type": "integer"
                 },
                 "create_time": {
                     "description": "创建时间",

@@ -93,6 +93,7 @@ func batchUpsertPatient_relativeHandler(w http.ResponseWriter, r *http.Request) 
 // @Param relationship query string false "relationship"
 // @Param status query string false "status"
 // @Param create_time query string false "create_time"
+// @Param check_status query string false "check_status"
 // @Produce  json
 // @Success 200 {object} common.Response{data=common.Page{items=[]model.Patient_relative}} "objects array"
 // @Failure 500 {object} common.Response ""
@@ -120,6 +121,7 @@ func Patient_relativePageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param relationship query string false "relationship"
 // @Param status query string false "status"
 // @Param create_time query string false "create_time"
+// @Param check_status query string false "check_status"
 // @Produce  json
 // @Success 200 {object} common.Response{data=[]model.Patient_relative} "objects array"
 // @Failure 500 {object} common.Response ""

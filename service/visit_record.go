@@ -47,8 +47,22 @@ func UpsertVisit_record(r *http.Request, in any) (out any, err error) {
 	if record.CheckStatus == CHECK_STATUS_UNCHECKED { //未审核
 		if record.Status == VISIT_RECORD_STATUS_NORMAL && record.ID == "" { //正常状态可以新建
 			err = newAddVisitRecord(r.Context(), &record)
+			if err != nil {
+				return nil, errors.Wrap(err, "新建预约记录失败")
+			}
+			config, err := GetConfig(CONFIG_VISIT_REGISTER_AUTO_AUDIT)
+			if err != nil {
+				return nil, errors.Wrap(err, "查询系统配置失败")
+			}
+			if config.ConfigValue == "1" {
+				record.CheckStatus = CHECK_STATUS_CHECKED
+				SendVisitRecordSms(&record)
+			}
 		} else if record.Status == VISIT_RECORD_STATUS_CANCEL && record.CameraID != "" { //取消状态，需要释放摄像头,并减少排班已预约人数
 			err = cancelVisitRecord(r.Context(), &record)
+			if err != nil {
+				return nil, errors.Wrap(err, "取消预约记录失败")
+			}
 		}
 	} else if record.CheckStatus == CHECK_STATUS_CHECK_FAILED && record.CameraID != "" { //审核不通过，删除摄像头信息，并减少排班已预约人数
 		err = cancelVisitRecord(r.Context(), &record)
@@ -188,8 +202,8 @@ func SendVisitRecordSms(record *model.Visit_record) error {
 		statusStr = "审核不通过"
 	}
 	templateParam := map[string]string{
-		"time": time.Time(record.VisitStartTime).Format("2006-01-02年 15时04分"),
-		"name": visitRecordInfo.PatientName,
+		"time":   time.Time(record.VisitStartTime).Format("2006-01-02年 15时04分"),
+		"name":   visitRecordInfo.PatientName,
 		"status": statusStr,
 	}
 	err = sms.SendSms(config.ALI_SMS_REGION, config.ALI_SMS_ACCESS_ID, config.ALI_SMS_ACCESS_SECRET, config.ALI_SMS_SIGN_NAME, config.ALI_SMS_TEMPLATE_VISIT_CHECK_CODE, phone, templateParam)

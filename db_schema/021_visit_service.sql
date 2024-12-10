@@ -206,6 +206,7 @@ CREATE TABLE o_visit_record (
     id VARCHAR(32) NOT NULL,
     patient_id VARCHAR(32) NOT NULL,
     relative_id VARCHAR(32) NOT NULL,
+    schedule_id VARCHAR(32) NOT NULL ,
     visit_start_time TIMESTAMP NOT NULL,
     visit_end_time TIMESTAMP NOT NULL,
     visitor_name VARCHAR(255) NOT NULL,
@@ -224,6 +225,7 @@ CREATE TABLE o_visit_record (
 CREATE INDEX idx_visit_record_visit_start_time ON o_visit_record (visit_start_time);
 COMMENT ON TABLE o_visit_record IS '探视登记表';
 COMMENT ON COLUMN o_visit_record.id IS '探视登记ID';
+COMMENT ON COLUMN o_visit_record.schedule_id IS '排班ID';
 COMMENT ON COLUMN o_visit_record.patient_id IS '病患ID';
 COMMENT ON COLUMN o_visit_record.relative_id IS '家属ID';
 COMMENT ON COLUMN o_visit_record.visit_start_time IS '探视开始时间';
@@ -240,6 +242,8 @@ COMMENT ON COLUMN o_visit_record.send_prompt_sms_status IS '发送提醒短信�
 COMMENT ON COLUMN o_visit_record.status IS '状态(0:正常,1:取消)';
 COMMENT ON COLUMN o_visit_record.remark IS '备注';
 
+
+
 CREATE OR REPLACE VIEW v_visit_record_info AS
 SELECT r.*,p.name AS patient_name,w.name AS patient_ward_name,b.bed_no AS patient_bed_no,
 (SELECT l.stream_id FROM o_live_record l WHERE l.schedule_id = r.id LIMIT 1) as stream_id,
@@ -251,6 +255,7 @@ COMMENT ON VIEW v_visit_record_info IS '探视记录信息视图';
 COMMENT ON COLUMN v_visit_record_info.id IS '探视记录ID';
 COMMENT ON COLUMN v_visit_record_info.patient_id IS '病患ID';
 COMMENT ON COLUMN v_visit_record_info.relative_id IS '家属ID';
+COMMENT ON COLUMN v_visit_record_info.schedule_id IS '排班ID';
 COMMENT ON COLUMN v_visit_record_info.visit_start_time IS '探视开始时间';
 COMMENT ON COLUMN v_visit_record_info.visit_end_time IS '探视结束时间';
 COMMENT ON COLUMN v_visit_record_info.visitor_name IS '探视人姓名';

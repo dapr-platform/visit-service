@@ -37,7 +37,7 @@ Table: v_patient_relative_info
 
 JSON Sample
 -------------------------------------
-{    "id": "gcCmcqUVhWOjTSEMpqhjyBFOa",    "patient_id": "KwVFetOZhfjOXQncwuIChmvWl",    "relative_id": "LPZcsufxujnNmpqhrYdMSoAne",    "relationship": "jRPicSnjBEfFHMJSHctvDfCEu",    "status": 45,    "create_time": 6,    "check_status": 23,    "patient_name": "YlCZrOokPynmpNPtOblFdtAln",    "hospital_no": "fpiBcdKgRdIMEalqwoLqkCGGn",    "patient_status": 47,    "ward_name": "IfhTbXhLKksbSiimBBMggujmN",    "bed_no": "DwspsWMYKhfniFajAUtpYjAbI",    "relative_name": "IOQVgJLTeWyXAOxTWJfpFEqjH",    "relative_mobile": "ZmFmvpWkUFCbfcBUvOWHytZrP",    "relative_id_card": "KQEyoyoQiQbVkiOypQiNFUOWb"}
+{    "id": "YFIhgxFuoccaagZWHGiuZkCje",    "patient_id": "SZGMlpZqGgjeSYKHdGFbTfTTo",    "relative_id": "SgklwXfSXuNcqZltFWgYXDEpO",    "relationship": "MWrIZyvasxLpYZXgEXBucLNHu",    "status": 12,    "create_time": 28,    "check_status": 48,    "patient_name": "FcqaExnRshUiZKRyGJYqbMMbj",    "hospital_no": "UcMHmGoUZZesIRuRtAZkbEKQE",    "patient_status": 31,    "ward_name": "GTCeqTNSXdQxbXFAAdCVDRXQe",    "bed_no": "RvnlSjIBouPPWFLZtqVEsMxkk",    "relative_name": "UNqUdDVSJBPgSoNxWLJGGJLnf",    "relative_mobile": "WjkxxmsabwcTueGcZoKIpIHaV",    "relative_id_card": "yjWFUOvyPobnXaPVFdiBJiLrh"}
 
 
 Comments

@@ -34,16 +34,17 @@ Table: v_visit_record_info
 [13] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
 [14] send_sms_status                                INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
 [15] send_prompt_sms_status                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[16] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[17] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[18] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[19] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
-[20] stream_url_suffix                              VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
+[16] schedule_id                                    VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[17] patient_name                                   VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[18] patient_ward_name                              VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
+[19] patient_bed_no                                 VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[20] stream_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[21] stream_url_suffix                              VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "hMZqeGIbqcuKMjZHBtrdORxZK",    "patient_id": "YTnksZRZbFGutfgdApVOcsnOL",    "relative_id": "uMWAwhALqCaijJpWRQjyvjMZS",    "visit_start_time": 43,    "visit_end_time": 34,    "visitor_name": "wmyFwvjPdLkjQWcMlSLNtwAFE",    "visitor_phone": "uElsjCHfeLilWHXvaFglEvwQf",    "visitor_id_card": "MKCjGonmHqWWtqBsagWkUWgDU",    "relationship": "GkRFlDwOhkICRDmodqkkYEHsN",    "camera_id": "erBsFbgwvXPvvxAeNvPZtrCNV",    "vr_camera_id": "dhFdiuHLwAudmMHfswMCxJmOI",    "check_status": 16,    "status": 8,    "remark": "hQcZQrjtJMEYSEIFfodcFNkBr",    "send_sms_status": 27,    "send_prompt_sms_status": 53,    "patient_name": "WWEhOaxlaNQWYVQSaqvbjGSKs",    "patient_ward_name": "qxuDQFiFhBoFVfQetEVxFBgZt",    "patient_bed_no": "VVaSSrFLTJRtAItORBAtAhXdF",    "stream_id": "RPThwsWHfIDgDqDISiKaOdwCI",    "stream_url_suffix": "SnfxiMFLXCOsVJyvQZdTWLmOw"}
+{    "id": "AQwQGjnPAkWgRFSTPbhVQjPtx",    "patient_id": "QBBvwJkeTcyDAlWZuXXGngUgA",    "relative_id": "bjcLZdWkhEtEfpboXuSYTJFGs",    "visit_start_time": 13,    "visit_end_time": 70,    "visitor_name": "xpMMMOhXdYsZqUfnWsnODZXyF",    "visitor_phone": "okfjbfugYgioKtgTcgRsaARiE",    "visitor_id_card": "ewWQQbSbZIdPMHrOYaRVBNmBU",    "relationship": "UVxgVDaQkByouWYmlVsRoqhmB",    "camera_id": "sOBXoelrFNZbcwZpRVyOnmhCA",    "vr_camera_id": "tbZPskKewvrKxMrsZcOmHFsUt",    "check_status": 95,    "status": 21,    "remark": "qNDrLFmLbRcotwtbAmRynwQpV",    "send_sms_status": 66,    "send_prompt_sms_status": 59,    "schedule_id": "cFxXVOeuMImiVkMSkGXVhBRfu",    "patient_name": "dkdsFiomjNCCjjEQGZHilvrQk",    "patient_ward_name": "aDxDElNAisjjLlAJYqjIoJmOM",    "patient_bed_no": "hsOkrHxfuHDjwIhoVppvhluXT",    "stream_id": "oegRoFmkjEfDCKWvPZaZwdKVJ",    "stream_url_suffix": "QSsVtUxTrjxaUZYGrpDtyRBCJ"}
 
 
 Comments
@@ -89,6 +90,8 @@ var (
 
 	Visit_record_info_FIELD_NAME_send_prompt_sms_status = "send_prompt_sms_status"
 
+	Visit_record_info_FIELD_NAME_schedule_id = "schedule_id"
+
 	Visit_record_info_FIELD_NAME_patient_name = "patient_name"
 
 	Visit_record_info_FIELD_NAME_patient_ward_name = "patient_ward_name"
@@ -133,6 +136,8 @@ type Visit_record_info struct {
 	SendSmsStatus int32 `json:"send_sms_status"` //send_sms_status
 
 	SendPromptSmsStatus int32 `json:"send_prompt_sms_status"` //send_prompt_sms_status
+
+	ScheduleID string `json:"schedule_id"` //排班ID
 
 	PatientName string `json:"patient_name"` //病患姓名
 
@@ -490,6 +495,27 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 
 		&ColumnInfo{
 			Index:              16,
+			Name:               "schedule_id",
+			Comment:            `排班ID`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "ScheduleID",
+			GoFieldType:        "string",
+			JSONFieldName:      "schedule_id",
+			ProtobufFieldName:  "schedule_id",
+			ProtobufType:       "string",
+			ProtobufPos:        17,
+		},
+
+		&ColumnInfo{
+			Index:              17,
 			Name:               "patient_name",
 			Comment:            `病患姓名`,
 			Notes:              ``,
@@ -506,11 +532,11 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			JSONFieldName:      "patient_name",
 			ProtobufFieldName:  "patient_name",
 			ProtobufType:       "string",
-			ProtobufPos:        17,
+			ProtobufPos:        18,
 		},
 
 		&ColumnInfo{
-			Index:              17,
+			Index:              18,
 			Name:               "patient_ward_name",
 			Comment:            `病房名称`,
 			Notes:              ``,
@@ -527,11 +553,11 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			JSONFieldName:      "patient_ward_name",
 			ProtobufFieldName:  "patient_ward_name",
 			ProtobufType:       "string",
-			ProtobufPos:        18,
+			ProtobufPos:        19,
 		},
 
 		&ColumnInfo{
-			Index:              18,
+			Index:              19,
 			Name:               "patient_bed_no",
 			Comment:            `床位号`,
 			Notes:              ``,
@@ -548,11 +574,11 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			JSONFieldName:      "patient_bed_no",
 			ProtobufFieldName:  "patient_bed_no",
 			ProtobufType:       "string",
-			ProtobufPos:        19,
+			ProtobufPos:        20,
 		},
 
 		&ColumnInfo{
-			Index:              19,
+			Index:              20,
 			Name:               "stream_id",
 			Comment:            `直播流ID`,
 			Notes:              ``,
@@ -569,11 +595,11 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			JSONFieldName:      "stream_id",
 			ProtobufFieldName:  "stream_id",
 			ProtobufType:       "string",
-			ProtobufPos:        20,
+			ProtobufPos:        21,
 		},
 
 		&ColumnInfo{
-			Index:              20,
+			Index:              21,
 			Name:               "stream_url_suffix",
 			Comment:            `stream_url_suffix`,
 			Notes:              ``,
@@ -590,7 +616,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 			JSONFieldName:      "stream_url_suffix",
 			ProtobufFieldName:  "stream_url_suffix",
 			ProtobufType:       "string",
-			ProtobufPos:        21,
+			ProtobufPos:        22,
 		},
 	},
 }

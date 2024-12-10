@@ -34,11 +34,12 @@ Table: o_visit_record
 [13] remark                                         VARCHAR(1024)        null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 1024    default: []
 [14] send_sms_status                                INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 [15] send_prompt_sms_status                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[16] schedule_id                                    VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "AGmFIrVrYLcNppAMVPTefJEZo",    "patient_id": "FwZJrYRXgDDrAeArULVaWDaTr",    "relative_id": "jHWNjAGdbTBXUibrppivROCJB",    "visit_start_time": 94,    "visit_end_time": 59,    "visitor_name": "nQRYhRjZFvOSHsLOiFhNIodxC",    "visitor_phone": "MFfsDaBpmAXjDlsTLqyWgiEpX",    "visitor_id_card": "OMJkFXfwEtewTWsWQPEEhqmaW",    "relationship": "dtDuDoIqBjMNaVIPkiOinIsgY",    "camera_id": "NTNmVjaDHFbwtcWSpUUmnxxRX",    "vr_camera_id": "LxWNOfkkYrFdJWPCedbHEifmc",    "check_status": 85,    "status": 33,    "remark": "qJpPOebUousKmpcxtUVBXiutA",    "send_sms_status": 2,    "send_prompt_sms_status": 39}
+{    "id": "YPaLwAxouvBoudLRClhOySsGU",    "patient_id": "TYmvmKmVwoiuippdVCtmWsRfN",    "relative_id": "JCPTkNHdmXTHtjWiNAFJBWDwr",    "visit_start_time": 55,    "visit_end_time": 52,    "visitor_name": "VplyehuZAKLFmXRlxioPYIsSq",    "visitor_phone": "ZVKnKfeLFlGSAFfXAATKWpPlo",    "visitor_id_card": "jcvOFdqVEXroLMGQdwjveWcPv",    "relationship": "LoUISCMtHtHSWpTBecaGIHUdq",    "camera_id": "qdiHBsOInPSPatRuhlwFmXZiZ",    "vr_camera_id": "kdwcTijHuUrWIunGpMCJiJPuE",    "check_status": 96,    "status": 10,    "remark": "XVpAGvRmXfZLUwRyNdkOWmjei",    "send_sms_status": 1,    "send_prompt_sms_status": 26,    "schedule_id": "BIyRycxWLDesQiXGGHkSIXyWO"}
 
 
 
@@ -76,6 +77,8 @@ var (
 	Visit_record_FIELD_NAME_send_sms_status = "send_sms_status"
 
 	Visit_record_FIELD_NAME_send_prompt_sms_status = "send_prompt_sms_status"
+
+	Visit_record_FIELD_NAME_schedule_id = "schedule_id"
 )
 
 // Visit_record struct is a row record of the o_visit_record table in the  database
@@ -111,6 +114,8 @@ type Visit_record struct {
 	SendSmsStatus int32 `json:"send_sms_status"` //发送短信状态(0:未发送,1:已发送)
 
 	SendPromptSmsStatus int32 `json:"send_prompt_sms_status"` //发送提醒短信状态(0:未发送,1:已发送)
+
+	ScheduleID string `json:"schedule_id"` //schedule_id
 
 }
 
@@ -452,6 +457,27 @@ var Visit_recordTableInfo = &TableInfo{
 			ProtobufFieldName:  "send_prompt_sms_status",
 			ProtobufType:       "int32",
 			ProtobufPos:        16,
+		},
+
+		&ColumnInfo{
+			Index:              16,
+			Name:               "schedule_id",
+			Comment:            `schedule_id`,
+			Notes:              ``,
+			Nullable:           false,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "ScheduleID",
+			GoFieldType:        "string",
+			JSONFieldName:      "schedule_id",
+			ProtobufFieldName:  "schedule_id",
+			ProtobufType:       "string",
+			ProtobufPos:        17,
 		},
 	},
 }

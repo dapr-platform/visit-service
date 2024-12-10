@@ -38,7 +38,7 @@ func UpsertVisitSchedule(r *http.Request, in any) (out any, err error) {
 	intervalConfig, err := GetConfig(CONFIG_SCHEDULE_INTERVAL)
 	if err != nil {
 		common.Logger.Errorf("Failed to get schedule_interval config: %v", err)
-			return
+		return
 	}
 	schedule.EndTime = common.LocalTime(time.Time(schedule.StartTime).Add(time.Duration(cast.ToInt(intervalConfig.ConfigValue)) * time.Minute))
 	if schedule.ID == "" {
@@ -85,12 +85,12 @@ func ManuAddVisitSchedule(startTime time.Time, endTime time.Time, totalVisitors 
 
 	// 创建排班记录
 	schedule := model.Visit_schedule{
-		ID:                startTime.Format("20060102150405"),
-		StartTime:         common.LocalTime(startTime),
-		EndTime:           common.LocalTime(endTime),
-		TotalVisitors:     int32(totalVisitors),
-		ScheduleVisitors:  int32(0),
-		Status:            1,
+		ID:               startTime.Format("20060102150405"),
+		StartTime:        common.LocalTime(startTime),
+		EndTime:          common.LocalTime(endTime),
+		TotalVisitors:    int32(totalVisitors),
+		ScheduleVisitors: int32(0),
+		Status:           1,
 	}
 
 	// 插入数据库
@@ -113,13 +113,14 @@ func ManualInitVisitSchedule(forceUpdate bool) error {
 }
 
 func DeleteVisitSchedule(startDay time.Time) error {
+	nextDay := startDay.AddDate(0, 0, 1)
 	return common.DbDeleteByOps(
 		context.Background(),
 		common.GetDaprClient(),
 		model.Visit_scheduleTableInfo.Name,
-		[]string{model.Visit_schedule_FIELD_NAME_start_time},
-		[]string{">="},
-		[]any{startDay.Format("2006-01-02T00:00:00")},
+		[]string{model.Visit_schedule_FIELD_NAME_start_time, model.Visit_schedule_FIELD_NAME_end_time},
+		[]string{">=", "<"},
+		[]any{startDay.Format("2006-01-02T15:04:05"), nextDay.Format("2006-01-02T15:04:05")},
 	)
 }
 func SetAllVisitScheduleStatus(ctx context.Context, status int) error {
@@ -210,68 +211,76 @@ func initVisitScheduleDaily(forceUpdate bool) error {
 	timeSpan := cast.ToInt(timeSpanConfig.ConfigValue)
 	generateDays := cast.ToInt(generateDaysConfig.ConfigValue)
 	maxVisitors := cast.ToInt(visitorsConfig.ConfigValue)
-
+	common.Logger.Infof("startHour: %v, endHour: %v, interval: %v, timeSpan: %v, generateDays: %v, maxVisitors: %v", startHour, endHour, interval, timeSpan, generateDays, maxVisitors)
 	// 从明天开始生成
 	startDate := time.Now().AddDate(0, 0, 1)
-
+	common.Logger.Infof("startDate: %v", startDate)
 	// 生成未来 generateDays 天的排班
 	for day := 0; day < generateDays; day++ {
 		currentDate := startDate.AddDate(0, 0, day)
+		common.Logger.Infof("currentDate: %v", currentDate)
+
+		if forceUpdate {
+			common.Logger.Infof("forceUpdate: %v, delete visit schedule: %v", forceUpdate, currentDate)
+			DeleteVisitSchedule(currentDate)
+		}
 
 		// 生成当天的时间段
 		for hour := startHour; hour < endHour; hour++ {
-			for minute := 0; minute < 60; minute += (interval + timeSpan) {
-				startTime := time.Date(
-					currentDate.Year(),
-					currentDate.Month(),
-					currentDate.Day(),
-					hour,
-					minute,
-					0,
-					0,
-					time.Local,
-				)
-				endTime := startTime.Add(time.Duration(timeSpan) * time.Minute)
+			minute := 0
+			minuteStep := interval + timeSpan
+			startTime := time.Date(
+				currentDate.Year(),
+				currentDate.Month(),
+				currentDate.Day(),
+				hour,
+				minute,
+				0,
+				0,
+				time.Local,
+			)
+			endTime := startTime.Add(time.Duration(timeSpan) * time.Minute)
 
-				// 检查时间段是否已存在
-				exists, err := checkTimeSlotExists(startTime)
-				if err != nil {
-					common.Logger.Errorf("Error checking time slot: %v", err)
-					continue
-				}
-				if exists && !forceUpdate {
-					continue
-				}
-				status := 0
-				totalVisitors := maxVisitors
-				autoAvailableVisitors := cast.ToInt(autoAvailableVisitorsConfig.ConfigValue)
-				if startTime.Hour() >= cast.ToInt(autoAvailableBeginHourConfig.ConfigValue) && startTime.Hour() <= cast.ToInt(autoAvailableEndHourConfig.ConfigValue) {
-					status = 1
-					totalVisitors = autoAvailableVisitors
-				}
-
-				// 创建排班记录
-				schedule := model.Visit_schedule{
-					ID:                startTime.Format("20060102150405"),
-					StartTime:         common.LocalTime(startTime),
-					EndTime:           common.LocalTime(endTime),
-					TotalVisitors:     int32(totalVisitors),
-					ScheduleVisitors:  int32(0),
-					Status:            int32(status),
-				}
-
-				// 插入数据库
-				_, err = common.DbInsert(
-					context.Background(),
-					common.GetDaprClient(),
-					&schedule,
-					model.Visit_scheduleTableInfo.Name,
-				)
-				if err != nil {
-					common.Logger.Errorf("Error inserting schedule: %v", err)
-					continue
-				}
+			// 检查时间段是否已存在
+			exists, err := checkTimeSlotExists(startTime)
+			if err != nil {
+				common.Logger.Errorf("Error checking time slot: %v", err)
+				continue
 			}
+			if exists && !forceUpdate {
+				continue
+			}
+			status := 0
+			totalVisitors := maxVisitors
+			autoAvailableVisitors := cast.ToInt(autoAvailableVisitorsConfig.ConfigValue)
+			if startTime.Hour() >= cast.ToInt(autoAvailableBeginHourConfig.ConfigValue) && startTime.Hour() <= cast.ToInt(autoAvailableEndHourConfig.ConfigValue) {
+				status = 1
+				totalVisitors = autoAvailableVisitors
+			}
+
+			// 创建排班记录
+			schedule := model.Visit_schedule{
+				ID:               startTime.Format("20060102150405"),
+				StartTime:        common.LocalTime(startTime),
+				EndTime:          common.LocalTime(endTime),
+				TotalVisitors:    int32(totalVisitors),
+				ScheduleVisitors: int32(0),
+				Status:           int32(status),
+			}
+
+			// 插入数据库
+			_, err = common.DbInsert(
+				context.Background(),
+				common.GetDaprClient(),
+				&schedule,
+				model.Visit_scheduleTableInfo.Name,
+			)
+			if err != nil {
+				common.Logger.Errorf("Error inserting schedule: %v", err)
+				continue
+			}
+			common.Logger.Infof("Inserted schedule: %v", schedule)
+			minute += minuteStep
 		}
 	}
 

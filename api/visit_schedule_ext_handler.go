@@ -39,7 +39,7 @@ func ManualInitVisitScheduleHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // @Summary 手动删除排班
-// @Description 手动删除排班
+// @Description 手动删除排班, 删除开始时间到第二天开始时间之间的排班
 // @Tags 探视排班
 // @Accept json
 // @Produce json

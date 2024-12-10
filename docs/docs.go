@@ -2669,7 +2669,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Live_record_info"
+                    "直播记录信息视图"
                 ],
                 "summary": "query objects",
                 "parameters": [
@@ -2820,7 +2820,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Live_record_info"
+                    "直播记录信息视图"
                 ],
                 "summary": "page query",
                 "parameters": [
@@ -7834,67 +7834,67 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "camera_id": {
-                    "description": "camera_id",
+                    "description": "床头摄像头ID",
                     "type": "string"
                 },
                 "device_id": {
-                    "description": "device_id",
+                    "description": "设备ID",
                     "type": "string"
                 },
                 "end_time": {
-                    "description": "end_time",
+                    "description": "直播结束时间",
                     "type": "string"
                 },
                 "file_size": {
-                    "description": "file_size",
+                    "description": "文件大小",
                     "type": "integer"
                 },
                 "id": {
-                    "description": "id",
+                    "description": "直播记录ID",
                     "type": "string"
                 },
                 "patient_bed_no": {
-                    "description": "patient_bed_no",
+                    "description": "床位号",
                     "type": "string"
                 },
                 "patient_id": {
-                    "description": "patient_id",
+                    "description": "病患ID",
                     "type": "string"
                 },
                 "patient_name": {
-                    "description": "patient_name",
+                    "description": "病患姓名",
                     "type": "string"
                 },
                 "patient_ward_name": {
-                    "description": "patient_ward_name",
+                    "description": "病房名称",
                     "type": "string"
                 },
                 "relative_id": {
-                    "description": "relative_id",
+                    "description": "家属ID",
                     "type": "string"
                 },
                 "schedule_id": {
-                    "description": "schedule_id",
+                    "description": "探视排班ID",
                     "type": "string"
                 },
                 "start_time": {
-                    "description": "start_time",
+                    "description": "直播开始时间",
                     "type": "string"
                 },
                 "status": {
-                    "description": "status",
+                    "description": "状态(0:未开始,1:直播中,2:已结束)",
                     "type": "integer"
                 },
                 "stream_id": {
-                    "description": "stream_id",
+                    "description": "流ID",
                     "type": "string"
                 },
                 "stream_url_suffix": {
-                    "description": "stream_url_suffix",
+                    "description": "流URL后缀",
                     "type": "string"
                 },
                 "vr_camera_id": {
-                    "description": "vr_camera_id",
+                    "description": "VR摄像头ID",
                     "type": "string"
                 }
             }

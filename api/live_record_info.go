@@ -20,7 +20,7 @@ func InitLive_record_infoRoute(r chi.Router) {
 
 // @Summary page query
 // @Description page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%
-// @Tags Live_record_info
+// @Tags 直播记录信息视图
 // @Param _page query int true "current page"
 // @Param _page_size query int true "page size"
 // @Param _order query string false "order"
@@ -58,7 +58,7 @@ func Live_record_infoPageListHandler(w http.ResponseWriter, r *http.Request) {
 
 // @Summary query objects
 // @Description query objects
-// @Tags Live_record_info
+// @Tags 直播记录信息视图
 // @Param _select query string false "_select"
 // @Param _order query string false "order"
 // @Param id query string false "id"

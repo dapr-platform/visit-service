@@ -192,10 +192,13 @@ COMMENT ON COLUMN v_live_record_info.start_time IS '直播开始时间';
 COMMENT ON COLUMN v_live_record_info.end_time IS '直播结束时间';
 COMMENT ON COLUMN v_live_record_info.file_size IS '文件大小';
 COMMENT ON COLUMN v_live_record_info.stream_id IS '流ID';
+COMMENT ON COLUMN v_live_record_info.stream_url_suffix IS '流URL后缀';
 COMMENT ON COLUMN v_live_record_info.status IS '状态(0:未开始,1:直播中,2:已结束)';
 COMMENT ON COLUMN v_live_record_info.patient_name IS '病患姓名';
 COMMENT ON COLUMN v_live_record_info.patient_ward_name IS '病房名称';
 COMMENT ON COLUMN v_live_record_info.patient_bed_no IS '床位号';
+COMMENT ON COLUMN v_live_record_info.camera_id IS '床头摄像头ID';
+COMMENT ON COLUMN v_live_record_info.vr_camera_id IS 'VR摄像头ID';
 
 
 -- 探视登记表

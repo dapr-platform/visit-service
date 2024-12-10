@@ -25,4 +25,5 @@ func InitRoute(r chi.Router) {
 	InitHead_displayRoute(r)
 	InitPatient_relativeRoute(r)
 	InitPatient_relative_infoRoute(r)
+	InitLive_recordRoute(r)
 }

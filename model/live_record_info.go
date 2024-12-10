@@ -38,7 +38,7 @@ Table: v_live_record_info
 
 JSON Sample
 -------------------------------------
-{    "id": "wFsSkpTyeokSXTowWSPxMrNkN",    "schedule_id": "frhvXSHwRmiNVTVrbqPuTelqE",    "patient_id": "xryLgfOFOttVvZUklIllcfGmL",    "relative_id": "odjsvMHlhUifEyGqdkNUmcier",    "device_id": "qQYlHVSeXPigMxYuLOaUbwZrx",    "start_time": 30,    "end_time": 60,    "file_size": 27,    "stream_id": "VaVACVeyWgUonvLrMQrQOiqtT",    "stream_url_suffix": "MHmCMgiwKiOtalgpEHDCuJXny",    "camera_id": "SURERxVVjiPvShCoYClFPlKoR",    "vr_camera_id": "CRMiUtVFqaKdJWeMERqomTKin",    "status": 87,    "patient_name": "fQXxOZDWPqgPSfTdlsGsNTdCM",    "patient_ward_name": "JqsRbEWsAiAFQyEVHAaEInspp",    "patient_bed_no": "wVhBaoQFfNECVkIfRnbrdaBFR"}
+{    "id": "lnuumKtmGdDoVShSLhlhoEkhf",    "schedule_id": "eIdcNsKmNXFKtkbqnmyRRFyDI",    "patient_id": "FOKJhNWmlIeojGOUXQLPYFLLA",    "relative_id": "xuKqIatSpyoQWBGuJlqgjLmIB",    "device_id": "voBYubIeUDSYWUGkIybCOMafR",    "start_time": 94,    "end_time": 83,    "file_size": 99,    "stream_id": "kFollKwlDhpjYNHPCucjZIZec",    "stream_url_suffix": "HnAQVXhheCHYaWyMMDDhREfvm",    "camera_id": "pshZcPgDOUPWDJnrnbmXDVRil",    "vr_camera_id": "KGipCibfFvUWkBoPuIiRhqAiB",    "status": 34,    "patient_name": "ZYvhesOshLJQrtjfkUVfoQPDD",    "patient_ward_name": "nnfAWlUkXAiMJpguvnSlnUZpF",    "patient_bed_no": "NLaVFnUySuTJxeqPueVpdfPEO"}
 
 
 Comments
@@ -87,37 +87,37 @@ var (
 
 // Live_record_info struct is a row record of the v_live_record_info table in the  database
 type Live_record_info struct {
-	ID string `json:"id"` //id
+	ID string `json:"id"` //直播记录ID
 
-	ScheduleID string `json:"schedule_id"` //schedule_id
+	ScheduleID string `json:"schedule_id"` //探视排班ID
 
-	PatientID string `json:"patient_id"` //patient_id
+	PatientID string `json:"patient_id"` //病患ID
 
-	RelativeID string `json:"relative_id"` //relative_id
+	RelativeID string `json:"relative_id"` //家属ID
 
-	DeviceID string `json:"device_id"` //device_id
+	DeviceID string `json:"device_id"` //设备ID
 
-	StartTime common.LocalTime `json:"start_time"` //start_time
+	StartTime common.LocalTime `json:"start_time"` //直播开始时间
 
-	EndTime common.LocalTime `json:"end_time"` //end_time
+	EndTime common.LocalTime `json:"end_time"` //直播结束时间
 
-	FileSize int32 `json:"file_size"` //file_size
+	FileSize int32 `json:"file_size"` //文件大小
 
-	StreamID string `json:"stream_id"` //stream_id
+	StreamID string `json:"stream_id"` //流ID
 
-	StreamURLSuffix string `json:"stream_url_suffix"` //stream_url_suffix
+	StreamURLSuffix string `json:"stream_url_suffix"` //流URL后缀
 
-	CameraID string `json:"camera_id"` //camera_id
+	CameraID string `json:"camera_id"` //床头摄像头ID
 
-	VrCameraID string `json:"vr_camera_id"` //vr_camera_id
+	VrCameraID string `json:"vr_camera_id"` //VR摄像头ID
 
-	Status int32 `json:"status"` //status
+	Status int32 `json:"status"` //状态(0:未开始,1:直播中,2:已结束)
 
-	PatientName string `json:"patient_name"` //patient_name
+	PatientName string `json:"patient_name"` //病患姓名
 
-	PatientWardName string `json:"patient_ward_name"` //patient_ward_name
+	PatientWardName string `json:"patient_ward_name"` //病房名称
 
-	PatientBedNo string `json:"patient_bed_no"` //patient_bed_no
+	PatientBedNo string `json:"patient_bed_no"` //床位号
 
 }
 
@@ -128,7 +128,7 @@ var Live_record_infoTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:   0,
 			Name:    "id",
-			Comment: `id`,
+			Comment: `直播记录ID`,
 			Notes: `Warning table: v_live_record_info does not have a primary key defined, setting col position 1 id as primary key
 Warning table: v_live_record_info primary key column id is nullable column, setting it as NOT NULL
 `,
@@ -151,7 +151,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              1,
 			Name:               "schedule_id",
-			Comment:            `schedule_id`,
+			Comment:            `探视排班ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -172,7 +172,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              2,
 			Name:               "patient_id",
-			Comment:            `patient_id`,
+			Comment:            `病患ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -193,7 +193,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              3,
 			Name:               "relative_id",
-			Comment:            `relative_id`,
+			Comment:            `家属ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -214,7 +214,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              4,
 			Name:               "device_id",
-			Comment:            `device_id`,
+			Comment:            `设备ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -235,7 +235,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              5,
 			Name:               "start_time",
-			Comment:            `start_time`,
+			Comment:            `直播开始时间`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "TIMESTAMP",
@@ -256,7 +256,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              6,
 			Name:               "end_time",
-			Comment:            `end_time`,
+			Comment:            `直播结束时间`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "TIMESTAMP",
@@ -277,7 +277,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              7,
 			Name:               "file_size",
-			Comment:            `file_size`,
+			Comment:            `文件大小`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT8",
@@ -298,7 +298,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              8,
 			Name:               "stream_id",
-			Comment:            `stream_id`,
+			Comment:            `流ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -319,7 +319,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              9,
 			Name:               "stream_url_suffix",
-			Comment:            `stream_url_suffix`,
+			Comment:            `流URL后缀`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -340,7 +340,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              10,
 			Name:               "camera_id",
-			Comment:            `camera_id`,
+			Comment:            `床头摄像头ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -361,7 +361,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              11,
 			Name:               "vr_camera_id",
-			Comment:            `vr_camera_id`,
+			Comment:            `VR摄像头ID`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -382,7 +382,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              12,
 			Name:               "status",
-			Comment:            `status`,
+			Comment:            `状态(0:未开始,1:直播中,2:已结束)`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT4",
@@ -403,7 +403,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              13,
 			Name:               "patient_name",
-			Comment:            `patient_name`,
+			Comment:            `病患姓名`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -424,7 +424,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              14,
 			Name:               "patient_ward_name",
-			Comment:            `patient_ward_name`,
+			Comment:            `病房名称`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -445,7 +445,7 @@ Warning table: v_live_record_info primary key column id is nullable column, sett
 		&ColumnInfo{
 			Index:              15,
 			Name:               "patient_bed_no",
-			Comment:            `patient_bed_no`,
+			Comment:            `床位号`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",

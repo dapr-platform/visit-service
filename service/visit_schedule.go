@@ -213,7 +213,7 @@ func initVisitScheduleDaily(forceUpdate bool) error {
 	maxVisitors := cast.ToInt(visitorsConfig.ConfigValue)
 	common.Logger.Infof("startHour: %v, endHour: %v, interval: %v, timeSpan: %v, generateDays: %v, maxVisitors: %v", startHour, endHour, interval, timeSpan, generateDays, maxVisitors)
 	// 从明天开始生成
-	startDate := time.Now().AddDate(0, 0, 1)
+	startDate := time.Date(time.Now().Year(), time.Now().Month(), time.Now().Day()+1, 0, 0, 0, 0, time.Local)
 	common.Logger.Infof("startDate: %v", startDate)
 	// 生成未来 generateDays 天的排班
 	for day := 0; day < generateDays; day++ {
@@ -240,7 +240,12 @@ func initVisitScheduleDaily(forceUpdate bool) error {
 		for minute := 0; minute < 1440; minute += (interval + timeSpan) {
 			startTime = startTime.Add(time.Duration(minute) * time.Minute)
 			endTime := startTime.Add(time.Duration(timeSpan) * time.Minute)
-
+			if startTime.Hour() < startHour {
+				continue
+			}
+			if startTime.Hour() > endHour {
+				break
+			}
 			// 检查时间段是否已存在
 			exists, err := checkTimeSlotExists(startTime)
 			if err != nil {

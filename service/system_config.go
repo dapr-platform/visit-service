@@ -104,7 +104,7 @@ var (
 	}
 	scheduleInterval = model.System_config{
 		ConfigName:  CONFIG_SCHEDULE_INTERVAL,
-		ConfigValue: "30",
+		ConfigValue: "0",
 		ConfigType:  "number",
 		ConfigDesc:  "排班间隔时间(分钟)",
 		Status:      1,

@@ -225,20 +225,20 @@ func initVisitScheduleDaily(forceUpdate bool) error {
 			DeleteVisitSchedule(currentDate)
 		}
 
+		startTime := time.Date(
+			currentDate.Year(),
+			currentDate.Month(),
+			currentDate.Day(),
+			startHour,
+			0,
+			0,
+			0,
+			time.Local,
+		)
+
 		// 生成当天的时间段
-		for hour := startHour; hour < endHour; hour++ {
-			minute := 0
-			minuteStep := interval + timeSpan
-			startTime := time.Date(
-				currentDate.Year(),
-				currentDate.Month(),
-				currentDate.Day(),
-				hour,
-				minute,
-				0,
-				0,
-				time.Local,
-			)
+		for minute := 0; minute < 1440; minute += (interval + timeSpan) {
+			startTime = startTime.Add(time.Duration(minute) * time.Minute)
 			endTime := startTime.Add(time.Duration(timeSpan) * time.Minute)
 
 			// 检查时间段是否已存在
@@ -280,7 +280,6 @@ func initVisitScheduleDaily(forceUpdate bool) error {
 				continue
 			}
 			common.Logger.Infof("Inserted schedule: %v", schedule)
-			minute += minuteStep
 		}
 	}
 

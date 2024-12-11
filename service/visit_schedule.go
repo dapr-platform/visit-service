@@ -222,7 +222,10 @@ func initVisitScheduleDaily(forceUpdate bool) error {
 
 		if forceUpdate {
 			common.Logger.Infof("forceUpdate: %v, delete visit schedule: %v", forceUpdate, currentDate)
-			DeleteVisitSchedule(currentDate)
+			err = DeleteVisitSchedule(currentDate)
+			if err != nil {
+				common.Logger.Errorf("Failed to delete visit schedule: %v", err)
+			}
 		}
 
 		startTime := time.Date(
@@ -274,11 +277,12 @@ func initVisitScheduleDaily(forceUpdate bool) error {
 			}
 
 			// 插入数据库
-			_, err = common.DbInsert(
+			err = common.DbUpsert[model.Visit_schedule](
 				context.Background(),
 				common.GetDaprClient(),
-				&schedule,
+				schedule,
 				model.Visit_scheduleTableInfo.Name,
+				model.Visit_schedule_FIELD_NAME_id,
 			)
 			if err != nil {
 				common.Logger.Errorf("Error inserting schedule: %v", err)

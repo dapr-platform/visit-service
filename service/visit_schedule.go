@@ -228,69 +228,86 @@ func initVisitScheduleDaily(forceUpdate bool) error {
 			}
 		}
 
-		startTime := time.Date(
-			currentDate.Year(),
-			currentDate.Month(),
-			currentDate.Day(),
-			startHour,
-			0,
-			0,
-			0,
-			time.Local,
-		)
 
-		// 生成当天的时间段
-		for minute := 0; minute < 1440; minute += (interval + timeSpan) {
-			startTime = startTime.Add(time.Duration(minute) * time.Minute)
-			endTime := startTime.Add(time.Duration(timeSpan) * time.Minute)
-			if startTime.Hour() < startHour {
-				continue
-			}
-			if startTime.Hour() > endHour {
-				break
-			}
-			// 检查时间段是否已存在
-			exists, err := checkTimeSlotExists(startTime)
-			if err != nil {
-				common.Logger.Errorf("Error checking time slot: %v", err)
-				continue
-			}
-			if exists && !forceUpdate {
-				continue
-			}
-			status := 0
-			totalVisitors := maxVisitors
-			autoAvailableVisitors := cast.ToInt(autoAvailableVisitorsConfig.ConfigValue)
-			if startTime.Hour() >= cast.ToInt(autoAvailableBeginHourConfig.ConfigValue) && startTime.Hour() <= cast.ToInt(autoAvailableEndHourConfig.ConfigValue) {
-				status = 1
-				totalVisitors = autoAvailableVisitors
-			}
+        // 计算当天开始和结束的分钟数
+        dayStartMinutes := startHour * 60
+        dayEndMinutes := endHour * 60
 
-			// 创建排班记录
-			schedule := model.Visit_schedule{
-				ID:               startTime.Format("20060102150405"),
-				StartTime:        common.LocalTime(startTime),
-				EndTime:          common.LocalTime(endTime),
-				TotalVisitors:    int32(totalVisitors),
-				ScheduleVisitors: int32(0),
-				Status:           int32(status),
-			}
+        // 按间隔生成时间槽
+        for currentMinute := dayStartMinutes; currentMinute < dayEndMinutes; currentMinute += (interval + timeSpan) {
+            // 创建开始时间
+            slotStartTime := time.Date(
+                currentDate.Year(),
+                currentDate.Month(),
+                currentDate.Day(),
+                currentMinute / 60,        // 小时
+                currentMinute % 60,        // 分钟
+                0,
+                0,
+                time.Local,
+            )
 
-			// 插入数据库
-			err = common.DbUpsert[model.Visit_schedule](
-				context.Background(),
-				common.GetDaprClient(),
-				schedule,
-				model.Visit_scheduleTableInfo.Name,
-				model.Visit_schedule_FIELD_NAME_id,
-			)
-			if err != nil {
-				common.Logger.Errorf("Error inserting schedule: %v", err)
-				continue
-			}
-			common.Logger.Infof("Inserted schedule: %v", schedule)
-		}
-	}
+            // 创建结束时间
+            slotEndTime := slotStartTime.Add(time.Duration(timeSpan) * time.Minute)
 
+            // 如果结束时间超过了当天的结束时间，跳过这个时间槽
+            if slotEndTime.Hour() > endHour || 
+               (slotEndTime.Hour() == endHour && slotEndTime.Minute() > 0) {
+                continue
+            }
+
+            // 检查时间槽是否已存在
+            exists, err := checkTimeSlotExists(slotStartTime)
+            if err != nil {
+                common.Logger.Errorf("Error checking time slot: %v", err)
+                continue
+            }
+            if exists && !forceUpdate {
+                continue
+            }
+
+            // 设置状态和访客数量
+            status := 0
+            totalVisitors := maxVisitors
+            autoAvailableVisitors := cast.ToInt(autoAvailableVisitorsConfig.ConfigValue)
+            
+            // 检查是否在自动可用时间范围内
+            autoStartHour := cast.ToInt(autoAvailableBeginHourConfig.ConfigValue)
+            autoEndHour := cast.ToInt(autoAvailableEndHourConfig.ConfigValue)
+            
+            // 对于跨小时的时间槽，如果开始时间在自动可用范围内就设置为可用
+            if slotStartTime.Hour() >= autoStartHour && slotStartTime.Hour() <= autoEndHour {
+                status = 1
+                totalVisitors = autoAvailableVisitors
+            }
+
+            // 创建排班记录
+            schedule := model.Visit_schedule{
+                ID:               slotStartTime.Format("20060102150405"),
+                StartTime:        common.LocalTime(slotStartTime),
+                EndTime:          common.LocalTime(slotEndTime),
+                TotalVisitors:    int32(totalVisitors),
+                ScheduleVisitors: 0,
+                Status:           int32(status),
+            }
+
+            // 插入数据库
+            err = common.DbUpsert[model.Visit_schedule](
+                context.Background(),
+                common.GetDaprClient(),
+                schedule,
+                model.Visit_scheduleTableInfo.Name,
+                model.Visit_schedule_FIELD_NAME_id,
+            )
+            if err != nil {
+                common.Logger.Errorf("Error inserting schedule: %v", err)
+                continue
+            }
+            common.Logger.Infof("Created schedule: start=%v, end=%v, visitors=%d, status=%d", 
+                schedule.StartTime, schedule.EndTime, schedule.TotalVisitors, schedule.Status)
+        }
+    }
 	return nil
 }
+
+

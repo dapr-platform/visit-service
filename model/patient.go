@@ -29,7 +29,7 @@ Table: o_patient
 
 JSON Sample
 -------------------------------------
-{    "id": "EXPlWeWAsCFhKAIwGjOvNOHjP",    "ward_id": "jrngdywTgsQAhGsjcuHCNwVPk",    "bed_id": "RJuWETmtPJDxIuICptjgIdlAy",    "name": "tCvNwOXqbZWKZaaGNUpMnGXVO",    "hospital_no": "lXMbpGGPUkApBKfDrOqVkKRpo",    "status": 94,    "remark": "ayyeseuePoVCOSMiNinyifLCL"}
+{    "id": "kCoKEgeQyWpNjJbbwmpyZdkZr",    "ward_id": "PWyJpeVYuwBOxDIWBdLkjeSiR",    "bed_id": "omGwDplPJrMWKsFpldqFCdDCu",    "name": "uacDBCswySLiTErrcwrURmeMS",    "hospital_no": "POcYRoqHvvDQfKTxFNJxIIBUW",    "status": 91,    "remark": "kagwcjUkJMjahGSiYZGUDZFaP"}
 
 
 

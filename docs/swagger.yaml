@@ -601,6 +601,9 @@ definitions:
       remark:
         description: 备注
         type: string
+      schedule_id:
+        description: schedule_id
+        type: string
       send_prompt_sms_status:
         description: 发送提醒短信状态(0:未发送,1:已发送)
         type: integer
@@ -660,6 +663,9 @@ definitions:
         type: string
       remark:
         description: 备注
+        type: string
+      schedule_id:
+        description: 排班ID
         type: string
       send_prompt_sms_status:
         description: send_prompt_sms_status
@@ -4317,6 +4323,10 @@ paths:
         in: query
         name: send_prompt_sms_status
         type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
+        type: string
       produces:
       - application/json
       responses:
@@ -4444,6 +4454,10 @@ paths:
         in: query
         name: send_prompt_sms_status
         type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
+        type: string
       - description: patient_name
         in: query
         name: patient_name
@@ -4567,6 +4581,10 @@ paths:
       - description: send_prompt_sms_status
         in: query
         name: send_prompt_sms_status
+        type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
         type: string
       - description: patient_name
         in: query
@@ -4782,6 +4800,10 @@ paths:
         in: query
         name: send_prompt_sms_status
         type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
+        type: string
       produces:
       - application/json
       responses:
@@ -4984,7 +5006,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: 手动删除排班
+      description: 手动删除排班, 删除开始时间到第二天开始时间之间的排班
       parameters:
       - description: 删除开始时间，2006-01-02
         in: query

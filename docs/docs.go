@@ -5697,6 +5697,12 @@ const docTemplate = `{
                         "description": "send_prompt_sms_status",
                         "name": "send_prompt_sms_status",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "schedule_id",
+                        "name": "schedule_id",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -5901,6 +5907,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "schedule_id",
+                        "name": "schedule_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "patient_name",
                         "name": "patient_name",
                         "in": "query"
@@ -6086,6 +6098,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "send_prompt_sms_status",
                         "name": "send_prompt_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "schedule_id",
+                        "name": "schedule_id",
                         "in": "query"
                     },
                     {
@@ -6374,6 +6392,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "send_prompt_sms_status",
                         "name": "send_prompt_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "schedule_id",
+                        "name": "schedule_id",
                         "in": "query"
                     }
                 ],
@@ -6697,7 +6721,7 @@ const docTemplate = `{
         },
         "/visit-schedule/delete-visit-schedule": {
             "post": {
-                "description": "手动删除排班",
+                "description": "手动删除排班, 删除开始时间到第二天开始时间之间的排班",
                 "consumes": [
                     "application/json"
                 ],
@@ -8248,6 +8272,10 @@ const docTemplate = `{
                     "description": "备注",
                     "type": "string"
                 },
+                "schedule_id": {
+                    "description": "schedule_id",
+                    "type": "string"
+                },
                 "send_prompt_sms_status": {
                     "description": "发送提醒短信状态(0:未发送,1:已发送)",
                     "type": "integer"
@@ -8327,6 +8355,10 @@ const docTemplate = `{
                 },
                 "remark": {
                     "description": "备注",
+                    "type": "string"
+                },
+                "schedule_id": {
+                    "description": "排班ID",
                     "type": "string"
                 },
                 "send_prompt_sms_status": {

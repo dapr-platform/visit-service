@@ -23,14 +23,25 @@ func InitVisit_scheduleExtRoute(r chi.Router) {
 // @Accept json
 // @Produce json
 // @Param force_update query bool false "是否强制更新, true: 强制更新, false: 不强制更新"
+// @Param start_date query string false "开始日期, 2024-01-01"
 // @Success 200 {object} common.Response "Success response"
 // @Failure 400 {object} common.Response "Invalid request parameters"
 // @Failure 500 {object} common.Response "Internal server error"
 // @Router /visit-schedule/init-visit-schedule [post]
 func ManualInitVisitScheduleHandler(w http.ResponseWriter, r *http.Request) {
 	forceUpdate := r.FormValue("force_update") == "true"
+	startDateStr := r.FormValue("start_date")
+	startDate := time.Time{}
+	var err error
+	if startDateStr != "" {
+		startDate, err = time.Parse("2006-01-02", startDateStr)
+		if err != nil {
+			common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
+			return
+		}
+	}
 	go func() {
-		err := service.ManualInitVisitSchedule(forceUpdate)
+		err := service.ManualInitVisitSchedule(forceUpdate, startDate)
 		if err != nil {
 			common.Logger.Error("init visit schedule error", err)
 		}

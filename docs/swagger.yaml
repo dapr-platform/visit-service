@@ -5041,6 +5041,10 @@ paths:
         in: query
         name: force_update
         type: boolean
+      - description: 开始日期, 2024-01-01
+        in: query
+        name: start_date
+        type: string
       produces:
       - application/json
       responses:

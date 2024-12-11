@@ -6782,6 +6782,12 @@ const docTemplate = `{
                         "description": "是否强制更新, true: 强制更新, false: 不强制更新",
                         "name": "force_update",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "开始日期, 2024-01-01",
+                        "name": "start_date",
+                        "in": "query"
                     }
                 ],
                 "responses": {

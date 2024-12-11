@@ -8,6 +8,7 @@ import (
 	"visit-service/model"
 
 	"github.com/dapr-platform/common"
+	"github.com/pkg/errors"
 	"github.com/robfig/cron/v3"
 	"github.com/spf13/cast"
 )
@@ -55,17 +56,33 @@ func FindVisitScheduleByStartTime(ctx context.Context, startTime common.LocalTim
 	}
 	return schedule, nil
 }
+
 func IncreaseVisitScheduleVisitors(ctx context.Context, schedule *model.Visit_schedule) error {
-	schedule.ScheduleVisitors++
-	err := common.DbUpsert[model.Visit_schedule](ctx, common.GetDaprClient(), *schedule, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
+	qstr := model.Visit_record_FIELD_NAME_schedule_id + "=" + schedule.ID
+	count, err := common.DbGetCount(ctx, common.GetDaprClient(), model.Visit_recordTableInfo.Name, model.Visit_record_FIELD_NAME_schedule_id, qstr)
+	if err != nil {
+		err = errors.Wrap(err, "查询预约记录失败")
+		return err
+	}
+	schedule.ScheduleVisitors = int32(count + 1)
+	err = common.DbUpsert[model.Visit_schedule](ctx, common.GetDaprClient(), *schedule, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 func DecreaseVisitScheduleVisitors(ctx context.Context, schedule *model.Visit_schedule) error {
-	schedule.ScheduleVisitors--
-	err := common.DbUpsert[model.Visit_schedule](ctx, common.GetDaprClient(), *schedule, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
+	qstr := model.Visit_record_FIELD_NAME_schedule_id + "=" + schedule.ID
+	count, err := common.DbGetCount(ctx, common.GetDaprClient(), model.Visit_recordTableInfo.Name, model.Visit_record_FIELD_NAME_schedule_id, qstr)
+	if err != nil {
+		err = errors.Wrap(err, "查询预约记录失败")
+		return err
+	}
+	if count == 0 {
+		return nil
+	}
+	schedule.ScheduleVisitors = int32(count - 1)
+	err = common.DbUpsert[model.Visit_schedule](ctx, common.GetDaprClient(), *schedule, model.Visit_scheduleTableInfo.Name, model.Visit_schedule_FIELD_NAME_id)
 	if err != nil {
 		return err
 	}

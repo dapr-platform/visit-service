@@ -144,7 +144,7 @@ COMMENT ON COLUMN o_visit_schedule.start_time IS '开始时间';
 COMMENT ON COLUMN o_visit_schedule.end_time IS '结束时间';
 COMMENT ON COLUMN o_visit_schedule.total_visitors IS '探视总人数';
 COMMENT ON COLUMN o_visit_schedule.schedule_visitors IS '已预约人数';
-COMMENT ON COLUMN o_visit_schedule.status IS '状态(0:可预约,1:不可预约)';
+COMMENT ON COLUMN o_visit_schedule.status IS '状态(0:不可预约,1:可预约)';
 
 
 -- 直播记录表

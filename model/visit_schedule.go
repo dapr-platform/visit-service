@@ -28,7 +28,7 @@ Table: o_visit_schedule
 
 JSON Sample
 -------------------------------------
-{    "id": "PekysDfcDyXhvgyLmCGmGICgE",    "start_time": 53,    "end_time": 56,    "total_visitors": 60,    "schedule_visitors": 48,    "status": 80}
+{    "id": "HnmBgGtqGlIZUAqTYFOyJCacX",    "start_time": 88,    "end_time": 51,    "total_visitors": 51,    "schedule_visitors": 25,    "status": 3}
 
 
 
@@ -60,7 +60,7 @@ type Visit_schedule struct {
 
 	ScheduleVisitors int32 `json:"schedule_visitors"` //已预约人数
 
-	Status int32 `json:"status"` //状态(0:可预约,1:不可预约)
+	Status int32 `json:"status"` //状态(0:不可预约,1:可预约)
 
 }
 
@@ -176,7 +176,7 @@ var Visit_scheduleTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:              5,
 			Name:               "status",
-			Comment:            `状态(0:可预约,1:不可预约)`,
+			Comment:            `状态(0:不可预约,1:可预约)`,
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "INT4",

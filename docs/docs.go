@@ -8427,7 +8427,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "status": {
-                    "description": "状态(0:可预约,1:不可预约)",
+                    "description": "状态(0:不可预约,1:可预约)",
                     "type": "integer"
                 },
                 "total_visitors": {

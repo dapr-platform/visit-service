@@ -1654,6 +1654,11 @@ paths:
   /dashboard/monthly-stats:
     get:
       description: 获取探视预约按月数量统计
+      parameters:
+      - description: 年,默认当前年.格式2006
+        in: query
+        name: year
+        type: string
       produces:
       - application/json
       responses:

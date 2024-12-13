@@ -1466,6 +1466,14 @@
                     "仪表盘"
                 ],
                 "summary": "获取探视预约按月数量统计",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "年,默认当前年.格式2006",
+                        "name": "year",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "月度统计数据",

@@ -222,6 +222,7 @@ CREATE TABLE o_visit_record (
     remark VARCHAR(1024) DEFAULT '',
     PRIMARY KEY (id)
 );
+
 CREATE INDEX idx_visit_record_visit_start_time ON o_visit_record (visit_start_time);
 COMMENT ON TABLE o_visit_record IS '探视登记表';
 COMMENT ON COLUMN o_visit_record.id IS '探视登记ID';

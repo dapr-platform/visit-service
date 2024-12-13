@@ -71,7 +71,7 @@ func DashboardMonthlyStatsHandler(w http.ResponseWriter, r *http.Request) {
 
 	selectSql := "to_char(visit_end_time, 'YYYY-MM') as month, COUNT(*) as count"
 	fromSql := "o_visit_record"
-	whereSql := ` 1==1 GROUP BY to_char(visit_end_time, 'YYYY-MM')
+	whereSql := ` 1=1 GROUP BY to_char(visit_end_time, 'YYYY-MM')
 			ORDER BY month DESC 
 			LIMIT 12`
 	type Stats struct {

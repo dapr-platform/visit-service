@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 	"sort"
+	"time"
 	"visit-service/entity"
 	"visit-service/model"
 
@@ -64,14 +65,18 @@ func DashboardStatsHandler(w http.ResponseWriter, r *http.Request) {
 // @Description 获取探视预约按月数量统计
 // @Tags 仪表盘
 // @Produce json
+// @Param year query string false "年,默认当前年.格式2006"
 // @Success 200 {object} common.Response{data=[]entity.VisitRecordStats} "月度统计数据"
 // @Failure 500 {object} common.Response ""
 // @Router /dashboard/monthly-stats [get]
 func DashboardMonthlyStatsHandler(w http.ResponseWriter, r *http.Request) {
-
+	year := r.URL.Query().Get("year")
+	if year == "" {
+		year = time.Now().Format("2006")
+	}
 	selectSql := "to_char(visit_end_time, 'YYYY-MM') as month, COUNT(*) as count"
 	fromSql := "o_visit_record"
-	whereSql := ` 1=1 GROUP BY to_char(visit_end_time, 'YYYY-MM')
+	whereSql := ` visit_end_time >= '` + year + `-01-01' and visit_end_time <= '` + year + `-12-31' GROUP BY to_char(visit_end_time, 'YYYY-MM')
 			ORDER BY month DESC 
 			LIMIT 12`
 	type Stats struct {

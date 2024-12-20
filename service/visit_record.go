@@ -89,6 +89,13 @@ func cancelVisitRecord(ctx context.Context, record *model.Visit_record) error {
 }
 
 func newAddVisitRecord(ctx context.Context, record *model.Visit_record) error {
+	existRecord, err := findVisitRecordByRelativeIDAndStartTime(ctx, record.RelativeID, record.VisitStartTime)
+	if err != nil {
+		return errors.Wrap(err, "查询已存在预约记录失败")
+	}
+	if existRecord != nil {
+		return errors.New("已存在预约记录")
+	}
 	schedule, err := FindVisitScheduleByStartTime(ctx, record.VisitStartTime)
 	if err != nil {
 		return errors.Wrap(err, "查询排班信息失败")
@@ -145,6 +152,14 @@ func newAddVisitRecord(ctx context.Context, record *model.Visit_record) error {
 		return errors.Wrap(err, "更新排班已预约人数失败")
 	}
 	return nil
+}
+func findVisitRecordByRelativeIDAndStartTime(ctx context.Context, relativeID string, startTime common.LocalTime) (*model.Visit_record, error) {
+	qstr := model.Visit_record_FIELD_NAME_relative_id + "=" + relativeID + "&" + model.Visit_record_FIELD_NAME_visit_start_time + "=" + startTime.DbString()
+	record, err := common.DbGetOne[model.Visit_record](ctx, common.GetDaprClient(), model.Visit_recordTableInfo.Name, qstr)
+	if err != nil {
+		return nil, err
+	}
+	return record, nil
 }
 
 func FindValidExistVisitRecordsByStartTime(ctx context.Context, startTime common.LocalTime) ([]model.Visit_record, error) {

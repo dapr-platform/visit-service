@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 	"sort"
+	"strconv"
 	"time"
 	"visit-service/entity"
 	"visit-service/model"
@@ -74,10 +75,10 @@ func DashboardMonthlyStatsHandler(w http.ResponseWriter, r *http.Request) {
 	if year == "" {
 		year = time.Now().Format("2006")
 	}
-	selectSql := "to_char(visit_end_time, 'YYYY-MM') as month, COUNT(*) as count"
+	selectSql := "to_char(visit_end_time, 'MM') as month, COUNT(*) as count"
 	fromSql := "o_visit_record"
-	whereSql := ` visit_end_time >= '` + year + `-01-01' and visit_end_time <= '` + year + `-12-31' GROUP BY to_char(visit_end_time, 'YYYY-MM')
-			ORDER BY month DESC 
+	whereSql := ` visit_end_time >= '` + year + `-01-01' and visit_end_time <= '` + year + `-12-31' GROUP BY to_char(visit_end_time, 'MM')
+			ORDER BY month ASC 
 			LIMIT 12`
 	type Stats struct {
 		Month string `json:"month"`
@@ -94,5 +95,20 @@ func DashboardMonthlyStatsHandler(w http.ResponseWriter, r *http.Request) {
 		return result[i].Month < result[j].Month
 	})
 
-	common.HttpResult(w, common.OK.WithData(result))
+	data := make([]entity.VisitRecordStats, 12)
+	for mon := 1; mon <= 12; mon++ {
+		found := false
+		for _, stat := range result {
+			if stat.Month == strconv.Itoa(mon) {
+				data[mon-1] = stat
+				found = true
+				break
+			}
+		}
+		if !found {
+			data[mon-1] = entity.VisitRecordStats{Month: strconv.Itoa(mon), Count: 0}
+		}
+	}
+
+	common.HttpResult(w, common.OK.WithData(data))
 }

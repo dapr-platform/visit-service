@@ -89,12 +89,26 @@ func cancelVisitRecord(ctx context.Context, record *model.Visit_record) error {
 }
 
 func newAddVisitRecord(ctx context.Context, record *model.Visit_record) error {
+	configPerDay, err := GetConfig(CONFIG_MAX_VISIT_PER_DAY)
+	if err != nil {
+		return errors.Wrap(err, "查询系统配置失败")
+	}
+	maxVisitPerDay := cast.ToInt(configPerDay.ConfigValue)
+	if maxVisitPerDay > 0 {
+		count, err := findVisitRecordCountByRelativeIDAndStartDay(ctx, record.RelativeID, record.VisitStartTime)
+		if err != nil {
+			return errors.Wrap(err, "查询已存在预约记录失败")
+		}
+		if count >= maxVisitPerDay {
+			return errors.New("已达到预约次数上限")
+		}
+	}
 	existRecord, err := findVisitRecordByRelativeIDAndStartTime(ctx, record.RelativeID, record.VisitStartTime)
 	if err != nil {
 		return errors.Wrap(err, "查询已存在预约记录失败")
 	}
 	if existRecord != nil {
-		return errors.New("已存在预约记录")
+		return errors.New("当前时段已存在预约记录")
 	}
 	schedule, err := FindVisitScheduleByStartTime(ctx, record.VisitStartTime)
 	if err != nil {
@@ -152,6 +166,16 @@ func newAddVisitRecord(ctx context.Context, record *model.Visit_record) error {
 		return errors.Wrap(err, "更新排班已预约人数失败")
 	}
 	return nil
+}
+func findVisitRecordCountByRelativeIDAndStartDay(ctx context.Context, relativeID string, startDay common.LocalTime) (int, error) {
+	startDayStr := time.Time(startDay).Format("2006-01-02")
+	endDayStr := time.Time(startDay).AddDate(0, 0, 1).Format("2006-01-02")
+	qstr := model.Visit_record_FIELD_NAME_relative_id + "=" + relativeID + "&" + model.Visit_record_FIELD_NAME_visit_start_time + "=$gt." + startDayStr + "&" + model.Visit_record_FIELD_NAME_visit_start_time + "=$lt." + endDayStr
+	count, err := common.DbGetCount(ctx, common.GetDaprClient(), model.Visit_recordTableInfo.Name, model.Visit_record_FIELD_NAME_id, qstr)
+	if err != nil {
+		return 0, errors.Wrap(err, "查询已存在预约记录失败")
+	}
+	return int(count), nil
 }
 func findVisitRecordByRelativeIDAndStartTime(ctx context.Context, relativeID string, startTime common.LocalTime) (*model.Visit_record, error) {
 	qstr := model.Visit_record_FIELD_NAME_relative_id + "=" + relativeID + "&" + model.Visit_record_FIELD_NAME_visit_start_time + "=" + startTime.DbString()

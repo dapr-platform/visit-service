@@ -30,6 +30,8 @@ const (
 	CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR = "schedule_state_auto_available_begin_hour"
 	CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR   = "schedule_state_auto_available_end_hour"
 	CONFIG_NURSE_NOTIFY_PHONES                      = "nurse_notify_phones"
+	CONFIG_DEBUG_MODE                               = "debug_mode"
+	CONFIG_MAX_VISIT_PER_DAY                       = "max_visit_per_day"
 )
 
 // ConfigManager 系统配置管理器
@@ -172,6 +174,20 @@ var (
 		ConfigDesc:  "护士短信通知手机号(多个手机号用,号分隔)",
 		Status:      1,
 	}
+	debugMode = model.System_config{
+		ConfigName:  CONFIG_DEBUG_MODE,
+		ConfigValue: "0",
+		ConfigType:  "number",
+		ConfigDesc:  "调试模式(0:关闭,1:开启)",
+		Status:      1,
+	}
+	maxVisitPerDay = model.System_config{
+		ConfigName:  CONFIG_MAX_VISIT_PER_DAY,
+		ConfigValue: "0",
+		ConfigType:  "number",
+		ConfigDesc:  "每人每天预约次数上限(0:不限制)",
+		Status:      1,
+	}
 
 	// 默认配置映射
 	defaultSystemConfigListMap = map[string]*model.System_config{
@@ -193,6 +209,8 @@ var (
 		CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_BEGIN_HOUR: &scheduleStateAutoAvailableBeginHour,
 		CONFIG_SCHEDULE_STATE_AUTO_AVAILABLE_END_HOUR:   &scheduleStateAutoAvailableEndHour,
 		CONFIG_NURSE_NOTIFY_PHONES:                      &nurseNotifyPhones,
+		CONFIG_DEBUG_MODE:                               &debugMode,
+		CONFIG_MAX_VISIT_PER_DAY:                       &maxVisitPerDay,
 	}
 )
 

@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 	"sort"
 	"strconv"
@@ -75,38 +76,40 @@ func DashboardMonthlyStatsHandler(w http.ResponseWriter, r *http.Request) {
 	if year == "" {
 		year = time.Now().Format("2006")
 	}
+
+	// 验证年份格式
+	if _, err := strconv.Atoi(year); err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg("invalid year format"))
+		return
+	}
+
 	selectSql := "to_char(visit_end_time, 'MM') as month, COUNT(*) as count"
 	fromSql := "o_visit_record"
-	whereSql := ` visit_end_time >= '` + year + `-01-01' and visit_end_time <= '` + year + `-12-31' GROUP BY to_char(visit_end_time, 'MM')
-			ORDER BY month ASC 
-			LIMIT 12`
-	type Stats struct {
-		Month string `json:"month"`
-		Count int64  `json:"count"`
-	}
+	yearInt, _ := strconv.Atoi(year)
+	whereSql := ` visit_end_time >= '` + year + `-01-01' and visit_end_time < '` + strconv.Itoa(yearInt+1) + `-01-01' 
+			GROUP BY to_char(visit_end_time, 'MM')
+			ORDER BY month ASC`
+
 	result, err := common.CustomSql[entity.VisitRecordStats](r.Context(), common.GetDaprClient(), selectSql, fromSql, whereSql)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
 	}
 
-	// Sort result by month ascending
-	sort.Slice(result, func(i, j int) bool {
-		return result[i].Month < result[j].Month
-	})
-
 	data := make([]entity.VisitRecordStats, 12)
 	for mon := 1; mon <= 12; mon++ {
+		// 确保月份格式为两位数字
+		monthStr := fmt.Sprintf("%02d", mon)
 		found := false
 		for _, stat := range result {
-			if stat.Month == strconv.Itoa(mon) {
+			if stat.Month == monthStr {
 				data[mon-1] = stat
 				found = true
 				break
 			}
 		}
 		if !found {
-			data[mon-1] = entity.VisitRecordStats{Month: strconv.Itoa(mon), Count: 0}
+			data[mon-1] = entity.VisitRecordStats{Month: monthStr, Count: 0}
 		}
 	}
 

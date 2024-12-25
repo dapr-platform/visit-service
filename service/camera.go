@@ -63,6 +63,9 @@ func StartCamLiveStream(cameraID string, disableSaveMp4 bool) (string, error) {
 		params.Set("enable_mp4", "1")
 	}
 	params.Set("enable_rtmp", "1")
+	params.Set("enable_hls", "1")
+	params.Set("enable_ts", "1")
+	params.Set("enable_fmp4", "1")
 	params.Set("enable_audio", "1")
 	params.Set("mp4_max_second", "3600")
 	params.Set("mp4_as_player", "0")

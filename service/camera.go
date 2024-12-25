@@ -32,6 +32,30 @@ func FindMovableCameras(ctx context.Context) ([]model.Camera_info, error) {
 	}
 	return cameras, nil
 }
+
+func OnStreamNotFound(ctx context.Context, streamID string) error {
+	common.Logger.Info("on stream not found", "streamID", streamID) //streamId为摄像头的编号
+	// 1. 获取摄像头信息
+	qstr := model.Camera_info_FIELD_NAME_device_no + "=" + streamID
+	cameras, err := common.DbQuery[model.Camera_info](ctx, common.GetDaprClient(), model.Camera_infoTableInfo.Name, qstr)
+	if err != nil {
+		common.Logger.Error("on stream not found", "err", err)
+		return err
+	}
+	if len(cameras) == 0 {
+		common.Logger.Error("on stream not found", "camera not found", streamID)
+		return fmt.Errorf("camera not found: %s", streamID)
+	}
+	camera := cameras[0]
+	common.Logger.Info("on stream not found", "camera", camera)
+	err = addStreamProxy(streamID, camera.MainStreamURL, false)
+	if err != nil {
+		common.Logger.Error("on stream not found", "err", err)
+		return err
+	}
+	return nil
+}
+
 func StartCamLiveStream(cameraID string, disableSaveMp4 bool) (string, error) {
 	// 1. 获取摄像头信息
 	cameras, err := common.DbQuery[model.Camera_info](context.Background(), common.GetDaprClient(), model.Camera_infoTableInfo.Name, fmt.Sprintf("id=%s", cameraID))
@@ -47,16 +71,23 @@ func StartCamLiveStream(cameraID string, disableSaveMp4 bool) (string, error) {
 		return "", fmt.Errorf("camera main stream url is empty")
 	}
 	streamID := common.NanoId()
+
+	// 2. 调用ZLMediaKit API添加流代理
+	err = addStreamProxy(streamID, camera.MainStreamURL, camera.DeviceType == int32(DEVICE_TYPE_VR))
+	if err != nil {
+		return "", fmt.Errorf("failed to add stream proxy: %v", err)
+	}
+	return streamID, nil
+}
+
+func addStreamProxy(  streamID string, streamUrl string, disableSaveMp4 bool) error {
 	// 2. 调用ZLMediaKit API添加流代理
 	params := url.Values{}
 	params.Set("secret", config.ZLMEDIAKIT_SECRET)
 	params.Set("vhost", "__defaultVhost__")
 	params.Set("app", "live")
 	params.Set("stream", streamID)
-	params.Set("url", camera.MainStreamURL)
-	if camera.DeviceType == int32(DEVICE_TYPE_VR) {
-		disableSaveMp4 = true //VR设备不保存mp4
-	}
+	params.Set("url", streamUrl)
 	if disableSaveMp4 {
 		params.Set("enable_mp4", "0")
 	} else {
@@ -74,19 +105,18 @@ func StartCamLiveStream(cameraID string, disableSaveMp4 bool) (string, error) {
 	apiURL := fmt.Sprintf("%s/addStreamProxy?%s", config.ZLMEDIAKIT_API_URL, params.Encode())
 	resp, err := http.Get(apiURL)
 	if err != nil {
-		return "", fmt.Errorf("failed to call ZLMediaKit API: %v", err)
+		return fmt.Errorf("failed to call ZLMediaKit API: %v", err)
 	}
 	defer resp.Body.Close()
 
 	var result AddStreamResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return "", fmt.Errorf("failed to decode response: %v", err)
+		return fmt.Errorf("failed to decode response: %v", err)
 	}
 
 	if result.Code != 0 {
-		return "", fmt.Errorf("ZLMediaKit API returned error code: %d", result.Code)
+		return fmt.Errorf("ZLMediaKit API returned error code: %d", result.Code)
 	}
 
-	// 3. 返回流ID
-	return streamID, nil
+	return nil
 }

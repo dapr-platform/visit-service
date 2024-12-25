@@ -5434,4 +5434,55 @@ paths:
       summary: zlm on record mp4
       tags:
       - Zlm
+  /zlm/on-stream-not-found:
+    post:
+      description: zlm on stream not found callback
+      parameters:
+      - description: stream_id
+        in: query
+        name: stream_id
+        required: true
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Ward'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: zlm on stream not found
+      tags:
+      - Zlm
 swagger: "2.0"

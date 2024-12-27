@@ -14,15 +14,16 @@ var RECORD_STATUS_ENDING = 2
 
 func AddLiveRecord(ctx context.Context, visitRecord *model.Visit_record, userID, cameraID, streamID string) error {
 	record := &model.Live_record{
-		ID:         common.NanoId(),
-		ScheduleID: visitRecord.ID,
-		PatientID:  visitRecord.PatientID,
-		RelativeID: visitRecord.RelativeID,
-		DeviceID:   cameraID,
-		StreamID:   streamID,
+		ID:              common.NanoId(),
+		ScheduleID:      visitRecord.ID,
+		PatientID:       visitRecord.PatientID,
+		RelativeID:      visitRecord.RelativeID,
+		CameraID:        cameraID,
+		VrCameraID:     visitRecord.VrCameraID,
+		StreamID:        streamID,
 		StreamURLSuffix: config.ZLMEDIAKIT_STREAM_URL_PREFIX + "live/" + streamID + ".live.flv",
-		StartTime:  common.LocalTime(time.Now()),
-		Status:     int32(RECORD_STATUS_STARTING),
+		StartTime:       common.LocalTime(time.Now()),
+		Status:          int32(RECORD_STATUS_STARTING),
 	}
 	_, err := common.DbInsert(ctx, common.GetDaprClient(), record, model.Live_recordTableInfo.Name)
 	return err

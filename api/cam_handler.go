@@ -95,7 +95,6 @@ func StartCamLiveStreamHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-
 	err = service.AddLiveRecord(r.Context(), visitRecord, req.UserID, req.CameraID, streamID)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))

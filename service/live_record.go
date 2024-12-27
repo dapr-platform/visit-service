@@ -20,6 +20,7 @@ func AddLiveRecord(ctx context.Context, visitRecord *model.Visit_record, userID,
 		RelativeID: visitRecord.RelativeID,
 		DeviceID:   cameraID,
 		StreamID:   streamID,
+		StreamURLSuffix: config.ZLMEDIAKIT_STREAM_URL_PREFIX + "live/" + streamID + ".live.flv",
 		StartTime:  common.LocalTime(time.Now()),
 		Status:     int32(RECORD_STATUS_STARTING),
 	}
@@ -40,5 +41,10 @@ func StopLiveRecord(ctx context.Context, streamID string, fileSize int64, url st
 	record.Status = int32(RECORD_STATUS_ENDING)
 	record.FileSize = int32(fileSize)
 	record.StreamURLSuffix = config.ZLMEDIAKIT_STREAM_URL_PREFIX + url
-	return common.DbUpsert(ctx, common.GetDaprClient(), *record, model.Live_recordTableInfo.Name, model.Live_record_FIELD_NAME_id)
+	err = common.DbUpsert(ctx, common.GetDaprClient(), *record, model.Live_recordTableInfo.Name, model.Live_record_FIELD_NAME_id)
+	if err != nil {
+		common.Logger.Error("stop live record", "streamID", streamID, "record", record, "err", err)
+		return err
+	}
+	return nil
 }

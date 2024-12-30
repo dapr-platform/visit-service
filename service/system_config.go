@@ -32,6 +32,7 @@ const (
 	CONFIG_NURSE_NOTIFY_PHONES                      = "nurse_notify_phones"
 	CONFIG_DEBUG_MODE                               = "debug_mode"
 	CONFIG_MAX_VISIT_PER_DAY                       = "max_visit_per_day"
+	CONFIG_HISTORY_DATA_RETENTION_DAYS             = "history_data_retention_days"
 )
 
 // ConfigManager 系统配置管理器
@@ -188,6 +189,14 @@ var (
 		ConfigDesc:  "每人每天预约次数上限(0:不限制)",
 		Status:      1,
 	}
+	historyDataRetentionDays = model.System_config{
+		ConfigName:  CONFIG_HISTORY_DATA_RETENTION_DAYS,
+		ConfigValue: "365",
+		ConfigType:  "number",
+		ConfigUnit:  "天",
+		ConfigDesc:  "历史数据保存天数",
+		Status:      1,
+	}
 
 	// 默认配置映射
 	defaultSystemConfigListMap = map[string]*model.System_config{
@@ -211,6 +220,7 @@ var (
 		CONFIG_NURSE_NOTIFY_PHONES:                      &nurseNotifyPhones,
 		CONFIG_DEBUG_MODE:                               &debugMode,
 		CONFIG_MAX_VISIT_PER_DAY:                       &maxVisitPerDay,
+		CONFIG_HISTORY_DATA_RETENTION_DAYS:             &historyDataRetentionDays,
 	}
 )
 

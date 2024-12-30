@@ -21,6 +21,7 @@ var CHECK_STATUS_CHECKED int32 = 1       //已审核
 var CHECK_STATUS_CHECK_FAILED int32 = 2  //审核不通过
 var VISIT_RECORD_STATUS_NORMAL int32 = 0 //正常
 var VISIT_RECORD_STATUS_CANCEL int32 = 1 //取消
+var VISIT_RECORD_STATUS_END int32 = 2    //已结束
 var SEND_SMS_STATUS_UNSENT int32 = 0     //未发送
 var SEND_SMS_STATUS_SENT int32 = 1       //已发送
 
@@ -33,6 +34,14 @@ func init() {
 	_, err := scheduleCron.AddFunc("0 * * * * ?", func() {
 		if err := LoopCheckVisitRecordWillAfter5Minutes(); err != nil {
 			common.Logger.Errorf("Failed to loop check visit record: %v", err)
+		}
+	})
+	if err != nil {
+		panic(fmt.Sprintf("Failed to add cron job: %v", err))
+	}
+	_, err = scheduleCron.AddFunc("0 * * * * ?", func() {
+		if err := LoopSetVisitRecordToEnd(context.Background()); err != nil {
+			common.Logger.Errorf("Failed to loop set visit record to end: %v", err)
 		}
 	})
 	if err != nil {
@@ -71,6 +80,21 @@ func UpsertVisit_record(r *http.Request, in any) (out any, err error) {
 	}
 
 	return record, err
+}
+func LoopSetVisitRecordToEnd(ctx context.Context) error {
+	qstr := model.Visit_record_FIELD_NAME_status + "=" + cast.ToString(VISIT_RECORD_STATUS_NORMAL) + "&" + model.Visit_record_FIELD_NAME_visit_end_time + "=$lt." + common.LocalTime(time.Now()).DbString()
+	records, err := common.DbQuery[model.Visit_record](ctx, common.GetDaprClient(), model.Visit_recordTableInfo.Name, qstr)
+	if err != nil {
+		return errors.Wrap(err, "查询即将结束的预约记录失败")
+	}
+	for _, record := range records {
+		record.Status = VISIT_RECORD_STATUS_END
+		err = common.DbUpsert(ctx, common.GetDaprClient(), record, model.Visit_recordTableInfo.Name, model.Visit_record_FIELD_NAME_id)
+		if err != nil {
+			common.Logger.Error("update visit record to end", "record", record, "err", err)
+		}
+	}
+	return nil
 }
 func cancelVisitRecord(ctx context.Context, record *model.Visit_record) error {
 	schedule, err := FindVisitScheduleByStartTime(ctx, record.VisitStartTime)

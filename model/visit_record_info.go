@@ -44,7 +44,7 @@ Table: v_visit_record_info
 
 JSON Sample
 -------------------------------------
-{    "id": "AQwQGjnPAkWgRFSTPbhVQjPtx",    "patient_id": "QBBvwJkeTcyDAlWZuXXGngUgA",    "relative_id": "bjcLZdWkhEtEfpboXuSYTJFGs",    "visit_start_time": 13,    "visit_end_time": 70,    "visitor_name": "xpMMMOhXdYsZqUfnWsnODZXyF",    "visitor_phone": "okfjbfugYgioKtgTcgRsaARiE",    "visitor_id_card": "ewWQQbSbZIdPMHrOYaRVBNmBU",    "relationship": "UVxgVDaQkByouWYmlVsRoqhmB",    "camera_id": "sOBXoelrFNZbcwZpRVyOnmhCA",    "vr_camera_id": "tbZPskKewvrKxMrsZcOmHFsUt",    "check_status": 95,    "status": 21,    "remark": "qNDrLFmLbRcotwtbAmRynwQpV",    "send_sms_status": 66,    "send_prompt_sms_status": 59,    "schedule_id": "cFxXVOeuMImiVkMSkGXVhBRfu",    "patient_name": "dkdsFiomjNCCjjEQGZHilvrQk",    "patient_ward_name": "aDxDElNAisjjLlAJYqjIoJmOM",    "patient_bed_no": "hsOkrHxfuHDjwIhoVppvhluXT",    "stream_id": "oegRoFmkjEfDCKWvPZaZwdKVJ",    "stream_url_suffix": "QSsVtUxTrjxaUZYGrpDtyRBCJ"}
+{    "id": "ZGnhhyckTdJWEcBSnpjldqBiC",    "patient_id": "WnZlcIqhAfnhykUwmaZYxAJUI",    "relative_id": "DZweehoynqhfCKvCVkCMKpHhB",    "visit_start_time": 83,    "visit_end_time": 92,    "visitor_name": "dxhvysZFxnXvjtofJJMPhoiuq",    "visitor_phone": "WsEmoeHiWoWpfPCsGQygXZPlB",    "visitor_id_card": "pbnCNUkeSVrsvcjtjHtgrdFmc",    "relationship": "AeYcGLQvCSRqQNZjaWQiPyqDi",    "camera_id": "tJaljOOlPcPaQmoEThZloRqyO",    "vr_camera_id": "IljsvythwnbKDWgbLUqusouJf",    "check_status": 6,    "status": 60,    "remark": "UXbchJxkSVYdMgohPHMvgXSyc",    "send_sms_status": 17,    "send_prompt_sms_status": 83,    "schedule_id": "trUPJtVYWBlcMtZrNbNGNfpHQ",    "patient_name": "qfkcYNnJhvnBtaCnWhhHTlUDp",    "patient_ward_name": "EQjBarWkkeRmhqTmAIYUfUbvI",    "patient_bed_no": "gAikNhemTcspDFRrCHgEbvyUo",    "stream_id": "XJhVgwMrUVJGIroenFGIlJlwt",    "stream_url_suffix": "xRuRpNQuSRUdQVJYYfsdtRNTx"}
 
 
 Comments
@@ -129,7 +129,7 @@ type Visit_record_info struct {
 
 	CheckStatus int32 `json:"check_status"` //审核状态(0:未审核,1:已审核,2:审核不通过)
 
-	Status int32 `json:"status"` //状态(0:正常,1:取消)
+	Status int32 `json:"status"` //状态(0:正常,1:取消,2:已结束)
 
 	Remark string `json:"remark"` //备注
 
@@ -412,7 +412,7 @@ Warning table: v_visit_record_info primary key column id is nullable column, set
 		&ColumnInfo{
 			Index:              12,
 			Name:               "status",
-			Comment:            `状态(0:正常,1:取消)`,
+			Comment:            `状态(0:正常,1:取消,2:已结束)`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "INT4",

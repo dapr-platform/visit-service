@@ -39,7 +39,7 @@ Table: o_visit_record
 
 JSON Sample
 -------------------------------------
-{    "id": "lgQsxdvwqCMVneNCisTFQxNUe",    "patient_id": "TUhrNmBpGVoBnEXNmusDLQqde",    "relative_id": "EZRLurLLLdVofOxtZtkmRwtWA",    "visit_start_time": 31,    "visit_end_time": 78,    "visitor_name": "iieCnLPhlFjCHVVChiKyqCuan",    "visitor_phone": "dpbSMteulokCFvMxPZthBVJlu",    "visitor_id_card": "ILVMGbupJeWdCHLFmTHuVMVhP",    "relationship": "JljOjGeSyhKFpXwmxZAECZlmw",    "camera_id": "oGXapdXWqJmNFWaTrnpGumLjX",    "vr_camera_id": "YjXdJmNQctFoKkIZeMAMGEQdK",    "check_status": 78,    "status": 85,    "remark": "soeikUMnsnjGcUBccJERqmOiH",    "send_sms_status": 86,    "send_prompt_sms_status": 46,    "schedule_id": "CbfsAbmmGmakdkbWXLDtKMIkg"}
+{    "id": "VLKWjAkfPdSAbeSRcUokNEMHr",    "patient_id": "qyWgcGDpPvXPOWgEUqwjdXggB",    "relative_id": "NvTlgFqYaxbmkxcaqyDfqvijO",    "visit_start_time": 5,    "visit_end_time": 76,    "visitor_name": "eaLYTsYfHHLXCtsZZKQZfjkgq",    "visitor_phone": "nPVfsZklEDSOmViFwBhVxSFTU",    "visitor_id_card": "RASaEuwCKgZfoqJRiadguMRkC",    "relationship": "orGtRZoRbMfryIAlwIOKObEeU",    "camera_id": "NVqNZcrsEoAGcsUHxnQLECZrf",    "vr_camera_id": "pqJnSoMjloXPPwjrtJLRCHvcX",    "check_status": 58,    "status": 36,    "remark": "qBDSteXXwngGeCRUAdUGaybPh",    "send_sms_status": 16,    "send_prompt_sms_status": 60,    "schedule_id": "XtTMvjBPOtSkulEhRPrsofndF"}
 
 
 
@@ -107,7 +107,7 @@ type Visit_record struct {
 
 	CheckStatus int32 `json:"check_status"` //审核状态(0:未审核,1:已审核,2:审核不通过)
 
-	Status int32 `json:"status"` //状态(0:正常,1:取消)
+	Status int32 `json:"status"` //状态(0:正常,1:取消,2:已结束)
 
 	Remark string `json:"remark"` //备注
 
@@ -378,7 +378,7 @@ var Visit_recordTableInfo = &TableInfo{
 		&ColumnInfo{
 			Index:              12,
 			Name:               "status",
-			Comment:            `状态(0:正常,1:取消)`,
+			Comment:            `状态(0:正常,1:取消,2:已结束)`,
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "INT4",

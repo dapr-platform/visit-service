@@ -33,7 +33,7 @@ Table: v_patient_info
 
 JSON Sample
 -------------------------------------
-{    "id": "gNqotsMAcVuMWxftbEiUPECkX",    "ward_id": "ODvUNcqLpgytBEDNZDhSYSYEe",    "bed_id": "qXknwierMADpNZHAdaUIxynlU",    "name": "ZYVkdndXBdXogHlubaAWatRNt",    "hospital_no": "EADhhDLOQEPcjKGmIQFghooDI",    "status": 75,    "remark": "MKurOAqdGvZYaaAZRcFGVjDoT",    "bed_no": "TjXJhaOhFRMjMGlGljhiYYcJH",    "camera_id": "ItveDpxPuQRjQlZxZYFmEECAQ",    "vr_camera_id": "RagLxHfXlTHAeGbRnmgbiNKAQ",    "ward_name": "mXUTZltDMGOGIyUUbYvnTikhA"}
+{    "id": "lOhBFTbcATKUSGROseeICmZSw",    "ward_id": "KZkgbuvvDvPNSYMrHYfHCckWv",    "bed_id": "juwWNpkYhRBUBySkVwLhGsAwM",    "name": "hZXlaqrnHtBHwMchCPBoXEUlh",    "hospital_no": "jWthbfNRDTDpTHYYtCdfUiwgG",    "status": 68,    "remark": "LCuLkBJpAlyDIJHVlsoWssKFE",    "bed_no": "GGasabyDumiknAviZYSHicKpi",    "camera_id": "KFICPBwPLfokNoOCrcBpCjmyI",    "vr_camera_id": "JdRrZwAaPKCFhwvHmmFCMXwNS",    "ward_name": "qleAXblFnoVUdisfIXvJQgIMg"}
 
 
 Comments

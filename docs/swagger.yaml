@@ -26,9 +26,12 @@ definitions:
         type: boolean
       user_id:
         type: string
+      visit_record_id:
+        type: string
     required:
     - camera_id
     - user_id
+    - visit_record_id
     type: object
   entity.CamLiveStreamResponse:
     properties:
@@ -611,7 +614,7 @@ definitions:
         description: 发送短信状态(0:未发送,1:已发送)
         type: integer
       status:
-        description: 状态(0:正常,1:取消)
+        description: 状态(0:正常,1:取消,2:已结束)
         type: integer
       visit_end_time:
         description: 探视结束时间
@@ -674,7 +677,7 @@ definitions:
         description: send_sms_status
         type: integer
       status:
-        description: 状态(0:正常,1:取消)
+        description: 状态(0:正常,1:取消,2:已结束)
         type: integer
       stream_id:
         description: 直播流ID
@@ -699,6 +702,83 @@ definitions:
         type: string
       vr_camera_id:
         description: VR摄像头ID
+        type: string
+    type: object
+  model.Visit_record_live_info:
+    properties:
+      camera_id:
+        description: 床头摄像头ID
+        type: string
+      check_status:
+        description: 审核状态
+        type: integer
+      id:
+        description: 探视记录ID
+        type: string
+      live_records:
+        description: 直播记录列表
+      patient_bed_no:
+        description: 床位号
+        type: string
+      patient_id:
+        description: 病患ID
+        type: string
+      patient_name:
+        description: 病患姓名
+        type: string
+      patient_ward_name:
+        description: 病房名称
+        type: string
+      relationship:
+        description: 探视人与患者关系
+        type: string
+      relative_id:
+        description: 家属ID
+        type: string
+      remark:
+        description: 备注
+        type: string
+      schedule_id:
+        description: 排班ID
+        type: string
+      send_prompt_sms_status:
+        description: send_prompt_sms_status
+        type: integer
+      send_sms_status:
+        description: send_sms_status
+        type: integer
+      status:
+        description: 状态
+        type: integer
+      visit_end_time:
+        description: 探视结束时间
+        type: string
+      visit_start_time:
+        description: 探视开始时间
+        type: string
+      visitor_id_card:
+        description: 探视人身份证号
+        type: string
+      visitor_name:
+        description: 探视人姓名
+        type: string
+      visitor_phone:
+        description: 探视人电话
+        type: string
+      vr_camera_id:
+        description: VR摄像头ID
+        type: string
+    type: object
+  model.Visit_record_live_record:
+    properties:
+      id:
+        description: 关联ID
+        type: string
+      live_record_id:
+        description: 直播记录ID
+        type: string
+      visit_record_id:
+        description: 探视记录ID
         type: string
     type: object
   model.Visit_schedule:
@@ -4637,6 +4717,469 @@ paths:
       summary: page query
       tags:
       - 探视记录信息视图
+  /visit-record-live-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: visit_start_time
+        in: query
+        name: visit_start_time
+        type: string
+      - description: visit_end_time
+        in: query
+        name: visit_end_time
+        type: string
+      - description: visitor_name
+        in: query
+        name: visitor_name
+        type: string
+      - description: visitor_phone
+        in: query
+        name: visitor_phone
+        type: string
+      - description: visitor_id_card
+        in: query
+        name: visitor_id_card
+        type: string
+      - description: relationship
+        in: query
+        name: relationship
+        type: string
+      - description: camera_id
+        in: query
+        name: camera_id
+        type: string
+      - description: vr_camera_id
+        in: query
+        name: vr_camera_id
+        type: string
+      - description: check_status
+        in: query
+        name: check_status
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      - description: send_sms_status
+        in: query
+        name: send_sms_status
+        type: string
+      - description: send_prompt_sms_status
+        in: query
+        name: send_prompt_sms_status
+        type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
+        type: string
+      - description: patient_name
+        in: query
+        name: patient_name
+        type: string
+      - description: patient_ward_name
+        in: query
+        name: patient_ward_name
+        type: string
+      - description: patient_bed_no
+        in: query
+        name: patient_bed_no
+        type: string
+      - description: live_records
+        in: query
+        name: live_records
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Visit_record_live_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - 探视记录及直播信息视图
+  /visit-record-live-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: patient_id
+        in: query
+        name: patient_id
+        type: string
+      - description: relative_id
+        in: query
+        name: relative_id
+        type: string
+      - description: visit_start_time
+        in: query
+        name: visit_start_time
+        type: string
+      - description: visit_end_time
+        in: query
+        name: visit_end_time
+        type: string
+      - description: visitor_name
+        in: query
+        name: visitor_name
+        type: string
+      - description: visitor_phone
+        in: query
+        name: visitor_phone
+        type: string
+      - description: visitor_id_card
+        in: query
+        name: visitor_id_card
+        type: string
+      - description: relationship
+        in: query
+        name: relationship
+        type: string
+      - description: camera_id
+        in: query
+        name: camera_id
+        type: string
+      - description: vr_camera_id
+        in: query
+        name: vr_camera_id
+        type: string
+      - description: check_status
+        in: query
+        name: check_status
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: remark
+        in: query
+        name: remark
+        type: string
+      - description: send_sms_status
+        in: query
+        name: send_sms_status
+        type: string
+      - description: send_prompt_sms_status
+        in: query
+        name: send_prompt_sms_status
+        type: string
+      - description: schedule_id
+        in: query
+        name: schedule_id
+        type: string
+      - description: patient_name
+        in: query
+        name: patient_name
+        type: string
+      - description: patient_ward_name
+        in: query
+        name: patient_ward_name
+        type: string
+      - description: patient_bed_no
+        in: query
+        name: patient_bed_no
+        type: string
+      - description: live_records
+        in: query
+        name: live_records
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Visit_record_live_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - 探视记录及直播信息视图
+  /visit-record-live-record:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: visit_record_id
+        in: query
+        name: visit_record_id
+        type: string
+      - description: live_record_id
+        in: query
+        name: live_record_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Visit_record_live_record'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - 探视记录-直播记录关联
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Visit_record_live_record'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Visit_record_live_record'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - 探视记录-直播记录关联
+  /visit-record-live-record/{id}:
+    delete:
+      description: delete
+      parameters:
+      - description: 实例id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Visit_record_live_record'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: delete
+      tags:
+      - 探视记录-直播记录关联
+  /visit-record-live-record/batch-delete:
+    post:
+      consumes:
+      - application/json
+      description: batch delete
+      parameters:
+      - description: id array
+        in: body
+        name: ids
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch delete
+      tags:
+      - 探视记录-直播记录关联
+  /visit-record-live-record/batch-upsert:
+    post:
+      consumes:
+      - application/json
+      description: batch update
+      parameters:
+      - description: objects array
+        in: body
+        name: entities
+        required: true
+        schema:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch update
+      tags:
+      - 探视记录-直播记录关联
+  /visit-record-live-record/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: visit_record_id
+        in: query
+        name: visit_record_id
+        type: string
+      - description: live_record_id
+        in: query
+        name: live_record_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Visit_record_live_record'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - 探视记录-直播记录关联
   /visit-record/{id}:
     delete:
       description: delete

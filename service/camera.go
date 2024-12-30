@@ -56,7 +56,7 @@ func OnStreamNotFound(ctx context.Context, streamID string) error {
 	return nil
 }
 
-func StartCamLiveStream(cameraID string, disableSaveMp4 bool) (string, error) {
+func StartCamLiveStream(visitRecordID string, cameraID string, disableSaveMp4 bool) (string, error) {
 	// 1. 获取摄像头信息
 	cameras, err := common.DbQuery[model.Camera_info](context.Background(), common.GetDaprClient(), model.Camera_infoTableInfo.Name, fmt.Sprintf("id=%s", cameraID))
 	if err != nil {

@@ -31,12 +31,13 @@ func StartCamLiveStreamPreviewHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("Invalid request body: "+err.Error()))
 		return
 	}
+	
 	if req.CameraID == "" {
 		common.HttpResult(w, common.ErrParam.AppendMsg("camera_id is required"))
 		return
 	}
 	// Start the camera livestream
-	streamID, err := service.StartCamLiveStream(req.CameraID, req.DisableSaveMp4)
+	streamID, err := service.StartCamLiveStream(req.VisitRecordID, req.CameraID, req.DisableSaveMp4)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
@@ -66,14 +67,17 @@ func StartCamLiveStreamHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("Invalid request body: "+err.Error()))
 		return
 	}
-
+	if req.VisitRecordID == "" {
+		common.HttpResult(w, common.ErrParam.AppendMsg("visit_record_id is required"))
+		return
+	}
 	// Validate required fields
 	if req.UserID == "" {
 		common.HttpResult(w, common.ErrParam.AppendMsg("user_id is required"))
 		return
 	}
 
-	visitRecord, err := service.FindNearestVisitRecord(r.Context(), req.UserID)
+	visitRecord, err := service.FindVisitRecord(r.Context(), req.VisitRecordID)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
@@ -89,7 +93,7 @@ func StartCamLiveStreamHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Start the camera livestream
-	streamID, err := service.StartCamLiveStream(req.CameraID, req.DisableSaveMp4)
+	streamID, err := service.StartCamLiveStream(req.VisitRecordID, req.CameraID, req.DisableSaveMp4)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return

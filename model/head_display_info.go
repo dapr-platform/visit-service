@@ -28,7 +28,7 @@ Table: v_head_display_info
 
 JSON Sample
 -------------------------------------
-{    "id": "ohSFZrcfCIBhyYpcQJwLGLhaU",    "device_name": "dmTWxsrdbrGwgksEUnqqysFjm",    "device_no": "ICmHXcdUEVTvNnktNfBhcVYkK",    "model": "JLYhVQdjvIrjIgLPCbINKoiMr",    "ward_id": "aOxlILWYnWKGBLwclsJWbtQkW",    "ward_name": "fTdWNhWJOewiwncLTJGJmXcKo"}
+{    "id": "FGVWhJKSTRKgueAKWyrYMEAZl",    "device_name": "GKwStpYgfExbtRPhwlddIdRXQ",    "device_no": "djWJFPytGTyRIKMoAZofeMGuO",    "model": "bKebsErInByPhLdNbXEmwjORO",    "ward_id": "aEAbrtFrouoXKrFiIeiAtuYVZ",    "ward_name": "tUxersVegLDctxkDiKNTZxCiX"}
 
 
 Comments

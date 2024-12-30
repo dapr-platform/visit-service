@@ -26,7 +26,22 @@ func AddLiveRecord(ctx context.Context, visitRecord *model.Visit_record, userID,
 		Status:          int32(RECORD_STATUS_STARTING),
 	}
 	_, err := common.DbInsert(ctx, common.GetDaprClient(), record, model.Live_recordTableInfo.Name)
-	return err
+	if err != nil {
+		common.Logger.Error("add live record", "visitRecord", visitRecord, "err", err)
+		return err
+	}
+	var visitRecordLiveRecord  = model.Visit_record_live_record{
+		ID: common.NanoId(),
+		VisitRecordID: visitRecord.ID,
+		LiveRecordID: record.ID,
+		
+	}
+	_, err = common.DbInsert(ctx, common.GetDaprClient(), visitRecordLiveRecord, model.Visit_record_live_recordTableInfo.Name)
+	if err != nil {
+		common.Logger.Error("add visit record live record", "visitRecord", visitRecord, "err", err)
+		return err
+	}
+	return nil
 }
 func StopLiveRecord(ctx context.Context, streamID string, fileSize int64, url string) error {
 	qstr := model.Live_record_FIELD_NAME_stream_id + "=" + streamID

@@ -180,7 +180,7 @@ COMMENT ON COLUMN o_live_record.vr_camera_id IS 'VR摄像头ID';
 COMMENT ON COLUMN o_live_record.status IS '状态(0:未开始,1:直播中,2:已结束)';
 
 CREATE OR REPLACE VIEW v_live_record_info AS
-SELECT l.*,p.name AS patient_name,p.name AS patient_ward_name,b.bed_no AS patient_bed_no FROM o_live_record l,o_patient p,o_bed b,o_ward w WHERE l.patient_id = p.id AND p.bed_id = b.id AND b.ward_id = w.id;
+SELECT l.*,p.name AS patient_name,w.name AS patient_ward_name,b.bed_no AS patient_bed_no FROM o_live_record l,o_patient p,o_bed b,o_ward w WHERE l.patient_id = p.id AND p.bed_id = b.id AND b.ward_id = w.id;
 
 COMMENT ON VIEW v_live_record_info IS '直播记录信息视图';
 COMMENT ON COLUMN v_live_record_info.id IS '直播记录ID';
@@ -240,7 +240,7 @@ COMMENT ON COLUMN o_visit_record.vr_camera_id IS 'VR摄像头ID';
 COMMENT ON COLUMN o_visit_record.check_status IS '审核状态(0:未审核,1:已审核,2:审核不通过)';
 COMMENT ON COLUMN o_visit_record.send_sms_status IS '发送审核短信状态(0:未发送,1:已发送)';
 COMMENT ON COLUMN o_visit_record.send_prompt_sms_status IS '发送提醒短信状态(0:未发送,1:已发送)';
-COMMENT ON COLUMN o_visit_record.status IS '状态(0:正常,1:取消)';
+COMMENT ON COLUMN o_visit_record.status IS '状态(0:正常,1:取消,2:已结束)';
 COMMENT ON COLUMN o_visit_record.remark IS '备注';
 
 
@@ -266,12 +266,76 @@ COMMENT ON COLUMN v_visit_record_info.relationship IS '探视人与患者关系(
 COMMENT ON COLUMN v_visit_record_info.camera_id IS '床头摄像头ID';
 COMMENT ON COLUMN v_visit_record_info.vr_camera_id IS 'VR摄像头ID';
 COMMENT ON COLUMN v_visit_record_info.check_status IS '审核状态(0:未审核,1:已审核,2:审核不通过)';
-COMMENT ON COLUMN v_visit_record_info.status IS '状态(0:正常,1:取消)';
+COMMENT ON COLUMN v_visit_record_info.status IS '状态(0:正常,1:取消,2:已结束)';
 COMMENT ON COLUMN v_visit_record_info.remark IS '备注';
 COMMENT ON COLUMN v_visit_record_info.patient_name IS '病患姓名';
 COMMENT ON COLUMN v_visit_record_info.patient_ward_name IS '病房名称';
 COMMENT ON COLUMN v_visit_record_info.patient_bed_no IS '床位号';
 COMMENT ON COLUMN v_visit_record_info.stream_id IS '直播流ID';
+
+CREATE TABLE o_visit_record_live_record (
+    id VARCHAR(32) NOT NULL,
+    visit_record_id VARCHAR(32) NOT NULL,
+    live_record_id VARCHAR(32) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX idx_visit_record_live_record_visit_record_id ON o_visit_record_live_record (visit_record_id);
+CREATE INDEX idx_visit_record_live_record_live_record_id ON o_visit_record_live_record (live_record_id);
+
+COMMENT ON TABLE o_visit_record_live_record IS '探视记录-直播记录关联表';
+COMMENT ON COLUMN o_visit_record_live_record.id IS '关联ID';
+COMMENT ON COLUMN o_visit_record_live_record.visit_record_id IS '探视记录ID';
+COMMENT ON COLUMN o_visit_record_live_record.live_record_id IS '直播记录ID';
+
+CREATE OR REPLACE VIEW v_visit_record_live_info AS
+SELECT 
+    r.*,
+    p.name AS patient_name,
+    w.name AS patient_ward_name,
+    b.bed_no AS patient_bed_no,
+    json_agg(
+        json_build_object(
+            'live_record_id', l.id,
+            'stream_id', l.stream_id,
+            'stream_url_suffix', l.stream_url_suffix,
+            'start_time', l.start_time,
+            'end_time', l.end_time,
+            'status', l.status
+        )
+    ) FILTER (WHERE l.id IS NOT NULL) as live_records
+FROM o_visit_record r
+LEFT JOIN o_patient p ON r.patient_id = p.id 
+LEFT JOIN o_bed b ON p.bed_id = b.id
+LEFT JOIN o_ward w ON p.ward_id = w.id
+LEFT JOIN o_visit_record_live_record vrl ON r.id = vrl.visit_record_id
+LEFT JOIN o_live_record l ON vrl.live_record_id = l.id
+GROUP BY r.id, r.patient_id, r.relative_id, r.schedule_id, r.visit_start_time, 
+         r.visit_end_time, r.visitor_name, r.visitor_phone, r.visitor_id_card,
+         r.relationship, r.camera_id, r.vr_camera_id, r.check_status,
+         r.send_sms_status, r.send_prompt_sms_status, r.status, r.remark,
+         p.name, w.name, b.bed_no;
+
+COMMENT ON VIEW v_visit_record_live_info IS '探视记录及直播信息视图';
+COMMENT ON COLUMN v_visit_record_live_info.id IS '探视记录ID';
+COMMENT ON COLUMN v_visit_record_live_info.patient_id IS '病患ID';
+COMMENT ON COLUMN v_visit_record_live_info.relative_id IS '家属ID';
+COMMENT ON COLUMN v_visit_record_live_info.schedule_id IS '排班ID';
+COMMENT ON COLUMN v_visit_record_live_info.visit_start_time IS '探视开始时间';
+COMMENT ON COLUMN v_visit_record_live_info.visit_end_time IS '探视结束时间';
+COMMENT ON COLUMN v_visit_record_live_info.visitor_name IS '探视人姓名';
+COMMENT ON COLUMN v_visit_record_live_info.visitor_phone IS '探视人电话';
+COMMENT ON COLUMN v_visit_record_live_info.visitor_id_card IS '探视人身份证号';
+COMMENT ON COLUMN v_visit_record_live_info.relationship IS '探视人与患者关系';
+COMMENT ON COLUMN v_visit_record_live_info.camera_id IS '床头摄像头ID';
+COMMENT ON COLUMN v_visit_record_live_info.vr_camera_id IS 'VR摄像头ID';
+COMMENT ON COLUMN v_visit_record_live_info.check_status IS '审核状态(0:未审核,1:已审核,2:审核不通过)';
+COMMENT ON COLUMN v_visit_record_live_info.status IS '状态(0:正常,1:取消,2:已结束)';
+COMMENT ON COLUMN v_visit_record_live_info.remark IS '备注';
+COMMENT ON COLUMN v_visit_record_live_info.patient_name IS '病患姓名';
+COMMENT ON COLUMN v_visit_record_live_info.patient_ward_name IS '病房名称';
+COMMENT ON COLUMN v_visit_record_live_info.patient_bed_no IS '床位号';
+COMMENT ON COLUMN v_visit_record_live_info.live_records IS '直播记录列表';
 
 
 -- 头显表
@@ -447,6 +511,8 @@ COMMENT ON COLUMN v_family_member_info.patients IS '关联的病患信息列表'
 
 -- +goose Down
 -- +goose StatementBegin
+DROP VIEW IF EXISTS v_visit_record_live_info CASCADE;
+DROP TABLE IF EXISTS o_visit_record_live_record CASCADE;
 DROP VIEW IF EXISTS v_family_member_info CASCADE;
 DROP VIEW IF EXISTS v_patient_relative_info CASCADE;
 DROP TABLE IF EXISTS o_patient_relative CASCADE;

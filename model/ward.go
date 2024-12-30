@@ -26,7 +26,7 @@ Table: o_ward
 
 JSON Sample
 -------------------------------------
-{    "id": "rxXcCNBVBXVfnytWpxrFNjADj",    "name": "MZngdgUPiFBMQhQDasFTKhefl",    "type": 17,    "status": 72}
+{    "id": "BZOhbJmkFdafprmfAFkOxvbaO",    "name": "nqJOxbFFJqEmOobNcMfhjDlIW",    "type": 56,    "status": 29}
 
 
 

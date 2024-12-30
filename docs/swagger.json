@@ -6181,6 +6181,738 @@
                 }
             }
         },
+        "/visit-record-live-info": {
+            "get": {
+                "description": "query objects",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "探视记录及直播信息视图"
+                ],
+                "summary": "query objects",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_id",
+                        "name": "patient_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_id",
+                        "name": "relative_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visit_start_time",
+                        "name": "visit_start_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visit_end_time",
+                        "name": "visit_end_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visitor_name",
+                        "name": "visitor_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visitor_phone",
+                        "name": "visitor_phone",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visitor_id_card",
+                        "name": "visitor_id_card",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relationship",
+                        "name": "relationship",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "check_status",
+                        "name": "check_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "remark",
+                        "name": "remark",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "send_sms_status",
+                        "name": "send_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "send_prompt_sms_status",
+                        "name": "send_prompt_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "schedule_id",
+                        "name": "schedule_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_name",
+                        "name": "patient_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_ward_name",
+                        "name": "patient_ward_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_bed_no",
+                        "name": "patient_bed_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "live_records",
+                        "name": "live_records",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.Visit_record_live_info"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/visit-record-live-info/page": {
+            "get": {
+                "description": "page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "探视记录及直播信息视图"
+                ],
+                "summary": "page query",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "current page",
+                        "name": "_page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size",
+                        "name": "_page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_id",
+                        "name": "patient_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relative_id",
+                        "name": "relative_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visit_start_time",
+                        "name": "visit_start_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visit_end_time",
+                        "name": "visit_end_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visitor_name",
+                        "name": "visitor_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visitor_phone",
+                        "name": "visitor_phone",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visitor_id_card",
+                        "name": "visitor_id_card",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "relationship",
+                        "name": "relationship",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "camera_id",
+                        "name": "camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "vr_camera_id",
+                        "name": "vr_camera_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "check_status",
+                        "name": "check_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "remark",
+                        "name": "remark",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "send_sms_status",
+                        "name": "send_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "send_prompt_sms_status",
+                        "name": "send_prompt_sms_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "schedule_id",
+                        "name": "schedule_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_name",
+                        "name": "patient_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_ward_name",
+                        "name": "patient_ward_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "patient_bed_no",
+                        "name": "patient_bed_no",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "live_records",
+                        "name": "live_records",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/definitions/common.Page"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "items": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/definitions/model.Visit_record_live_info"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/visit-record-live-record": {
+            "get": {
+                "description": "query objects",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "探视记录-直播记录关联"
+                ],
+                "summary": "query objects",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visit_record_id",
+                        "name": "visit_record_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "live_record_id",
+                        "name": "live_record_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.Visit_record_live_record"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "save",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "探视记录-直播记录关联"
+                ],
+                "summary": "save",
+                "parameters": [
+                    {
+                        "description": "object",
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Visit_record_live_record"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Visit_record_live_record"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/visit-record-live-record/batch-delete": {
+            "post": {
+                "description": "batch delete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "探视记录-直播记录关联"
+                ],
+                "summary": "batch delete",
+                "parameters": [
+                    {
+                        "description": "id array",
+                        "name": "ids",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/visit-record-live-record/batch-upsert": {
+            "post": {
+                "description": "batch update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "探视记录-直播记录关联"
+                ],
+                "summary": "batch update",
+                "parameters": [
+                    {
+                        "description": "objects array",
+                        "name": "entities",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/visit-record-live-record/page": {
+            "get": {
+                "description": "page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "探视记录-直播记录关联"
+                ],
+                "summary": "page query",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "current page",
+                        "name": "_page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size",
+                        "name": "_page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visit_record_id",
+                        "name": "visit_record_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "live_record_id",
+                        "name": "live_record_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/definitions/common.Page"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "items": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/definitions/model.Visit_record_live_record"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/visit-record-live-record/{id}": {
+            "delete": {
+                "description": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "探视记录-直播记录关联"
+                ],
+                "summary": "delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "实例id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Visit_record_live_record"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/visit-record/batch-delete": {
             "post": {
                 "description": "batch delete",
@@ -7570,7 +8302,8 @@
             "type": "object",
             "required": [
                 "camera_id",
-                "user_id"
+                "user_id",
+                "visit_record_id"
             ],
             "properties": {
                 "camera_id": {
@@ -7580,6 +8313,9 @@
                     "type": "boolean"
                 },
                 "user_id": {
+                    "type": "string"
+                },
+                "visit_record_id": {
                     "type": "string"
                 }
             }
@@ -8378,7 +9114,7 @@
                     "type": "integer"
                 },
                 "status": {
-                    "description": "状态(0:正常,1:取消)",
+                    "description": "状态(0:正常,1:取消,2:已结束)",
                     "type": "integer"
                 },
                 "visit_end_time": {
@@ -8463,7 +9199,7 @@
                     "type": "integer"
                 },
                 "status": {
-                    "description": "状态(0:正常,1:取消)",
+                    "description": "状态(0:正常,1:取消,2:已结束)",
                     "type": "integer"
                 },
                 "stream_id": {
@@ -8496,6 +9232,111 @@
                 },
                 "vr_camera_id": {
                     "description": "VR摄像头ID",
+                    "type": "string"
+                }
+            }
+        },
+        "model.Visit_record_live_info": {
+            "type": "object",
+            "properties": {
+                "camera_id": {
+                    "description": "床头摄像头ID",
+                    "type": "string"
+                },
+                "check_status": {
+                    "description": "审核状态",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "探视记录ID",
+                    "type": "string"
+                },
+                "live_records": {
+                    "description": "直播记录列表"
+                },
+                "patient_bed_no": {
+                    "description": "床位号",
+                    "type": "string"
+                },
+                "patient_id": {
+                    "description": "病患ID",
+                    "type": "string"
+                },
+                "patient_name": {
+                    "description": "病患姓名",
+                    "type": "string"
+                },
+                "patient_ward_name": {
+                    "description": "病房名称",
+                    "type": "string"
+                },
+                "relationship": {
+                    "description": "探视人与患者关系",
+                    "type": "string"
+                },
+                "relative_id": {
+                    "description": "家属ID",
+                    "type": "string"
+                },
+                "remark": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "schedule_id": {
+                    "description": "排班ID",
+                    "type": "string"
+                },
+                "send_prompt_sms_status": {
+                    "description": "send_prompt_sms_status",
+                    "type": "integer"
+                },
+                "send_sms_status": {
+                    "description": "send_sms_status",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "状态",
+                    "type": "integer"
+                },
+                "visit_end_time": {
+                    "description": "探视结束时间",
+                    "type": "string"
+                },
+                "visit_start_time": {
+                    "description": "探视开始时间",
+                    "type": "string"
+                },
+                "visitor_id_card": {
+                    "description": "探视人身份证号",
+                    "type": "string"
+                },
+                "visitor_name": {
+                    "description": "探视人姓名",
+                    "type": "string"
+                },
+                "visitor_phone": {
+                    "description": "探视人电话",
+                    "type": "string"
+                },
+                "vr_camera_id": {
+                    "description": "VR摄像头ID",
+                    "type": "string"
+                }
+            }
+        },
+        "model.Visit_record_live_record": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "关联ID",
+                    "type": "string"
+                },
+                "live_record_id": {
+                    "description": "直播记录ID",
+                    "type": "string"
+                },
+                "visit_record_id": {
+                    "description": "探视记录ID",
                     "type": "string"
                 }
             }

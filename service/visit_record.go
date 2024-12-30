@@ -167,20 +167,7 @@ func newAddVisitRecord(ctx context.Context, record *model.Visit_record) error {
 	}
 	return nil
 }
-func StartVisitRecordLiveRecord(ctx context.Context, visitRecordID string) error {
-	record, err := common.DbGetOne[model.Visit_record](ctx, common.GetDaprClient(), model.Visit_recordTableInfo.Name, model.Visit_record_FIELD_NAME_id+"="+visitRecordID)
-	if err != nil {
-		return errors.Wrap(err, "查询预约记录失败")
-	}
-	if record == nil {
-		return errors.New("预约记录不存在")
-	}
-	liveRecord, err := common.DbGetOne[model.Live_record](ctx, common.GetDaprClient(), model.Live_recordTableInfo.Name, model.Live_record_FIELD_NAME_camera_id+"="+record.CameraID)
-	if err != nil {
-		return errors.Wrap(err, "查询直播记录失败")
-	}
-	return nil
-}
+
 func findVisitRecordCountByRelativeIDAndStartDay(ctx context.Context, relativeID string, startDay common.LocalTime) (int, error) {
 	startDayStr := time.Time(startDay).Format("2006-01-02")
 	endDayStr := time.Time(startDay).AddDate(0, 0, 1).Format("2006-01-02")

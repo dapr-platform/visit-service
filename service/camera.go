@@ -32,6 +32,16 @@ func FindMovableCameras(ctx context.Context) ([]model.Camera_info, error) {
 	}
 	return cameras, nil
 }
+func FindCamera(ctx context.Context, cameraID string) (*model.Camera_info, error) {
+	cameras, err := common.DbQuery[model.Camera_info](ctx, common.GetDaprClient(), model.Camera_infoTableInfo.Name, fmt.Sprintf("id=%s", cameraID))
+	if err != nil {
+		return nil, err
+	}
+	if len(cameras) == 0 {
+		return nil, fmt.Errorf("camera not found: %s", cameraID)
+	}
+	return &cameras[0], nil
+}
 func OnStreamNoneReader(ctx context.Context, streamID string) error {
 	common.Logger.Info("on stream none reader", "streamID", streamID) //streamId为摄像头的编号
 	return StopLiveRecordOnlyStatus(ctx, streamID)
@@ -61,28 +71,28 @@ func OnStreamNotFound(ctx context.Context, streamID string) error {
 	return nil
 }
 
-func StartCamLiveStream(visitRecordID string, cameraID string, disableSaveMp4 bool) (string, bool, error) {
+func StartCamLiveStream(visitRecordID string, cameraID string, disableSaveMp4 bool) (string, error) {
 	// 1. 获取摄像头信息
 	cameras, err := common.DbQuery[model.Camera_info](context.Background(), common.GetDaprClient(), model.Camera_infoTableInfo.Name, fmt.Sprintf("id=%s", cameraID))
 	if err != nil {
-		return "", false, fmt.Errorf("failed to query camera info: %v", err)
+		return "", fmt.Errorf("failed to query camera info: %v", err)
 	}
 	if len(cameras) == 0 {
-		return "", false, fmt.Errorf("camera not found: %s", cameraID)
+		return "", fmt.Errorf("camera not found: %s", cameraID)
 	}
 	camera := cameras[0]
 
 	if camera.MainStreamURL == "" {
-		return "", false, fmt.Errorf("camera main stream url is empty")
+		return "", fmt.Errorf("camera main stream url is empty")
 	}
 	streamID := common.NanoId()
 
 	// 2. 调用ZLMediaKit API添加流代理
-	err = addStreamProxy(streamID, camera.MainStreamURL, camera.DeviceType == int32(DEVICE_TYPE_VR))
+	err = addStreamProxy(streamID, camera.MainStreamURL, disableSaveMp4)
 	if err != nil {
-		return "", false, fmt.Errorf("failed to add stream proxy: %v", err)
+		return "", fmt.Errorf("failed to add stream proxy: %v", err)
 	}
-	return streamID, camera.DeviceType == int32(DEVICE_TYPE_VR), nil
+	return streamID, nil
 }
 
 func addStreamProxy(streamID string, streamUrl string, disableSaveMp4 bool) error {

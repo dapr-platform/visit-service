@@ -7845,6 +7845,68 @@
                 }
             }
         },
+        "/zlm/on-stream-none-reader": {
+            "post": {
+                "description": "zlm on stream none reader callback",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Zlm"
+                ],
+                "summary": "zlm on stream none reader",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "stream_id",
+                        "name": "stream_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/definitions/common.Page"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "items": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/definitions/model.Ward"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/zlm/on-stream-not-found": {
             "post": {
                 "description": "zlm on stream not found callback",

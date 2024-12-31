@@ -32,6 +32,11 @@ func FindMovableCameras(ctx context.Context) ([]model.Camera_info, error) {
 	}
 	return cameras, nil
 }
+func OnStreamNoneReader(ctx context.Context, streamID string) error {
+	common.Logger.Info("on stream none reader", "streamID", streamID) //streamId为摄像头的编号
+	return StopLiveRecordOnlyStatus(ctx, streamID)
+
+}
 
 func OnStreamNotFound(ctx context.Context, streamID string) error {
 	common.Logger.Info("on stream not found", "streamID", streamID) //streamId为摄像头的编号
@@ -56,31 +61,31 @@ func OnStreamNotFound(ctx context.Context, streamID string) error {
 	return nil
 }
 
-func StartCamLiveStream(visitRecordID string, cameraID string, disableSaveMp4 bool) (string, error) {
+func StartCamLiveStream(visitRecordID string, cameraID string, disableSaveMp4 bool) (string, bool, error) {
 	// 1. 获取摄像头信息
 	cameras, err := common.DbQuery[model.Camera_info](context.Background(), common.GetDaprClient(), model.Camera_infoTableInfo.Name, fmt.Sprintf("id=%s", cameraID))
 	if err != nil {
-		return "", fmt.Errorf("failed to query camera info: %v", err)
+		return "", false, fmt.Errorf("failed to query camera info: %v", err)
 	}
 	if len(cameras) == 0 {
-		return "", fmt.Errorf("camera not found: %s", cameraID)
+		return "", false, fmt.Errorf("camera not found: %s", cameraID)
 	}
 	camera := cameras[0]
 
 	if camera.MainStreamURL == "" {
-		return "", fmt.Errorf("camera main stream url is empty")
+		return "", false, fmt.Errorf("camera main stream url is empty")
 	}
 	streamID := common.NanoId()
 
 	// 2. 调用ZLMediaKit API添加流代理
 	err = addStreamProxy(streamID, camera.MainStreamURL, camera.DeviceType == int32(DEVICE_TYPE_VR))
 	if err != nil {
-		return "", fmt.Errorf("failed to add stream proxy: %v", err)
+		return "", false, fmt.Errorf("failed to add stream proxy: %v", err)
 	}
-	return streamID, nil
+	return streamID, camera.DeviceType == int32(DEVICE_TYPE_VR), nil
 }
 
-func addStreamProxy(  streamID string, streamUrl string, disableSaveMp4 bool) error {
+func addStreamProxy(streamID string, streamUrl string, disableSaveMp4 bool) error {
 	// 2. 调用ZLMediaKit API添加流代理
 	params := url.Values{}
 	params.Set("secret", config.ZLMEDIAKIT_SECRET)

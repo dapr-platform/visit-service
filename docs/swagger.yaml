@@ -5759,6 +5759,41 @@ paths:
       summary: zlm on record mp4
       tags:
       - Zlm
+  /zlm/on-stream-none-reader:
+    post:
+      description: zlm on stream none reader callback
+      parameters:
+      - description: stream_id
+        in: query
+        name: stream_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Ward'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: zlm on stream none reader
+      tags:
+      - Zlm
   /zlm/on-stream-not-found:
     post:
       description: zlm on stream not found callback

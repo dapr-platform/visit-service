@@ -37,7 +37,7 @@ func StartCamLiveStreamPreviewHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Start the camera livestream
-	streamID, err := service.StartCamLiveStream(req.VisitRecordID, req.CameraID, req.DisableSaveMp4)
+	streamID, _,err := service.StartCamLiveStream(req.VisitRecordID, req.CameraID, req.DisableSaveMp4)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
@@ -93,16 +93,17 @@ func StartCamLiveStreamHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Start the camera livestream
-	streamID, err := service.StartCamLiveStream(req.VisitRecordID, req.CameraID, req.DisableSaveMp4)
+	streamID, saveMp4, err := service.StartCamLiveStream(req.VisitRecordID, req.CameraID, req.DisableSaveMp4)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
 	}
-
-	err = service.AddLiveRecord(r.Context(), visitRecord, req.UserID, req.CameraID, streamID)
-	if err != nil {
-		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
-		return
+	if saveMp4 {
+		err = service.AddLiveRecord(r.Context(), visitRecord, req.UserID, req.CameraID, streamID)
+		if err != nil {
+			common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
+			return
+		}
 	}
 
 	response := entity.CamLiveStreamResponse{

@@ -12,6 +12,7 @@ import (
 func InitZlmCbHandler(r chi.Router) {
 	r.Post(common.BASE_CONTEXT+"/zlm/on-record-mp4", ZlmOnRecordMp4Handler)
 	r.Post(common.BASE_CONTEXT+"/zlm/on-stream-not-found", ZlmOnStreamNotFoundHandler)
+	r.Post(common.BASE_CONTEXT+"/zlm/on-stream-none-reader", ZlmOnStreamNoneReaderHandler)
 }
 
 /*
@@ -104,6 +105,38 @@ func ZlmOnStreamNotFoundHandler(w http.ResponseWriter, r *http.Request) {
 		common.Logger.Error("zlm on stream not found", "err", err)
 	}
 	// 流未找到事件，用户可以在此事件触发时，立即去拉流，这样可以实现按需拉流
+	// 此事件对回复不敏感
+	resp := make(map[string]any)
+	resp["code"] = 0
+	resp["msg"] = "success"
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(resp)
+}
+
+type ZlmOnStreamNoneReaderReq struct {
+	MediaServerID string `json:"mediaServerId"`
+	App           string `json:"app"`
+	Stream        string `json:"stream"`
+	VHost         string `json:"vhost"`
+}
+
+// @Summary zlm on stream none reader
+// @Description zlm on stream none reader callback
+// @Tags Zlm
+// @Param stream_id query string true "stream_id"
+// @Produce  json
+// @Success 200 {object} common.Response{data=common.Page{items=[]model.Ward}} "objects array"
+// @Failure 500 {object} common.Response ""
+// @Router /zlm/on-stream-none-reader [post]
+func ZlmOnStreamNoneReaderHandler(w http.ResponseWriter, r *http.Request) {
+	var req ZlmOnStreamNoneReaderReq
+	common.ReadRequestBody(r, &req)
+	common.Logger.Info("zlm on stream none reader", "req", req)
+	err := service.OnStreamNoneReader(r.Context(), req.Stream)
+	if err != nil {
+		common.Logger.Error("zlm on stream none reader", "err", err)
+	}
+	// 流无人观看事件，用户可以在这个事件触发时，选择是否关闭推流等
 	// 此事件对回复不敏感
 	resp := make(map[string]any)
 	resp["code"] = 0

@@ -161,6 +161,7 @@ CREATE TABLE o_live_record (
     stream_url_suffix VARCHAR(1024),
     camera_id VARCHAR(32),
     vr_camera_id VARCHAR(32),
+    visit_record_id VARCHAR(32),
     status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
@@ -177,7 +178,9 @@ COMMENT ON COLUMN o_live_record.stream_id IS '流ID';
 COMMENT ON COLUMN o_live_record.stream_url_suffix IS '流URL后缀';
 COMMENT ON COLUMN o_live_record.camera_id IS '床头摄像头ID';
 COMMENT ON COLUMN o_live_record.vr_camera_id IS 'VR摄像头ID';
+COMMENT ON COLUMN o_live_record.visit_record_id IS '探视记录ID';
 COMMENT ON COLUMN o_live_record.status IS '状态(0:未开始,1:直播中,2:已结束)';
+
 
 CREATE OR REPLACE VIEW v_live_record_info AS
 SELECT l.*,p.name AS patient_name,w.name AS patient_ward_name,b.bed_no AS patient_bed_no FROM o_live_record l,o_patient p,o_bed b,o_ward w WHERE l.patient_id = p.id AND p.bed_id = b.id AND b.ward_id = w.id;
@@ -194,6 +197,7 @@ COMMENT ON COLUMN v_live_record_info.file_size IS '文件大小';
 COMMENT ON COLUMN v_live_record_info.stream_id IS '流ID';
 COMMENT ON COLUMN v_live_record_info.stream_url_suffix IS '流URL后缀';
 COMMENT ON COLUMN v_live_record_info.status IS '状态(0:未开始,1:直播中,2:已结束)';
+COMMENT ON COLUMN v_live_record_info.visit_record_id IS '探视记录ID';
 COMMENT ON COLUMN v_live_record_info.patient_name IS '病患姓名';
 COMMENT ON COLUMN v_live_record_info.patient_ward_name IS '病房名称';
 COMMENT ON COLUMN v_live_record_info.patient_bed_no IS '床位号';
@@ -273,21 +277,6 @@ COMMENT ON COLUMN v_visit_record_info.patient_ward_name IS '病房名称';
 COMMENT ON COLUMN v_visit_record_info.patient_bed_no IS '床位号';
 COMMENT ON COLUMN v_visit_record_info.stream_id IS '直播流ID';
 
-CREATE TABLE o_visit_record_live_record (
-    id VARCHAR(32) NOT NULL,
-    visit_record_id VARCHAR(32) NOT NULL,
-    live_record_id VARCHAR(32) NOT NULL,
-    PRIMARY KEY (id)
-);
-
-CREATE INDEX idx_visit_record_live_record_visit_record_id ON o_visit_record_live_record (visit_record_id);
-CREATE INDEX idx_visit_record_live_record_live_record_id ON o_visit_record_live_record (live_record_id);
-
-COMMENT ON TABLE o_visit_record_live_record IS '探视记录-直播记录关联表';
-COMMENT ON COLUMN o_visit_record_live_record.id IS '关联ID';
-COMMENT ON COLUMN o_visit_record_live_record.visit_record_id IS '探视记录ID';
-COMMENT ON COLUMN o_visit_record_live_record.live_record_id IS '直播记录ID';
-
 CREATE OR REPLACE VIEW v_visit_record_live_info AS
 SELECT 
     r.*,
@@ -308,8 +297,7 @@ FROM o_visit_record r
 LEFT JOIN o_patient p ON r.patient_id = p.id 
 LEFT JOIN o_bed b ON p.bed_id = b.id
 LEFT JOIN o_ward w ON p.ward_id = w.id
-LEFT JOIN o_visit_record_live_record vrl ON r.id = vrl.visit_record_id
-LEFT JOIN o_live_record l ON vrl.live_record_id = l.id
+LEFT JOIN o_live_record l ON r.id = l.visit_record_id
 GROUP BY r.id, r.patient_id, r.relative_id, r.schedule_id, r.visit_start_time, 
          r.visit_end_time, r.visitor_name, r.visitor_phone, r.visitor_id_card,
          r.relationship, r.camera_id, r.vr_camera_id, r.check_status,
@@ -512,7 +500,6 @@ COMMENT ON COLUMN v_family_member_info.patients IS '关联的病患信息列表'
 -- +goose Down
 -- +goose StatementBegin
 DROP VIEW IF EXISTS v_visit_record_live_info CASCADE;
-DROP TABLE IF EXISTS o_visit_record_live_record CASCADE;
 DROP VIEW IF EXISTS v_family_member_info CASCADE;
 DROP VIEW IF EXISTS v_patient_relative_info CASCADE;
 DROP TABLE IF EXISTS o_patient_relative CASCADE;

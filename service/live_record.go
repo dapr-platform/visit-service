@@ -19,26 +19,16 @@ func AddLiveRecord(ctx context.Context, visitRecord *model.Visit_record, userID,
 		PatientID:       visitRecord.PatientID,
 		RelativeID:      visitRecord.RelativeID,
 		CameraID:        cameraID,
-		VrCameraID:     visitRecord.VrCameraID,
+		VrCameraID:      visitRecord.VrCameraID,
 		StreamID:        streamID,
 		StreamURLSuffix: config.ZLMEDIAKIT_STREAM_URL_PREFIX + "live/" + streamID + ".live.flv",
 		StartTime:       common.LocalTime(time.Now()),
 		Status:          int32(RECORD_STATUS_STARTING),
+		VisitRecordID:   visitRecord.ID,
 	}
 	_, err := common.DbInsert(ctx, common.GetDaprClient(), record, model.Live_recordTableInfo.Name)
 	if err != nil {
 		common.Logger.Error("add live record", "visitRecord", visitRecord, "err", err)
-		return err
-	}
-	var visitRecordLiveRecord  = model.Visit_record_live_record{
-		ID: common.NanoId(),
-		VisitRecordID: visitRecord.ID,
-		LiveRecordID: record.ID,
-		
-	}
-	_, err = common.DbInsert(ctx, common.GetDaprClient(), visitRecordLiveRecord, model.Visit_record_live_recordTableInfo.Name)
-	if err != nil {
-		common.Logger.Error("add visit record live record", "visitRecord", visitRecord, "err", err)
 		return err
 	}
 	return nil

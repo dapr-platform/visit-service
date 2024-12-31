@@ -2580,6 +2580,12 @@
                         "description": "status",
                         "name": "status",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visit_record_id",
+                        "name": "visit_record_id",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -3179,6 +3185,12 @@
                         "type": "string",
                         "description": "status",
                         "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "visit_record_id",
+                        "name": "visit_record_id",
                         "in": "query"
                     }
                 ],
@@ -6563,356 +6575,6 @@
                 }
             }
         },
-        "/visit-record-live-record": {
-            "get": {
-                "description": "query objects",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "探视记录-直播记录关联"
-                ],
-                "summary": "query objects",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "_select",
-                        "name": "_select",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "order",
-                        "name": "_order",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "id",
-                        "name": "id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "visit_record_id",
-                        "name": "visit_record_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "live_record_id",
-                        "name": "live_record_id",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "objects array",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/common.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/model.Visit_record_live_record"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/common.Response"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "description": "save",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "探视记录-直播记录关联"
-                ],
-                "summary": "save",
-                "parameters": [
-                    {
-                        "description": "object",
-                        "name": "item",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/model.Visit_record_live_record"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "object",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/common.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.Visit_record_live_record"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/common.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/visit-record-live-record/batch-delete": {
-            "post": {
-                "description": "batch delete",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "探视记录-直播记录关联"
-                ],
-                "summary": "batch delete",
-                "parameters": [
-                    {
-                        "description": "id array",
-                        "name": "ids",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/common.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/common.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/visit-record-live-record/batch-upsert": {
-            "post": {
-                "description": "batch update",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "探视记录-直播记录关联"
-                ],
-                "summary": "batch update",
-                "parameters": [
-                    {
-                        "description": "objects array",
-                        "name": "entities",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "additionalProperties": true
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/common.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/common.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/visit-record-live-record/page": {
-            "get": {
-                "description": "page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "探视记录-直播记录关联"
-                ],
-                "summary": "page query",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "current page",
-                        "name": "_page",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "page size",
-                        "name": "_page_size",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "order",
-                        "name": "_order",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "id",
-                        "name": "id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "visit_record_id",
-                        "name": "visit_record_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "live_record_id",
-                        "name": "live_record_id",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "objects array",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/common.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "allOf": [
-                                                {
-                                                    "$ref": "#/definitions/common.Page"
-                                                },
-                                                {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "items": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "$ref": "#/definitions/model.Visit_record_live_record"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/common.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/visit-record-live-record/{id}": {
-            "delete": {
-                "description": "delete",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "探视记录-直播记录关联"
-                ],
-                "summary": "delete",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "实例id",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "object",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/common.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.Visit_record_live_record"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/common.Response"
-                        }
-                    }
-                }
-            }
-        },
         "/visit-record/batch-delete": {
             "post": {
                 "description": "batch delete",
@@ -8701,6 +8363,10 @@
                     "description": "流URL后缀",
                     "type": "string"
                 },
+                "visit_record_id": {
+                    "description": "探视记录ID",
+                    "type": "string"
+                },
                 "vr_camera_id": {
                     "description": "VR摄像头ID",
                     "type": "string"
@@ -9320,23 +8986,6 @@
                 },
                 "vr_camera_id": {
                     "description": "VR摄像头ID",
-                    "type": "string"
-                }
-            }
-        },
-        "model.Visit_record_live_record": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "关联ID",
-                    "type": "string"
-                },
-                "live_record_id": {
-                    "description": "直播记录ID",
-                    "type": "string"
-                },
-                "visit_record_id": {
-                    "description": "探视记录ID",
                     "type": "string"
                 }
             }

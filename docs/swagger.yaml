@@ -310,6 +310,9 @@ definitions:
       stream_url_suffix:
         description: 流URL后缀
         type: string
+      visit_record_id:
+        description: 探视记录ID
+        type: string
       vr_camera_id:
         description: VR摄像头ID
         type: string
@@ -767,18 +770,6 @@ definitions:
         type: string
       vr_camera_id:
         description: VR摄像头ID
-        type: string
-    type: object
-  model.Visit_record_live_record:
-    properties:
-      id:
-        description: 关联ID
-        type: string
-      live_record_id:
-        description: 直播记录ID
-        type: string
-      visit_record_id:
-        description: 探视记录ID
         type: string
     type: object
   model.Visit_schedule:
@@ -2437,6 +2428,10 @@ paths:
         in: query
         name: status
         type: string
+      - description: visit_record_id
+        in: query
+        name: visit_record_id
+        type: string
       produces:
       - application/json
       responses:
@@ -2849,6 +2844,10 @@ paths:
       - description: status
         in: query
         name: status
+        type: string
+      - description: visit_record_id
+        in: query
+        name: visit_record_id
         type: string
       produces:
       - application/json
@@ -4963,223 +4962,6 @@ paths:
       summary: page query
       tags:
       - 探视记录及直播信息视图
-  /visit-record-live-record:
-    get:
-      description: query objects
-      parameters:
-      - description: _select
-        in: query
-        name: _select
-        type: string
-      - description: order
-        in: query
-        name: _order
-        type: string
-      - description: id
-        in: query
-        name: id
-        type: string
-      - description: visit_record_id
-        in: query
-        name: visit_record_id
-        type: string
-      - description: live_record_id
-        in: query
-        name: live_record_id
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: objects array
-          schema:
-            allOf:
-            - $ref: '#/definitions/common.Response'
-            - properties:
-                data:
-                  items:
-                    $ref: '#/definitions/model.Visit_record_live_record'
-                  type: array
-              type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/common.Response'
-      summary: query objects
-      tags:
-      - 探视记录-直播记录关联
-    post:
-      consumes:
-      - application/json
-      description: save
-      parameters:
-      - description: object
-        in: body
-        name: item
-        required: true
-        schema:
-          $ref: '#/definitions/model.Visit_record_live_record'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: object
-          schema:
-            allOf:
-            - $ref: '#/definitions/common.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.Visit_record_live_record'
-              type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/common.Response'
-      summary: save
-      tags:
-      - 探视记录-直播记录关联
-  /visit-record-live-record/{id}:
-    delete:
-      description: delete
-      parameters:
-      - description: 实例id
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: object
-          schema:
-            allOf:
-            - $ref: '#/definitions/common.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/model.Visit_record_live_record'
-              type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/common.Response'
-      summary: delete
-      tags:
-      - 探视记录-直播记录关联
-  /visit-record-live-record/batch-delete:
-    post:
-      consumes:
-      - application/json
-      description: batch delete
-      parameters:
-      - description: id array
-        in: body
-        name: ids
-        required: true
-        schema:
-          items:
-            type: string
-          type: array
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/common.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/common.Response'
-      summary: batch delete
-      tags:
-      - 探视记录-直播记录关联
-  /visit-record-live-record/batch-upsert:
-    post:
-      consumes:
-      - application/json
-      description: batch update
-      parameters:
-      - description: objects array
-        in: body
-        name: entities
-        required: true
-        schema:
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/common.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/common.Response'
-      summary: batch update
-      tags:
-      - 探视记录-直播记录关联
-  /visit-record-live-record/page:
-    get:
-      description: page query, _page(from 1 begin), _page_size, _order, and others
-        fields, status=1, name=$like.%CAM%
-      parameters:
-      - description: current page
-        in: query
-        name: _page
-        required: true
-        type: integer
-      - description: page size
-        in: query
-        name: _page_size
-        required: true
-        type: integer
-      - description: order
-        in: query
-        name: _order
-        type: string
-      - description: id
-        in: query
-        name: id
-        type: string
-      - description: visit_record_id
-        in: query
-        name: visit_record_id
-        type: string
-      - description: live_record_id
-        in: query
-        name: live_record_id
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: objects array
-          schema:
-            allOf:
-            - $ref: '#/definitions/common.Response'
-            - properties:
-                data:
-                  allOf:
-                  - $ref: '#/definitions/common.Page'
-                  - properties:
-                      items:
-                        items:
-                          $ref: '#/definitions/model.Visit_record_live_record'
-                        type: array
-                    type: object
-              type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/common.Response'
-      summary: page query
-      tags:
-      - 探视记录-直播记录关联
   /visit-record/{id}:
     delete:
       description: delete

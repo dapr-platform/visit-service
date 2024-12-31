@@ -31,11 +31,12 @@ Table: o_live_record
 [10] camera_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [11] vr_camera_id                                   VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [12] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[13] visit_record_id                                VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "kKjopEQAddtyNKVacHNycIbnq",    "schedule_id": "qOGfOxxKxpBOSvSGXJTMiOMPa",    "patient_id": "OqyXMLlZByMdgguIlyIqZLveN",    "relative_id": "UTPriBRVOWQxqRkRZspKcHeAL",    "device_id": "pdCZwinkFpBqIxOjcBXMkYSFI",    "start_time": 8,    "end_time": 5,    "file_size": 22,    "stream_id": "breNjJQkrSmSVRuNNNMWiPaHq",    "stream_url_suffix": "vUwnHlKCbgRLcLiKEOFhyRNhG",    "camera_id": "ZWBMGMwhauAQkbePpMSMCRBWX",    "vr_camera_id": "qKuQsNhUxKwOwcIaOfiYGiwVM",    "status": 51}
+{    "id": "kbijZLoTkrEVBOIYkrPnGHxTw",    "schedule_id": "XRIthVwTLAFBkKXDxLolYOIeq",    "patient_id": "DPMaYCRLvLoCqYOMjwQJtEGLv",    "relative_id": "wlyXerJNDUcvRZShtmXWAieni",    "device_id": "rPwrbOTSXOgGGdQUHQQnGScbG",    "start_time": 23,    "end_time": 63,    "file_size": 64,    "stream_id": "DpXNplxjIOAOuuTDmfNolxQrj",    "stream_url_suffix": "PSfSpdyTrOPJskvkrZwWRaIRT",    "camera_id": "gyqEyaLPtbrBUOKPfmZrJaReP",    "vr_camera_id": "BawjGVfLbAVVPnRplTKVwcKQS",    "status": 26,    "visit_record_id": "neEeIXMLffdvWDmBKEdNryfwS"}
 
 
 
@@ -67,6 +68,8 @@ var (
 	Live_record_FIELD_NAME_vr_camera_id = "vr_camera_id"
 
 	Live_record_FIELD_NAME_status = "status"
+
+	Live_record_FIELD_NAME_visit_record_id = "visit_record_id"
 )
 
 // Live_record struct is a row record of the o_live_record table in the  database
@@ -96,6 +99,8 @@ type Live_record struct {
 	VrCameraID string `json:"vr_camera_id"` //VR摄像头ID
 
 	Status int32 `json:"status"` //状态(0:未开始,1:直播中,2:已结束)
+
+	VisitRecordID string `json:"visit_record_id"` //探视记录ID
 
 }
 
@@ -374,6 +379,27 @@ var Live_recordTableInfo = &TableInfo{
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
 			ProtobufPos:        13,
+		},
+
+		&ColumnInfo{
+			Index:              13,
+			Name:               "visit_record_id",
+			Comment:            `探视记录ID`,
+			Notes:              ``,
+			Nullable:           false,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "VisitRecordID",
+			GoFieldType:        "string",
+			JSONFieldName:      "visit_record_id",
+			ProtobufFieldName:  "visit_record_id",
+			ProtobufType:       "string",
+			ProtobufPos:        14,
 		},
 	},
 }

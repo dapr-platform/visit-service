@@ -104,6 +104,7 @@ func batchUpsertLive_recordHandler(w http.ResponseWriter, r *http.Request) {
 // @Param camera_id query string false "camera_id"
 // @Param vr_camera_id query string false "vr_camera_id"
 // @Param status query string false "status"
+// @Param visit_record_id query string false "visit_record_id"
 // @Produce  json
 // @Success 200 {object} common.Response{data=common.Page{items=[]model.Live_record}} "objects array"
 // @Failure 500 {object} common.Response ""
@@ -138,6 +139,7 @@ func Live_recordPageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param camera_id query string false "camera_id"
 // @Param vr_camera_id query string false "vr_camera_id"
 // @Param status query string false "status"
+// @Param visit_record_id query string false "visit_record_id"
 // @Produce  json
 // @Success 200 {object} common.Response{data=[]model.Live_record} "objects array"
 // @Failure 500 {object} common.Response ""

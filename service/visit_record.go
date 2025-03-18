@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strings"
 	"sync"
 	"time"
 	"visit-service/config"
@@ -32,8 +33,16 @@ func init() {
 	scheduleCron = cron.New(cron.WithSeconds())
 	// 每分钟执行
 	_, err := scheduleCron.AddFunc("0 * * * * ?", func() {
-		if err := LoopCheckVisitRecordWillAfter5Minutes(); err != nil {
-			common.Logger.Errorf("Failed to loop check visit record: %v", err)
+		if err := LoopCheckVisitRecordWillAfterSomeSeconds(); err != nil {
+			common.Logger.Errorf("Failed to loop check visit record for relative: %v", err)
+		}
+	})
+	if err != nil {
+		panic(fmt.Sprintf("Failed to add cron job: %v", err))
+	}
+	_, err = scheduleCron.AddFunc("0 * * * * ?", func() {
+		if err := LoopCheckVisitRecordWillAfterSomeSecondsForNurse(context.Background()); err != nil {
+			common.Logger.Errorf("Failed to loop check visit record for nurse: %v", err)
 		}
 	})
 	if err != nil {
@@ -235,9 +244,36 @@ func FindVisitRecord(ctx context.Context, visitRecordID string) (*model.Visit_re
 	}
 	return record, nil
 }
+func LoopCheckVisitRecordWillAfterSomeSecondsForNurse(ctx context.Context) error {
+	timeSecondsConfig, _ := GetConfig(CONFIG_NURSE_VISIT_NOTIFY_TIME)
+	timeSeconds := cast.ToInt(timeSecondsConfig.ConfigValue)
+	if timeSeconds == 0 {
+		timeSeconds = 300
+	}
 
-func LoopCheckVisitRecordWillAfter5Minutes() error {
-	qstr := model.Visit_record_FIELD_NAME_visit_start_time + "=" + common.LocalTime(time.Now().Add(time.Minute*5)).DbString()
+	qstr := model.Visit_record_FIELD_NAME_visit_start_time + "=" + common.LocalTime(time.Now().Add(time.Second*time.Duration(timeSeconds))).DbString()
+	qstr += "&" + model.Visit_record_FIELD_NAME_check_status + "=" + cast.ToString(CHECK_STATUS_CHECKED)
+	qstr += "&" + model.Visit_record_FIELD_NAME_status + "=" + cast.ToString(VISIT_RECORD_STATUS_NORMAL)
+	records, err := common.DbQuery[model.Visit_record](context.Background(), common.GetDaprClient(), model.Visit_recordTableInfo.Name, qstr)
+	if err != nil {
+		return errors.Wrap(err, "查询即将开始的预约记录失败")
+	}
+	for _, record := range records {
+		if record.SendPromptSmsStatus == SEND_SMS_STATUS_UNSENT {
+			SendVisitRecordPromptSmsForNurse(&record)
+		}
+	}
+	return nil
+}
+
+func LoopCheckVisitRecordWillAfterSomeSeconds() error {
+	timeSecondsConfig, _ := GetConfig(CONFIG_RELATIVE_VISIT_NOTIFY_TIME)
+	timeSeconds := cast.ToInt(timeSecondsConfig.ConfigValue)
+	if timeSeconds == 0 {
+		timeSeconds = 300
+	}
+
+	qstr := model.Visit_record_FIELD_NAME_visit_start_time + "=" + common.LocalTime(time.Now().Add(time.Second*time.Duration(timeSeconds))).DbString()
 	qstr += "&" + model.Visit_record_FIELD_NAME_check_status + "=" + cast.ToString(CHECK_STATUS_CHECKED)
 	qstr += "&" + model.Visit_record_FIELD_NAME_status + "=" + cast.ToString(VISIT_RECORD_STATUS_NORMAL)
 	records, err := common.DbQuery[model.Visit_record](context.Background(), common.GetDaprClient(), model.Visit_recordTableInfo.Name, qstr)
@@ -251,9 +287,88 @@ func LoopCheckVisitRecordWillAfter5Minutes() error {
 	}
 	return nil
 }
+
+func SendVisitRecordPromptSmsForNurse(record *model.Visit_record) error {
+	common.Logger.Infof("send visit record prompt sms for nurse_notify_phones: %v", record)
+	nurseNotifyPhones, err := GetConfig(CONFIG_NURSE_NOTIFY_PHONES)
+	if err != nil {
+		common.Logger.Error("查询护士通知手机号失败", "err", err)
+	} else {
+		if nurseNotifyPhones.ConfigValue != "" {
+			visitRecordInfo, err := common.DbGetOne[model.Visit_record_info](context.Background(), common.GetDaprClient(), model.Visit_record_infoTableInfo.Name, model.Visit_record_info_FIELD_NAME_id+"="+record.ID)
+			if err != nil {
+				return errors.Wrap(err, "查询探视记录信息失败")
+			}
+
+			if visitRecordInfo == nil {
+				return errors.New("探视记录信息不存在")
+			}
+
+			phone := visitRecordInfo.VisitorPhone
+			if phone == "" {
+				return errors.New("家属手机号不存在")
+			}
+
+			templateParam := map[string]string{
+				"time": time.Time(record.VisitStartTime).Format("2006-01-02年 15时04分"),
+				"name": visitRecordInfo.PatientName,
+			}
+
+			phones := nurseNotifyPhones.ConfigValue
+			phoneList := strings.Split(phones, ",")
+			for _, phone := range phoneList {
+				phone = strings.TrimSpace(phone)
+				if phone != "" {
+					phone = strings.Trim(phone, " ")
+					err = sms.SendSms(config.ALI_SMS_REGION, config.ALI_SMS_ACCESS_ID, config.ALI_SMS_ACCESS_SECRET, config.ALI_SMS_SIGN_NAME, config.ALI_SMS_TEMPLATE_VISIT_PROMPT_CODE, phone, templateParam)
+					if err != nil {
+						common.Logger.Error("发送短信失败", "err", err)
+					}
+
+				}
+
+			}
+			record.SendPromptSmsStatus = SEND_SMS_STATUS_SENT
+			err = common.DbUpsert(context.Background(), common.GetDaprClient(), record, model.Visit_recordTableInfo.Name, model.Visit_record_FIELD_NAME_id)
+			if err != nil {
+				return errors.Wrap(err, "更新预约记录发送短信状态失败")
+			}
+		} else {
+			return nil
+		}
+	}
+	return nil
+}
+
 func SendVisitRecordPromptSms(record *model.Visit_record) error {
 	common.Logger.Infof("send visit record prompt sms: %v", record)
-	//TODO: 发送短信
+	visitRecordInfo, err := common.DbGetOne[model.Visit_record_info](context.Background(), common.GetDaprClient(), model.Visit_record_infoTableInfo.Name, model.Visit_record_info_FIELD_NAME_id+"="+record.ID)
+	if err != nil {
+		return errors.Wrap(err, "查询探视记录信息失败")
+	}
+	if visitRecordInfo == nil {
+		return errors.New("探视记录信息不存在")
+	}
+
+	phone := visitRecordInfo.VisitorPhone
+	if phone == "" {
+		return errors.New("家属手机号不存在")
+	}
+
+	templateParam := map[string]string{
+		"time": time.Time(record.VisitStartTime).Format("2006-01-02年 15时04分"),
+		"name": visitRecordInfo.PatientName,
+	}
+	err = sms.SendSms(config.ALI_SMS_REGION, config.ALI_SMS_ACCESS_ID, config.ALI_SMS_ACCESS_SECRET, config.ALI_SMS_SIGN_NAME, config.ALI_SMS_TEMPLATE_VISIT_CHECK_CODE, phone, templateParam)
+	if err != nil {
+		return errors.Wrap(err, "发送短信失败")
+	}
+
+	record.SendSmsStatus = SEND_SMS_STATUS_SENT
+	err = common.DbUpsert(context.Background(), common.GetDaprClient(), record, model.Visit_recordTableInfo.Name, model.Visit_record_FIELD_NAME_id)
+	if err != nil {
+		return errors.Wrap(err, "更新预约记录发送短信状态失败")
+	}
 	return nil
 }
 func SendVisitRecordSms(record *model.Visit_record) error {

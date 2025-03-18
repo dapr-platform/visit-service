@@ -100,7 +100,7 @@ var (
 	}
 	visitRegisterAutoAudit = model.System_config{
 		ConfigName:  CONFIG_VISIT_REGISTER_AUTO_AUDIT,
-		ConfigValue: "1",
+		ConfigValue: "0",
 		ConfigType:  "number",
 		ConfigDesc:  "探视登记预约是否自动审核(1:自动审核，0:手动审核)",
 		Status:      1,
@@ -114,14 +114,14 @@ var (
 	}
 	scheduleBeginHour = model.System_config{
 		ConfigName:  CONFIG_SCHEDULE_BEGIN_HOUR,
-		ConfigValue: "0",
+		ConfigValue: "9",
 		ConfigType:  "number",
 		ConfigDesc:  "排班开始时间（小时）0-23",
 		Status:      1,
 	}
 	scheduleEndHour = model.System_config{
 		ConfigName:  CONFIG_SCHEDULE_END_HOUR,
-		ConfigValue: "23",
+		ConfigValue: "17",
 		ConfigType:  "number",
 		ConfigDesc:  "排班结束时间（小时）0-23",
 		Status:      1,
